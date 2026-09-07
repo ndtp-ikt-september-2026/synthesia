@@ -1,0 +1,711 @@
+<?php
+/**
+ * LiveStore (OpenCart 3.0.3.x Fork) High-Throughput Scraper Ingestion Utility
+ *
+ * Architecture: Fault-Tolerant, Idempotent Batch Catalog Ingestion
+ * Code Standards: Strictly single quotes for all string literals, array keys, SQL queries, and paths.
+ *
+ * Exit Codes:
+ *   0 = Success (all items processed or partially processed with fault tolerance)
+ *   1 = Fatal Runtime Error
+ *   2 = Missing Arguments / Invalid Payload Input
+ */
+
+namespace LiveStore\Cli;
+
+// Enforce non-blocking runtime execution outside HTTP/web timeouts
+if (function_exists('set_time_limit')) {
+	@set_time_limit(0);
+}
+if (function_exists('ignore_user_abort')) {
+	@ignore_user_abort(true);
+}
+if (function_exists('ini_set')) {
+	@ini_set('memory_limit', '512M');
+	@ini_set('display_errors', '0');
+	@ini_set('display_startup_errors', '0');
+}
+error_reporting(E_ALL);
+
+// Intercept notices and warnings from corrupting STDOUT
+set_error_handler(function($severity, $message, $file, $line) {
+	if (!(error_reporting() & $severity)) {
+		return false;
+	}
+	fwrite(STDERR, '[INGEST NOTICE ' . $severity . '] ' . $message . ' in ' . $file . ' on line ' . $line . PHP_EOL);
+	return true;
+});
+
+// Intercept uncaught exceptions
+set_exception_handler(function(\Throwable $e) {
+	$payload = array(
+		'status'    => 'error',
+		'processed' => 0,
+		'inserted'  => 0,
+		'updated'   => 0,
+		'failed'    => 0,
+		'message'   => 'Fatal Uncaught Exception: ' . $e->getMessage(),
+		'errors'    => array(
+			'type' => get_class($e),
+			'code' => $e->getCode(),
+			'file' => $e->getFile(),
+			'line' => $e->getLine()
+		)
+	);
+	echo json_encode($payload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+	exit(1);
+});
+
+// 1. Headless CLI Bootstrap
+$cliDir = str_replace('\\', '/', __DIR__);
+$rootDir = dirname($cliDir);
+$adminDir = $rootDir . '/admin';
+
+$adminConfigFile = $adminDir . '/config.php';
+$rootConfigFile  = $rootDir . '/config.php';
+
+if (is_file($adminConfigFile)) {
+	require_once($adminConfigFile);
+} elseif (is_file($rootConfigFile)) {
+	require_once($rootConfigFile);
+} else {
+	fwrite(STDERR, '[ERROR] OpenCart configuration file not found.' . PHP_EOL);
+	exit(1);
+}
+
+// Ensure Core Directory Constants
+if (!defined('DIR_APPLICATION')) {
+	define('DIR_APPLICATION', $adminDir . '/');
+}
+if (!defined('DIR_SYSTEM')) {
+	define('DIR_SYSTEM', $rootDir . '/system/');
+}
+if (!defined('DIR_STORAGE')) {
+	define('DIR_STORAGE', $rootDir . '/system/storage/');
+}
+if (!defined('DIR_CONFIG')) {
+	define('DIR_CONFIG', DIR_SYSTEM . 'config/');
+}
+if (!defined('DIR_IMAGE')) {
+	define('DIR_IMAGE', $rootDir . '/image/');
+}
+if (!defined('DIR_CACHE')) {
+	define('DIR_CACHE', DIR_STORAGE . 'cache/');
+}
+
+// Require OpenCart Core Startup
+require_once(DIR_SYSTEM . 'startup.php');
+
+$registry = new \Registry();
+
+$config = new \Config();
+$config->load('default');
+if (is_file(DIR_CONFIG . 'admin.php')) {
+	$config->load('admin');
+}
+$registry->set('config', $config);
+
+$log = new \Log($config->get('error_filename'));
+$registry->set('log', $log);
+
+$event = new \Event($registry);
+$registry->set('event', $event);
+
+// Register Config Action Events
+if ($config->has('action_event')) {
+	foreach ($config->get('action_event') as $key => $value) {
+		foreach ($value as $priority => $action) {
+			$event->register($key, new \Action($action), $priority);
+		}
+	}
+}
+
+$loader = new \Loader($registry);
+$registry->set('load', $loader);
+
+$request = new \Request();
+if (!isset($request->server['REMOTE_ADDR'])) {
+	$request->server['REMOTE_ADDR'] = '127.0.0.1';
+}
+$registry->set('request', $request);
+
+$response = new \Response();
+$registry->set('response', $response);
+
+$db = new \DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_PORT);
+$registry->set('db', $db);
+$db->query('SET time_zone = \'' . $db->escape(date('P')) . '\'');
+
+// Register DB Events (including admin/model hooks for AI Vector sync)
+$eventRows = $db->query('SELECT * FROM `' . DB_PREFIX . 'event` WHERE `status` = \'1\' ORDER BY `sort_order` ASC');
+foreach ($eventRows->rows as $evt) {
+	$trigger = $evt['trigger'];
+	$action = new \Action($evt['action']);
+	$priority = (int)$evt['sort_order'];
+
+	if (substr($trigger, 0, 6) === 'admin/') {
+		$event->register(substr($trigger, 6), $action, $priority);
+		$event->register($trigger, $action, $priority);
+	} else {
+		$event->register($trigger, $action, $priority);
+	}
+}
+
+$session = new \Session($config->get('session_engine'), $registry);
+$registry->set('session', $session);
+
+$cache = new \Cache($config->get('cache_engine'), $config->get('cache_expire'));
+$registry->set('cache', $cache);
+
+$url = new \Url($config->get('site_url'), $config->get('site_ssl'));
+$registry->set('url', $url);
+
+$registry->set('document', new \Document());
+
+// Setup Administrative Context & User Proxy (Always Authorized)
+$cliUser = new class(1, 'admin') {
+	private $id;
+	private $name;
+	public function __construct($id, $name) {
+		$this->id = $id;
+		$this->name = $name;
+	}
+	public function isLogged() { return $this->id; }
+	public function getId() { return $this->id; }
+	public function getUserName() { return $this->name; }
+	public function getGroupId() { return 1; }
+	public function hasPermission($key, $value) { return true; }
+};
+$registry->set('user', $cliUser);
+
+// Load Installed Store Languages
+$languages = array();
+$langRows = $db->query('SELECT `language_id`, `code`, `name` FROM `' . DB_PREFIX . 'language` WHERE `status` = \'1\' ORDER BY `sort_order` ASC');
+foreach ($langRows->rows as $l) {
+	$languages[(int)$l['language_id']] = array(
+		'code' => strtolower($l['code']),
+		'name' => $l['name']
+	);
+}
+if (empty($languages)) {
+	$languages[1] = array('code' => 'ru-ru', 'name' => 'Russian');
+}
+
+$adminLangCode = $config->get('config_admin_language') ? $config->get('config_admin_language') : 'ru-ru';
+$language = new \Language($adminLangCode);
+$language->load($adminLangCode);
+$registry->set('language', $language);
+
+// Dynamically Load Native Product Model
+$loader->model('catalog/product');
+$modelProduct = $registry->get('model_catalog_product');
+
+// 2. Parse CLI Options
+$format = 'json';
+$dryRun = false;
+$skipImages = false;
+$filePath = null;
+$readStdin = false;
+
+foreach ($argv as $arg) {
+	if (strpos($arg, '--format=') === 0) {
+		$format = substr($arg, 9);
+	} elseif ($arg === '--format=text') {
+		$format = 'text';
+	} elseif ($arg === '--dry-run') {
+		$dryRun = true;
+	} elseif ($arg === '--skip-images') {
+		$skipImages = true;
+	} elseif (strpos($arg, '--file=') === 0) {
+		$filePath = substr($arg, 7);
+	} elseif (strpos($arg, '-f=') === 0) {
+		$filePath = substr($arg, 3);
+	} elseif ($arg === '--stdin') {
+		$readStdin = true;
+	}
+}
+
+// 3. Ingest Payload (File or STDIN)
+$rawPayload = '';
+
+if ($readStdin) {
+	$stdinHandle = fopen('php://stdin', 'r');
+	if ($stdinHandle) {
+		while (!feof($stdinHandle)) {
+			$rawPayload .= fread($stdinHandle, 8192);
+		}
+		fclose($stdinHandle);
+	}
+} elseif ($filePath !== null) {
+	if (!is_file($filePath) || !is_readable($filePath)) {
+		$errPayload = array(
+			'status'    => 'error',
+			'processed' => 0,
+			'inserted'  => 0,
+			'updated'   => 0,
+			'failed'    => 0,
+			'message'   => 'Payload file not found or not readable: ' . $filePath,
+			'errors'    => array('Invalid file path')
+		);
+		echo json_encode($errPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+		exit(2);
+	}
+	$rawPayload = file_get_contents($filePath);
+	// If piped without explicit flag
+	if (function_exists('stream_isatty')) {
+		if (!@stream_isatty(STDIN)) {
+			$rawPayload = (string)@file_get_contents('php://stdin');
+		}
+	} elseif (function_exists('posix_isatty')) {
+		if (!@posix_isatty(STDIN)) {
+			$rawPayload = (string)@file_get_contents('php://stdin');
+		}
+	}
+}
+
+$rawPayload = trim($rawPayload);
+
+if ($rawPayload === '') {
+	$errPayload = array(
+		'status'    => 'error',
+		'processed' => 0,
+		'inserted'  => 0,
+		'updated'   => 0,
+		'failed'    => 0,
+		'message'   => 'No input payload provided. Supply payload via --file=<path> or pipe via --stdin.',
+		'errors'    => array('Empty input payload')
+	);
+	echo json_encode($errPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+	exit(2);
+}
+
+$decodedPayload = json_decode($rawPayload, true);
+if (json_last_error() !== JSON_ERROR_NONE) {
+	$errPayload = array(
+		'status'    => 'error',
+		'processed' => 0,
+		'inserted'  => 0,
+		'updated'   => 0,
+		'failed'    => 0,
+		'message'   => 'Invalid JSON payload: ' . json_last_error_msg(),
+		'errors'    => array('JSON parse error')
+	);
+	echo json_encode($errPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+	exit(2);
+}
+
+// Support single object or array of objects
+$items = is_array($decodedPayload) && isset($decodedPayload['model']) ? array($decodedPayload) : $decodedPayload;
+if (!is_array($items)) {
+	$errPayload = array(
+		'status'    => 'error',
+		'processed' => 0,
+		'inserted'  => 0,
+		'updated'   => 0,
+		'failed'    => 0,
+		'message'   => 'Payload must be an array of product entities or a single product entity.',
+		'errors'    => array('Expected array of objects')
+	);
+	echo json_encode($errPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+	exit(2);
+}
+
+// 4. Attribute Resolver & In-Memory Dictionary
+$attributeNameMap = array();
+$attrQuery = $db->query('SELECT a.`attribute_id`, a.`attribute_group_id`, ad.`name` FROM `' . DB_PREFIX . 'attribute` a LEFT JOIN `' . DB_PREFIX . 'attribute_description` ad ON (a.`attribute_id` = ad.`attribute_id`)');
+foreach ($attrQuery->rows as $ar) {
+	$normName = mb_strtolower(trim($ar['name']), 'UTF-8');
+	$attributeNameMap[$normName] = (int)$ar['attribute_id'];
+}
+
+// Fallback / default attribute group ID
+$defaultGroupId = 1;
+$groupQuery = $db->query('SELECT `attribute_group_id` FROM `' . DB_PREFIX . 'attribute_group` ORDER BY `sort_order` ASC LIMIT 1');
+if ($groupQuery->num_rows) {
+	$defaultGroupId = (int)$groupQuery->row['attribute_group_id'];
+}
+
+$resolveAttributeId = function($attrName) use (&$attributeNameMap, $db, $languages, $defaultGroupId) {
+	$normName = mb_strtolower(trim($attrName), 'UTF-8');
+	if (isset($attributeNameMap[$normName])) {
+		return $attributeNameMap[$normName];
+	}
+
+	// Dynamically create missing attribute for fault tolerance
+	$db->query('INSERT INTO `' . DB_PREFIX . 'attribute` SET `attribute_group_id` = \'' . (int)$defaultGroupId . '\', `sort_order` = \'0\'');
+	$newAttrId = (int)$db->getLastId();
+
+	foreach ($languages as $langId => $langInfo) {
+		$db->query('INSERT INTO `' . DB_PREFIX . 'attribute_description` SET `attribute_id` = \'' . (int)$newAttrId . '\', `language_id` = \'' . (int)$langId . '\', `name` = \'' . $db->escape($attrName) . '\'');
+	}
+
+	$attributeNameMap[$normName] = $newAttrId;
+	return $newAttrId;
+};
+
+// 5. Remote Image Pipeline (cURL)
+$downloadImage = function($url, $modelIdentifier) use ($skipImages) {
+	if ($skipImages || empty($url) || !is_string($url)) {
+		return null;
+	}
+
+	$url = trim($url);
+
+	// Already local relative path
+	if (strpos($url, 'catalog/') === 0 && is_file(DIR_IMAGE . $url)) {
+		return $url;
+	}
+
+	// Only process remote URLs
+	if (strpos($url, 'http://') !== 0 && strpos($url, 'https://') !== 0) {
+		return null;
+	}
+
+	$cleanModel = preg_replace('/[^a-zA-Z0-9_\-]/', '_', $modelIdentifier);
+	$targetSubdir = 'catalog/products/' . $cleanModel . '/';
+	$targetDir = DIR_IMAGE . $targetSubdir;
+
+	if (!is_dir($targetDir)) {
+		@mkdir($targetDir, 0777, true);
+	}
+
+	$urlPath = parse_url($url, PHP_URL_PATH);
+	$ext = pathinfo($urlPath, PATHINFO_EXTENSION);
+	if (empty($ext) || strlen($ext) > 5) {
+		$ext = 'jpg';
+	}
+	$ext = strtolower($ext);
+
+	$filename = 'img_' . substr(md5($url), 0, 12) . '.' . $ext;
+	$destFile = $targetDir . $filename;
+	$relPath  = $targetSubdir . $filename;
+
+	// Deduplication: reuse already downloaded image
+	if (is_file($destFile) && filesize($destFile) > 0) {
+		return $relPath;
+	}
+
+	// cURL Download with connect and execution timeouts
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+	curl_setopt($ch, CURLOPT_USERAGENT, 'LiveStore-CatalogIngest/1.0');
+
+	$data = curl_exec($ch);
+	$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+	$curlError = curl_error($ch);
+	curl_close($ch);
+
+	if ($data !== false && $httpCode === 200 && strlen($data) > 0) {
+		@file_put_contents($destFile, $data);
+		return $relPath;
+	}
+
+	fwrite(STDERR, '[IMAGE NOTICE] Could not download \'' . $url . '\' (HTTP ' . $httpCode . ' ' . $curlError . '). Proceeding without image.' . PHP_EOL);
+	return null;
+};
+
+// 6. Batch Ingestion Engine
+$processed = 0;
+$inserted = 0;
+$updated = 0;
+$failed = 0;
+$itemResults = array();
+$itemErrors = array();
+
+foreach ($items as $idx => $item) {
+	$processed++;
+
+	$model = isset($item['model']) ? trim((string)$item['model']) : '';
+	$name  = isset($item['name']) ? trim((string)$item['name']) : '';
+
+	if ($model === '') {
+		$failed++;
+		$itemErrors[] = array(
+			'index'   => $idx,
+			'model'   => '',
+			'message' => 'Missing required identifier: \'model\'.'
+		);
+		continue;
+	}
+
+	try {
+		$price       = isset($item['price']) ? (float)$item['price'] : 0.00;
+		$quantity    = isset($item['quantity']) ? (int)$item['quantity'] : 0;
+		$description = isset($item['description']) ? (string)$item['description'] : '';
+		$categoryIds = isset($item['category_ids']) && is_array($item['category_ids']) ? array_map('intval', $item['category_ids']) : array();
+
+		// Download primary and additional images
+		$mainImage = null;
+		if (isset($item['image_url'])) {
+			$mainImage = $downloadImage($item['image_url'], $model);
+		}
+
+		$additionalImages = array();
+		if (isset($item['additional_images']) && is_array($item['additional_images'])) {
+			$sortOrder = 0;
+			foreach ($item['additional_images'] as $addUrl) {
+				$savedAddImg = $downloadImage($addUrl, $model);
+				if ($savedAddImg) {
+					$additionalImages[] = array(
+						'image'      => $savedAddImg,
+						'sort_order' => $sortOrder++
+					);
+				}
+			}
+		}
+
+		// Map Scraper Attributes
+		$productAttributes = array();
+		if (isset($item['attributes']) && is_array($item['attributes'])) {
+			foreach ($item['attributes'] as $attrKey => $attrVal) {
+				$attrId = $resolveAttributeId($attrKey);
+				$attrDesc = array();
+				foreach ($languages as $langId => $langInfo) {
+					$attrDesc[$langId] = array('text' => (string)$attrVal);
+				}
+				$productAttributes[] = array(
+					'attribute_id'                  => $attrId,
+					'product_attribute_description' => $attrDesc
+				);
+			}
+		}
+
+		// Check if Product Exists
+		$checkSql = 'SELECT `product_id` FROM `' . DB_PREFIX . 'product` WHERE `model` = \'' . $db->escape($model) . '\' LIMIT 1';
+		$checkQuery = $db->query($checkSql);
+
+		if ($checkQuery->num_rows > 0) {
+			// --- UPDATE EXISTING PRODUCT ---
+			$productId = (int)$checkQuery->row['product_id'];
+
+			$existing = $modelProduct->getProduct($productId);
+			$existDescriptions = $modelProduct->getProductDescriptions($productId);
+			$existCategories   = $modelProduct->getProductCategories($productId);
+			$existImages       = $modelProduct->getProductImages($productId);
+			$existStores       = $modelProduct->getProductStores($productId);
+			$existDiscounts    = $modelProduct->getProductDiscounts($productId);
+			$existSpecials     = $modelProduct->getProductSpecials($productId);
+			$existDownloads    = $modelProduct->getProductDownloads($productId);
+			$existFilters      = $modelProduct->getProductFilters($productId);
+			$existRelated      = $modelProduct->getProductRelated($productId);
+			$existRewards      = $modelProduct->getProductRewards($productId);
+			$existSeoUrls      = $modelProduct->getProductSeoUrls($productId);
+			$existLayouts      = $modelProduct->getProductLayouts($productId);
+
+			// Merge descriptions
+			foreach ($languages as $langId => $langInfo) {
+				if (!isset($existDescriptions[$langId])) {
+					$existDescriptions[$langId] = array(
+						'name'             => $name !== '' ? $name : $model,
+						'description'      => $description,
+						'tag'              => '',
+						'meta_title'       => $name !== '' ? $name : $model,
+						'meta_h1'          => $name !== '' ? $name : $model,
+						'meta_description' => '',
+						'meta_keyword'     => ''
+					);
+				} else {
+					if ($name !== '') {
+						$existDescriptions[$langId]['name'] = $name;
+						if (empty($existDescriptions[$langId]['meta_title'])) {
+							$existDescriptions[$langId]['meta_title'] = $name;
+						}
+					}
+					if ($description !== '') {
+						$existDescriptions[$langId]['description'] = $description;
+					}
+				}
+			}
+
+			$mergedCategories = !empty($categoryIds) ? $categoryIds : $existCategories;
+			$mergedMainCategory = !empty($mergedCategories) ? $mergedCategories[0] : 0;
+			$mergedImage = ($mainImage !== null) ? $mainImage : $existing['image'];
+			$mergedImages = !empty($additionalImages) ? $additionalImages : $existImages;
+
+			$mergedData = array(
+				'model'              => $model,
+				'sku'                => $existing['sku'],
+				'upc'                => $existing['upc'],
+				'ean'                => $existing['ean'],
+				'jan'                => $existing['jan'],
+				'isbn'               => $existing['isbn'],
+				'mpn'                => $existing['mpn'],
+				'location'           => $existing['location'],
+				'certification_link' => isset($existing['certification_link']) ? $existing['certification_link'] : '',
+				'quantity'           => $quantity,
+				'minimum'            => (int)$existing['minimum'],
+				'subtract'           => (int)$existing['subtract'],
+				'stock_status_id'    => (int)$existing['stock_status_id'],
+				'date_available'     => $existing['date_available'],
+				'manufacturer_id'    => (int)$existing['manufacturer_id'],
+				'shipping'           => (int)$existing['shipping'],
+				'price'              => $price,
+				'points'             => (int)$existing['points'],
+				'weight'             => (float)$existing['weight'],
+				'weight_class_id'    => (int)$existing['weight_class_id'],
+				'length'             => (float)$existing['length'],
+				'width'              => (float)$existing['width'],
+				'height'             => (float)$existing['height'],
+				'length_class_id'    => (int)$existing['length_class_id'],
+				'status'             => 1,
+				'noindex'            => isset($existing['noindex']) ? (int)$existing['noindex'] : 0,
+				'tax_class_id'       => (int)$existing['tax_class_id'],
+				'sort_order'         => (int)$existing['sort_order'],
+				'image'              => $mergedImage,
+				'product_description'=> $existDescriptions,
+				'product_category'   => $mergedCategories,
+				'main_category_id'   => $mergedMainCategory,
+				'product_store'      => !empty($existStores) ? $existStores : array(0),
+				'product_attribute'  => !empty($productAttributes) ? $productAttributes : $modelProduct->getProductAttributes($productId),
+				'product_option'     => array(),
+				'product_discount'   => $existDiscounts,
+				'product_special'    => $existSpecials,
+				'product_image'      => $mergedImages,
+				'product_download'   => $existDownloads,
+				'product_filter'     => $existFilters,
+				'product_related'    => $existRelated,
+				'product_reward'     => $existRewards,
+				'product_seo_url'    => $existSeoUrls,
+				'product_layout'     => $existLayouts
+			);
+
+			if (!$dryRun) {
+				$modelProduct->editProduct($productId, $mergedData);
+			}
+
+			$updated++;
+			$itemResults[] = array(
+				'model'      => $model,
+				'action'     => 'updated',
+				'product_id' => $productId,
+				'name'       => $name,
+				'price'      => $price,
+				'quantity'   => $quantity
+			);
+		} else {
+			// --- INSERT NEW PRODUCT ---
+			$productDescriptions = array();
+			foreach ($languages as $langId => $langInfo) {
+				$productDescriptions[$langId] = array(
+					'name'             => $name !== '' ? $name : $model,
+					'description'      => $description,
+					'tag'              => '',
+					'meta_title'       => $name !== '' ? $name : $model,
+					'meta_h1'          => $name !== '' ? $name : $model,
+					'meta_description' => '',
+					'meta_keyword'     => ''
+				);
+			}
+
+			$mainCategory = !empty($categoryIds) ? $categoryIds[0] : 0;
+
+			$preparedData = array(
+				'model'              => $model,
+				'sku'                => '',
+				'upc'                => '',
+				'ean'                => '',
+				'jan'                => '',
+				'isbn'               => '',
+				'mpn'                => '',
+				'location'           => '',
+				'certification_link' => '',
+				'quantity'           => $quantity,
+				'minimum'            => 1,
+				'subtract'           => 1,
+				'stock_status_id'    => (int)$config->get('config_stock_status_id'),
+				'date_available'     => date('Y-m-d'),
+				'manufacturer_id'    => 0,
+				'shipping'           => 1,
+				'price'              => $price,
+				'points'             => 0,
+				'weight'             => 0.0,
+				'weight_class_id'    => (int)$config->get('config_weight_class_id'),
+				'length'             => 0.0,
+				'width'              => 0.0,
+				'height'             => 0.0,
+				'length_class_id'    => (int)$config->get('config_length_class_id'),
+				'status'             => 1,
+				'noindex'            => 0,
+				'tax_class_id'       => 0,
+				'sort_order'         => 0,
+				'image'              => $mainImage ? $mainImage : '',
+				'product_description'=> $productDescriptions,
+				'product_store'      => array(0),
+				'product_category'   => $categoryIds,
+				'main_category_id'   => $mainCategory,
+				'product_attribute'  => $productAttributes,
+				'product_image'      => $additionalImages
+			);
+
+			$newId = 0;
+			if (!$dryRun) {
+				$newId = (int)$modelProduct->addProduct($preparedData);
+			}
+
+			$inserted++;
+			$itemResults[] = array(
+				'model'      => $model,
+				'action'     => 'inserted',
+				'product_id' => $newId,
+				'name'       => $name,
+				'price'      => $price,
+				'quantity'   => $quantity
+			);
+		}
+	} catch (\Throwable $itemException) {
+		$failed++;
+		$itemErrors[] = array(
+			'index'   => $idx,
+			'model'   => $model,
+			'message' => $itemException->getMessage(),
+			'file'    => $itemException->getFile(),
+			'line'    => $itemException->getLine()
+		);
+		fwrite(STDERR, '[INGEST ERROR] Failed processing model \'' . $model . '\': ' . $itemException->getMessage() . PHP_EOL);
+	}
+}
+
+// 7. Cache Invalidation
+if (!$dryRun && ($inserted > 0 || $updated > 0)) {
+	$cache->delete('product');
+	$cache->delete('category');
+}
+
+// 8. Deterministic Output Response
+$overallStatus = ($failed === 0) ? 'success' : (($inserted > 0 || $updated > 0) ? 'partial' : 'error');
+
+$response = array(
+	'status'    => $overallStatus,
+	'dry_run'   => $dryRun,
+	'processed' => $processed,
+	'inserted'  => $inserted,
+	'updated'   => $updated,
+	'failed'    => $failed,
+	'items'     => $itemResults,
+	'errors'    => $itemErrors,
+	'message'   => 'Catalog ingestion completed: ' . $inserted . ' inserted, ' . $updated . ' updated, ' . $failed . ' failed.'
+);
+
+if ($format === 'text') {
+	echo ($dryRun ? '[DRY-RUN] ' : '[INGEST COMPLETE] ') . $response['message'] . PHP_EOL;
+	echo 'Total Processed: ' . $processed . PHP_EOL;
+	echo 'Inserted: ' . $inserted . PHP_EOL;
+	echo 'Updated:  ' . $updated . PHP_EOL;
+	echo 'Failed:   ' . $failed . PHP_EOL;
+	if (!empty($itemErrors)) {
+		echo 'Errors encountered:' . PHP_EOL;
+		foreach ($itemErrors as $ie) {
+			echo '  - Model \'' . $ie['model'] . '\': ' . $ie['message'] . PHP_EOL;
+		}
+	}
+} else {
+	echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+}
+
+exit($overallStatus === 'error' ? 1 : 0);
