@@ -206,6 +206,7 @@ $dryRun = false;
 $skipImages = false;
 $filePath = null;
 $readStdin = false;
+$showHelp = false;
 
 foreach ($argv as $arg) {
 	if (strpos($arg, '--format=') === 0) {
@@ -222,7 +223,49 @@ foreach ($argv as $arg) {
 		$filePath = substr($arg, 3);
 	} elseif ($arg === '--stdin') {
 		$readStdin = true;
+	} elseif ($arg === '--help' || $arg === '-h') {
+		$showHelp = true;
 	}
+}
+
+if ($showHelp) {
+	if ($format === 'json') {
+		$helpPayload = array(
+			'utility'     => 'LiveStore Catalog Ingestion CLI',
+			'usage'       => 'php cli/catalog_ingest.php [options]',
+			'options'     => array(
+				'--file=<path>, -f=<path>' => 'Path to JSON payload file containing scraped entities.',
+				'--stdin'                  => 'Read JSON payload directly from STDIN stream pipe.',
+				'--format=json|text'       => 'Output format (default: json).',
+				'--dry-run'                => 'Validate and simulate ingestion without database mutations.',
+				'--skip-images'            => 'Bypass downloading and associating external images.',
+				'--help, -h'               => 'Display this command-line manual.'
+			),
+			'contract'    => array(
+				'model'             => 'string (required, unique catalog identifier / SKU)',
+				'name'              => 'string (product title)',
+				'price'             => 'float (store unit price)',
+				'quantity'          => 'int (available stock)',
+				'category_ids'      => 'array<int> (mapped category IDs)',
+				'image_url'         => 'string (remote primary image URL)',
+				'additional_images' => 'array<string> (remote secondary image URLs)',
+				'description'       => 'string (HTML or markdown product description)',
+				'attributes'        => 'object<string, string> (attribute name to value map)'
+			)
+		);
+		echo json_encode($helpPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
+	} else {
+		echo 'LiveStore Catalog Ingestion CLI Utility' . PHP_EOL;
+		echo 'Usage: php cli/catalog_ingest.php [options]' . PHP_EOL . PHP_EOL;
+		echo 'Options:' . PHP_EOL;
+		echo '  --file=<path>, -f=<path>  Path to JSON payload file' . PHP_EOL;
+		echo '  --stdin                   Stream payload from STDIN pipe' . PHP_EOL;
+		echo '  --format=json|text        Output format (default: json)' . PHP_EOL;
+		echo '  --dry-run                 Simulate operations without database commits' . PHP_EOL;
+		echo '  --skip-images             Skip downloading external images' . PHP_EOL;
+		echo '  --help, -h                Show this help screen' . PHP_EOL;
+	}
+	exit(0);
 }
 
 // 3. Ingest Payload (File or STDIN)
@@ -251,18 +294,24 @@ if ($readStdin) {
 		exit(2);
 	}
 	$rawPayload = file_get_contents($filePath);
-	// If piped without explicit flag
+} else {
+	// If piped without explicit --file flag
 	if (function_exists('stream_isatty')) {
 		if (!@stream_isatty(STDIN)) {
-			$rawPayload = (string)@file_get_contents('php://stdin');
+			$rawPayload = (string)@stream_get_contents(STDIN);
 		}
 	} elseif (function_exists('posix_isatty')) {
 		if (!@posix_isatty(STDIN)) {
-			$rawPayload = (string)@file_get_contents('php://stdin');
+			$rawPayload = (string)@stream_get_contents(STDIN);
 		}
 	}
 }
 
+// Strip UTF-8 Byte Order Mark (BOM) if present from Windows/PowerShell streams
+$utf8Bom = chr(239) . chr(187) . chr(191);
+if (substr($rawPayload, 0, 3) === $utf8Bom) {
+	$rawPayload = substr($rawPayload, 3);
+}
 $rawPayload = trim($rawPayload);
 
 if ($rawPayload === '') {
@@ -390,8 +439,8 @@ $downloadImage = function($url, $modelIdentifier) use ($skipImages) {
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 4);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 6);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 	curl_setopt($ch, CURLOPT_USERAGENT, 'LiveStore-CatalogIngest/1.0');
@@ -477,14 +526,13 @@ foreach ($items as $idx => $item) {
 		}
 
 		// Check if Product Exists
-		$checkSql = 'SELECT `product_id` FROM `' . DB_PREFIX . 'product` WHERE `model` = \'' . $db->escape($model) . '\' LIMIT 1';
+		$checkSql = 'SELECT * FROM `' . DB_PREFIX . 'product` WHERE `model` = \'' . $db->escape($model) . '\' LIMIT 1';
 		$checkQuery = $db->query($checkSql);
 
 		if ($checkQuery->num_rows > 0) {
 			// --- UPDATE EXISTING PRODUCT ---
 			$productId = (int)$checkQuery->row['product_id'];
-
-			$existing = $modelProduct->getProduct($productId);
+			$existing  = $checkQuery->row;
 			$existDescriptions = $modelProduct->getProductDescriptions($productId);
 			$existCategories   = $modelProduct->getProductCategories($productId);
 			$existImages       = $modelProduct->getProductImages($productId);
