@@ -160,6 +160,17 @@
 							</div>
 						</div>
 						<div class="form-group">
+							<label class="col-sm-2 control-label" for="input-audio-file"><span data-toggle="tooltip" title="Optional: Upload audio track (MP3, WAV, FLAC, OGG) to extract acoustic features for AI vector search.">Audio Track (SoundNet AI)</span></label>
+							<div class="col-sm-10">
+								<input type="file" name="audio_file" id="input-audio-file" accept="audio/*,.mp3,.wav,.flac,.ogg" class="form-control"/>
+								{% if soundnet_audio_path %}
+									<div style="margin-top: 6px;">
+										<span class="label label-info"><i class="fa fa-music"></i> Attached Audio File: {{ soundnet_audio_path }}</span>
+									</div>
+								{% endif %}
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-sm-2 control-label" for="input-price">{{ entry_price }}</label>
 							<div class="col-sm-10">
 								<input type="text" name="price" value="{{ price }}" placeholder="{{ entry_price }}" id="input-price" class="form-control"/>

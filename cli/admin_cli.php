@@ -493,10 +493,12 @@ class HeadlessBootstrap {
 class AdminCliApp {
 	private $registry;
 	private $args;
+	private $db;
 
 	public function __construct(CliArgs $args) {
 		$this->args = $args;
 		$this->registry = HeadlessBootstrap::init();
+		$this->db = $this->registry->get('db');
 	}
 
 	public function run() {
@@ -543,6 +545,18 @@ class AdminCliApp {
 
 			case 'setting:set':
 				$this->commandSettingSet();
+				break;
+
+			case 'tracklist:get':
+				$this->commandTracklistGet();
+				break;
+
+			case 'tracklist:set':
+				$this->commandTracklistSet();
+				break;
+
+			case 'tracklist:clear':
+				$this->commandTracklistClear();
 				break;
 
 			default:
@@ -666,6 +680,28 @@ class AdminCliApp {
 						'--payload'  => array('type' => 'json_string', 'description' => 'Batch key-value dictionary'),
 						'--dry-run'  => array('type' => 'flag', 'description' => 'Simulate mutation without persisting')
 					)
+				),
+				'tracklist:get' => array(
+					'description' => 'Retrieves active audio tracks and previews for an album product.',
+					'options'     => array(
+						'--product_id' => array('type' => 'int', 'required' => true, 'description' => 'Target product ID')
+					)
+				),
+				'tracklist:set' => array(
+					'description' => 'Replaces or updates the audio tracklist for an album product.',
+					'options'     => array(
+						'--product_id'   => array('type' => 'int', 'required' => true, 'description' => 'Target product ID'),
+						'--payload'      => array('type' => 'json_string', 'description' => 'JSON array of tracks or {"tracks": [...]}'),
+						'--payload-file' => array('type' => 'filepath', 'description' => 'Path to JSON payload file'),
+						'--dry-run'      => array('type' => 'flag', 'description' => 'Validate tracklist schema without database mutation')
+					)
+				),
+				'tracklist:clear' => array(
+					'description' => 'Deletes all audio tracks associated with a product.',
+					'options'     => array(
+						'--product_id' => array('type' => 'int', 'required' => true, 'description' => 'Target product ID'),
+						'--dry-run'    => array('type' => 'flag', 'description' => 'Simulate deletion without committing')
+					)
 				)
 			)
 		);
@@ -763,6 +799,21 @@ class AdminCliApp {
 		// Resolve Vector Sync State if available
 		$vectorSyncState = $this->resolveVectorSyncState($productId);
 
+		// Resolve Tracklist from oc_product_tracklist
+		$tracksQuery = $this->db->query('SELECT track_id, track_num, title, duration, preview_file, status, sort_order FROM `' . DB_PREFIX . 'product_tracklist` WHERE `product_id` = \'' . (int)$productId . '\' ORDER BY `sort_order` ASC, `track_num` ASC');
+		$tracklist = array();
+		foreach ($tracksQuery->rows as $tr) {
+			$tracklist[] = array(
+				'track_id'     => (int)$tr['track_id'],
+				'track_num'    => (int)$tr['track_num'],
+				'title'        => $tr['title'],
+				'duration'     => $tr['duration'],
+				'preview_file' => $tr['preview_file'],
+				'status'       => (int)$tr['status'],
+				'sort_order'   => (int)$tr['sort_order']
+			);
+		}
+
 		$result = array(
 			'product_id'        => (int)$product['product_id'],
 			'model'             => $product['model'],
@@ -806,7 +857,9 @@ class AdminCliApp {
 			'stores'            => $stores,
 			'seo_urls'          => $seoUrls,
 			'related_ids'       => $related,
-			'vector_sync'       => $vectorSyncState
+			'vector_sync'       => $vectorSyncState,
+			'tracklist'         => $tracklist,
+			'track_count'       => count($tracklist)
 		);
 
 		CliResponse::success($result, 'Product #' . $productId . ' fetched successfully.');
@@ -842,12 +895,17 @@ class AdminCliApp {
 		$modelProduct = $this->registry->get('model_catalog_product');
 		$productId = $modelProduct->addProduct($preparedData);
 
+		if (isset($preparedData['product_track']) && !empty($preparedData['product_track'])) {
+			$this->saveProductTracks($productId, $preparedData['product_track']);
+		}
+
 		CliResponse::success(
 			array(
-				'product_id' => (int)$productId,
-				'model'      => $preparedData['model'],
-				'price'      => (float)$preparedData['price'],
-				'status'     => (int)$preparedData['status']
+				'product_id'  => (int)$productId,
+				'model'       => $preparedData['model'],
+				'price'       => (float)$preparedData['price'],
+				'status'      => (int)$preparedData['status'],
+				'track_count' => isset($preparedData['product_track']) ? count($preparedData['product_track']) : 0
 			),
 			'Product created successfully with ID #' . $productId . '.'
 		);
@@ -890,6 +948,10 @@ class AdminCliApp {
 
 		$modelProduct->editProduct($productId, $mergedData);
 
+		if (isset($mergedData['product_track'])) {
+			$this->saveProductTracks($productId, $mergedData['product_track']);
+		}
+
 		CliResponse::success(
 			array(
 				'product_id'     => $productId,
@@ -931,6 +993,8 @@ class AdminCliApp {
 		}
 
 		$modelProduct->deleteProduct($productId);
+
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_tracklist` WHERE `product_id` = \'' . (int)$productId . '\'');
 
 		CliResponse::success(
 			array(
@@ -1209,6 +1273,143 @@ class AdminCliApp {
 	}
 
 	/**
+	 * 11. tracklist:get: Retrieve Audio Tracklist for a Product
+	 */
+	private function commandTracklistGet() {
+		$productId = (int)$this->args->getOption('product_id');
+		if ($productId <= 0) {
+			$productId = (int)$this->args->getOption('id');
+		}
+		if ($productId <= 0) {
+			CliResponse::missingArgument('The --product_id option is required and must be a positive integer.', '--product_id');
+		}
+
+		$modelProduct = $this->registry->get('model_catalog_product');
+		$product = $modelProduct->getProduct($productId);
+		if (!$product) {
+			CliResponse::error('Product not found: ' . $productId, array(), 1);
+		}
+
+		$tracksQuery = $this->db->query('SELECT track_id, track_num, title, duration, preview_file, status, sort_order FROM `' . DB_PREFIX . 'product_tracklist` WHERE `product_id` = \'' . $productId . '\' ORDER BY `sort_order` ASC, `track_num` ASC');
+
+		$tracklist = array();
+		foreach ($tracksQuery->rows as $tr) {
+			$tracklist[] = array(
+				'track_id'     => (int)$tr['track_id'],
+				'track_num'    => (int)$tr['track_num'],
+				'title'        => $tr['title'],
+				'duration'     => $tr['duration'],
+				'preview_file' => $tr['preview_file'],
+				'status'       => (int)$tr['status'],
+				'sort_order'   => (int)$tr['sort_order']
+			);
+		}
+
+		$data = array(
+			'product_id'   => $productId,
+			'model'        => $product['model'],
+			'track_count'  => count($tracklist),
+			'tracks'       => $tracklist
+		);
+
+		CliResponse::success($data, 'Retrieved ' . count($tracklist) . ' tracks for product #' . $productId . '.');
+	}
+
+	/**
+	 * 12. tracklist:set: Set/Replace Tracklist for a Product
+	 */
+	private function commandTracklistSet() {
+		$productId = (int)$this->args->getOption('product_id');
+		if ($productId <= 0) {
+			$productId = (int)$this->args->getOption('id');
+		}
+		if ($productId <= 0) {
+			CliResponse::missingArgument('The --product_id option is required and must be a positive integer.', '--product_id');
+		}
+
+		$modelProduct = $this->registry->get('model_catalog_product');
+		$product = $modelProduct->getProduct($productId);
+		if (!$product) {
+			CliResponse::error('Product not found: ' . $productId, array(), 1);
+		}
+
+		$payload = $this->args->getPayload();
+		if ($payload === null) {
+			CliResponse::missingArgument('Provide tracklist array via --payload=\'<json>\' or --payload-file=<path>.', '--payload');
+		}
+
+		$rawTracks = array();
+		if (isset($payload['tracks']) && is_array($payload['tracks'])) {
+			$rawTracks = $payload['tracks'];
+		} elseif (isset($payload['tracklist']) && is_array($payload['tracklist'])) {
+			$rawTracks = $payload['tracklist'];
+		} elseif (is_array($payload) && array_keys($payload) === range(0, count($payload) - 1)) {
+			$rawTracks = $payload;
+		} else {
+			CliResponse::error('Invalid tracklist payload format. Expected array of tracks or {"tracks": [...]}.', array(), 1);
+		}
+
+		$normalizedTracks = $this->normalizeTracklist($rawTracks);
+
+		if ($this->args->isDryRun()) {
+			CliResponse::success(
+				array(
+					'dry_run'          => true,
+					'product_id'       => $productId,
+					'track_count'      => count($normalizedTracks),
+					'normalized_tracks'=> $normalizedTracks
+				),
+				'[DRY-RUN] Tracklist validation passed for product #' . $productId . '. No database records changed.'
+			);
+		}
+
+		$this->saveProductTracks($productId, $normalizedTracks);
+
+		$tracksQuery = $this->db->query('SELECT track_id, track_num, title, duration, preview_file, status, sort_order FROM `' . DB_PREFIX . 'product_tracklist` WHERE `product_id` = \'' . $productId . '\' ORDER BY `sort_order` ASC, `track_num` ASC');
+
+		$data = array(
+			'product_id'  => $productId,
+			'track_count' => count($tracksQuery->rows),
+			'tracks'      => $tracksQuery->rows
+		);
+
+		CliResponse::success($data, 'Successfully updated tracklist for product #' . $productId . ' (' . count($tracksQuery->rows) . ' tracks).');
+	}
+
+	/**
+	 * 13. tracklist:clear: Clear All Tracks for a Product
+	 */
+	private function commandTracklistClear() {
+		$productId = (int)$this->args->getOption('product_id');
+		if ($productId <= 0) {
+			$productId = (int)$this->args->getOption('id');
+		}
+		if ($productId <= 0) {
+			CliResponse::missingArgument('The --product_id option is required and must be a positive integer.', '--product_id');
+		}
+
+		$modelProduct = $this->registry->get('model_catalog_product');
+		$product = $modelProduct->getProduct($productId);
+		if (!$product) {
+			CliResponse::error('Product not found: ' . $productId, array(), 1);
+		}
+
+		if ($this->args->isDryRun()) {
+			CliResponse::success(
+				array(
+					'dry_run'    => true,
+					'product_id' => $productId
+				),
+				'[DRY-RUN] Simulated tracklist clear for product #' . $productId . '.'
+			);
+		}
+
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_tracklist` WHERE `product_id` = \'' . $productId . '\'');
+
+		CliResponse::success(array('product_id' => $productId), 'Cleared tracklist for product #' . $productId . '.');
+	}
+
+	/**
 	 * Helper: Resolve Vector Sync State for AI agents
 	 */
 	private function resolveVectorSyncState($productId) {
@@ -1401,6 +1602,12 @@ class AdminCliApp {
 			$data['product_image'] = (array)$payload['product_image'];
 		}
 
+		if (isset($payload['tracklist']) && is_array($payload['tracklist'])) {
+			$data['product_track'] = $this->normalizeTracklist($payload['tracklist']);
+		} elseif (isset($payload['tracks']) && is_array($payload['tracks'])) {
+			$data['product_track'] = $this->normalizeTracklist($payload['tracks']);
+		}
+
 		return $data;
 	}
 
@@ -1502,6 +1709,12 @@ class AdminCliApp {
 			'product_layout'     => isset($payload['product_layout']) ? (array)$payload['product_layout'] : $layouts
 		);
 
+		if (isset($payload['tracklist']) && is_array($payload['tracklist'])) {
+			$data['product_track'] = $this->normalizeTracklist($payload['tracklist']);
+		} elseif (isset($payload['tracks']) && is_array($payload['tracks'])) {
+			$data['product_track'] = $this->normalizeTracklist($payload['tracks']);
+		}
+
 		return $data;
 	}
 
@@ -1550,6 +1763,83 @@ class AdminCliApp {
 		}
 
 		return $stats;
+	}
+
+	/**
+	 * Helper: Normalize Tracklist Array or Strings
+	 */
+	private function normalizeTracklist(array $tracks) {
+		$normalized = array();
+		foreach ($tracks as $index => $track) {
+			if (is_string($track)) {
+				$trackStr = trim($track);
+				$trackNum = $index + 1;
+				$duration = '0:00';
+				$title = $trackStr;
+				$preview = '';
+
+				if (preg_match('/^(\d+)[\.\s\-]+(.*)/', $trackStr, $tm)) {
+					$trackNum = (int)$tm[1];
+					$title = trim($tm[2]);
+				}
+				if (preg_match('/^(.*?)\s*[\(\[]?(\d+:\d{2})[\)\]]?$/', $title, $dm)) {
+					$title = trim($dm[1], " \t\n\r\0\x0B-");
+					$duration = $dm[2];
+				}
+
+				$normalized[] = array(
+					'track_num'    => $trackNum,
+					'title'        => $title,
+					'duration'     => $duration,
+					'preview_file' => $preview,
+					'status'       => 1,
+					'sort_order'   => $index
+				);
+			} elseif (is_array($track)) {
+				$trackNum = isset($track['track_num']) ? (int)$track['track_num'] : ($index + 1);
+				$title = isset($track['title']) ? trim((string)$track['title']) : ('Track ' . $trackNum);
+				$duration = isset($track['duration']) ? trim((string)$track['duration']) : '0:00';
+				$preview = isset($track['preview_file']) ? trim((string)$track['preview_file']) : (isset($track['preview']) ? trim((string)$track['preview']) : (isset($track['url']) ? trim((string)$track['url']) : ''));
+				$status = isset($track['status']) ? (int)$track['status'] : 1;
+				$sortOrder = isset($track['sort_order']) ? (int)$track['sort_order'] : $index;
+
+				$normalized[] = array(
+					'track_num'    => $trackNum,
+					'title'        => $title,
+					'duration'     => $duration,
+					'preview_file' => $preview,
+					'status'       => $status,
+					'sort_order'   => $sortOrder
+				);
+			}
+		}
+		return $normalized;
+	}
+
+	/**
+	 * Helper: Persist Tracklist Rows to oc_product_tracklist
+	 */
+	private function saveProductTracks($productId, array $tracks) {
+		$productId = (int)$productId;
+		$this->db->query('DELETE FROM `' . DB_PREFIX . 'product_tracklist` WHERE `product_id` = \'' . $productId . '\'');
+
+		foreach ($tracks as $index => $track) {
+			$trackNum = isset($track['track_num']) && (int)$track['track_num'] > 0 ? (int)$track['track_num'] : ($index + 1);
+			$title = isset($track['title']) ? $this->db->escape(trim($track['title'])) : 'Track ' . $trackNum;
+			$duration = isset($track['duration']) ? $this->db->escape(trim($track['duration'])) : '0:00';
+			$preview = isset($track['preview_file']) ? $this->db->escape(trim($track['preview_file'])) : '';
+			$status = isset($track['status']) ? (int)$track['status'] : 1;
+			$sortOrder = isset($track['sort_order']) ? (int)$track['sort_order'] : $index;
+
+			$this->db->query('INSERT INTO `' . DB_PREFIX . 'product_tracklist` SET
+				`product_id` = \'' . $productId . '\',
+				`track_num` = \'' . $trackNum . '\',
+				`title` = \'' . $title . '\',
+				`duration` = \'' . $duration . '\',
+				`preview_file` = \'' . $preview . '\',
+				`status` = \'' . $status . '\',
+				`sort_order` = \'' . $sortOrder . '\'');
+		}
 	}
 }
 

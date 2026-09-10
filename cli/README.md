@@ -63,7 +63,12 @@ The utility accepts either a JSON array of product objects or a single product o
       "Лейбл": "Harvest",
       "Формат издания": "LP 180g",
       "Вайб / Характер звучания": "dark, immersive, psychedelic, lush synth"
-    }
+    },
+    "tracklist": [
+      {"track_num": 1, "title": "Speak to Me", "duration": "1:30", "preview_file": "https://cdn.freesound.org/previews/560/560446_11861866-lq.mp3"},
+      {"track_num": 2, "title": "Breathe (In the Air)", "duration": "2:43", "preview_file": "https://cdn.freesound.org/previews/612/612089_11861866-lq.mp3"},
+      {"track_num": 3, "title": "On the Run", "duration": "3:30", "preview_file": "upload/audio/sample_on_the_run.mp3"}
+    ]
   },
   {
     "type": "instrument",
@@ -96,6 +101,7 @@ The utility accepts either a JSON array of product objects or a single product o
 - `additional_images` *(array of string, optional)*: HTTP/HTTPS URLs of gallery/secondary images.
 - `description` *(string, optional)*: HTML/Markdown product description.
 - `attributes` *(object / map, optional)*: Key-value map of specifications. Keys are dynamically resolved against `oc_attribute_description`.
+- `tracklist` *(array of objects or strings, optional)*: Release tracklist. Accepts either objects (`{"track_num": 1, "title": "...", "duration": "...", "preview_file": "..."}`) or strings (`"01. Title (3:45)"`). Automatically populates `oc_product_tracklist`.
 
 ---
 
@@ -274,7 +280,26 @@ php cli/admin_cli.php product:update --id=1 --payload='{"price": 42.00, "quantit
 php cli/admin_cli.php product:delete --id=1
 ```
 
-### 3.2 Category Operations (`category:*`)
+### 3.2 Tracklist Operations (`tracklist:*`)
+
+```bash
+# Retrieve tracklist and preview streams for a release
+php cli/admin_cli.php tracklist:get --product_id=1
+
+# Replace / set tracklist via JSON payload file
+php cli/admin_cli.php tracklist:set --product_id=1 --payload-file=tracks.json
+
+# Replace / set tracklist via inline JSON
+php cli/admin_cli.php tracklist:set --product_id=1 --payload='[{"track_num":1,"title":"Intro","duration":"1:20","preview_file":"upload/audio/intro.mp3"}]'
+
+# Dry-run validation of tracklist without writing to database
+php cli/admin_cli.php tracklist:set --product_id=1 --payload-file=tracks.json --dry-run
+
+# Clear all audio tracks for a product
+php cli/admin_cli.php tracklist:clear --product_id=1
+```
+
+### 3.3 Category Operations (`category:*`)
 
 ```bash
 # List all categories hierarchically
@@ -293,7 +318,7 @@ php cli/admin_cli.php category:update --id=5 --payload='{"sort_order": 10}'
 php cli/admin_cli.php category:delete --id=5
 ```
 
-### 3.3 Configuration Settings (`setting:*`)
+### 3.4 Configuration Settings (`setting:*`)
 
 ```bash
 # Read a configuration key
@@ -306,7 +331,7 @@ php cli/admin_cli.php setting:set --group=config --key=config_maintenance --valu
 php cli/admin_cli.php setting:list --group=config
 ```
 
-### 3.4 Maintenance & Diagnostics
+### 3.5 Maintenance & Diagnostics
 
 ```bash
 # Clear all OpenCart file-system cache files

@@ -1,0 +1,56 @@
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: soundnet-qdrant
+    restart: unless-stopped
+    ports:
+      - '6333:6333'
+      - '6334:6334'
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    networks:
+      - soundnet-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: soundnet-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_storage:/data
+    networks:
+      - soundnet-network
+
+  soundnet-ai:
+    build:
+      context: ./system/library/soundnet_ai
+      dockerfile: Dockerfile
+    container_name: soundnet-ai-daemon
+    restart: unless-stopped
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./system/library/soundnet_ai/app:/app/app
+      - ./system/library/soundnet_ai/tests:/app/tests
+    environment:
+      QDRANT_HOST: qdrant
+      QDRANT_PORT: 6333
+      QDRANT_COLLECTION_NAME: soundnet_catalog
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      INTERNAL_SECRET: soundnet_secret_key
+      EMBEDDING_MODEL_NAME: paraphrase-multilingual-MiniLM-L12-v2
+    depends_on:
+      - qdrant
+      - redis
+    networks:
+      - soundnet-network
+
+volumes:
+  qdrant_storage:
+  redis_storage:
+
+networks:
+  soundnet-network:
+    driver: bridge

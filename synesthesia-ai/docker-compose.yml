@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: synesthesia-qdrant
+    restart: unless-stopped
+    ports:
+      - '6333:6333'
+      - '6334:6334'
+    volumes:
+      - qdrant_storage:/qdrant/storage
+    networks:
+      - music-store-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: synesthesia-redis
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - music-store-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: synesthesia-api
+    restart: unless-stopped
+    ports:
+      - '8000:8000'
+    environment:
+      QDRANT_HOST: qdrant
+      QDRANT_PORT: 6333
+      QDRANT_COLLECTION_NAME: soundnet_catalog
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      INTERNAL_SECRET: soundnet_secret_key
+      EMBEDDING_MODEL_NAME: paraphrase-multilingual-MiniLM-L12-v2
+    depends_on:
+      - qdrant
+      - redis
+    networks:
+      - music-store-network
+
+volumes:
+  qdrant_storage:
+  redis_data:
+
+networks:
+  music-store-network:
+    name: music-store-network
+    driver: bridge

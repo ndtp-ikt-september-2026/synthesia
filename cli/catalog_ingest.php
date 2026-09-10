@@ -250,7 +250,8 @@ if ($showHelp) {
 				'image_url'         => 'string (remote primary image URL)',
 				'additional_images' => 'array<string> (remote secondary image URLs)',
 				'description'       => 'string (HTML or markdown product description)',
-				'attributes'        => 'object<string, string> (attribute name to value map)'
+				'attributes'        => 'object<string, string> (attribute name to value map)',
+				'tracklist'         => 'array<object|string> (album tracklist: objects with track_num, title, duration, preview_file or strings like "01. Title (3:45)")'
 			)
 		);
 		echo json_encode($helpPayload, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) . PHP_EOL;
@@ -464,6 +465,7 @@ $processed = 0;
 $inserted = 0;
 $updated = 0;
 $failed = 0;
+$tracksIngested = 0;
 $itemResults = array();
 $itemErrors = array();
 
@@ -488,6 +490,26 @@ foreach ($items as $idx => $item) {
 		$quantity    = isset($item['quantity']) ? (int)$item['quantity'] : 0;
 		$description = isset($item['description']) ? (string)$item['description'] : '';
 		$categoryIds = isset($item['category_ids']) && is_array($item['category_ids']) ? array_map('intval', $item['category_ids']) : array();
+		$itemType    = isset($item['type']) ? strtolower(trim((string)$item['type'])) : '';
+
+		// Extract or generate tag characteristics
+		$itemTags = '';
+		if (isset($item['tags'])) {
+			$itemTags = is_array($item['tags']) ? implode(', ', $item['tags']) : trim((string)$item['tags']);
+		} elseif (isset($item['tag'])) {
+			$itemTags = trim((string)$item['tag']);
+		}
+		if ($itemTags === '' && isset($item['attributes']) && is_array($item['attributes'])) {
+			$tagParts = array();
+			foreach ($item['attributes'] as $attrK => $attrV) {
+				if (is_scalar($attrV) && strlen(trim((string)$attrV)) > 0) {
+					$tagParts[] = trim((string)$attrV);
+				}
+			}
+			if (!empty($tagParts)) {
+				$itemTags = implode(', ', $tagParts);
+			}
+		}
 
 		// Download primary and additional images
 		$mainImage = null;
@@ -504,6 +526,61 @@ foreach ($items as $idx => $item) {
 					$additionalImages[] = array(
 						'image'      => $savedAddImg,
 						'sort_order' => $sortOrder++
+					);
+				}
+			}
+		}
+
+		// Extract and normalize tracklist
+		$rawTracklist = null;
+		if (isset($item['tracklist']) && is_array($item['tracklist'])) {
+			$rawTracklist = $item['tracklist'];
+		} elseif (isset($item['tracks']) && is_array($item['tracks'])) {
+			$rawTracklist = $item['tracks'];
+		}
+
+		$parsedTracks = array();
+		if ($rawTracklist !== null) {
+			foreach ($rawTracklist as $tIdx => $trackItem) {
+				if (is_string($trackItem)) {
+					$trackStr = trim($trackItem);
+					$trackNum = $tIdx + 1;
+					$duration = '0:00';
+					$title = $trackStr;
+					$preview = '';
+
+					if (preg_match('/^(\d+)[\.\s\-]+(.*)/', $trackStr, $tm)) {
+						$trackNum = (int)$tm[1];
+						$title = trim($tm[2]);
+					}
+					if (preg_match('/^(.*?)\s*[\(\[]?(\d+:\d{2})[\)\]]?$/', $title, $dm)) {
+						$title = trim($dm[1], " \t\n\r\0\x0B-");
+						$duration = $dm[2];
+					}
+
+					$parsedTracks[] = array(
+						'track_num'    => $trackNum,
+						'title'        => $title,
+						'duration'     => $duration,
+						'preview_file' => $preview,
+						'status'       => 1,
+						'sort_order'   => $tIdx
+					);
+				} elseif (is_array($trackItem)) {
+					$trackNum = isset($trackItem['track_num']) ? (int)$trackItem['track_num'] : ($tIdx + 1);
+					$title = isset($trackItem['title']) ? trim((string)$trackItem['title']) : ('Track ' . $trackNum);
+					$duration = isset($trackItem['duration']) ? trim((string)$trackItem['duration']) : '0:00';
+					$preview = isset($trackItem['preview_file']) ? trim((string)$trackItem['preview_file']) : (isset($trackItem['preview']) ? trim((string)$trackItem['preview']) : (isset($trackItem['url']) ? trim((string)$trackItem['url']) : ''));
+					$status = isset($trackItem['status']) ? (int)$trackItem['status'] : 1;
+					$sortOrder = isset($trackItem['sort_order']) ? (int)$trackItem['sort_order'] : $tIdx;
+
+					$parsedTracks[] = array(
+						'track_num'    => $trackNum,
+						'title'        => $title,
+						'duration'     => $duration,
+						'preview_file' => $preview,
+						'status'       => $status,
+						'sort_order'   => $sortOrder
 					);
 				}
 			}
@@ -552,7 +629,7 @@ foreach ($items as $idx => $item) {
 					$existDescriptions[$langId] = array(
 						'name'             => $name !== '' ? $name : $model,
 						'description'      => $description,
-						'tag'              => '',
+						'tag'              => $itemTags,
 						'meta_title'       => $name !== '' ? $name : $model,
 						'meta_h1'          => $name !== '' ? $name : $model,
 						'meta_description' => '',
@@ -568,6 +645,9 @@ foreach ($items as $idx => $item) {
 					if ($description !== '') {
 						$existDescriptions[$langId]['description'] = $description;
 					}
+					if ($itemTags !== '') {
+						$existDescriptions[$langId]['tag'] = $itemTags;
+					}
 				}
 			}
 
@@ -577,6 +657,7 @@ foreach ($items as $idx => $item) {
 			$mergedImages = !empty($additionalImages) ? $additionalImages : $existImages;
 
 			$mergedData = array(
+				'type'               => $itemType,
 				'model'              => $model,
 				'sku'                => $existing['sku'],
 				'upc'                => $existing['upc'],
@@ -620,21 +701,38 @@ foreach ($items as $idx => $item) {
 				'product_related'    => $existRelated,
 				'product_reward'     => $existRewards,
 				'product_seo_url'    => $existSeoUrls,
-				'product_layout'     => $existLayouts
+				'product_layout'     => $existLayouts,
+				'product_track'      => !empty($parsedTracks) ? $parsedTracks : array()
 			);
 
 			if (!$dryRun) {
 				$modelProduct->editProduct($productId, $mergedData);
+
+				if ($rawTracklist !== null) {
+					$db->query('DELETE FROM `' . DB_PREFIX . 'product_tracklist` WHERE `product_id` = \'' . (int)$productId . '\'');
+					foreach ($parsedTracks as $pt) {
+						$db->query('INSERT INTO `' . DB_PREFIX . 'product_tracklist` SET
+							`product_id` = \'' . (int)$productId . '\',
+							`track_num` = \'' . (int)$pt['track_num'] . '\',
+							`title` = \'' . $db->escape($pt['title']) . '\',
+							`duration` = \'' . $db->escape($pt['duration']) . '\',
+							`preview_file` = \'' . $db->escape($pt['preview_file']) . '\',
+							`status` = \'' . (int)$pt['status'] . '\',
+							`sort_order` = \'' . (int)$pt['sort_order'] . '\'');
+					}
+				}
 			}
 
 			$updated++;
+			$tracksIngested += count($parsedTracks);
 			$itemResults[] = array(
-				'model'      => $model,
-				'action'     => 'updated',
-				'product_id' => $productId,
-				'name'       => $name,
-				'price'      => $price,
-				'quantity'   => $quantity
+				'model'       => $model,
+				'action'      => 'updated',
+				'product_id'  => $productId,
+				'name'        => $name,
+				'price'       => $price,
+				'quantity'    => $quantity,
+				'track_count' => count($parsedTracks)
 			);
 		} else {
 			// --- INSERT NEW PRODUCT ---
@@ -643,7 +741,7 @@ foreach ($items as $idx => $item) {
 				$productDescriptions[$langId] = array(
 					'name'             => $name !== '' ? $name : $model,
 					'description'      => $description,
-					'tag'              => '',
+					'tag'              => $itemTags,
 					'meta_title'       => $name !== '' ? $name : $model,
 					'meta_h1'          => $name !== '' ? $name : $model,
 					'meta_description' => '',
@@ -654,6 +752,7 @@ foreach ($items as $idx => $item) {
 			$mainCategory = !empty($categoryIds) ? $categoryIds[0] : 0;
 
 			$preparedData = array(
+				'type'               => $itemType,
 				'model'              => $model,
 				'sku'                => '',
 				'upc'                => '',
@@ -688,22 +787,39 @@ foreach ($items as $idx => $item) {
 				'product_category'   => $categoryIds,
 				'main_category_id'   => $mainCategory,
 				'product_attribute'  => $productAttributes,
-				'product_image'      => $additionalImages
+				'product_image'      => $additionalImages,
+				'product_track'      => !empty($parsedTracks) ? $parsedTracks : array()
 			);
 
 			$newId = 0;
 			if (!$dryRun) {
 				$newId = (int)$modelProduct->addProduct($preparedData);
+
+				if ($rawTracklist !== null && $newId > 0) {
+					$db->query('DELETE FROM `' . DB_PREFIX . 'product_tracklist` WHERE `product_id` = \'' . (int)$newId . '\'');
+					foreach ($parsedTracks as $pt) {
+						$db->query('INSERT INTO `' . DB_PREFIX . 'product_tracklist` SET
+							`product_id` = \'' . (int)$newId . '\',
+							`track_num` = \'' . (int)$pt['track_num'] . '\',
+							`title` = \'' . $db->escape($pt['title']) . '\',
+							`duration` = \'' . $db->escape($pt['duration']) . '\',
+							`preview_file` = \'' . $db->escape($pt['preview_file']) . '\',
+							`status` = \'' . (int)$pt['status'] . '\',
+							`sort_order` = \'' . (int)$pt['sort_order'] . '\'');
+					}
+				}
 			}
 
 			$inserted++;
+			$tracksIngested += count($parsedTracks);
 			$itemResults[] = array(
-				'model'      => $model,
-				'action'     => 'inserted',
-				'product_id' => $newId,
-				'name'       => $name,
-				'price'      => $price,
-				'quantity'   => $quantity
+				'model'       => $model,
+				'action'      => 'inserted',
+				'product_id'  => $newId,
+				'name'        => $name,
+				'price'       => $price,
+				'quantity'    => $quantity,
+				'track_count' => count($parsedTracks)
 			);
 		}
 	} catch (\Throwable $itemException) {
@@ -729,23 +845,25 @@ if (!$dryRun && ($inserted > 0 || $updated > 0)) {
 $overallStatus = ($failed === 0) ? 'success' : (($inserted > 0 || $updated > 0) ? 'partial' : 'error');
 
 $response = array(
-	'status'    => $overallStatus,
-	'dry_run'   => $dryRun,
-	'processed' => $processed,
-	'inserted'  => $inserted,
-	'updated'   => $updated,
-	'failed'    => $failed,
-	'items'     => $itemResults,
-	'errors'    => $itemErrors,
-	'message'   => 'Catalog ingestion completed: ' . $inserted . ' inserted, ' . $updated . ' updated, ' . $failed . ' failed.'
+	'status'          => $overallStatus,
+	'dry_run'         => $dryRun,
+	'processed'       => $processed,
+	'inserted'        => $inserted,
+	'updated'         => $updated,
+	'failed'          => $failed,
+	'tracks_ingested' => $tracksIngested,
+	'items'           => $itemResults,
+	'errors'          => $itemErrors,
+	'message'         => 'Catalog ingestion completed: ' . $inserted . ' inserted, ' . $updated . ' updated, ' . $tracksIngested . ' tracks ingested, ' . $failed . ' failed.'
 );
 
 if ($format === 'text') {
 	echo ($dryRun ? '[DRY-RUN] ' : '[INGEST COMPLETE] ') . $response['message'] . PHP_EOL;
 	echo 'Total Processed: ' . $processed . PHP_EOL;
-	echo 'Inserted: ' . $inserted . PHP_EOL;
-	echo 'Updated:  ' . $updated . PHP_EOL;
-	echo 'Failed:   ' . $failed . PHP_EOL;
+	echo 'Inserted:        ' . $inserted . PHP_EOL;
+	echo 'Updated:         ' . $updated . PHP_EOL;
+	echo 'Tracks Ingested: ' . $tracksIngested . PHP_EOL;
+	echo 'Failed:          ' . $failed . PHP_EOL;
 	if (!empty($itemErrors)) {
 		echo 'Errors encountered:' . PHP_EOL;
 		foreach ($itemErrors as $ie) {

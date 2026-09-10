@@ -1,0 +1,56 @@
+[project]
+name = 'soundnet-ai'
+version = '0.1.0'
+description = 'SoundNet AI vector similarity and acoustic feature microservice'
+readme = 'README.md'
+requires-python = '>=3.10'
+dependencies = [
+    'fastapi>=0.115.11',
+    'librosa>=0.10.2',
+    'pydantic>=2.10.6',
+    'pydantic-settings>=2.8.1',
+    'python-multipart>=0.0.20',
+    'qdrant-client>=1.13.3',
+    'redis>=5.2.1',
+    'sentence-transformers>=3.4.1',
+    'soundfile>=0.13.1',
+    'uvicorn>=0.34.0',
+]
+
+[dependency-groups]
+dev = [
+    'pytest>=9.1.1',
+    'ruff>=0.16.1',
+]
+
+[tool.ruff]
+target-version = 'py310'
+line-length = 120
+src = ['app', 'tests', 'scripts']
+
+[tool.ruff.lint]
+select = [
+    'E',   # pycodestyle errors
+    'W',   # pycodestyle warnings
+    'F',   # Pyflakes
+    'I',   # isort
+    'B',   # flake8-bugbear
+    'C4',  # flake8-comprehensions
+    'UP',  # pyupgrade
+]
+ignore = []
+
+[tool.ruff.lint.flake8-bugbear]
+extend-immutable-calls = [
+    'fastapi.Depends',
+    'fastapi.params.Depends',
+    'fastapi.File',
+    'fastapi.Form',
+    'fastapi.Header',
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ['app']
+
+[tool.ruff.format]
+quote-style = 'single'

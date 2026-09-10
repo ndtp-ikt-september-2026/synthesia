@@ -1,0 +1,121 @@
+# ==============================================================================
+# OpenCart System Storage & Caches
+# ==============================================================================
+system/storage/cache/*
+!system/storage/cache/index.html
+system/storage/logs/*
+!system/storage/logs/index.html
+system/storage/download/*
+!system/storage/download/index.html
+system/storage/upload/*
+!system/storage/upload/index.html
+system/storage/modification/*
+!system/storage/modification/index.html
+system/storage/session/*
+!system/storage/session/index.html
+!system/storage/session/.htaccess
+
+# ==============================================================================
+# OpenCart Generated Image Cache
+# ==============================================================================
+image/cache/catalog/products/
+image/cache/placeholder-*.png
+
+# ==============================================================================
+# Scraped / Ingested Product Images & Audio Previews
+# ==============================================================================
+image/catalog/products/
+upload/audio/
+
+# ==============================================================================
+# Python / FastAPI / SoundNet AI Microservices
+# ==============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+
+# Testing, Code Quality & Coverage
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# Python Build & Packaging
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# ==============================================================================
+# Environment & Configuration Secrets
+# ==============================================================================
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+
+# ==============================================================================
+# Build Artifacts & Archive Packages
+# ==============================================================================
+dist/
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+
+# ==============================================================================
+# Logs & Temporary Files
+# ==============================================================================
+*.log
+setup.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*~
+
+# ==============================================================================
+# IDEs & Editor Configuration
+# ==============================================================================
+.idea/
+.vscode/
+!.vscode/extensions.json
+*.sublime-project
+*.sublime-workspace
+.fleet/
+
+# ==============================================================================
+# Operating System Files
+# ==============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+desktop.ini
