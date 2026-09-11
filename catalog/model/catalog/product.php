@@ -160,6 +160,42 @@ class ModelCatalogProduct extends Model {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
 		}
 
+		if (isset($data['filter_price_min']) && $data['filter_price_min'] !== '') {
+			$sql .= " AND p.price >= '" . (float)$data['filter_price_min'] . "'";
+		}
+
+		if (isset($data['filter_price_max']) && $data['filter_price_max'] !== '') {
+			$sql .= " AND p.price <= '" . (float)$data['filter_price_max'] . "'";
+		}
+
+		if (!empty($data['filter_brands'])) {
+			$brand_list = is_array($data['filter_brands']) ? $data['filter_brands'] : explode(',', $data['filter_brands']);
+			$brand_clauses = array();
+			foreach ($brand_list as $b) {
+				$b_clean = trim($b);
+				if ($b_clean !== '') {
+					$brand_clauses[] = "p.product_id IN (SELECT pa.product_id FROM " . DB_PREFIX . "product_attribute pa JOIN " . DB_PREFIX . "attribute_description ad ON (pa.attribute_id = ad.attribute_id) WHERE (LOWER(ad.name) = 'бренд' OR LOWER(ad.name) = 'brand' OR LOWER(ad.name) = 'исполнитель' OR LOWER(ad.name) = 'artist') AND pa.text = '" . $this->db->escape($b_clean) . "')";
+				}
+			}
+			if (!empty($brand_clauses)) {
+				$sql .= " AND (" . implode(" OR ", $brand_clauses) . ")";
+			}
+		}
+
+		if (!empty($data['filter_formats'])) {
+			$format_list = is_array($data['filter_formats']) ? $data['filter_formats'] : explode(',', $data['filter_formats']);
+			$format_clauses = array();
+			foreach ($format_list as $f) {
+				$f_clean = trim($f);
+				if ($f_clean !== '') {
+					$format_clauses[] = "p.product_id IN (SELECT pa.product_id FROM " . DB_PREFIX . "product_attribute pa JOIN " . DB_PREFIX . "attribute_description ad ON (pa.attribute_id = ad.attribute_id) WHERE (LOWER(ad.name) = 'формат издания' OR LOWER(ad.name) = 'тип инструмента') AND pa.text LIKE '%" . $this->db->escape($f_clean) . "%')";
+				}
+			}
+			if (!empty($format_clauses)) {
+				$sql .= " AND (" . implode(" OR ", $format_clauses) . ")";
+			}
+		}
+
 		$sql .= " GROUP BY p.product_id";
 
 		$sort_data = array(
@@ -519,6 +555,42 @@ class ModelCatalogProduct extends Model {
 
 		if (!empty($data['filter_manufacturer_id'])) {
 			$sql .= " AND p.manufacturer_id = '" . (int)$data['filter_manufacturer_id'] . "'";
+		}
+
+		if (isset($data['filter_price_min']) && $data['filter_price_min'] !== '') {
+			$sql .= " AND p.price >= '" . (float)$data['filter_price_min'] . "'";
+		}
+
+		if (isset($data['filter_price_max']) && $data['filter_price_max'] !== '') {
+			$sql .= " AND p.price <= '" . (float)$data['filter_price_max'] . "'";
+		}
+
+		if (!empty($data['filter_brands'])) {
+			$brand_list = is_array($data['filter_brands']) ? $data['filter_brands'] : explode(',', $data['filter_brands']);
+			$brand_clauses = array();
+			foreach ($brand_list as $b) {
+				$b_clean = trim($b);
+				if ($b_clean !== '') {
+					$brand_clauses[] = "p.product_id IN (SELECT pa.product_id FROM " . DB_PREFIX . "product_attribute pa JOIN " . DB_PREFIX . "attribute_description ad ON (pa.attribute_id = ad.attribute_id) WHERE (LOWER(ad.name) = 'бренд' OR LOWER(ad.name) = 'brand' OR LOWER(ad.name) = 'исполнитель' OR LOWER(ad.name) = 'artist') AND pa.text = '" . $this->db->escape($b_clean) . "')";
+				}
+			}
+			if (!empty($brand_clauses)) {
+				$sql .= " AND (" . implode(" OR ", $brand_clauses) . ")";
+			}
+		}
+
+		if (!empty($data['filter_formats'])) {
+			$format_list = is_array($data['filter_formats']) ? $data['filter_formats'] : explode(',', $data['filter_formats']);
+			$format_clauses = array();
+			foreach ($format_list as $f) {
+				$f_clean = trim($f);
+				if ($f_clean !== '') {
+					$format_clauses[] = "p.product_id IN (SELECT pa.product_id FROM " . DB_PREFIX . "product_attribute pa JOIN " . DB_PREFIX . "attribute_description ad ON (pa.attribute_id = ad.attribute_id) WHERE (LOWER(ad.name) = 'формат издания' OR LOWER(ad.name) = 'тип инструмента') AND pa.text LIKE '%" . $this->db->escape($f_clean) . "%')";
+				}
+			}
+			if (!empty($format_clauses)) {
+				$sql .= " AND (" . implode(" OR ", $format_clauses) . ")";
+			}
 		}
 
 		$query = $this->db->query($sql);

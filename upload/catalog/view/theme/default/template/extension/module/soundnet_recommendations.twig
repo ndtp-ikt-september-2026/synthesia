@@ -1,0 +1,110 @@
+{# SoundNet Storefront Recommendations Carousels #}
+<div class="soundnet-storefront-wrapper">
+  {% if music_recommendations %}
+  <section class="recommendation-carousel-section" id="section-curated-music">
+    <div class="section-header">
+      <div class="section-header__title-group">
+        <div class="section-eyebrow">Physical Audio & Masterings</div>
+        <h2 class="section-title">{{ heading_curated_music|default('Кураторские виниловые и CD релизы') }}</h2>
+        <p class="section-subtitle">{{ subtitle_curated_music|default('Тщательно отобранные пластинки и коллекционные издания с аудиофильским мастерингом') }}</p>
+      </div>
+      <div class="carousel-nav-controls" id="curated-music-nav">
+        <button type="button" class="carousel-nav-btn prev" onclick="SoundnetStorefront.scrollCarousel('curated-music-strip', 'prev');" aria-label="Назад">‹</button>
+        <button type="button" class="carousel-nav-btn next" onclick="SoundnetStorefront.scrollCarousel('curated-music-strip', 'next');" aria-label="Вперед">›</button>
+      </div>
+    </div>
+
+    <div class="recommendation-scroll-strip" id="curated-music-strip">
+      {% for item in music_recommendations %}
+      <div class="carousel-card-item">
+        <div class="vinyl-card" data-product-id="{{ item.product_id }}">
+          <div class="vinyl-card__cover-wrap">
+            <a href="{{ item.href }}" class="vinyl-card__cover-link" title="{{ item.name }}">
+              <img src="{{ item.thumb }}" alt="{{ item.name }}" class="vinyl-card__artwork" loading="lazy" />
+            </a>
+            {% if item.format_badge %}
+              <span class="vinyl-card__format-badge {{ item.format_badge == 'КОМПАКТ-ДИСК CD' ? 'badge-cd' : 'badge-vinyl' }}">
+                {{ item.format_badge }}
+              </span>
+            {% endif %}
+            <button type="button" class="btn-ai-mode" data-product-id="{{ item.product_id }}" title="AI Mode • Похожие релизы">
+              <svg class="ai-sparkle-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="10" cy="10" r="7"></circle>
+                <line x1="21" y1="21" x2="15" y2="15"></line>
+                <path d="M10 7 L10.8 9.2 L13 10 L10.8 10.8 L10 13 L9.2 10.8 L7 10 L9.2 9.2 Z" fill="#FBBF24" stroke="none"></path>
+              </svg>
+              <span>AI Mode</span>
+            </button>
+          </div>
+          <div class="vinyl-card__meta-content">
+            <div class="vinyl-card__line-artist" title="{{ item.artist }}">{{ item.artist }}</div>
+            <div class="vinyl-card__line-title"><a href="{{ item.href }}" title="{{ item.name }}">{{ item.name }}</a></div>
+            <div class="vinyl-card__line-submeta">{{ item.meta }}</div>
+            <div class="vinyl-card__line-action">
+              <span class="vinyl-card__price">{{ item.price }}</span>
+              <button type="button" class="btn-vinyl-cart" onclick="cart.add('{{ item.product_id }}', 1);" title="Купить">
+                <i class="fa fa-shopping-cart"></i>
+                <span>Купить</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if gear_recommendations %}
+  <section class="recommendation-carousel-section" id="section-gear-match">
+    <div class="section-header">
+      <div class="section-header__title-group">
+        <div class="section-eyebrow">Studio Gear & Hardware</div>
+        <h2 class="section-title">{{ heading_gear_match|default('Рекомендуемые музыкальные инструменты') }}</h2>
+        <p class="section-subtitle">{{ subtitle_gear_match|default('Гитары, синтезаторы и студийные девайсы, создающие легендарный саунд') }}</p>
+      </div>
+      <div class="carousel-nav-controls" id="gear-nav">
+        <button type="button" class="carousel-nav-btn prev" onclick="SoundnetStorefront.scrollCarousel('gear-match-strip', 'prev');" aria-label="Назад">‹</button>
+        <button type="button" class="carousel-nav-btn next" onclick="SoundnetStorefront.scrollCarousel('gear-match-strip', 'next');" aria-label="Вперед">›</button>
+      </div>
+    </div>
+
+    <div class="recommendation-scroll-strip" id="gear-match-strip">
+      {% for item in gear_recommendations %}
+      <div class="carousel-card-item">
+        <div class="gear-card" data-product-id="{{ item.product_id }}">
+          <div class="gear-card__visual-wrap">
+            <a href="{{ item.href }}" class="gear-card__visual-link">
+              <img src="{{ item.thumb }}" alt="{{ item.name }}" class="gear-card__artwork" loading="lazy" />
+            </a>
+            {% if item.brand %}
+              <span class="gear-card__brand-pill">{{ item.brand }}</span>
+            {% endif %}
+          </div>
+          <div class="gear-card__content">
+            <div class="gear-card__type-tag">{{ item.gear_type }}</div>
+            <div class="gear-card__title"><a href="{{ item.href }}">{{ item.name }}</a></div>
+            {% if item.sound_style %}
+              <div class="gear-card__sound-style"><i class="fa fa-sliders"></i> {{ item.sound_style }}</div>
+            {% endif %}
+            <div class="gear-card__action-row">
+              <span class="gear-card__price">{{ item.price }}</span>
+              <button type="button" class="btn-gear-cart" onclick="cart.add('{{ item.product_id }}', 1);" title="Купить">
+                <i class="fa fa-shopping-cart"></i>
+                <span>Купить</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if popular_categories %}
+    {% include 'default/template/extension/module/soundnet_categories.twig' %}
+  {% endif %}
+</div>
+
+{% include 'default/template/extension/module/soundnet_similar_modal.twig' %}

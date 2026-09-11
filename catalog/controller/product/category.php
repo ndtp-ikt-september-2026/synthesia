@@ -192,6 +192,19 @@ class ControllerProductCategory extends Controller {
 				'limit'              => $limit
 			);
 
+			if (isset($this->request->get['filter_price_min']) && $this->request->get['filter_price_min'] !== '') {
+				$filter_data['filter_price_min'] = (float)$this->request->get['filter_price_min'];
+			}
+			if (isset($this->request->get['filter_price_max']) && $this->request->get['filter_price_max'] !== '') {
+				$filter_data['filter_price_max'] = (float)$this->request->get['filter_price_max'];
+			}
+			if (isset($this->request->get['filter_brand']) && $this->request->get['filter_brand'] !== '') {
+				$filter_data['filter_brands'] = $this->request->get['filter_brand'];
+			}
+			if (isset($this->request->get['filter_format']) && $this->request->get['filter_format'] !== '') {
+				$filter_data['filter_formats'] = $this->request->get['filter_format'];
+			}
+
 			$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
 			$results = $this->model_catalog_product->getProducts($filter_data);
@@ -229,17 +242,68 @@ class ControllerProductCategory extends Controller {
 					$rating = false;
 				}
 
+				// Enrich Product Attributes for Vinyl & CD / Gear Cards
+				$attrs_query = $this->db->query("SELECT LOWER(TRIM(ad.name)) as attr_name, pa.text 
+					FROM " . DB_PREFIX . "product_attribute pa 
+					JOIN " . DB_PREFIX . "attribute_description ad ON (pa.attribute_id = ad.attribute_id AND ad.language_id = '" . (int)$this->config->get('config_language_id') . "') 
+					WHERE pa.product_id = '" . (int)$result['product_id'] . "' AND pa.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+
+				$artist = '';
+				$year = '';
+				$label = '';
+				$format_badge = 'Vinyl LP';
+				$brand = '';
+				$gear_type = '';
+				$is_music = false;
+
+				foreach ($attrs_query->rows as $attr) {
+					if ($attr['attr_name'] == 'исполнитель' || $attr['attr_name'] == 'artist') {
+						$artist = $attr['text'];
+						$is_music = true;
+					} elseif ($attr['attr_name'] == 'год выпуска' || $attr['attr_name'] == 'year') {
+						$year = $attr['text'];
+					} elseif ($attr['attr_name'] == 'лейбл' || $attr['attr_name'] == 'label') {
+						$label = $attr['text'];
+					} elseif ($attr['attr_name'] == 'формат издания' || $attr['attr_name'] == 'format') {
+						$format_badge = (stripos($attr['text'], 'cd') !== false || stripos($attr['text'], 'компакт') !== false) ? 'Audio CD' : 'Vinyl LP';
+						$is_music = true;
+					} elseif ($attr['attr_name'] == 'бренд' || $attr['attr_name'] == 'brand') {
+						$brand = $attr['text'];
+					} elseif ($attr['attr_name'] == 'тип инструмента' || $attr['attr_name'] == 'gear type') {
+						$gear_type = $attr['text'];
+					}
+				}
+
+				if (in_array((int)$category_id, array(1, 2, 3, 4))) {
+					$is_music = true;
+				}
+
+				$meta_parts = array();
+				if ($year) {
+					$meta_parts[] = $year;
+				}
+				if ($label) {
+					$meta_parts[] = $label;
+				}
+				$meta = !empty($meta_parts) ? implode(' • ', $meta_parts) : 'Studio Release';
+
 				$data['products'][] = array(
-					'product_id'  => $result['product_id'],
-					'thumb'       => $image,
-					'name'        => $result['name'],
-					'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
-					'price'       => $price,
-					'special'     => $special,
-					'tax'         => $tax,
-					'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
-					'rating'      => $result['rating'],
-					'href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+					'product_id'   => $result['product_id'],
+					'thumb'        => $image,
+					'name'         => $result['name'],
+					'artist'       => $artist ? $artist : 'Various Artists',
+					'meta'         => $meta,
+					'format_badge' => $format_badge,
+					'brand'        => $brand,
+					'gear_type'    => $gear_type,
+					'is_music'     => $is_music,
+					'description'  => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, $this->config->get('theme_' . $this->config->get('config_theme') . '_product_description_length')) . '..',
+					'price'        => $price,
+					'special'      => $special,
+					'tax'          => $tax,
+					'minimum'      => $result['minimum'] > 0 ? $result['minimum'] : 1,
+					'rating'       => $result['rating'],
+					'href'         => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
 				);
 			}
 
@@ -247,6 +311,22 @@ class ControllerProductCategory extends Controller {
 
 			if (isset($this->request->get['filter'])) {
 				$url .= '&filter=' . $this->request->get['filter'];
+			}
+
+			if (isset($this->request->get['filter_price_min'])) {
+				$url .= '&filter_price_min=' . $this->request->get['filter_price_min'];
+			}
+
+			if (isset($this->request->get['filter_price_max'])) {
+				$url .= '&filter_price_max=' . $this->request->get['filter_price_max'];
+			}
+
+			if (isset($this->request->get['filter_brand'])) {
+				$url .= '&filter_brand=' . urlencode($this->request->get['filter_brand']);
+			}
+
+			if (isset($this->request->get['filter_format'])) {
+				$url .= '&filter_format=' . urlencode($this->request->get['filter_format']);
 			}
 
 			if (isset($this->request->get['limit'])) {
@@ -317,6 +397,22 @@ class ControllerProductCategory extends Controller {
 				$url .= '&filter=' . $this->request->get['filter'];
 			}
 
+			if (isset($this->request->get['filter_price_min'])) {
+				$url .= '&filter_price_min=' . $this->request->get['filter_price_min'];
+			}
+
+			if (isset($this->request->get['filter_price_max'])) {
+				$url .= '&filter_price_max=' . $this->request->get['filter_price_max'];
+			}
+
+			if (isset($this->request->get['filter_brand'])) {
+				$url .= '&filter_brand=' . urlencode($this->request->get['filter_brand']);
+			}
+
+			if (isset($this->request->get['filter_format'])) {
+				$url .= '&filter_format=' . urlencode($this->request->get['filter_format']);
+			}
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -343,6 +439,22 @@ class ControllerProductCategory extends Controller {
 
 			if (isset($this->request->get['filter'])) {
 				$url .= '&filter=' . $this->request->get['filter'];
+			}
+
+			if (isset($this->request->get['filter_price_min'])) {
+				$url .= '&filter_price_min=' . $this->request->get['filter_price_min'];
+			}
+
+			if (isset($this->request->get['filter_price_max'])) {
+				$url .= '&filter_price_max=' . $this->request->get['filter_price_max'];
+			}
+
+			if (isset($this->request->get['filter_brand'])) {
+				$url .= '&filter_brand=' . urlencode($this->request->get['filter_brand']);
+			}
+
+			if (isset($this->request->get['filter_format'])) {
+				$url .= '&filter_format=' . urlencode($this->request->get['filter_format']);
 			}
 
 			if (isset($this->request->get['sort'])) {

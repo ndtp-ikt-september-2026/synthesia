@@ -76,52 +76,127 @@
 						</div>
 					</div>
 				</div>
-				<div class="row row-flex">
+				<div class="row category-products-grid">
 					{% for product in products %}
-						<div class="product-layout product-list col-xs-12">
-							<div class="product-thumb">
-								<div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
-								<div class="caption">
-									<h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
-									<p>{{ product.description }}</p>
-									{% if product.price %}
-										<p class="price">
-											{% if not product.special %}
-												{{ product.price }}
-											{% else %}
-												<span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
-											{% endif %}
-											{% if product.tax %}<span class="price-tax">{{ text_tax }} {{ product.tax }}</span>{% endif %}
-										</p>
-									{% endif %}
-									{% if product.rating %}
-										<div class="rating">
-											{% for i in 1..5 %}
-												{% if product.rating < i %}<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>{% endif %}
-											{% endfor %}
+						<div class="product-layout col-lg-4 col-md-4 col-sm-6 col-xs-12">
+							{% if product.is_music %}
+								{# Dedicated Vinyl & CD Card Layout #}
+								<div class="vinyl-card" data-product-id="{{ product.product_id }}">
+									<div class="vinyl-card__cover-wrap">
+										<a href="{{ product.href }}" class="vinyl-card__cover-link" title="{{ product.name }}">
+											<img src="{{ product.thumb }}" alt="{{ product.name }}" class="vinyl-card__artwork" loading="lazy" />
+										</a>
+										{% if product.format_badge %}
+											<span class="vinyl-card__format-badge {{ product.format_badge == 'Audio CD' ? 'badge-cd' : 'badge-vinyl' }}">
+												{{ product.format_badge }}
+											</span>
+										{% endif %}
+										<button type="button" class="btn-ai-mode" data-product-id="{{ product.product_id }}" title="Find Similar with AI Mode">
+											<svg class="ai-sparkle-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+												<circle cx="10" cy="10" r="7"></circle>
+												<line x1="21" y1="21" x2="15" y2="15"></line>
+												<path d="M10 7 L10.8 9.2 L13 10 L10.8 10.8 L10 13 L9.2 10.8 L7 10 L9.2 9.2 Z" fill="#FBBF24" stroke="none"></path>
+											</svg>
+											<span>AI Mode</span>
+										</button>
+									</div>
+									<div class="vinyl-card__meta-content">
+										<div class="vinyl-card__line-artist" title="{{ product.artist }}">{{ product.artist }}</div>
+										<div class="vinyl-card__line-title"><a href="{{ product.href }}" title="{{ product.name }}">{{ product.name }}</a></div>
+										<div class="vinyl-card__line-submeta">{{ product.meta }}</div>
+										<div class="vinyl-card__line-action">
+											<span class="vinyl-card__price">
+												{% if not product.special %}
+													{{ product.price }}
+												{% else %}
+													<span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+												{% endif %}
+											</span>
+											<button type="button" class="btn-vinyl-cart" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" title="Add to Cart">
+												<i class="fa fa-shopping-cart"></i>
+												<span>Add</span>
+											</button>
 										</div>
-									{% endif %}
+									</div>
 								</div>
-								<div class="button-group">
-									<button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span></button>
-									<button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
-									<button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+							{% else %}
+								{# Gear / Instrument Card Layout #}
+								<div class="gear-card" data-product-id="{{ product.product_id }}">
+									<div class="gear-card__visual-wrap">
+										<a href="{{ product.href }}" class="gear-card__visual-link">
+											<img src="{{ product.thumb }}" alt="{{ product.name }}" class="gear-card__artwork" loading="lazy" />
+										</a>
+										{% if product.brand %}
+											<span class="gear-card__brand-pill">{{ product.brand }}</span>
+										{% endif %}
+									</div>
+									<div class="gear-card__content">
+										{% if product.gear_type %}
+											<div class="gear-card__type-tag">{{ product.gear_type }}</div>
+										{% endif %}
+										<div class="gear-card__title"><a href="{{ product.href }}">{{ product.name }}</a></div>
+										<div class="gear-card__action-row">
+											<span class="gear-card__price">
+												{% if not product.special %}
+													{{ product.price }}
+												{% else %}
+													<span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+												{% endif %}
+											</span>
+											<button type="button" class="btn-gear-cart" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" title="Add to Cart">
+												<i class="fa fa-shopping-cart"></i>
+												<span>Add</span>
+											</button>
+										</div>
+									</div>
 								</div>
-							</div>
+							{% endif %}
 						</div>
 					{% endfor %}
 				</div>
-				<div class="row">
+				<div class="category-pagination-row row">
 					<div class="col-sm-6 text-left">{{ pagination }}</div>
-					<div class="col-sm-6 text-right">{{ results }}</div>
+					<div class="col-sm-6 text-right pagination-results-text">{{ results }}</div>
 				</div>
 			{% endif %}
 			{% if not categories and not products %}
-				<p>{{ text_empty }}</p>
-				<div class="buttons">
-					<div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+				<div class="empty-category-notice">
+					<div class="empty-notice-icon">
+						<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="12" cy="12" r="10"></circle>
+							<path d="M8 15h8"></path>
+							<circle cx="9" cy="9" r="1"></circle>
+							<circle cx="15" cy="9" r="1"></circle>
+						</svg>
+					</div>
+					<h3>{{ text_empty }}</h3>
+					<p>No products match the selected criteria or price filter range.</p>
+					<a href="{{ continue }}" class="btn btn-primary">Browse All Releases</a>
 				</div>
 			{% endif %}
+
+			{# AI Mode Modal Container for Category Page #}
+			<div class="ai-similar-modal-backdrop" id="aiSimilarModal" style="display: none;">
+			  <div class="ai-similar-modal-dialog">
+			    <div class="ai-similar-modal-header">
+			      <div class="ai-modal-brand-badge">
+			        <svg class="ai-sparkle-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			          <circle cx="10" cy="10" r="7"></circle>
+			          <line x1="21" y1="21" x2="15" y2="15"></line>
+			          <path d="M10 7 L10.8 9.2 L13 10 L10.8 10.8 L10 13 L9.2 10.8 L7 10 L9.2 9.2 Z" fill="#FBBF24" stroke="none"></path>
+			        </svg>
+			        <span>AI Mode • Sonic Matching Engine</span>
+			      </div>
+			      <button type="button" class="ai-modal-close" onclick="closeAiModal();" aria-label="Close modal">&times;</button>
+			    </div>
+			    <div class="ai-similar-modal-body" id="aiSimilarModalContent">
+			      <div class="ai-modal-loader">
+			        <div class="ai-loader-spinner"></div>
+			        <p>Analyzing acoustic characteristics and artist vector catalog...</p>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 			{{ content_bottom }}
 		</div>
 		{{ column_right }}

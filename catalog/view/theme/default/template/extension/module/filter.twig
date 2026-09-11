@@ -1,32 +1,222 @@
-<div class="panel panel-default">
-  <div class="panel-heading">{{ heading_title }}</div>
-  <div class="list-group"> {% for filter_group in filter_groups %} <a class="list-group-item">{{ filter_group.name }}</a>
-    <div class="list-group-item">
-      <div id="filter-group{{ filter_group.filter_group_id }}">{% for filter in filter_group.filter %}
-        <div class="checkbox">
-          <label>{% if filter.filter_id in filter_category %}
-            <input type="checkbox" name="filter[]" value="{{ filter.filter_id }}" checked="checked" />
-            {{ filter.name }}
-            {% else %}
-            <input type="checkbox" name="filter[]" value="{{ filter.filter_id }}" />
-            {{ filter.name }}
-            {% endif %}</label>
-        </div>
-        {% endfor %}</div>
+<div class="parametric-filter-panel" id="catalogParametricFilter">
+  <div class="filter-panel-header">
+    <div class="filter-panel-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+      </svg>
+      <span>Refine Selection</span>
     </div>
-    {% endfor %}</div>
-  <div class="panel-footer text-right">
-    <button type="button" id="button-filter" class="btn btn-primary">{{ button_filter }}</button>
+    <button type="button" class="filter-reset-link" id="btnFilterReset" title="Reset all filters">Reset</button>
+  </div>
+
+  <div class="filter-panel-content">
+    {# 1. Price Filter #}
+    <div class="filter-group-card">
+      <div class="filter-group-heading">
+        <span>Price Range</span>
+        <span class="price-range-badge" id="priceRangeBadge">${{ current_price_min }} — ${{ current_price_max }}</span>
+      </div>
+      <div class="price-filter-body">
+        <div class="price-slider-wrap">
+          <input type="range" class="price-range-slider" id="priceRangeMin" min="{{ price_min }}" max="{{ price_max }}" value="{{ current_price_min }}" step="5">
+          <input type="range" class="price-range-slider" id="priceRangeMax" min="{{ price_min }}" max="{{ price_max }}" value="{{ current_price_max }}" step="5">
+        </div>
+        <div class="price-inputs-row">
+          <div class="price-input-box">
+            <label for="inputPriceMin">Min</label>
+            <div class="price-field-wrap">
+              <span class="currency-symbol">$</span>
+              <input type="number" id="inputPriceMin" value="{{ current_price_min }}" min="{{ price_min }}" max="{{ price_max }}" class="price-num-input" />
+            </div>
+          </div>
+          <span class="price-input-separator">—</span>
+          <div class="price-input-box">
+            <label for="inputPriceMax">Max</label>
+            <div class="price-field-wrap">
+              <span class="currency-symbol">$</span>
+              <input type="number" id="inputPriceMax" value="{{ current_price_max }}" min="{{ price_min }}" max="{{ price_max }}" class="price-num-input" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {# 2. Brand / Manufacturer Filter #}
+    {% if brands %}
+    <div class="filter-group-card">
+      <div class="filter-group-heading">
+        <span>Brand / Artist</span>
+      </div>
+      <div class="filter-options-list">
+        {% for brand in brands %}
+        <label class="filter-checkbox-item">
+          <input type="checkbox" name="filter_brand[]" value="{{ brand.name }}" {% if brand.checked %}checked="checked"{% endif %} class="filter-native-checkbox" />
+          <span class="filter-custom-check"></span>
+          <span class="filter-item-name" title="{{ brand.name }}">{{ brand.name }}</span>
+          <span class="filter-count-badge">{{ brand.count }}</span>
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {# 3. Domain Attributes: Format / Gear Type #}
+    {% if formats %}
+    <div class="filter-group-card">
+      <div class="filter-group-heading">
+        <span>Format & Specifications</span>
+      </div>
+      <div class="filter-options-list">
+        {% for format in formats %}
+        <label class="filter-checkbox-item">
+          <input type="checkbox" name="filter_format[]" value="{{ format.name }}" {% if format.checked %}checked="checked"{% endif %} class="filter-native-checkbox" />
+          <span class="filter-custom-check"></span>
+          <span class="filter-item-name" title="{{ format.name }}">{{ format.name }}</span>
+          <span class="filter-count-badge">{{ format.count }}</span>
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    {# 4. Native OpenCart Filter Groups #}
+    {% if filter_groups %}
+    {% for filter_group in filter_groups %}
+    <div class="filter-group-card">
+      <div class="filter-group-heading">
+        <span>{{ filter_group.name }}</span>
+      </div>
+      <div class="filter-options-list" id="filter-group{{ filter_group.filter_group_id }}">
+        {% for filter in filter_group.filter %}
+        <label class="filter-checkbox-item">
+          <input type="checkbox" name="filter[]" value="{{ filter.filter_id }}" {% if filter.filter_id in filter_category %}checked="checked"{% endif %} class="filter-native-checkbox" />
+          <span class="filter-custom-check"></span>
+          <span class="filter-item-name">{{ filter.name }}</span>
+        </label>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="filter-panel-footer">
+    <button type="button" id="button-filter" class="btn btn-apply-filter">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <span>Apply Filters</span>
+    </button>
   </div>
 </div>
+
 <script type="text/javascript"><!--
-$('#button-filter').on('click', function() {
-	filter = [];
+(function() {
+  var baseUrl = '{{ action|escape('js') }}';
+  var pMinSlider = document.getElementById('priceRangeMin');
+  var pMaxSlider = document.getElementById('priceRangeMax');
+  var pMinInput = document.getElementById('inputPriceMin');
+  var pMaxInput = document.getElementById('inputPriceMax');
+  var badge = document.getElementById('priceRangeBadge');
 
-	$('input[name^=\'filter\']:checked').each(function(element) {
-		filter.push(this.value);
-	});
+  function updatePriceBadge() {
+    if (badge && pMinInput && pMaxInput) {
+      badge.textContent = '$' + pMinInput.value + ' — $' + pMaxInput.value;
+    }
+  }
 
-	location = '{{ action|escape('js') }}&filter=' + filter.join(',');
-});
+  if (pMinSlider && pMaxSlider && pMinInput && pMaxInput) {
+    pMinSlider.addEventListener('input', function() {
+      if (parseFloat(pMinSlider.value) > parseFloat(pMaxSlider.value)) {
+        pMinSlider.value = pMaxSlider.value;
+      }
+      pMinInput.value = pMinSlider.value;
+      updatePriceBadge();
+    });
+
+    pMaxSlider.addEventListener('input', function() {
+      if (parseFloat(pMaxSlider.value) < parseFloat(pMinSlider.value)) {
+        pMaxSlider.value = pMinSlider.value;
+      }
+      pMaxInput.value = pMaxSlider.value;
+      updatePriceBadge();
+    });
+
+    pMinInput.addEventListener('change', function() {
+      var val = parseFloat(pMinInput.value) || 0;
+      var maxVal = parseFloat(pMaxInput.value) || 1000;
+      if (val > maxVal) val = maxVal;
+      pMinInput.value = val;
+      pMinSlider.value = val;
+      updatePriceBadge();
+    });
+
+    pMaxInput.addEventListener('change', function() {
+      var val = parseFloat(pMaxInput.value) || 1000;
+      var minVal = parseFloat(pMinInput.value) || 0;
+      if (val < minVal) val = minVal;
+      pMaxInput.value = val;
+      pMaxSlider.value = val;
+      updatePriceBadge();
+    });
+  }
+
+  var btnApply = document.getElementById('button-filter');
+  if (btnApply) {
+    btnApply.addEventListener('click', function() {
+      var params = [];
+
+      // Native filters
+      var filters = [];
+      document.querySelectorAll('input[name^="filter["]:checked').forEach(function(el) {
+        filters.push(el.value);
+      });
+      if (filters.length) {
+        params.push('filter=' + encodeURIComponent(filters.join(',')));
+      }
+
+      // Price filter
+      if (pMinInput && pMaxInput) {
+        var minDef = {{ price_min }};
+        var maxDef = {{ price_max }};
+        var curMin = parseFloat(pMinInput.value);
+        var curMax = parseFloat(pMaxInput.value);
+        if (curMin > minDef || curMax < maxDef) {
+          params.push('filter_price_min=' + curMin);
+          params.push('filter_price_max=' + curMax);
+        }
+      }
+
+      // Brand filter
+      var brands = [];
+      document.querySelectorAll('input[name="filter_brand[]"]:checked').forEach(function(el) {
+        brands.push(el.value);
+      });
+      if (brands.length) {
+        params.push('filter_brand=' + encodeURIComponent(brands.join(',')));
+      }
+
+      // Format filter
+      var formats = [];
+      document.querySelectorAll('input[name="filter_format[]"]:checked').forEach(function(el) {
+        formats.push(el.value);
+      });
+      if (formats.length) {
+        params.push('filter_format=' + encodeURIComponent(formats.join(',')));
+      }
+
+      var targetUrl = baseUrl;
+      if (params.length) {
+        targetUrl += (targetUrl.indexOf('?') !== -1 ? '&' : '?') + params.join('&');
+      }
+
+      location = targetUrl;
+    });
+  }
+
+  var btnReset = document.getElementById('btnFilterReset');
+  if (btnReset) {
+    btnReset.addEventListener('click', function() {
+      location = baseUrl;
+    });
+  }
+})();
 //--></script> 

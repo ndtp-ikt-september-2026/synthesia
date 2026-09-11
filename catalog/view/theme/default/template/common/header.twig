@@ -52,58 +52,96 @@
 {% endfor %}
 </head>
 <body>
-<nav id="top">
+<nav id="top" class="top-utility-bar">
   <div class="container">
-	<div>
-		{{ currency }}
-		{{ language }}
-		{{ blog_menu }}
-	</div>
-    <div id="top-links" class="nav pull-right">
-      <ul class="list-inline">
-        <li><a href="{{ contact }}"><i class="fa fa-phone"></i></a> <span class="hidden-xs hidden-sm hidden-md">{{ telephone }}</span></li>
-        <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_account }}</span> <span class="caret"></span></a>
-          <ul class="dropdown-menu dropdown-menu-right">
+    <div class="top-utility-left">
+      {{ currency }}
+      {{ language }}
+      {% if telephone %}
+      <a href="{{ contact }}" class="top-contact-link"><i class="fa fa-phone"></i> <span>{{ telephone }}</span></a>
+      {% endif %}
+    </div>
+    <div id="top-links" class="top-utility-right">
+      <ul class="list-inline top-quick-links">
+        <li><a href="{{ contact }}"><i class="fa fa-headphones"></i> <span>Support</span></a></li>
+        <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle"></i> <span class="hidden-xs">{{ text_account }}</span> <span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-menu-right top-user-dropdown">
             {% if logged %}
-            <li><a href="{{ account }}">{{ text_account }}</a></li>
-            <li><a href="{{ order }}">{{ text_order }}</a></li>
-            <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
-            <li><a href="{{ download }}">{{ text_download }}</a></li>
-            <li><a href="{{ logout }}">{{ text_logout }}</a></li>
+            <li><a href="{{ account }}"><i class="fa fa-user"></i> {{ text_account }}</a></li>
+            <li><a href="{{ order }}"><i class="fa fa-history"></i> {{ text_order }}</a></li>
+            <li><a href="{{ transaction }}"><i class="fa fa-credit-card"></i> {{ text_transaction }}</a></li>
+            <li><a href="{{ download }}"><i class="fa fa-download"></i> {{ text_download }}</a></li>
+            <li class="divider"></li>
+            <li><a href="{{ logout }}"><i class="fa fa-sign-out"></i> {{ text_logout }}</a></li>
             {% else %}
-            <li><a href="{{ register }}">{{ text_register }}</a></li>
-            <li><a href="{{ login }}">{{ text_login }}</a></li>
+            <li><a href="{{ register }}"><i class="fa fa-user-plus"></i> {{ text_register }}</a></li>
+            <li><a href="{{ login }}"><i class="fa fa-sign-in"></i> {{ text_login }}</a></li>
             {% endif %}
           </ul>
         </li>
-        <li><a href="{{ wishlist }}" id="wishlist-total" title="{{ text_wishlist }}"><i class="fa fa-heart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_wishlist }}</span></a></li>
-		<!--
-        <li><a href="{{ shopping_cart }}" title="{{ text_shopping_cart }}"><i class="fa fa-shopping-cart"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_shopping_cart }}</span></a></li>
-        <li><a href="{{ checkout }}" title="{{ text_checkout }}"><i class="fa fa-share"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_checkout }}</span></a></li>
-		-->
       </ul>
     </div>
   </div>
 </nav>
-<header>
+<header class="main-interaction-header">
   <div class="container">
-    <div class="row">
-      <div class="col-sm-3">
-		<div id="logo">
+    <div class="header-inner-row">
+      <div class="header-logo-block">
+        <div id="logo">
           {% if logo %}
             {% if home == og_url %}
-              <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive">
+              <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive site-logo-img">
             {% else %}
-              <a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive"></a>
+              <a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive site-logo-img"></a>
             {% endif %}
           {% else %}
-            <h1><a href="{{ home }}">{{ name }}</a></h1>
+            <a href="{{ home }}" class="brand-text-logo">
+              <span class="brand-mark">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <line x1="12" y1="2" x2="12" y2="4"></line>
+                </svg>
+              </span>
+              <span class="brand-name">{{ name }}</span>
+            </a>
           {% endif %}
-		</div>
+        </div>
       </div>
-      <div class="col-sm-6">{{ search }}</div>
-      <div class="col-sm-3">{{ cart }}</div>
+
+      <div class="header-catalog-trigger-block">
+        <button type="button" class="btn btn-catalog-trigger" id="catalogMegaTrigger" data-toggle="collapse" data-target="#menu .navbar-collapse" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>{{ text_catalog_all|default('Каталог товаров') }}</span>
+        </button>
+      </div>
+
+      <div class="header-search-block">
+        {{ search }}
+      </div>
+
+      <div class="header-actions-cluster">
+        <a href="{{ wishlist }}" id="wishlist-total" class="btn-action-icon" title="{{ text_wishlist }}">
+          <span class="action-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </span>
+          <span class="action-label hidden-xs">Wishlist</span>
+        </a>
+
+        <div class="header-cart-block">
+          {{ cart }}
+        </div>
+      </div>
     </div>
   </div>
 </header>
-{{ menu }}
+<div class="header-navigation-strip">
+  {{ menu }}
+</div>

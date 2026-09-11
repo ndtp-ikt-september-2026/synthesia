@@ -22,10 +22,14 @@ class ControllerEventTheme extends Controller {
 		// If there is a theme override we should get it
 		$this->load->model('design/theme');
 
-		$theme_info = $this->model_design_theme->getTheme($route, $directory);
+		if (is_file(DIR_MODIFICATION . 'catalog/view/theme/' . $directory . '/template/' . $route . '.twig')) {
+			$code = file_get_contents(DIR_MODIFICATION . 'catalog/view/theme/' . $directory . '/template/' . $route . '.twig');
+		} else {
+			$theme_info = $this->model_design_theme->getTheme($route, $directory);
 
-        if ($theme_info && !is_file(DIR_MODIFICATION . 'catalog/view/theme/' .$directory.'/template/'. $route . '.twig')) {
-			$code = html_entity_decode($theme_info['code'], ENT_QUOTES, 'UTF-8');
+			if ($theme_info) {
+				$code = html_entity_decode($theme_info['code'], ENT_QUOTES, 'UTF-8');
+			}
 		}
 	}
 }

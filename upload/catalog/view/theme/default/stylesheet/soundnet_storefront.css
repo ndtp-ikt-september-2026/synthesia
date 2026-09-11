@@ -1,0 +1,732 @@
+/**
+ * SoundNet Storefront Extension Stylesheet
+ * High-density light studio aesthetic, 1:1 Vinyl & CD cards, Google AI Mode capsule, and modal dialog
+ */
+
+/* ==========================================================================
+   1. PRODUCT DETAIL PAGE: ARTWORK & TYPOGRAPHY FIX (Screenshot 2)
+   ========================================================================== */
+
+.product-detail-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.product-detail-left {
+  flex: 0 0 460px;
+  max-width: 460px;
+}
+
+.product-detail-right {
+  flex: 1 1 340px;
+  min-width: 300px;
+}
+
+@media (max-width: 991px) {
+  .product-detail-left {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* 1:1 Cover Artwork Container */
+.product-cover-frame {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1 / 1;
+  background: #f1f5f9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+  margin-bottom: 16px;
+}
+
+.product-cover-frame__img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.product-cover-frame:hover .product-cover-frame__img {
+  transform: scale(1.02);
+}
+
+/* Pinned Media Badge (Top-Left) */
+.product-cover-frame .media-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  z-index: 3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Typography & Metadata Hierarchy */
+.product-release-header {
+  margin-bottom: 24px;
+}
+
+.product-artist-title {
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.product-album-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.25;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.02em;
+}
+
+.product-release-meta-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: #475569;
+  margin-bottom: 18px;
+}
+
+.meta-dot {
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.meta-val {
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   2. GOOGLE AI MODE CAPSULE BUTTON
+   ========================================================================== */
+
+.btn-ai-mode {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  background: rgba(30, 31, 34, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  z-index: 2;
+}
+
+/* Glowing Multi-Color Top Gradient Border Accent */
+.btn-ai-mode::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #FBBF24 0%, #10B981 33%, #06B6D4 66%, #3B82F6 100%);
+  z-index: -1;
+  opacity: 0.85;
+  transition: opacity 0.25s ease;
+}
+
+.btn-ai-mode:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.25);
+  color: #ffffff;
+}
+
+.btn-ai-mode:hover::before {
+  opacity: 1;
+}
+
+.btn-ai-mode--detail {
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+
+.ai-sparkle-icon {
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 4px rgba(251, 191, 36, 0.6));
+}
+
+/* ==========================================================================
+   3. COMMERCIAL PANEL (Right Column)
+   ========================================================================== */
+
+.product-commercial-box {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.product-commercial-meta {
+  margin-bottom: 20px;
+}
+
+.product-commercial-meta .meta-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 13px;
+}
+
+.meta-item__label {
+  color: #64748b;
+}
+
+.meta-item__val {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.stock-badge--in {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.stock-badge--in::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #16a34a;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+.product-price-row {
+  margin: 20px 0;
+}
+
+.product-price-amount {
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.product-purchase-action-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin-top: 20px;
+}
+
+.product-qty-wrap {
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.product-qty-wrap input {
+  height: 48px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+
+.btn-buy-primary {
+  flex: 1;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #0f172a;
+  color: #ffffff !important;
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+}
+
+.btn-buy-primary:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.25);
+}
+
+.product-secondary-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn-secondary-icon {
+  flex: 1;
+  height: 38px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #475569;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary-icon:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}
+
+/* ==========================================================================
+   4. MATCHING GEAR SECTION ("Инструменты для этой песни")
+   ========================================================================== */
+
+.matching-gear-block {
+  margin: 50px 0;
+  padding: 32px 28px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+}
+
+.matching-gear-block__header {
+  margin-bottom: 24px;
+}
+
+.matching-gear-block__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0284c7;
+  margin-bottom: 4px;
+}
+
+.matching-gear-block__title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+}
+
+.matching-gear-block__subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+.matching-gear-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.gear-item-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gear-item-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.gear-item-card__media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+.gear-item-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gear-item-card__brand {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.gear-item-card__body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.gear-item-card__type {
+  font-size: 11px;
+  font-weight: 700;
+  color: #0284c7;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.gear-item-card__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+  margin: 0 0 8px 0;
+  flex: 1;
+}
+
+.gear-item-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.gear-item-card__title a:hover {
+  color: #2563eb;
+}
+
+.gear-item-card__style {
+  font-size: 11px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.gear-item-card__action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.gear-item-card__price {
+  font-size: 16px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.btn-gear-buy {
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.2s ease;
+}
+
+.btn-gear-buy:hover {
+  background: #2563eb;
+}
+
+/* ==========================================================================
+   5. AI MODE SONIC MATCHING ENGINE MODAL (Screenshot 1)
+   ========================================================================== */
+
+.soundnet-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.soundnet-modal-backdrop.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.soundnet-modal-dialog {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 24px 60px -12px rgba(15, 23, 42, 0.35);
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(20px) scale(0.98);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.soundnet-modal-backdrop.is-active .soundnet-modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+/* Modal Header Bar */
+.soundnet-modal-header {
+  padding: 20px 24px;
+  background: #0f172a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.soundnet-modal-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.soundnet-modal-header__title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.soundnet-modal-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #ffffff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.soundnet-modal-close:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Modal Subtitle */
+.soundnet-modal-subtitle-bar {
+  padding: 12px 24px;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+  color: #475569;
+}
+
+.soundnet-modal-subtitle-bar strong {
+  color: #0f172a;
+}
+
+/* Modal Body / Results Grid */
+.soundnet-modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.soundnet-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* 1:1 Vinyl Modal Card */
+.modal-vinyl-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-vinyl-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.modal-vinyl-card__cover-wrap {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #0f172a;
+  overflow: hidden;
+}
+
+.modal-vinyl-card__cover-wrap img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.modal-vinyl-card__badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.modal-vinyl-card__body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.modal-vinyl-card__artist {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal-vinyl-card__title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.25;
+  margin: 0 0 4px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.modal-vinyl-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.modal-vinyl-card__meta {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.modal-vinyl-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 8px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.modal-vinyl-card__price {
+  font-size: 15px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.btn-modal-cart {
+  background: #0f172a;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-modal-cart:hover {
+  background: #2563eb;
+}
+
+/* Modal Loading State */
+.soundnet-modal-loader {
+  padding: 60px 20px;
+  text-align: center;
+  color: #64748b;
+}
+
+.soundnet-loader-spinner {
+  width: 44px;
+  height: 44px;
+  border: 3px solid #e2e8f0;
+  border-top-color: #06b6d4;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: sn-spin 0.8s linear infinite;
+}
+
+@keyframes sn-spin {
+  to { transform: rotate(360deg); }
+}
