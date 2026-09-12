@@ -62,14 +62,14 @@ class ControllerCommonHome extends Controller {
 				} elseif ($attr['attr_name'] == 'лейбл' || $attr['attr_name'] == 'label') {
 					$label = $attr['text'];
 				} elseif ($attr['attr_name'] == 'формат издания' || $attr['attr_name'] == 'format') {
-					$format = (stripos($attr['text'], 'cd') !== false || stripos($attr['text'], 'компакт') !== false) ? 'Audio CD' : 'Vinyl LP';
+					$format = (stripos($attr['text'], 'cd') !== false || stripos($attr['text'], 'компакт') !== false) ? 'КОМПАКТ-ДИСК CD' : 'ВИНИЛ LP';
 				} elseif ($attr['attr_name'] == 'жанр' || $attr['attr_name'] == 'genre') {
 					$genre = $attr['text'];
 				}
 			}
 
 			if (!$artist) {
-				$artist = 'Various Artists';
+				$artist = 'Различные исполнители';
 			}
 
 			$meta_parts = array();
@@ -79,7 +79,7 @@ class ControllerCommonHome extends Controller {
 			if ($label) {
 				$meta_parts[] = $label;
 			}
-			$meta = !empty($meta_parts) ? implode(' • ', $meta_parts) : ($genre ? $genre : 'Original Master');
+			$meta = !empty($meta_parts) ? implode(' • ', $meta_parts) : ($genre ? $genre : 'Оригинальный мастер');
 
 			$data['music_recommendations'][] = array(
 				'product_id'   => $product['product_id'],
@@ -93,13 +93,13 @@ class ControllerCommonHome extends Controller {
 			);
 		}
 
-		// 2. Recommended Musical Instruments / Matching Gear (Categories 5, 6, 11, 12, 14, 15, 22, 24)
+		// 2. Recommended Musical Instruments / Matching Gear (Categories 11, 12, 14, 15, 22, 24)
 		$data['gear_recommendations'] = array();
 		$gear_query = $this->db->query("SELECT DISTINCT p.product_id, p.image, p.price, p.tax_class_id, pd.name 
 			FROM " . DB_PREFIX . "product p 
 			JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id AND pd.language_id = '" . $language_id . "') 
 			JOIN " . DB_PREFIX . "product_to_category ptc ON (p.product_id = ptc.product_id) 
-			WHERE ptc.category_id IN (5, 6, 11, 12, 14, 15, 22, 24) AND p.status = '1' AND p.image IS NOT NULL AND p.image != '' 
+			WHERE ptc.category_id IN (11, 12, 14, 15, 22, 24) AND p.status = '1' AND p.image IS NOT NULL AND p.image != '' 
 			ORDER BY p.product_id ASC 
 			LIMIT 12");
 
@@ -122,7 +122,7 @@ class ControllerCommonHome extends Controller {
 				WHERE pa.product_id = '" . (int)$product['product_id'] . "' AND pa.language_id = '" . $language_id . "'");
 
 			$brand = '';
-			$gear_type = 'Instrument';
+			$gear_type = 'Инструмент';
 			$sound_style = '';
 
 			foreach ($attrs_query->rows as $attr) {
@@ -137,7 +137,7 @@ class ControllerCommonHome extends Controller {
 
 			if (!$brand) {
 				$name_words = explode(' ', $product['name']);
-				$brand = isset($name_words[1]) ? $name_words[1] : 'Studio Gear';
+				$brand = isset($name_words[1]) ? $name_words[1] : 'Студийное оборудование';
 			}
 
 			$data['gear_recommendations'][] = array(

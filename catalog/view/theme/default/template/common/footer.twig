@@ -1,45 +1,53 @@
-<footer>
+<footer class="studio-site-footer">
   <div class="container">
-    <div class="row">
-      {% if informations %}
-      <div class="col-sm-3">
-        <h5>{{ text_information }}</h5>
-        <ul class="list-unstyled">
-         {% for information in informations %}
-          <li><a href="{{ information.href }}">{{ information.title }}</a></li>
-          {% endfor %}
+    <div class="footer-top-grid row">
+      <div class="col-md-5 col-sm-12 footer-brand-col">
+        <div class="footer-brand-logo">
+          <span class="footer-brand-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="3"></circle>
+              <line x1="12" y1="2" x2="12" y2="4"></line>
+            </svg>
+          </span>
+          <span class="footer-brand-title">SYNTHESIA</span>
+        </div>
+        <p class="footer-brand-desc">
+          Премиальный музыкальный магазин и студия звука. Оригинальный коллекционный винил, аудиофильские CD, культовые электрогитары и профессиональные аналоговые синтезаторы.
+        </p>
+      </div>
+
+      <div class="col-md-3 col-sm-6 col-xs-6 footer-nav-col">
+        <h5 class="footer-col-title">Каталог</h5>
+        <ul class="list-unstyled footer-nav-list">
+          <li><a href="index.php?route=product/category&path=2">Виниловые пластинки</a></li>
+          <li><a href="index.php?route=product/category&path=3">Компакт-диски CD</a></li>
+          <li><a href="index.php?route=product/category&path=15">Электрогитары</a></li>
+          <li><a href="index.php?route=product/category&path=12">Акустические гитары</a></li>
+          <li><a href="index.php?route=product/category&path=24">Синтезаторы</a></li>
         </ul>
       </div>
-      {% endif %}
-      <div class="col-sm-3">
-        <h5>{{ text_service }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ contact }}">{{ text_contact }}</a></li>
-          <li><a href="{{ return }}">{{ text_return }}</a></li>
-          <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>
-        </ul>
-      </div>
-      <div class="col-sm-3">
-        <h5>{{ text_extra }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ manufacturer }}">{{ text_manufacturer }}</a></li>
-          <li><a href="{{ voucher }}">{{ text_voucher }}</a></li>
-          <li><a href="{{ affiliate }}">{{ text_affiliate }}</a></li>
-          <li><a href="{{ special }}">{{ text_special }}</a></li>
-        </ul>
-      </div>
-      <div class="col-sm-3">
-        <h5>{{ text_account }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ account }}">{{ text_account }}</a></li>
-          <li><a href="{{ order }}">{{ text_order }}</a></li>
-          <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
-          <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
+
+      <div class="col-md-4 col-sm-6 col-xs-6 footer-nav-col">
+        <h5 class="footer-col-title">Сервис и поддержка</h5>
+        <ul class="list-unstyled footer-nav-list">
+          <li><a href="{{ contact }}">Связаться с нами</a></li>
+          <li><a href="{{ return }}">Гарантия и возврат</a></li>
+          <li><a href="{{ sitemap }}">Карта сайта</a></li>
+          {% if informations %}
+            {% for information in informations %}
+              <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+            {% endfor %}
+          {% endif %}
         </ul>
       </div>
     </div>
-    <hr>
-    <p>{{ powered }}</p>
+
+    <div class="footer-bottom-strip">
+      <div class="footer-bottom-left">
+        <p class="footer-copyright">© 2026 Synthesia Sound Studio. Все права защищены.</p>
+      </div>
+    </div>
   </div>
 </footer>
 {% for style in styles %}
@@ -63,8 +71,4 @@
 	</script>
 {% endif %}
 
-<!--
-OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
-Please donate via PayPal to donate@opencart.com
-//-->
 </body></html>

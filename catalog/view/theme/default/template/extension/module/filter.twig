@@ -4,17 +4,17 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
       </svg>
-      <span>Refine Selection</span>
+      <span>Фильтры</span>
     </div>
-    <button type="button" class="filter-reset-link" id="btnFilterReset" title="Reset all filters">Reset</button>
+    <button type="button" class="filter-reset-link" id="btnFilterReset" title="Сбросить все фильтры">Сбросить</button>
   </div>
 
   <div class="filter-panel-content">
     {# 1. Price Filter #}
     <div class="filter-group-card">
       <div class="filter-group-heading">
-        <span>Price Range</span>
-        <span class="price-range-badge" id="priceRangeBadge">${{ current_price_min }} — ${{ current_price_max }}</span>
+        <span>Диапазон цен</span>
+        <span class="price-range-badge" id="priceRangeBadge">{{ current_price_min }} — {{ current_price_max }} руб.</span>
       </div>
       <div class="price-filter-body">
         <div class="price-slider-wrap">
@@ -23,18 +23,18 @@
         </div>
         <div class="price-inputs-row">
           <div class="price-input-box">
-            <label for="inputPriceMin">Min</label>
+            <label for="inputPriceMin">От</label>
             <div class="price-field-wrap">
-              <span class="currency-symbol">$</span>
               <input type="number" id="inputPriceMin" value="{{ current_price_min }}" min="{{ price_min }}" max="{{ price_max }}" class="price-num-input" />
+              <span class="currency-symbol">руб.</span>
             </div>
           </div>
           <span class="price-input-separator">—</span>
           <div class="price-input-box">
-            <label for="inputPriceMax">Max</label>
+            <label for="inputPriceMax">До</label>
             <div class="price-field-wrap">
-              <span class="currency-symbol">$</span>
               <input type="number" id="inputPriceMax" value="{{ current_price_max }}" min="{{ price_min }}" max="{{ price_max }}" class="price-num-input" />
+              <span class="currency-symbol">руб.</span>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
     {% if brands %}
     <div class="filter-group-card">
       <div class="filter-group-heading">
-        <span>Brand / Artist</span>
+        <span>Бренд / Исполнитель</span>
       </div>
       <div class="filter-options-list">
         {% for brand in brands %}
@@ -64,7 +64,7 @@
     {% if formats %}
     <div class="filter-group-card">
       <div class="filter-group-heading">
-        <span>Format & Specifications</span>
+        <span>Формат и параметры</span>
       </div>
       <div class="filter-options-list">
         {% for format in formats %}
@@ -103,7 +103,7 @@
   <div class="filter-panel-footer">
     <button type="button" id="button-filter" class="btn btn-apply-filter">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-      <span>Apply Filters</span>
+      <span>Применить</span>
     </button>
   </div>
 </div>
@@ -119,7 +119,7 @@
 
   function updatePriceBadge() {
     if (badge && pMinInput && pMaxInput) {
-      badge.textContent = '$' + pMinInput.value + ' — $' + pMaxInput.value;
+      badge.textContent = pMinInput.value + ' — ' + pMaxInput.value + ' руб.';
     }
   }
 

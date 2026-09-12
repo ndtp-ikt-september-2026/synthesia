@@ -22,156 +22,37 @@
             <add position="after"><![CDATA[
 			// SoundNet Metadata Enrichment
 			$soundnet_meta = $this->model_extension_module_soundnet_storefront->getReleaseMetadata($this->request->get['product_id']);
-			$data['artist'] = $soundnet_meta['artist'];
+			$data['is_music'] = $soundnet_meta['is_music'];
+			$data['artist'] = $soundnet_meta['is_music'] ? $soundnet_meta['artist'] : '';
 			$data['year'] = $soundnet_meta['year'];
 			$data['label'] = $soundnet_meta['label'];
-			$data['format_badge'] = $soundnet_meta['format_badge'];
-			$data['is_music'] = $soundnet_meta['is_music'];
-			$data['matching_gear'] = $this->model_extension_module_soundnet_storefront->getMatchingInstruments($this->request->get['product_id'], 6);
+			$data['format_badge'] = $soundnet_meta['is_music'] ? $soundnet_meta['format_badge'] : '';
+			if ($data['is_music']) {
+				$data['matching_gear'] = $this->model_extension_module_soundnet_storefront->getMatchingInstruments($this->request->get['product_id'], 6);
+				$data['tracks'] = $this->model_extension_module_soundnet_storefront->getTracks($this->request->get['product_id']);
+			} else {
+				$data['matching_gear'] = array();
+				$data['tracks'] = array();
+			}
+			$data['preview_track'] = null;
+			if (!empty($data['tracks'])) {
+				foreach ($data['tracks'] as $trk) {
+					if (!empty($trk['audio_url'])) {
+						$data['preview_track'] = $trk;
+						break;
+					}
+				}
+			}
             ]]></add>
         </operation>
     </file>
 
-    <!-- 2. PRODUCT TEMPLATE: Fix Screenshot 2 Layout, 1:1 Cover, Typography, AI Mode, Commercial Panel & Matching Gear -->
+    <!-- 2. PRODUCT TEMPLATE: Inject AI Similar Modal -->
     <file path="catalog/view/theme/default/template/product/product.twig">
         <operation>
-            <search><![CDATA[<div class="row"> {% if column_left or column_right %}]]></search>
+            <search><![CDATA[{{ footer }}]]></search>
             <add position="before"><![CDATA[
-      <div class="product-detail-layout">
-        <div class="product-detail-left">
-          <div class="product-cover-frame">
-            {% if thumb %}
-            <a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}">
-              <img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" class="product-cover-frame__img" />
-            </a>
-            {% endif %}
-            <span class="media-badge">{{ format_badge|default('ВИНИЛ LP') }}</span>
-          </div>
-          {% if images %}
-          <div class="product-additional-thumbs">
-            {% for image in images %}
-            <a class="thumbnail" href="{{ image.popup }}" title="{{ heading_title }}">
-              <img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}" />
-            </a>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
-        <div class="product-detail-right">
-          <div class="product-release-header">
-            {% if artist %}
-            <div class="product-artist-title">{{ artist|upper }}</div>
-            {% endif %}
-            <h1 class="product-album-title">{{ heading_title }}</h1>
-            <div class="product-release-meta-strip">
-              {% if year %}<span class="meta-val">{{ year }}</span>{% endif %}
-              {% if year and label %}<span class="meta-dot">•</span>{% endif %}
-              {% if label %}<span class="meta-val">{{ label }}</span>{% endif %}
-            </div>
-            <button type="button" class="btn-ai-mode btn-ai-mode--detail" data-product-id="{{ product_id }}" title="AI Mode • Похожие релизы">
-              <svg class="ai-sparkle-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="10" cy="10" r="7"></circle>
-                <line x1="21" y1="21" x2="15" y2="15"></line>
-                <path d="M10 7 L10.8 9.2 L13 10 L10.8 10.8 L10 13 L9.2 10.8 L7 10 L9.2 9.2 Z" fill="#FBBF24" stroke="none"></path>
-              </svg>
-              <span>AI Mode • Похожие релизы</span>
-            </button>
-          </div>
-
-          <div class="product-commercial-box" id="product">
-            <div class="product-commercial-meta">
-              <div class="meta-item">
-                <span class="meta-item__label">Код Товара:</span>
-                <span class="meta-item__val">{{ model }}</span>
-              </div>
-              <div class="meta-item">
-                <span class="meta-item__label">Наличие:</span>
-                <span class="meta-item__val stock-badge--in">В наличии</span>
-              </div>
-            </div>
-
-            {% if price %}
-            <div class="product-price-row">
-              {% if not special %}
-              <div class="product-price-amount">{{ price }}</div>
-              {% else %}
-              <div class="product-price-amount" style="color: #dc2626;">{{ special }}</div>
-              <div style="text-decoration: line-through; color: #94a3b8; font-size: 16px;">{{ price }}</div>
-              {% endif %}
-            </div>
-            {% endif %}
-
-            <div class="product-purchase-action-row">
-              <div class="product-qty-wrap">
-                <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
-                <input type="hidden" name="product_id" value="{{ product_id }}" />
-              </div>
-              <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn-buy-primary">
-                <i class="fa fa-shopping-cart"></i>
-                <span>Купить</span>
-              </button>
-            </div>
-
-            <div class="product-secondary-actions">
-              <button type="button" class="btn-secondary-icon" title="В избранное" onclick="wishlist.add('{{ product_id }}');">
-                <i class="fa fa-heart"></i>
-                <span>В избранное</span>
-              </button>
-              <button type="button" class="btn-secondary-icon" title="В сравнение" onclick="compare.add('{{ product_id }}');">
-                <i class="fa fa-exchange"></i>
-                <span>В сравнение</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-            ]]></add>
-        </operation>
-        <operation>
-            <search><![CDATA[<h1>{{ heading_title }}</h1>]]></search>
-            <add position="replace"><![CDATA[<div style="display:none;">]]></add>
-        </operation>
-        <operation>
-            <search><![CDATA[<ul class="nav nav-tabs">]]></search>
-            <add position="before"><![CDATA[</div>]]></add>
-        </operation>
-        <operation>
-            <search><![CDATA[<div class="sticky {{ class }}">]]></search>
-            <add position="replace"><![CDATA[<div class="sticky {{ class }}" style="display:none;">]]></add>
-        </operation>
-        <operation>
-            <search><![CDATA[{{ content_bottom }}]]></search>
-            <add position="before"><![CDATA[
-      {% if matching_gear %}
-      <section class="matching-gear-block">
-        <div class="matching-gear-block__header">
-          <div class="matching-gear-block__eyebrow">Studio Gear &amp; Hardware</div>
-          <h3 class="matching-gear-block__title">Инструменты для этой песни</h3>
-          <p class="matching-gear-block__subtitle">Оборудование и инструменты, формирующие фирменное звучание этого релиза</p>
-        </div>
-        <div class="matching-gear-grid">
-          {% for gear in matching_gear %}
-          <div class="gear-item-card">
-            <div class="gear-item-card__media">
-              <a href="{{ gear.href }}"><img src="{{ gear.thumb }}" alt="{{ gear.name }}" loading="lazy" /></a>
-              {% if gear.brand %}<span class="gear-item-card__brand">{{ gear.brand }}</span>{% endif %}
-            </div>
-            <div class="gear-item-card__body">
-              <div class="gear-item-card__type">{{ gear.gear_type }}</div>
-              <h4 class="gear-item-card__title"><a href="{{ gear.href }}">{{ gear.name }}</a></h4>
-              {% if gear.sound_style %}<div class="gear-item-card__style"><i class="fa fa-sliders"></i> {{ gear.sound_style }}</div>{% endif %}
-              <div class="gear-item-card__action-row">
-                <span class="gear-item-card__price">{{ gear.price }}</span>
-                <button type="button" class="btn-gear-buy" onclick="cart.add('{{ gear.product_id }}', 1);">Купить</button>
-              </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </section>
-      {% endif %}
-
-      {% include 'default/template/extension/module/soundnet_similar_modal.twig' %}
+{% include 'default/template/extension/module/soundnet_similar_modal.twig' %}
             ]]></add>
         </operation>
     </file>
@@ -203,9 +84,13 @@
     <file path="catalog/view/theme/default/template/common/home.twig">
         <operation>
             <search><![CDATA[{{ content_top }}]]></search>
-            <add position="after"><![CDATA[
+            <add position="replace"><![CDATA[
       {{ soundnet_storefront }}
             ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[{{ content_bottom }}]]></search>
+            <add position="replace"><![CDATA[]]></add>
         </operation>
     </file>
 </modification>

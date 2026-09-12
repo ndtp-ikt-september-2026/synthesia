@@ -4,7 +4,7 @@
   <section class="recommendation-carousel-section" id="section-curated-music">
     <div class="section-header">
       <div class="section-header__title-group">
-        <div class="section-eyebrow">Physical Audio & Masterings</div>
+        <div class="section-eyebrow">Аудиофильские издания</div>
         <h2 class="section-title">{{ heading_curated_music|default('Кураторские виниловые и CD релизы') }}</h2>
         <p class="section-subtitle">{{ subtitle_curated_music|default('Тщательно отобранные пластинки и коллекционные издания с аудиофильским мастерингом') }}</p>
       </div>
@@ -27,14 +27,6 @@
                 {{ item.format_badge }}
               </span>
             {% endif %}
-            <button type="button" class="btn-ai-mode" data-product-id="{{ item.product_id }}" title="AI Mode • Похожие релизы">
-              <svg class="ai-sparkle-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="10" cy="10" r="7"></circle>
-                <line x1="21" y1="21" x2="15" y2="15"></line>
-                <path d="M10 7 L10.8 9.2 L13 10 L10.8 10.8 L10 13 L9.2 10.8 L7 10 L9.2 9.2 Z" fill="#FBBF24" stroke="none"></path>
-              </svg>
-              <span>AI Mode</span>
-            </button>
           </div>
           <div class="vinyl-card__meta-content">
             <div class="vinyl-card__line-artist" title="{{ item.artist }}">{{ item.artist }}</div>
@@ -59,7 +51,7 @@
   <section class="recommendation-carousel-section" id="section-gear-match">
     <div class="section-header">
       <div class="section-header__title-group">
-        <div class="section-eyebrow">Studio Gear & Hardware</div>
+        <div class="section-eyebrow">Студийный сетап и инструменты</div>
         <h2 class="section-title">{{ heading_gear_match|default('Рекомендуемые музыкальные инструменты') }}</h2>
         <p class="section-subtitle">{{ subtitle_gear_match|default('Гитары, синтезаторы и студийные девайсы, создающие легендарный саунд') }}</p>
       </div>

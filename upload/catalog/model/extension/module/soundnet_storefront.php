@@ -55,13 +55,13 @@ class ModelExtensionModuleSoundnetStorefront extends Model {
 
 		$sql = "SELECT DISTINCT p.product_id, p.image, p.price, pd.name,
 				m.name AS brand,
-				(SELECT cd.name FROM " . DB_PREFIX . "category_description cd JOIN " . DB_PREFIX . "product_to_category p2c ON (cd.category_id = p2c.category_id) WHERE p2c.product_id = p.product_id AND cd.category_id IN (6, 11, 12, 14, 15, 22, 24) LIMIT 1) AS category_name,
+				(SELECT cd.name FROM " . DB_PREFIX . "category_description cd JOIN " . DB_PREFIX . "product_to_category p2c ON (cd.category_id = p2c.category_id) WHERE p2c.product_id = p.product_id AND cd.category_id IN (11, 12, 14, 15, 22, 24) LIMIT 1) AS category_name,
 				(SELECT pa.text FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 9 LIMIT 1) AS sound_style
 				FROM " . DB_PREFIX . "product p
 				JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "')
 				JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)
 				LEFT JOIN " . DB_PREFIX . "manufacturer m ON (p.manufacturer_id = m.manufacturer_id)
-				WHERE p.status = '1' AND p2c.category_id IN (5, 6, 11, 12, 14, 15, 22, 24)
+				WHERE p.status = '1' AND p2c.category_id IN (11, 12, 14, 15, 22, 24)
 				ORDER BY p.price DESC, p.product_id DESC
 				LIMIT " . (int)$limit;
 
@@ -135,11 +135,17 @@ class ModelExtensionModuleSoundnetStorefront extends Model {
 			'artist'       => '',
 			'year'         => '',
 			'label'        => '',
-			'format_badge' => 'ВИНИЛ LP',
+			'format_badge' => '',
 			'genre'        => '',
 			'vibe'         => '',
 			'is_music'     => false
 		);
+
+		// Also check if product belongs to music categories (1, 2, 3, 4)
+		$cat_check = $this->db->query("SELECT category_id FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "' AND category_id IN (1, 2, 3, 4) LIMIT 1");
+		if ($cat_check->num_rows) {
+			$meta['is_music'] = true;
+		}
 
 		foreach ($query->rows as $r) {
 			$name = mb_strtolower(trim($r['attr_name']), 'UTF-8');
@@ -167,11 +173,32 @@ class ModelExtensionModuleSoundnetStorefront extends Model {
 			}
 		}
 
+		// If it's music and format_badge is still empty, detect from category
+		if ($meta['is_music'] && empty($meta['format_badge'])) {
+			$cat_id_row = $this->db->query("SELECT category_id FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$product_id . "' AND category_id IN (2, 3) LIMIT 1");
+			if ($cat_id_row->num_rows && $cat_id_row->row['category_id'] == 3) {
+				$meta['format_badge'] = 'КОМПАКТ-ДИСК CD';
+			} elseif ($cat_id_row->num_rows && $cat_id_row->row['category_id'] == 2) {
+				$meta['format_badge'] = 'ВИНИЛ LP';
+			}
+		}
+
+		// Ensure non-music NEVER gets a format_badge or artist
+		if (!$meta['is_music']) {
+			$meta['format_badge'] = '';
+			$meta['artist'] = '';
+		}
+
 		return $meta;
 	}
 
 	public function getSimilarReleases($product_id, $limit = 8) {
 		$this->load->model('tool/image');
+
+		$meta = $this->getReleaseMetadata($product_id);
+		if (!$meta['is_music']) {
+			return array();
+		}
 
 		$ai_server_url = $this->config->get('module_soundnet_storefront_ai_url');
 		if (!$ai_server_url) {
@@ -281,6 +308,11 @@ class ModelExtensionModuleSoundnetStorefront extends Model {
 	public function getMatchingInstruments($product_id, $limit = 6) {
 		$this->load->model('tool/image');
 
+		$meta = $this->getReleaseMetadata($product_id);
+		if (!$meta['is_music']) {
+			return array();
+		}
+
 		$ai_server_url = $this->config->get('module_soundnet_storefront_ai_url');
 		if (!$ai_server_url) {
 			$ai_server_url = 'http://127.0.0.1:8000';
@@ -373,4 +405,40 @@ class ModelExtensionModuleSoundnetStorefront extends Model {
 
 		return $results;
 	}
+
+	public function getTracks($product_id) {
+		$meta = $this->getReleaseMetadata($product_id);
+		if (!$meta['is_music']) {
+			return array();
+		}
+
+		$table_check = $this->db->query("SHOW TABLES LIKE '" . DB_PREFIX . "product_tracklist'");
+		if (!$table_check->num_rows) {
+			return array();
+		}
+
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_tracklist WHERE product_id = '" . (int)$product_id . "' AND status = '1' ORDER BY track_num ASC");
+		$tracks = array();
+		foreach ($query->rows as $row) {
+			$audio_url = '';
+			if (!empty($row['preview_file'])) {
+				if (filter_var($row['preview_file'], FILTER_VALIDATE_URL)) {
+					$audio_url = $row['preview_file'];
+				} elseif (file_exists(DIR_APPLICATION . '../' . $row['preview_file'])) {
+					$audio_url = $row['preview_file'];
+				}
+			}
+
+			$tracks[] = array(
+				'track_id'   => $row['track_id'],
+				'track_num'  => $row['track_num'],
+				'title'      => $row['title'],
+				'duration'   => !empty($row['duration']) ? $row['duration'] : '--:--',
+				'audio_url'  => $audio_url,
+				'has_preview'=> !empty($audio_url)
+			);
+		}
+		return $tracks;
+	}
 }
+

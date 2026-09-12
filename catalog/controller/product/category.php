@@ -251,7 +251,7 @@ class ControllerProductCategory extends Controller {
 				$artist = '';
 				$year = '';
 				$label = '';
-				$format_badge = 'Vinyl LP';
+				$format_badge = 'ВИНИЛ LP';
 				$brand = '';
 				$gear_type = '';
 				$is_music = false;
@@ -265,7 +265,7 @@ class ControllerProductCategory extends Controller {
 					} elseif ($attr['attr_name'] == 'лейбл' || $attr['attr_name'] == 'label') {
 						$label = $attr['text'];
 					} elseif ($attr['attr_name'] == 'формат издания' || $attr['attr_name'] == 'format') {
-						$format_badge = (stripos($attr['text'], 'cd') !== false || stripos($attr['text'], 'компакт') !== false) ? 'Audio CD' : 'Vinyl LP';
+						$format_badge = (stripos($attr['text'], 'cd') !== false || stripos($attr['text'], 'компакт') !== false) ? 'КОМПАКТ-ДИСК CD' : 'ВИНИЛ LP';
 						$is_music = true;
 					} elseif ($attr['attr_name'] == 'бренд' || $attr['attr_name'] == 'brand') {
 						$brand = $attr['text'];
@@ -285,13 +285,13 @@ class ControllerProductCategory extends Controller {
 				if ($label) {
 					$meta_parts[] = $label;
 				}
-				$meta = !empty($meta_parts) ? implode(' • ', $meta_parts) : 'Studio Release';
+				$meta = !empty($meta_parts) ? implode(' • ', $meta_parts) : 'Студийный релиз';
 
 				$data['products'][] = array(
 					'product_id'   => $result['product_id'],
 					'thumb'        => $image,
 					'name'         => $result['name'],
-					'artist'       => $artist ? $artist : 'Various Artists',
+					'artist'       => $artist ? $artist : 'Различные исполнители',
 					'meta'         => $meta,
 					'format_badge' => $format_badge,
 					'brand'        => $brand,
