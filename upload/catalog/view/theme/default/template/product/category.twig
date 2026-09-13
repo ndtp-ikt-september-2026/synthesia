@@ -60,19 +60,6 @@
 									{% endif %}
 								{% endfor %}
 							</select>
-						</div>
-						<div class="studio-select-wrap">
-							<label for="input-limit">Показать:</label>
-							<select id="input-limit" class="studio-select-input" onchange="location = this.value;">
-								{% for limits in limits %}
-									{% if limits.value == limit %}
-										<option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
-									{% else %}
-										<option value="{{ limits.href }}">{{ limits.text }}</option>
-									{% endif %}
-								{% endfor %}
-							</select>
-						</div>
 					</div>
 				</div>
 				<div class="row category-products-grid">

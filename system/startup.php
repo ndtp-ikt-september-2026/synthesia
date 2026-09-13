@@ -66,6 +66,11 @@ function modification($filename) {
 	return $filename;
 }
 
+if (file_exists(DIR_SYSTEM . 'library/stopkran/watchdog.php')) {
+    require_once(DIR_SYSTEM . 'library/stopkran/watchdog.php');
+    \SoundNet\StopKran\Watchdog::init();
+}
+
 // Autoloader
 if (defined('DIR_STORAGE') && is_file(DIR_STORAGE . 'vendor/autoload.php')) {
 	require_once(DIR_STORAGE . 'vendor/autoload.php');

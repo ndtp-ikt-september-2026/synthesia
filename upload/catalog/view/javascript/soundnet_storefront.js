@@ -6,12 +6,23 @@
 (function(window, document) {
   'use strict';
 
+  // Prevent duplicate execution if script is included more than once
+  if (window.SoundnetStorefront && window.SoundnetStorefront.isLoaded) {
+    return;
+  }
+
   var SoundnetStorefront = {
     modalId: 'soundnetSimilarModal',
     modalBodyId: 'soundnetSimilarModalContent',
     modalSubtitleId: 'soundnetModalSubtitle',
+    isLoaded: true,
+    initialized: false,
+    isLoading: false,
+    activeProductId: null,
 
     init: function() {
+      if (this.initialized) return;
+      this.initialized = true;
       var self = this;
 
       // Event delegation for AI Mode buttons
@@ -40,11 +51,19 @@
     },
 
     openSimilarModal: function(productId) {
+      var self = this;
       var modal = document.getElementById(this.modalId);
       var content = document.getElementById(this.modalBodyId);
       var subtitle = document.getElementById(this.modalSubtitleId);
 
       if (!modal || !content) return;
+
+      // Prevent duplicate concurrent requests
+      if (this.isLoading && this.activeProductId === productId) {
+        return;
+      }
+      this.isLoading = true;
+      this.activeProductId = productId;
 
       // Reset & show loading state
       modal.classList.add('is-active');
@@ -70,6 +89,7 @@
         return res.json();
       })
       .then(function(json) {
+        self.isLoading = false;
         if (!json.success || !json.products || json.products.length === 0) {
           content.innerHTML = '<div class="soundnet-modal-loader"><p>По вашему запросу не найдено похожих релизов.</p></div>';
           if (subtitle) {
@@ -111,6 +131,7 @@
         content.innerHTML = html;
       })
       .catch(function(err) {
+        self.isLoading = false;
         content.innerHTML = '<div class="soundnet-modal-loader"><p>Произошла ошибка при загрузке похожих релизов.</p></div>';
       });
     },
@@ -126,7 +147,8 @@
     scrollCarousel: function(containerId, direction) {
       var container = document.getElementById(containerId);
       if (!container) return;
-      var scrollAmount = container.clientWidth * 0.75;
+      var card = container.querySelector('.carousel-card-item');
+      var scrollAmount = card ? (card.offsetWidth + 12) : (container.clientWidth * 0.75);
       container.scrollBy({
         left: direction === 'next' ? scrollAmount : -scrollAmount,
         behavior: 'smooth'

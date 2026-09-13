@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>SoundNet Stop-Kran Emergency Circuit Breaker</name>
+    <code>soundnet_stopkran</code>
+    <version>1.0.0</version>
+    <author>SoundNet Core Systems</author>
+    <link>http://localhost</link>
+    <file path="system/startup.php">
+        <operation>
+            <search><![CDATA[// Autoloader]]></search>
+            <add position="before"><![CDATA[
+if (file_exists(DIR_SYSTEM . 'library/stopkran/watchdog.php')) {
+    require_once(DIR_SYSTEM . 'library/stopkran/watchdog.php');
+    \SoundNet\StopKran\Watchdog::init();
+}
+            ]]></add>
+        </operation>
+    </file>
+</modification>

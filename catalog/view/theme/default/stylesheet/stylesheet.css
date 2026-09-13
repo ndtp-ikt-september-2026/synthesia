@@ -963,10 +963,31 @@ body {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 767px) {
+  .recommendation-scroll-strip {
+    gap: 12px;
+    margin: 0 -15px;
+    padding: 6px 15px 16px 15px;
+    scroll-padding: 0 15px;
+  }
   .carousel-card-item {
-    flex: 0 0 calc(50% - 10px);
-    min-width: 190px;
+    flex: 0 0 220px !important;
+    max-width: 74vw !important;
+    min-width: 190px !important;
+    scroll-snap-align: start;
+  }
+  .vinyl-card__format-badge {
+    top: 8px;
+    left: 8px;
+    padding: 2px 6px;
+    font-size: 9px;
+  }
+  .vinyl-card__line-artist,
+  .vinyl-card__line-title,
+  .vinyl-card__line-submeta {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 
