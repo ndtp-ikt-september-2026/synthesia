@@ -3254,3 +3254,47 @@
     width: 100% !important;
   }
 }
+
+/* ==========================================================================
+   SoundNet Stop-Kran Storefront Circuit Link (Flat Swiss/Braun)
+   ========================================================================== */
+.footer-bottom-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.stopkran-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  text-decoration: none !important;
+  border: 1px solid #334155;
+  padding: 3px 9px;
+  border-radius: 0;
+  background: #0f172a;
+  transition: all 0.12s ease;
+}
+
+.stopkran-footer-link:hover {
+  color: #ef4444;
+  border-color: #ef4444;
+  background: #1e1014;
+  text-decoration: none !important;
+}
+
+.stopkran-status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 0;
+}
+

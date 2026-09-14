@@ -237,6 +237,184 @@ class Recovery {
     }
 
     /**
+     * Compile and write all active OCMOD modifications into modification cache directory
+     *
+     * @return array
+     */
+    public static function rebuildModificationCache() {
+        $prefix = self::getPrefix();
+        $pdo = self::getPdo();
+        $modDir = self::getModificationDir();
+
+        $dirCatalog = defined('DIR_CATALOG') ? DIR_CATALOG : (defined('DIR_APPLICATION') ? rtrim(DIR_APPLICATION, '/') . '/../catalog/' : '');
+        $dirAdmin = defined('DIR_APPLICATION') && !defined('DIR_CATALOG') ? DIR_APPLICATION : (defined('DIR_APPLICATION') ? rtrim(DIR_APPLICATION, '/') . '/' : '');
+        if (defined('DIR_CATALOG')) {
+            $dirAdmin = defined('DIR_APPLICATION') ? DIR_APPLICATION : '';
+            $dirCatalog = DIR_CATALOG;
+        } else {
+            $dirCatalog = defined('DIR_APPLICATION') ? DIR_APPLICATION : '';
+            $dirAdmin = defined('DIR_APPLICATION') ? rtrim(DIR_APPLICATION, '/') . '/../admin/' : '';
+        }
+        $dirSystem = defined('DIR_SYSTEM') ? DIR_SYSTEM : '';
+
+        // Normalize slashes
+        $dirCatalog = rtrim(str_replace('\\', '/', $dirCatalog), '/') . '/';
+        $dirAdmin   = rtrim(str_replace('\\', '/', $dirAdmin), '/') . '/';
+        $dirSystem  = rtrim(str_replace('\\', '/', $dirSystem), '/') . '/';
+        $modDir     = rtrim(str_replace('\\', '/', $modDir), '/') . '/';
+
+        $xmlList = [];
+        if (is_file($dirSystem . 'modification.xml')) {
+            $xmlList[] = file_get_contents($dirSystem . 'modification.xml');
+        }
+        foreach (glob($dirSystem . '*.ocmod.xml') as $f) {
+            $xmlList[] = file_get_contents($f);
+        }
+
+        try {
+            $stmt = $pdo->query('SELECT `xml` FROM `' . $prefix . 'modification` WHERE `status` = 1');
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $xmlList[] = $row['xml'];
+            }
+        } catch (PDOException $e) {
+            self::logCrash('Failed to fetch active modifications: ' . $e->getMessage());
+        }
+
+        $modification = [];
+        $original = [];
+
+        foreach ($xmlList as $xml) {
+            if (empty($xml)) continue;
+
+            $dom = new \DOMDocument('1.0', 'UTF-8');
+            $dom->preserveWhiteSpace = false;
+            if (!@$dom->loadXml($xml)) continue;
+
+            $modNode = $dom->getElementsByTagName('modification')->item(0);
+            if (!$modNode) continue;
+
+            $files = $modNode->getElementsByTagName('file');
+            foreach ($files as $fileNode) {
+                $operations = $fileNode->getElementsByTagName('operation');
+                $filePaths = explode('|', str_replace('\\', '/', $fileNode->getAttribute('path')));
+
+                foreach ($filePaths as $relPath) {
+                    $fullPath = '';
+                    if (substr($relPath, 0, 7) === 'catalog') {
+                        $fullPath = $dirCatalog . substr($relPath, 8);
+                    } elseif (substr($relPath, 0, 5) === 'admin') {
+                        $fullPath = $dirAdmin . substr($relPath, 6);
+                    } elseif (substr($relPath, 0, 6) === 'system') {
+                        $fullPath = $dirSystem . substr($relPath, 7);
+                    }
+
+                    if (!$fullPath) continue;
+
+                    $matchedFiles = glob($fullPath, GLOB_BRACE);
+                    if (!$matchedFiles) continue;
+
+                    foreach ($matchedFiles as $mFile) {
+                        $mFile = str_replace('\\', '/', $mFile);
+                        $key = '';
+                        if (substr($mFile, 0, strlen($dirCatalog)) === $dirCatalog) {
+                            $key = 'catalog/' . substr($mFile, strlen($dirCatalog));
+                        } elseif (substr($mFile, 0, strlen($dirAdmin)) === $dirAdmin) {
+                            $key = 'admin/' . substr($mFile, strlen($dirAdmin));
+                        } elseif (substr($mFile, 0, strlen($dirSystem)) === $dirSystem) {
+                            $key = 'system/' . substr($mFile, strlen($dirSystem));
+                        }
+
+                        if (!$key) continue;
+
+                        if (!isset($modification[$key])) {
+                            $content = file_get_contents($mFile);
+                            $modification[$key] = preg_replace('~\r?\n~', "\n", $content);
+                            $original[$key] = preg_replace('~\r?\n~', "\n", $content);
+                        }
+
+                        foreach ($operations as $operation) {
+                            $searchNode = $operation->getElementsByTagName('search')->item(0);
+                            $addNode = $operation->getElementsByTagName('add')->item(0);
+                            if (!$searchNode || !$addNode) continue;
+
+                            $search = $searchNode->textContent;
+                            $trim = $searchNode->getAttribute('trim');
+                            $index = $searchNode->getAttribute('index');
+                            if (!$trim || $trim === 'true') {
+                                $search = trim($search);
+                            }
+
+                            $add = $addNode->textContent;
+                            $trimAdd = $addNode->getAttribute('trim');
+                            $position = $addNode->getAttribute('position') ?: 'replace';
+                            $offset = (int)($addNode->getAttribute('offset') ?: 0);
+                            if ($trimAdd === 'true') {
+                                $add = trim($add);
+                            }
+
+                            $indexes = ($index !== '') ? explode(',', $index) : [];
+                            $lines = explode("\n", $modification[$key]);
+                            $matchCount = 0;
+
+                            for ($line_id = 0; $line_id < count($lines); $line_id++) {
+                                $line = $lines[$line_id];
+                                if (stripos($line, $search) !== false) {
+                                    $isTarget = false;
+                                    if (!$indexes || in_array($matchCount, $indexes)) {
+                                        $isTarget = true;
+                                    }
+                                    $matchCount++;
+
+                                    if ($isTarget) {
+                                        switch ($position) {
+                                            case 'replace':
+                                                $new_lines = explode("\n", $add);
+                                                if ($offset < 0) {
+                                                    array_splice($lines, $line_id + $offset, abs($offset) + 1, [str_replace($search, $add, $line)]);
+                                                    $line_id -= $offset;
+                                                } else {
+                                                    array_splice($lines, $line_id, $offset + 1, [str_replace($search, $add, $line)]);
+                                                }
+                                                break;
+                                            case 'before':
+                                                $new_lines = explode("\n", $add);
+                                                array_splice($lines, $line_id - $offset, 0, $new_lines);
+                                                $line_id += count($new_lines);
+                                                break;
+                                            case 'after':
+                                                $new_lines = explode("\n", $add);
+                                                array_splice($lines, ($line_id + 1) + $offset, 0, $new_lines);
+                                                $line_id += count($new_lines);
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+
+                            $modification[$key] = implode("\n", $lines);
+                        }
+                    }
+                }
+            }
+        }
+
+        $written = 0;
+        foreach ($modification as $key => $value) {
+            if ($original[$key] !== $value) {
+                $destFile = $modDir . $key;
+                $destFolder = dirname($destFile);
+                if (!is_dir($destFolder)) {
+                    @mkdir($destFolder, 0777, true);
+                }
+                @file_put_contents($destFile, $value);
+                $written++;
+            }
+        }
+
+        return ['status' => true, 'files_written' => $written];
+    }
+
+    /**
      * Tier 1: Surgical disabling of a specific module
      *
      * @param string $code
@@ -274,8 +452,9 @@ class Recovery {
             $stmtSet->execute([':set_key' => 'module_' . $cleanCode . '_status']);
             $settingCount = $stmtSet->rowCount();
 
-            // 4. Purge modification cache
+            // 4. Purge modification cache and rebuild active
             $purgeResult = self::purgeModificationCache();
+            self::rebuildModificationCache();
 
             self::logCrash('Tier 1: Surgically disabled module \'' . $cleanCode . '\'', [
                 'modifications_disabled' => $modCount,
@@ -316,12 +495,12 @@ class Recovery {
             $stmtMod = $pdo->query('UPDATE `' . $prefix . 'modification` SET `status` = 0');
             $modCount = $stmtMod ? $stmtMod->rowCount() : 0;
 
-            // 2. Disable ALL non-core events
-            $stmtEvt = $pdo->query('UPDATE `' . $prefix . 'event` SET `status` = 0 WHERE `code` NOT LIKE \'core_%\'');
+            // 2. Disable non-core extension events only (protect core OpenCart activity/mail/statistics/advertising events)
+            $stmtEvt = $pdo->query('UPDATE `' . $prefix . 'event` SET `status` = 0 WHERE `code` NOT LIKE \'core_%\' AND `code` NOT LIKE \'activity_%\' AND `code` NOT LIKE \'mail_%\' AND `code` NOT LIKE \'statistics_%\' AND `code` NOT LIKE \'admin_mail_%\' AND `code` NOT LIKE \'advertise_google%\'');
             $eventCount = $stmtEvt ? $stmtEvt->rowCount() : 0;
 
-            // 3. Disable all module settings
-            $stmtSet = $pdo->query('UPDATE `' . $prefix . 'setting` SET `value` = \'0\' WHERE `key` LIKE \'module_%_status\'');
+            // 3. Disable 3rd-party module settings (protect core category, account, filter modules)
+            $stmtSet = $pdo->query('UPDATE `' . $prefix . 'setting` SET `value` = \'0\' WHERE `key` LIKE \'module_%_status\' AND `key` NOT IN (\'module_category_status\', \'module_account_status\', \'module_filter_status\', \'module_blog_category_status\')');
             $settingCount = $stmtSet ? $stmtSet->rowCount() : 0;
 
             // 4. Completely clear modification and system caches

@@ -195,10 +195,12 @@ class ControllerExtensionModuleStopkran extends Controller {
 
             $this->ensureRecoveryClass();
             \SoundNet\StopKran\Recovery::purgeModificationCache();
+            $rebuildResult = \SoundNet\StopKran\Recovery::rebuildModificationCache();
 
             $json['success'] = true;
             $json['modification_id'] = $modId;
             $json['status'] = $newStatus;
+            $json['rebuild'] = $rebuildResult;
         }
 
         $this->response->addHeader('Content-Type: application/json');
@@ -249,12 +251,14 @@ class ControllerExtensionModuleStopkran extends Controller {
             $this->ensureRecoveryClass();
             $modPurge = \SoundNet\StopKran\Recovery::purgeModificationCache();
             $sysPurge = \SoundNet\StopKran\Recovery::purgeSystemCache();
+            $rebuild  = \SoundNet\StopKran\Recovery::rebuildModificationCache();
 
             $json['success'] = true;
             $json['message'] = $this->language->get('text_cache_purged');
             $json['details'] = [
                 'modification' => $modPurge,
-                'system'       => $sysPurge
+                'system'       => $sysPurge,
+                'rebuild'      => $rebuild
             ];
         }
 

@@ -192,7 +192,7 @@ class Watchdog {
     }
 
     /**
-     * Render HTTP 503 Clean Diagnostic Maintenance UI
+     * Render HTTP 503 Clean Diagnostic Maintenance UI (Flat Industrial)
      *
      * @param int         $tier
      * @param string|null $moduleCode
@@ -207,26 +207,26 @@ class Watchdog {
         $cleanModule = htmlspecialchars((string)$moduleCode, ENT_QUOTES, 'UTF-8');
 
         $isTier1 = ($tier === 1);
-        $badgeColor = $isTier1 ? '#f59e0b' : '#ef4444';
-        $badgeText  = $isTier1 ? 'TIER 1 : SURGICAL ISOLATION ENGAGED' : 'TIER 2 : TOTAL BLACKOUT ENGAGED';
+        $badgeColor = $isTier1 ? '#d29922' : '#da3633';
+        $badgeText  = $isTier1 ? 'TIER 1 : SURGICAL DEACTIVATION' : 'TIER 2 : TOTAL BLACKOUT RESET';
         $titleText  = $isTier1
-            ? "Circuit Breaker Tripped: Module &lsquo;{$cleanModule}&rsquo; Auto-Disabled"
-            : 'Circuit Breaker Tripped: System Restored to Clean Native Core';
+            ? "Circuit Breaker Tripped: Module [{$cleanModule}] Isolated"
+            : 'Circuit Breaker Tripped: System Restored to Native Core';
 
         $actionDetails = '';
         if ($isTier1) {
             $actionDetails = "
-                <div class=\"action-item\"><span>Module Identifier:</span> <code>{$cleanModule}</code></div>
-                <div class=\"action-item\"><span>Modifications Deactivated:</span> <strong>" . ($actions['modifications_disabled'] ?? 1) . "</strong></div>
-                <div class=\"action-item\"><span>Related Events Deactivated:</span> <strong>" . ($actions['events_disabled'] ?? 0) . "</strong></div>
-                <div class=\"action-item\"><span>OCMOD Storage Cache:</span> <strong>Purged &amp; Cleared</strong></div>
+                <div class=\"action-row\"><span class=\"action-key\">TARGET MODULE:</span><span class=\"action-val font-mono\">{$cleanModule}</span></div>
+                <div class=\"action-row\"><span class=\"action-key\">MODIFICATIONS DEACTIVATED:</span><span class=\"action-val font-mono\">" . ($actions['modifications_disabled'] ?? 1) . "</span></div>
+                <div class=\"action-row\"><span class=\"action-key\">RELATED EVENTS DISABLED:</span><span class=\"action-val font-mono\">" . ($actions['events_disabled'] ?? 0) . "</span></div>
+                <div class=\"action-row\"><span class=\"action-key\">STORAGE MODIFICATION CACHE:</span><span class=\"action-val font-mono\">UNLINKED &amp; PURGED</span></div>
             ";
         } else {
             $actionDetails = "
-                <div class=\"action-item\"><span>Modifications Deactivated:</span> <strong>" . ($actions['modifications_disabled'] ?? 'All') . "</strong></div>
-                <div class=\"action-item\"><span>Non-Core Events Deactivated:</span> <strong>" . ($actions['events_disabled'] ?? 'All') . "</strong></div>
-                <div class=\"action-item\"><span>Module Settings Status:</span> <strong>Reset to 0 (Disabled)</strong></div>
-                <div class=\"action-item\"><span>Modification &amp; System Caches:</span> <strong>Completely Flushed</strong></div>
+                <div class=\"action-row\"><span class=\"action-key\">ALL MODIFICATIONS:</span><span class=\"action-val font-mono\">STATUS = 0 (DISABLED)</span></div>
+                <div class=\"action-row\"><span class=\"action-key\">NON-CORE EVENTS:</span><span class=\"action-val font-mono\">STATUS = 0 (DISABLED)</span></div>
+                <div class=\"action-row\"><span class=\"action-key\">MODULE SETTINGS:</span><span class=\"action-val font-mono\">RESET TO '0'</span></div>
+                <div class=\"action-row\"><span class=\"action-key\">STORAGE &amp; SYSTEM CACHE:</span><span class=\"action-val font-mono\">COMPLETELY FLUSHED</span></div>
             ";
         }
 
@@ -238,22 +238,11 @@ class Watchdog {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SoundNet Stop-Kran &mdash; Circuit Breaker Diagnostic</title>
     <style>
-        :root {
-            --bg-body: #0b0f19;
-            --bg-card: #111827;
-            --border-card: #1f2937;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
-            --accent-red: #ef4444;
-            --accent-amber: #f59e0b;
-            --accent-cyan: #06b6d4;
-            --code-bg: #030712;
-        }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #0b0f17;
+            color: #e6edf3;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -263,166 +252,157 @@ class Watchdog {
         .container {
             max-width: 820px;
             width: 100%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            border-radius: 14px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            overflow: hidden;
+            background: #141922;
+            border: 1px solid #30363d;
+            border-left: 6px solid {$badgeColor};
+            border-radius: 0;
+            box-shadow: none;
         }
         .header {
-            padding: 24px 30px;
-            border-bottom: 1px solid var(--border-card);
+            padding: 20px 24px;
+            border-bottom: 1px solid #21262d;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(255, 255, 255, 0.02);
+            background: #0e121a;
         }
         .brand {
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            color: var(--text-muted);
+            color: #8b949e;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: ui-monospace, Consolas, monospace;
         }
-        .brand-dot {
+        .brand-marker {
             width: 10px;
             height: 10px;
-            border-radius: 50%;
             background: {$badgeColor};
-            box-shadow: 0 0 12px {$badgeColor};
+            display: inline-block;
         }
         .badge {
-            background: {$badgeColor}22;
+            background: transparent;
             color: {$badgeColor};
-            border: 1px solid {$badgeColor}55;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 9999px;
-            letter-spacing: 0.5px;
+            border: 1px solid {$badgeColor};
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 0;
+            letter-spacing: 0.08em;
+            font-family: ui-monospace, Consolas, monospace;
         }
         .content {
-            padding: 30px;
+            padding: 24px;
         }
         h1 {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 14px;
-            color: #ffffff;
-            line-height: 1.4;
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #f0f6fc;
+            letter-spacing: -0.01em;
         }
         p.desc {
-            color: var(--text-muted);
-            font-size: 15px;
+            color: #8b949e;
+            font-size: 14px;
             line-height: 1.6;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
-        .section-title {
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 1px;
+        .section-label {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: var(--accent-cyan);
-            margin-bottom: 10px;
+            color: #8b949e;
+            margin-bottom: 8px;
+            font-family: ui-monospace, Consolas, monospace;
         }
         .code-box {
-            background: var(--code-bg);
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            padding: 16px 20px;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 13px;
-            color: #e2e8f0;
+            background: #080c13;
+            border: 1px solid #30363d;
+            border-radius: 0;
+            padding: 14px 18px;
+            font-family: ui-monospace, Consolas, monospace;
+            font-size: 12px;
+            color: #c9d1d9;
             line-height: 1.5;
             word-break: break-all;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
         .code-box .file-info {
-            color: #94a3b8;
-            margin-bottom: 8px;
-            font-size: 12px;
+            color: #8b949e;
+            margin-bottom: 6px;
+            font-size: 11px;
+            border-bottom: 1px solid #161b22;
+            padding-bottom: 6px;
         }
         .code-box .err-msg {
-            color: #f87171;
+            color: #f85149;
+            font-weight: 600;
         }
         .action-panel {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-card);
-            border-radius: 8px;
-            padding: 18px 22px;
-            margin-bottom: 26px;
+            background: #0e121a;
+            border: 1px solid #30363d;
+            border-radius: 0;
+            padding: 14px 18px;
+            margin-bottom: 24px;
         }
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 14px;
+        .action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #1c222c;
+            font-size: 12px;
         }
-        .action-item {
-            font-size: 13px;
-            color: var(--text-muted);
+        .action-row:last-child {
+            border-bottom: none;
         }
-        .action-item span {
-            display: block;
+        .action-key {
+            color: #8b949e;
             font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #64748b;
-            margin-bottom: 4px;
+            letter-spacing: 0.04em;
         }
-        .action-item strong {
-            color: #f1f5f9;
-        }
-        .action-item code {
-            background: #030712;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #38bdf8;
+        .action-val {
+            color: #f0f6fc;
+            font-weight: 600;
         }
         .footer {
-            padding: 20px 30px;
-            background: rgba(0, 0, 0, 0.25);
-            border-top: 1px solid var(--border-card);
+            padding: 16px 24px;
+            background: #0e121a;
+            border-top: 1px solid #21262d;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 12px;
         }
         .footer-note {
+            font-size: 12px;
+            color: #8b949e;
+            font-family: ui-monospace, Consolas, monospace;
+        }
+        .btn-refresh {
+            background: #238636;
+            color: #ffffff;
+            border: 1px solid #2ea043;
+            border-radius: 0;
+            padding: 8px 18px;
             font-size: 13px;
-            color: var(--text-muted);
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 22px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             text-decoration: none;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: background-color 0.1s ease;
         }
-        .btn-primary {
-            background: #2563eb;
-            color: #ffffff;
-            border: 1px solid #3b82f6;
+        .btn-refresh:hover {
+            background: #2ea043;
         }
-        .btn-primary:hover {
-            background: #1d4ed8;
-        }
-        .btn-secondary {
-            background: transparent;
-            color: #94a3b8;
-            border: 1px solid #334155;
-        }
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: #ffffff;
+        .font-mono {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
         }
     </style>
 </head>
@@ -430,36 +410,32 @@ class Watchdog {
     <div class="container">
         <div class="header">
             <div class="brand">
-                <div class="brand-dot"></div>
-                SoundNet Stop-Kran Circuit Breaker
+                <span class="brand-marker"></span>
+                SoundNet Stop-Kran Watchdog
             </div>
             <div class="badge">{$badgeText}</div>
         </div>
         <div class="content">
             <h1>{$titleText}</h1>
             <p class="desc">
-                An unhandled fatal PHP termination was captured by the early watchdog hook. The circuit breaker intervened immediately, executed protective recovery routines, flushed the cache, and prevented an unrecoverable blank screen.
+                An unhandled fatal PHP fault was caught prior to page failure. The emergency circuit breaker neutralized the crash source and unlinked cached modifications.
             </p>
 
-            <div class="section-title">Diagnostic Details</div>
+            <div class="section-label">Incident Telemetry</div>
             <div class="code-box">
-                <div class="file-info">Crash Location: {$cleanFile}:{$cleanLine}</div>
+                <div class="file-info">FAULT ORIGIN: {$cleanFile}:{$cleanLine}</div>
                 <div class="err-msg">{$cleanMsg}</div>
             </div>
 
-            <div class="section-title">Automated Countermeasures Applied</div>
+            <div class="section-label">Automated Actions Executed</div>
             <div class="action-panel">
-                <div class="action-grid">
-                    {$actionDetails}
-                </div>
+                {$actionDetails}
             </div>
         </div>
         <div class="footer">
-            <div class="footer-note">
-                Diagnostic log recorded in <code>system/storage/logs/stopkran_crash.log</code>
-            </div>
-            <div style="display: flex; gap: 10px;">
-                <a href="javascript:location.reload()" class="btn btn-primary">Refresh &amp; Continue</a>
+            <div class="footer-note">LOG: system/storage/logs/stopkran_crash.log</div>
+            <div>
+                <a href="javascript:location.reload()" class="btn-refresh">Reload Page</a>
             </div>
         </div>
     </div>
@@ -469,7 +445,7 @@ HTML;
     }
 
     /**
-     * Render HTTP 200 Emergency Bypass Recovery Confirmation Page
+     * Render HTTP 200 Emergency Bypass Recovery Confirmation Page (Flat Industrial)
      *
      * @param array $result
      * @return string
@@ -488,19 +464,11 @@ HTML;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emergency Stop-Kran &mdash; Recovery Executed</title>
     <style>
-        :root {
-            --bg-body: #0a0e17;
-            --bg-card: #111827;
-            --border-card: #1f2937;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
-            --accent-green: #10b981;
-        }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: var(--bg-body);
-            color: var(--text-main);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #0b0f17;
+            color: #e6edf3;
+            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -508,119 +476,134 @@ HTML;
             padding: 24px;
         }
         .container {
-            max-width: 680px;
+            max-width: 640px;
             width: 100%;
-            background: var(--bg-card);
-            border: 1px solid var(--border-card);
-            border-radius: 12px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-            padding: 36px;
-            text-align: center;
+            background: #141922;
+            border: 1px solid #30363d;
+            border-top: 5px solid #238636;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 32px;
         }
-        .icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto 20px;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-green);
-            font-size: 32px;
+        .status-tag {
+            font-family: ui-monospace, Consolas, monospace;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #3fb950;
+            margin-bottom: 8px;
         }
         h1 {
-            font-size: 24px;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-        p {
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.6;
-            margin-bottom: 26px;
-        }
-        .metrics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            background: #030712;
-            border: 1px solid #1e293b;
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 28px;
-        }
-        .metric-val {
             font-size: 22px;
             font-weight: 700;
-            color: #38bdf8;
+            margin-bottom: 10px;
+            color: #f0f6fc;
+            letter-spacing: -0.01em;
         }
-        .metric-lbl {
-            font-size: 11px;
+        p {
+            color: #8b949e;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .telemetry-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: #30363d;
+            border: 1px solid #30363d;
+            margin-bottom: 24px;
+        }
+        .telemetry-box {
+            background: #0d1117;
+            padding: 14px;
+            text-align: center;
+        }
+        .telemetry-val {
+            font-size: 24px;
+            font-weight: 700;
+            font-family: ui-monospace, Consolas, monospace;
+            color: #58a6ff;
+        }
+        .telemetry-lbl {
+            font-size: 10px;
+            font-weight: 700;
             text-transform: uppercase;
-            color: #64748b;
+            letter-spacing: 0.06em;
+            color: #8b949e;
             margin-top: 4px;
+        }
+        .meta-strip {
+            font-family: ui-monospace, Consolas, monospace;
+            font-size: 11px;
+            color: #6e7681;
+            margin-bottom: 24px;
+            border-top: 1px solid #21262d;
+            padding-top: 12px;
         }
         .btn-group {
             display: flex;
             gap: 12px;
-            justify-content: center;
         }
-        .btn {
-            display: inline-block;
-            padding: 11px 24px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
+        .btn-link {
+            flex: 1;
+            padding: 10px 16px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
             text-decoration: none;
-            transition: all 0.2s;
+            border-radius: 0;
+            transition: background-color 0.1s ease;
         }
         .btn-primary {
-            background: #10b981;
-            color: #042f1f;
+            background: #238636;
+            color: #ffffff;
+            border: 1px solid #2ea043;
         }
         .btn-primary:hover {
-            background: #059669;
-            color: #ffffff;
+            background: #2ea043;
         }
         .btn-secondary {
-            background: #1f2937;
-            color: #e5e7eb;
-            border: 1px solid #374151;
+            background: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #363b42;
         }
         .btn-secondary:hover {
-            background: #374151;
+            background: #30363d;
+            color: #ffffff;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="icon">&#10003;</div>
+        <div class="status-tag">[RECOVERY COMPLETE]</div>
         <h1>Total Blackout Executed</h1>
         <p>
-            The emergency bypass circuit breaker was successfully triggered via secret authentication. OpenCart has been safely rolled back to a clean native core state.
+            Emergency circuit breaker activated via bypass authorization. Active modifications, custom events, and extension statuses have been disabled in the database, and caches flushed.
         </p>
-        <div class="metrics">
-            <div>
-                <div class="metric-val">{$mods}</div>
-                <div class="metric-lbl">Modifications Disabled</div>
+        <div class="telemetry-grid">
+            <div class="telemetry-box">
+                <div class="telemetry-val">{$mods}</div>
+                <div class="telemetry-lbl">Modifications Disabled</div>
             </div>
-            <div>
-                <div class="metric-val">{$evts}</div>
-                <div class="metric-lbl">Events Disabled</div>
+            <div class="telemetry-box">
+                <div class="telemetry-val">{$evts}</div>
+                <div class="telemetry-lbl">Events Disabled</div>
             </div>
-            <div>
-                <div class="metric-val">{$sets}</div>
-                <div class="metric-lbl">Module Statuses Reset</div>
+            <div class="telemetry-box">
+                <div class="telemetry-val">{$sets}</div>
+                <div class="telemetry-lbl">Settings Reset</div>
             </div>
         </div>
-        <p style="font-size: 13px; color: #64748b; margin-bottom: 24px;">
-            Execution Timestamp: {$timestamp} | Modification &amp; system cache cleared.
-        </p>
+        <div class="meta-strip">
+            EXECUTION TIME: {$timestamp} | CACHE UNLINKED
+        </div>
         <div class="btn-group">
-            <a href="admin/" class="btn btn-primary">Go to Admin Login</a>
-            <a href="./" class="btn btn-secondary">Go to Storefront</a>
+            <a href="admin/" class="btn-link btn-primary">Go to Admin Login</a>
+            <a href="./" class="btn-link btn-secondary">Go to Storefront</a>
         </div>
     </div>
 </body>
@@ -629,7 +612,7 @@ HTML;
     }
 
     /**
-     * Render HTTP 403 Forbidden Security Rejection Page
+     * Render HTTP 403 Forbidden Security Rejection Page (Flat Industrial)
      *
      * @return string
      */
@@ -641,32 +624,36 @@ HTML;
     <meta charset="UTF-8">
     <title>Access Denied &mdash; Emergency Circuit Breaker</title>
     <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: #0b0f19;
-            color: #f87171;
-            font-family: monospace;
+            background: #0b0f17;
+            color: #f85149;
+            font-family: ui-monospace, Consolas, monospace;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
-            text-align: center;
+            padding: 20px;
         }
         .box {
-            background: #111827;
-            border: 1px solid #7f1d1d;
-            padding: 30px 40px;
-            border-radius: 8px;
-            max-width: 500px;
+            background: #141922;
+            border: 1px solid #8b1820;
+            border-left: 6px solid #da3633;
+            border-radius: 0;
+            box-shadow: none;
+            padding: 24px 30px;
+            max-width: 480px;
+            width: 100%;
         }
-        h2 { margin-bottom: 10px; color: #ef4444; }
-        p { color: #9ca3af; font-size: 14px; }
+        h2 { font-size: 16px; margin-bottom: 8px; color: #f85149; letter-spacing: 0.05em; text-transform: uppercase; }
+        p { color: #8b949e; font-size: 13px; line-height: 1.5; }
     </style>
 </head>
 <body>
     <div class="box">
         <h2>403 Forbidden</h2>
-        <p>Invalid or missing emergency recovery token.</p>
+        <p>Invalid or missing emergency recovery authorization token.</p>
     </div>
 </body>
 </html>

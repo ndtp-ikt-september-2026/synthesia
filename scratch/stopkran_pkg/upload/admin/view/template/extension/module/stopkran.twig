@@ -1,13 +1,13 @@
 {{ header }}{{ column_left }}
-<div id="content" class="stopkran-page">
+<div id="content" class="stopkran-console">
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
-                <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
-                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+                <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary stopkran-btn-flat"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default stopkran-btn-flat"><i class="fa fa-reply"></i></a>
             </div>
-            <h1>{{ heading_title }}</h1>
-            <ul class="breadcrumb">
+            <h1 class="stopkran-title">{{ heading_title }}</h1>
+            <ul class="breadcrumb stopkran-breadcrumb">
                 {% for breadcrumb in breadcrumbs %}
                 <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
                 {% endfor %}
@@ -17,98 +17,112 @@
 
     <div class="container-fluid">
         {% if error_warning %}
-        <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+        <div class="alert alert-danger stopkran-alert"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
         {% endif %}
         {% if success %}
-        <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+        <div class="alert alert-success stopkran-alert"><i class="fa fa-check-circle"></i> {{ success }}
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
         {% endif %}
         <div id="ajax-alert"></div>
 
-        <!-- Master Emergency Banner -->
-        <div class="stopkran-emergency-banner">
-            <div class="banner-inner">
-                <div class="banner-icon">
-                    <i class="fa fa-shield fa-3x"></i>
+        <!-- Master Emergency Override Station (Flat Industrial) -->
+        <div class="stopkran-breaker-bay">
+            <div class="breaker-inner">
+                <div class="breaker-status-col">
+                    <span class="breaker-indicator-light"></span>
+                    <div class="breaker-indicator-label">CIRCUIT BREAKER: ARMED</div>
                 </div>
-                <div class="banner-content">
-                    <div class="banner-title">CIRCUIT BREAKER EMERGENCY OVERRIDE</div>
-                    <div class="banner-desc">
-                        Immediate fail-safe isolation mechanism. Engaging Stop-Kran deactivates ALL active modifications, non-core events, and module settings, flushing modification and system caches to restore OpenCart to an untouchable native baseline.
+                <div class="breaker-spec-col">
+                    <div class="breaker-heading">FAIL-SAFE TOTAL BLACKOUT OVERRIDE</div>
+                    <div class="breaker-subtext">
+                        Direct mechanical fallback. Deactivates all modifications, non-core events, and module statuses in MySQL, then unlinks all storage caches. Instantly reverts OpenCart to an unmodified core state.
                     </div>
                 </div>
-                <div class="banner-actions">
-                    <button type="button" id="btn-master-kill" class="btn btn-danger btn-lg stopkran-btn-glow">
-                        <i class="fa fa-bolt"></i> {{ button_kill_all }}
+                <div class="breaker-action-col">
+                    <button type="button" id="btn-master-kill" class="btn btn-danger stopkran-kill-switch">
+                        <span class="kill-icon"><i class="fa fa-ban"></i></span>
+                        <span class="kill-text">{{ button_kill_all }}</span>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Stats Overview Strip -->
-        <div class="row stats-strip">
+        <!-- Telemetry Stats Strip (Flat Tabular Grid) -->
+        <div class="row stopkran-telemetry-row">
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
-                    <div class="stat-icon mod-icon"><i class="fa fa-cogs"></i></div>
-                    <div class="stat-body">
-                        <div class="stat-value" id="stat-mods">{{ modifications_active }} <span class="stat-sub">/ {{ modifications_total }}</span></div>
-                        <div class="stat-label">Active Modifications</div>
+                <div class="telemetry-cell">
+                    <div class="telemetry-header">
+                        <span class="telemetry-title">OCMOD Modifications</span>
+                        <span class="telemetry-tag">ACTIVE / TOTAL</span>
+                    </div>
+                    <div class="telemetry-data">
+                        <span class="telemetry-num text-highlight" id="stat-mods">{{ modifications_active }}</span>
+                        <span class="telemetry-divider">/</span>
+                        <span class="telemetry-denom">{{ modifications_total }}</span>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
-                    <div class="stat-icon evt-icon"><i class="fa fa-bolt"></i></div>
-                    <div class="stat-body">
-                        <div class="stat-value" id="stat-events">{{ events_active }} <span class="stat-sub">/ {{ events_total }}</span></div>
-                        <div class="stat-label">Active Custom Events</div>
+                <div class="telemetry-cell">
+                    <div class="telemetry-header">
+                        <span class="telemetry-title">Custom Events</span>
+                        <span class="telemetry-tag">NON-CORE</span>
+                    </div>
+                    <div class="telemetry-data">
+                        <span class="telemetry-num text-signal" id="stat-events">{{ events_active }}</span>
+                        <span class="telemetry-divider">/</span>
+                        <span class="telemetry-denom">{{ events_total }}</span>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
-                    <div class="stat-icon cache-icon"><i class="fa fa-hdd-o"></i></div>
-                    <div class="stat-body">
-                        <div class="stat-value" id="stat-cache">{{ mod_cache_size }}</div>
-                        <div class="stat-label">OCMOD Storage Cache</div>
+                <div class="telemetry-cell">
+                    <div class="telemetry-header">
+                        <span class="telemetry-title">Storage Cache (OCMOD)</span>
+                        <span class="telemetry-tag">DISK OCCUPANCY</span>
+                    </div>
+                    <div class="telemetry-data">
+                        <span class="telemetry-num" id="stat-cache">{{ mod_cache_size }}</span>
                     </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
-                    <div class="stat-icon purge-icon"><i class="fa fa-refresh"></i></div>
-                    <div class="stat-body">
-                        <button type="button" id="btn-purge-cache" class="btn btn-sm btn-info btn-block" style="margin-top: 5px;">
+                <div class="telemetry-cell">
+                    <div class="telemetry-header">
+                        <span class="telemetry-title">Cache Maintenance</span>
+                        <span class="telemetry-tag">SYS: {{ system_cache_size }}</span>
+                    </div>
+                    <div class="telemetry-action">
+                        <button type="button" id="btn-purge-cache" class="btn btn-block stopkran-btn-purge">
                             <i class="fa fa-recycle"></i> {{ button_purge_cache }}
                         </button>
-                        <div class="stat-label" style="margin-top: 4px;">System: {{ system_cache_size }}</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Panel with Tabs -->
-        <div class="panel panel-default stopkran-panel">
-            <div class="panel-heading">
-                <ul class="nav nav-tabs stopkran-tabs" id="circuit-tabs">
-                    <li class="active"><a href="#tab-bypass" data-toggle="tab"><i class="fa fa-key"></i> {{ tab_settings }}</a></li>
-                    <li><a href="#tab-mods" data-toggle="tab"><i class="fa fa-code-fork"></i> {{ tab_modifications }} <span class="badge badge-mod">{{ modifications_active }}</span></a></li>
-                    <li><a href="#tab-evts" data-toggle="tab"><i class="fa fa-random"></i> {{ tab_events }} <span class="badge badge-evt">{{ events_active }}</span></a></li>
+        <!-- Main Workspace Deck (Flat Structural Panels) -->
+        <div class="stopkran-deck">
+            <div class="deck-header">
+                <ul class="nav nav-tabs stopkran-nav-tabs" id="circuit-tabs">
+                    <li class="active"><a href="#tab-bypass" data-toggle="tab"><i class="fa fa-shield"></i> {{ tab_settings }}</a></li>
+                    <li><a href="#tab-mods" data-toggle="tab"><i class="fa fa-code-fork"></i> {{ tab_modifications }} <span class="flat-chip chip-cyan">{{ modifications_active }}</span></a></li>
+                    <li><a href="#tab-evts" data-toggle="tab"><i class="fa fa-bolt"></i> {{ tab_events }} <span class="flat-chip chip-amber">{{ events_active }}</span></a></li>
                     <li><a href="#tab-log" data-toggle="tab"><i class="fa fa-terminal"></i> {{ tab_logs }}</a></li>
                 </ul>
             </div>
-            <div class="panel-body">
+            <div class="deck-body">
                 <div class="tab-content">
                     <!-- Tab 1: Emergency Bypass Configuration -->
                     <div class="tab-pane active" id="tab-bypass">
-                        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+                        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal stopkran-form">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
                                 <div class="col-sm-9">
-                                    <select name="module_stopkran_status" id="input-status" class="form-control">
+                                    <select name="module_stopkran_status" id="input-status" class="form-control stopkran-input">
                                         {% if module_stopkran_status %}
                                         <option value="1" selected="selected">{{ text_enabled }}</option>
                                         <option value="0">{{ text_disabled }}</option>
@@ -126,17 +140,17 @@
                                 </label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" name="module_stopkran_secret_token" value="{{ module_stopkran_secret_token }}" id="input-secret-token" class="form-control font-mono" required />
+                                        <input type="text" name="module_stopkran_secret_token" value="{{ module_stopkran_secret_token }}" id="input-secret-token" class="form-control font-mono stopkran-input" required />
                                         <span class="input-group-btn">
-                                            <button type="button" id="btn-gen-token" class="btn btn-default" data-toggle="tooltip" title="{{ button_generate_token }}">
-                                                <i class="fa fa-random"></i>
+                                            <button type="button" id="btn-gen-token" class="btn stopkran-input-btn" data-toggle="tooltip" title="{{ button_generate_token }}">
+                                                <i class="fa fa-random"></i> {{ button_generate_token }}
                                             </button>
                                         </span>
                                     </div>
                                 </div>
                             </div>
 
-                            <hr style="border-color: #263345;" />
+                            <div class="section-divider"></div>
 
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
@@ -144,14 +158,14 @@
                                 </label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" readonly value="{{ bypass_url_admin }}" id="bypass-admin-url" class="form-control font-mono copy-target" />
+                                        <input type="text" readonly value="{{ bypass_url_admin }}" id="bypass-admin-url" class="form-control font-mono stopkran-input copy-target" />
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary btn-copy" data-target="#bypass-admin-url">
+                                            <button type="button" class="btn stopkran-btn-copy btn-copy" data-target="#bypass-admin-url">
                                                 <i class="fa fa-clipboard"></i> <span class="copy-lbl">{{ text_copy_url }}</span>
                                             </button>
                                         </span>
                                     </div>
-                                    <span class="help-block text-muted">Use this direct link if the Admin CP becomes inaccessible or encounters a blank white screen.</span>
+                                    <div class="form-caption">Direct admin rollback link. Operates without sessions or cookies.</div>
                                 </div>
                             </div>
 
@@ -161,51 +175,55 @@
                                 </label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" readonly value="{{ bypass_url_catalog }}" id="bypass-catalog-url" class="form-control font-mono copy-target" />
+                                        <input type="text" readonly value="{{ bypass_url_catalog }}" id="bypass-catalog-url" class="form-control font-mono stopkran-input copy-target" />
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary btn-copy" data-target="#bypass-catalog-url">
+                                            <button type="button" class="btn stopkran-btn-copy btn-copy" data-target="#bypass-catalog-url">
                                                 <i class="fa fa-clipboard"></i> <span class="copy-lbl">{{ text_copy_url }}</span>
                                             </button>
                                         </span>
                                     </div>
-                                    <span class="help-block text-muted">Public storefront bypass trigger. Operates without sessions or cookies.</span>
+                                    <div class="form-caption">Storefront emergency endpoint for unauthenticated recovery triggers.</div>
                                 </div>
                             </div>
                         </form>
                     </div>
 
-                    <!-- Tab 2: Modifications (OCMOD) Table with Instant AJAX Switches -->
+                    <!-- Tab 2: Modifications Table (Flat Industrial Grid) -->
                     <div class="tab-pane" id="tab-mods">
                         <div class="table-responsive">
-                            <table class="table table-hover stopkran-table">
+                            <table class="table stopkran-data-table">
                                 <thead>
                                     <tr>
                                         <th>{{ column_name }}</th>
                                         <th>{{ column_code }}</th>
                                         <th>{{ column_author }}</th>
                                         <th>{{ column_version }}</th>
-                                        <th class="text-center" style="width: 130px;">{{ column_status }}</th>
+                                        <th class="text-center" style="width: 140px;">{{ column_status }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% if modifications %}
                                     {% for mod in modifications %}
-                                    <tr id="mod-row-{{ mod.modification_id }}" class="{% if not mod.status %}row-inactive{% endif %}">
-                                        <td><strong>{{ mod.name }}</strong></td>
-                                        <td><code>{{ mod.code }}</code></td>
-                                        <td>{{ mod.author }}</td>
-                                        <td><span class="label label-default">{{ mod.version }}</span></td>
+                                    <tr id="mod-row-{{ mod.modification_id }}" class="{% if not mod.status %}row-deactivated{% endif %}">
+                                        <td class="cell-title">{{ mod.name }}</td>
+                                        <td><span class="cell-code font-mono">{{ mod.code }}</span></td>
+                                        <td class="cell-meta">{{ mod.author }}</td>
+                                        <td><span class="flat-chip">{{ mod.version }}</span></td>
                                         <td class="text-center">
-                                            <label class="switch">
-                                                <input type="checkbox" class="ajax-toggle-mod" data-id="{{ mod.modification_id }}" {% if mod.status %}checked{% endif %}>
-                                                <span class="slider round"></span>
-                                            </label>
+                                            <div class="rocker-switch-wrap">
+                                                <input type="checkbox" id="toggle-mod-{{ mod.modification_id }}" class="rocker-input ajax-toggle-mod" data-id="{{ mod.modification_id }}" {% if mod.status %}checked{% endif %}>
+                                                <label for="toggle-mod-{{ mod.modification_id }}" class="rocker-label">
+                                                    <span class="rocker-off">OFF</span>
+                                                    <span class="rocker-on">ON</span>
+                                                    <span class="rocker-nub"></span>
+                                                </label>
+                                            </div>
                                         </td>
                                     </tr>
                                     {% endfor %}
                                     {% else %}
                                     <tr>
-                                        <td colspan="5" class="text-center text-muted">{{ text_no_modifications }}</td>
+                                        <td colspan="5" class="text-center cell-empty">{{ text_no_modifications }}</td>
                                     </tr>
                                     {% endif %}
                                 </tbody>
@@ -213,36 +231,40 @@
                         </div>
                     </div>
 
-                    <!-- Tab 3: System Events Table with Instant AJAX Switches -->
+                    <!-- Tab 3: System Events Table -->
                     <div class="tab-pane" id="tab-evts">
                         <div class="table-responsive">
-                            <table class="table table-hover stopkran-table">
+                            <table class="table stopkran-data-table">
                                 <thead>
                                     <tr>
                                         <th>{{ column_code }}</th>
                                         <th>{{ column_trigger }}</th>
                                         <th>{{ column_action }}</th>
-                                        <th class="text-center" style="width: 130px;">{{ column_status }}</th>
+                                        <th class="text-center" style="width: 140px;">{{ column_status }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% if events %}
                                     {% for evt in events %}
-                                    <tr id="evt-row-{{ evt.event_id }}" class="{% if not evt.status %}row-inactive{% endif %}">
-                                        <td><code>{{ evt.code }}</code></td>
-                                        <td class="font-mono text-cyan" style="font-size: 12px;">{{ evt.trigger }}</td>
-                                        <td class="font-mono" style="font-size: 12px;">{{ evt.action }}</td>
+                                    <tr id="evt-row-{{ evt.event_id }}" class="{% if not evt.status %}row-deactivated{% endif %}">
+                                        <td><span class="cell-code font-mono">{{ evt.code }}</span></td>
+                                        <td class="font-mono text-spec">{{ evt.trigger }}</td>
+                                        <td class="font-mono text-meta">{{ evt.action }}</td>
                                         <td class="text-center">
-                                            <label class="switch">
-                                                <input type="checkbox" class="ajax-toggle-evt" data-id="{{ evt.event_id }}" {% if evt.status %}checked{% endif %}>
-                                                <span class="slider round"></span>
-                                            </label>
+                                            <div class="rocker-switch-wrap">
+                                                <input type="checkbox" id="toggle-evt-{{ evt.event_id }}" class="rocker-input ajax-toggle-evt" data-id="{{ evt.event_id }}" {% if evt.status %}checked{% endif %}>
+                                                <label for="toggle-evt-{{ evt.event_id }}" class="rocker-label">
+                                                    <span class="rocker-off">OFF</span>
+                                                    <span class="rocker-on">ON</span>
+                                                    <span class="rocker-nub"></span>
+                                                </label>
+                                            </div>
                                         </td>
                                     </tr>
                                     {% endfor %}
                                     {% else %}
                                     <tr>
-                                        <td colspan="4" class="text-center text-muted">{{ text_no_events }}</td>
+                                        <td colspan="4" class="text-center cell-empty">{{ text_no_events }}</td>
                                     </tr>
                                     {% endif %}
                                 </tbody>
@@ -250,22 +272,22 @@
                         </div>
                     </div>
 
-                    <!-- Tab 4: Crash Diagnostics Log -->
+                    <!-- Tab 4: Crash Diagnostics Log (Monospace Telemetry) -->
                     <div class="tab-pane" id="tab-log">
-                        <div class="log-header">
-                            <span class="log-title"><i class="fa fa-file-text-o"></i> <code>system/storage/logs/stopkran_crash.log</code></span>
+                        <div class="log-control-bar">
+                            <span class="log-file-label font-mono">system/storage/logs/stopkran_crash.log</span>
                             <div class="pull-right">
-                                <button type="button" id="btn-clear-log" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> {{ button_clear_log }}</button>
-                                <a href="javascript:location.reload()" class="btn btn-sm btn-default"><i class="fa fa-refresh"></i> {{ button_refresh }}</a>
+                                <button type="button" id="btn-clear-log" class="btn stopkran-btn-flat btn-danger"><i class="fa fa-trash"></i> {{ button_clear_log }}</button>
+                                <a href="javascript:location.reload()" class="btn stopkran-btn-flat btn-default"><i class="fa fa-refresh"></i> {{ button_refresh }}</a>
                             </div>
                         </div>
-                        <div class="terminal-box" id="crash-log-container">
+                        <div class="stopkran-terminal" id="crash-log-container">
                             {% if has_logs %}
                             {% for line in log_entries %}
-                            <div class="terminal-line">{{ line }}</div>
+                            <div class="terminal-record font-mono">{{ line }}</div>
                             {% endfor %}
                             {% else %}
-                            <div class="terminal-line text-muted">{{ text_no_logs }}</div>
+                            <div class="terminal-empty font-mono">{{ text_no_logs }}</div>
                             {% endif %}
                         </div>
                     </div>
@@ -276,226 +298,469 @@
 </div>
 
 <style>
-/* SoundNet Stop-Kran Industrial Aesthetic */
-.stopkran-page {
-    background-color: #0c121e;
+/* ==========================================================================
+   SoundNet Stop-Kran // Flat Dieter Rams + Swiss International Design
+   Zero Gradients. Zero Shadows. Zero Rounding Bloat. 100% Honest Functionality.
+   ========================================================================== */
+
+.stopkran-console {
+    background: #0d1117;
+    color: #e6edf3;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     min-height: 100vh;
+    padding-bottom: 40px;
 }
-.stopkran-emergency-banner {
-    background: linear-gradient(135deg, #1e1014 0%, #2a1117 50%, #170b0f 100%);
-    border: 1px solid #7f1d1d;
-    border-left: 6px solid #ef4444;
-    border-radius: 8px;
-    padding: 24px;
-    margin-bottom: 22px;
-    box-shadow: 0 10px 30px rgba(239, 68, 68, 0.15);
+
+.stopkran-title {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.01em;
+    color: #f0f6fc;
 }
-.banner-inner {
+
+.stopkran-breadcrumb > li > a {
+    color: #8b949e;
+}
+
+.stopkran-alert {
+    border-radius: 0 !important;
+    border: 1px solid #30363d !important;
+    box-shadow: none !important;
+    font-size: 13px;
+    padding: 12px 16px;
+}
+.alert-danger.stopkran-alert {
+    background: #1c1214;
+    border-color: #8b1820 !important;
+    color: #f85149;
+}
+.alert-success.stopkran-alert {
+    background: #0d1e16;
+    border-color: #238636 !important;
+    color: #3fb950;
+}
+
+/* Master Breaker Station (Physical Hazard Framing) */
+.stopkran-breaker-bay {
+    background: #141820;
+    border: 1px solid #30363d;
+    border-left: 6px solid #da3633;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+}
+.breaker-inner {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 24px;
     flex-wrap: wrap;
 }
-.banner-icon {
-    color: #ef4444;
-    padding: 5px;
+.breaker-status-col {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-right: 1px solid #21262d;
+    padding-right: 20px;
 }
-.banner-content {
+.breaker-indicator-light {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: #da3633;
+    border: 1px solid #f85149;
+    border-radius: 0;
+}
+.breaker-indicator-label {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f85149;
+    font-family: ui-monospace, Consolas, monospace;
+}
+.breaker-spec-col {
     flex: 1;
     min-width: 280px;
 }
-.banner-title {
-    font-size: 17px;
+.breaker-heading {
+    font-size: 15px;
     font-weight: 800;
-    letter-spacing: 1.5px;
-    color: #fca5a5;
-    margin-bottom: 6px;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+    color: #f0f6fc;
+    margin-bottom: 4px;
 }
-.banner-desc {
+.breaker-subtext {
     font-size: 13px;
-    color: #cbd5e1;
+    color: #8b949e;
     line-height: 1.5;
 }
-.stopkran-btn-glow {
-    background: #dc2626 !important;
-    border-color: #b91c1c !important;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    padding: 14px 26px;
-    border-radius: 6px;
-    box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
-    transition: all 0.25s ease;
-    white-space: nowrap;
-}
-.stopkran-btn-glow:hover {
-    background: #b91c1c !important;
-    transform: scale(1.02);
-    box-shadow: 0 0 28px rgba(239, 68, 68, 0.8);
-}
-.stats-strip {
-    margin-bottom: 15px;
-}
-.stat-card {
-    background: #131c2d;
-    border: 1px solid #1e2d42;
-    border-radius: 8px;
-    padding: 16px;
-    display: flex;
+.stopkran-kill-switch {
+    background: #da3633 !important;
+    color: #ffffff !important;
+    border: 2px solid #b62324 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase;
+    padding: 12px 22px !important;
+    transition: background-color 0.1s ease, transform 0.08s ease;
+    display: inline-flex;
     align-items: center;
-    gap: 16px;
+    gap: 10px;
+}
+.stopkran-kill-switch:hover {
+    background: #b62324 !important;
+}
+.stopkran-kill-switch:active {
+    transform: translateY(1px);
+}
+
+/* Telemetry Grid */
+.stopkran-telemetry-row {
+    margin-bottom: 20px;
+}
+.telemetry-cell {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 0;
+    padding: 14px 18px;
     margin-bottom: 15px;
-}
-.stat-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 8px;
+    height: 84px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
+    flex-direction: column;
+    justify-content: space-between;
 }
-.mod-icon { background: rgba(56, 189, 248, 0.12); color: #38bdf8; }
-.evt-icon { background: rgba(168, 85, 247, 0.12); color: #c084fc; }
-.cache-icon { background: rgba(245, 158, 11, 0.12); color: #fbbf24; }
-.purge-icon { background: rgba(16, 185, 129, 0.12); color: #34d399; }
-.stat-value {
+.telemetry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.telemetry-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #8b949e;
+}
+.telemetry-tag {
+    font-size: 10px;
+    font-family: ui-monospace, Consolas, monospace;
+    color: #6e7681;
+}
+.telemetry-data {
+    font-family: ui-monospace, Consolas, monospace;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+.telemetry-num {
     font-size: 22px;
     font-weight: 700;
-    color: #f1f5f9;
+    color: #f0f6fc;
 }
-.stat-sub {
-    font-size: 14px;
-    color: #64748b;
-    font-weight: 400;
+.telemetry-divider {
+    color: #484f58;
+    font-size: 16px;
 }
-.stat-label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    color: #94a3b8;
-    margin-top: 2px;
+.telemetry-denom {
+    color: #8b949e;
+    font-size: 15px;
 }
-.stopkran-panel {
-    background: #111927;
-    border: 1px solid #1e2d42;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-.stopkran-panel .panel-heading {
-    background: #0f1624;
-    border-bottom: 1px solid #1e2d42;
-    padding: 0;
-}
-.stopkran-tabs {
-    border-bottom: none;
-}
-.stopkran-tabs > li > a {
-    color: #94a3b8;
-    border-radius: 0;
-    border: none;
-    padding: 14px 22px;
+.text-highlight { color: #58a6ff; }
+.text-signal { color: #d29922; }
+
+.stopkran-btn-purge {
+    background: #21262d !important;
+    border: 1px solid #363b42 !important;
+    border-radius: 0 !important;
+    color: #c9d1d9 !important;
+    font-size: 12px !important;
     font-weight: 600;
-    font-size: 13px;
-    transition: all 0.2s;
+    box-shadow: none !important;
+    padding: 6px 12px !important;
+    text-align: center;
+    transition: background-color 0.1s ease;
 }
-.stopkran-tabs > li.active > a,
-.stopkran-tabs > li.active > a:hover,
-.stopkran-tabs > li.active > a:focus {
-    background: #111927;
-    color: #38bdf8;
-    border: none;
-    border-bottom: 3px solid #38bdf8;
+.stopkran-btn-purge:hover {
+    background: #30363d !important;
+    color: #ffffff !important;
 }
-.badge-mod { background: #0284c7; }
-.badge-evt { background: #7c3aed; }
-.font-mono {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+
+/* Structural Deck */
+.stopkran-deck {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 0;
+    box-shadow: none;
 }
-.text-cyan { color: #38bdf8; }
-.stopkran-table {
-    color: #e2e8f0;
+.deck-header {
+    background: #0d1117;
+    border-bottom: 1px solid #30363d;
 }
-.stopkran-table > thead > tr > th {
-    background: #0c121e;
-    color: #94a3b8;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    border-bottom: 1px solid #1e2d42;
-    padding: 12px 14px;
-}
-.stopkran-table > tbody > tr > td {
-    border-top: 1px solid #192538;
-    padding: 12px 14px;
-    vertical-align: middle;
-}
-.stopkran-table tr.row-inactive td {
-    opacity: 0.55;
-    background: rgba(0, 0, 0, 0.15);
-}
-/* Toggle Switch Styling */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 48px;
-    height: 24px;
+.stopkran-nav-tabs {
+    border-bottom: none;
     margin: 0;
 }
-.switch input { opacity: 0; width: 0; height: 0; }
-.slider {
+.stopkran-nav-tabs > li > a {
+    background: transparent;
+    border: none !important;
+    border-right: 1px solid #21262d !important;
+    border-radius: 0 !important;
+    color: #8b949e;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    margin: 0;
+    transition: color 0.1s ease;
+}
+.stopkran-nav-tabs > li > a:hover {
+    color: #f0f6fc;
+    background: #161b22;
+}
+.stopkran-nav-tabs > li.active > a,
+.stopkran-nav-tabs > li.active > a:focus,
+.stopkran-nav-tabs > li.active > a:hover {
+    background: #161b22 !important;
+    color: #58a6ff !important;
+    border-bottom: 2px solid #58a6ff !important;
+}
+.deck-body {
+    padding: 24px;
+}
+
+/* Flat Chips */
+.flat-chip {
+    display: inline-block;
+    padding: 2px 7px;
+    border: 1px solid #30363d;
+    background: #0d1117;
+    border-radius: 0;
+    font-size: 11px;
+    font-family: ui-monospace, Consolas, monospace;
+    font-weight: 600;
+    color: #8b949e;
+    margin-left: 6px;
+}
+.chip-cyan {
+    border-color: #1f4268;
+    background: #0c1b2b;
+    color: #58a6ff;
+}
+.chip-amber {
+    border-color: #5a3e1b;
+    background: #251a0b;
+    color: #d29922;
+}
+
+/* Form Controls */
+.stopkran-form .control-label {
+    color: #c9d1d9;
+    font-size: 13px;
+    font-weight: 600;
+}
+.stopkran-input {
+    background: #0d1117 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 0 !important;
+    color: #f0f6fc !important;
+    box-shadow: none !important;
+    font-size: 13px;
+    height: 38px;
+}
+.stopkran-input:focus {
+    border-color: #58a6ff !important;
+}
+.stopkran-input-btn,
+.stopkran-btn-copy,
+.stopkran-btn-flat {
+    background: #21262d !important;
+    border: 1px solid #363b42 !important;
+    border-radius: 0 !important;
+    color: #c9d1d9 !important;
+    box-shadow: none !important;
+    font-size: 12px !important;
+    font-weight: 600;
+    padding: 8px 16px;
+}
+.stopkran-input-btn:hover,
+.stopkran-btn-copy:hover,
+.stopkran-btn-flat:hover {
+    background: #30363d !important;
+    color: #ffffff !important;
+}
+.form-caption {
+    font-size: 12px;
+    color: #8b949e;
+    margin-top: 6px;
+}
+.section-divider {
+    border-top: 1px solid #21262d;
+    margin: 22px 0;
+}
+
+/* Tables */
+.stopkran-data-table {
+    border: 1px solid #30363d;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+.stopkran-data-table > thead > tr > th {
+    background: #0d1117;
+    border-bottom: 1px solid #30363d !important;
+    color: #8b949e;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 10px 14px;
+}
+.stopkran-data-table > tbody > tr > td {
+    border-top: 1px solid #21262d;
+    padding: 12px 14px;
+    vertical-align: middle;
+    color: #c9d1d9;
+    font-size: 13px;
+}
+.stopkran-data-table tr.row-deactivated td {
+    opacity: 0.45;
+    background: #0f1319;
+}
+.cell-title {
+    font-weight: 600;
+    color: #f0f6fc !important;
+}
+.cell-code {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    padding: 2px 6px;
+    color: #58a6ff;
+    font-size: 12px;
+}
+.cell-meta {
+    color: #8b949e;
+    font-size: 12px;
+}
+.text-spec {
+    color: #3fb950;
+    font-size: 12px;
+}
+.text-meta {
+    color: #8b949e;
+    font-size: 12px;
+}
+.cell-empty {
+    color: #6e7681;
+    padding: 30px !important;
+}
+
+/* Tactile Industrial Rocker Switch (Physical Equipment Look) */
+.rocker-switch-wrap {
+    display: inline-block;
+    position: relative;
+    user-select: none;
+}
+.rocker-input {
     position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.rocker-label {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 72px;
+    height: 26px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 0;
     cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #334155;
-    transition: .3s;
-    border-radius: 24px;
+    margin: 0;
+    overflow: hidden;
 }
-.slider:before {
+.rocker-off,
+.rocker-on {
+    flex: 1;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 800;
+    font-family: ui-monospace, Consolas, monospace;
+    letter-spacing: 0.05em;
+    z-index: 1;
+    transition: color 0.1s ease;
+}
+.rocker-off {
+    color: #f85149;
+}
+.rocker-on {
+    color: #484f58;
+}
+.rocker-nub {
     position: absolute;
-    content: "";
-    height: 18px;
-    width: 18px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    transition: .3s;
-    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+    width: 34px;
+    height: 22px;
+    background: #21262d;
+    border: 1px solid #363b42;
+    border-radius: 0;
+    transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1);
 }
-input:checked + .slider {
-    background-color: #10b981;
+.rocker-input:checked + .rocker-label .rocker-nub {
+    transform: translateX(34px);
+    background: #0e2a1b;
+    border-color: #238636;
 }
-input:checked + .slider:before {
-    transform: translateX(24px);
+.rocker-input:checked + .rocker-label .rocker-off {
+    color: #484f58;
 }
-/* Terminal Log Window */
-.log-header {
+.rocker-input:checked + .rocker-label .rocker-on {
+    color: #3fb950;
+}
+
+/* Terminal Log View */
+.log-control-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
 }
-.log-title {
-    color: #94a3b8;
-    font-size: 13px;
-}
-.terminal-box {
-    background: #050811;
-    border: 1px solid #192333;
-    border-radius: 6px;
-    padding: 16px;
-    max-height: 420px;
-    overflow-y: auto;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+.log-file-label {
     font-size: 12px;
-    color: #cbd5e1;
-    line-height: 1.6;
+    color: #8b949e;
 }
-.terminal-line {
+.stopkran-terminal {
+    background: #090d13;
+    border: 1px solid #30363d;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 16px;
+    max-height: 460px;
+    overflow-y: auto;
+}
+.terminal-record {
+    color: #c9d1d9;
+    font-size: 12px;
+    line-height: 1.6;
+    padding: 3px 0;
+    border-bottom: 1px solid #161b22;
     white-space: pre-wrap;
     word-break: break-all;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    padding: 3px 0;
+}
+.terminal-empty {
+    color: #6e7681;
+    font-size: 12px;
+    padding: 20px 0;
+    text-align: center;
+}
+.font-mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
 }
 </style>
 
@@ -513,7 +778,7 @@ $(document).ready(function() {
         btn.html('<i class="fa fa-check"></i> {{ text_copied }}');
         setTimeout(function() {
             btn.html(oldHtml);
-        }, 2000);
+        }, 1800);
     });
 
     // 2. Generate Random Token
@@ -537,7 +802,7 @@ $(document).ready(function() {
         }
 
         var btn = $(this);
-        btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> ENGAGING BLACKOUT...');
+        btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> ENGAGING...');
 
         $.ajax({
             url: '{{ url_kill_all }}',
@@ -546,9 +811,9 @@ $(document).ready(function() {
             success: function(json) {
                 if (json['error']) {
                     alert(json['error']);
-                    btn.prop('disabled', false).html('<i class="fa fa-bolt"></i> {{ button_kill_all }}');
+                    btn.prop('disabled', false).html('<i class="fa fa-ban"></i> {{ button_kill_all }}');
                 } else {
-                    $('#ajax-alert').html('<div class="alert alert-danger alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    $('#ajax-alert').html('<div class="alert alert-danger stopkran-alert"><i class="fa fa-check-circle"></i> ' + json['message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                     setTimeout(function() {
                         location.reload();
                     }, 1200);
@@ -556,7 +821,7 @@ $(document).ready(function() {
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-                btn.prop('disabled', false).html('<i class="fa fa-bolt"></i> {{ button_kill_all }}');
+                btn.prop('disabled', false).html('<i class="fa fa-ban"></i> {{ button_kill_all }}');
             }
         });
     });
@@ -582,9 +847,9 @@ $(document).ready(function() {
                     chk.prop('checked', !newStatus);
                 } else {
                     if (newStatus) {
-                        row.removeClass('row-inactive');
+                        row.removeClass('row-deactivated');
                     } else {
-                        row.addClass('row-inactive');
+                        row.addClass('row-deactivated');
                     }
                 }
             },
@@ -616,9 +881,9 @@ $(document).ready(function() {
                     chk.prop('checked', !newStatus);
                 } else {
                     if (newStatus) {
-                        row.removeClass('row-inactive');
+                        row.removeClass('row-deactivated');
                     } else {
-                        row.addClass('row-inactive');
+                        row.addClass('row-deactivated');
                     }
                 }
             },
@@ -643,7 +908,7 @@ $(document).ready(function() {
                 btn.prop('disabled', false).html(oldHtml);
                 if (json['success']) {
                     $('#stat-cache').text('0.00 B');
-                    $('#ajax-alert').html('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    $('#ajax-alert').html('<div class="alert alert-success stopkran-alert"><i class="fa fa-check-circle"></i> ' + json['message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                 } else if (json['error']) {
                     alert(json['error']);
                 }
@@ -670,7 +935,7 @@ $(document).ready(function() {
             success: function(json) {
                 btn.prop('disabled', false);
                 if (json['success']) {
-                    $('#crash-log-container').html('<div class="terminal-line text-muted">{{ text_no_logs }}</div>');
+                    $('#crash-log-container').html('<div class="terminal-empty font-mono">{{ text_no_logs }}</div>');
                 } else if (json['error']) {
                     alert(json['error']);
                 }
