@@ -8,7 +8,7 @@
       </svg>
     </span>
     <span class="studio-cart-count-badge">{{ products|length + vouchers|length }}</span>
-    <span id="cart-total" class="studio-cart-total-label">{{ text_items }}</span>
+    <span id="cart-total" class="studio-cart-total-label hidden-xs hidden-sm">{{ text_items }}</span>
   </button>
   <ul class="dropdown-menu dropdown-menu-right studio-cart-dropdown">
     {% if products or vouchers %}

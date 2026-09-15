@@ -57,6 +57,15 @@
           }
         }
 
+        // Mobile filter panel toggle
+        var filterHeader = e.target.closest('#column-left .parametric-filter-panel .filter-panel-header');
+        if (filterHeader && window.innerWidth <= 991) {
+          var panel = filterHeader.closest('.parametric-filter-panel');
+          if (panel) {
+            panel.classList.toggle('is-open');
+          }
+        }
+
         // Close on backdrop click
         if (e.target.classList.contains('soundnet-modal-backdrop')) {
           self.closeSimilarModal();
@@ -81,6 +90,9 @@
       var match = totalText.match(/(\d+)/);
       if (match) {
         count = parseInt(match[1], 10) || 0;
+      }
+      if (totalSpan) {
+        totalSpan.classList.add('studio-cart-total-label', 'hidden-xs', 'hidden-sm');
       }
 
       var badge = cartBtn.querySelector('.studio-cart-count-badge');
