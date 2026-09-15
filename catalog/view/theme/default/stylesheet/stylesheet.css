@@ -863,6 +863,7 @@ body {
    -------------------------------------------------------------------------- */
 .storefront-canvas {
   padding: 30px 0 50px;
+  overflow-x: hidden;
 }
 
 .storefront-carousel-section {

@@ -37,12 +37,12 @@
       {% if images %}
         <div class="studio-thumb-strip">
           {% if thumb %}
-            <div class="studio-thumb-item active" data-popup="{{ popup }}" data-thumb="{{ thumb }}">
-              <img src="{{ thumb }}" alt="{{ heading_title }}" />
+            <div class="studio-thumb-item active" data-popup="{{ popup }}" data-preview="{{ thumb }}" data-index="0">
+              <img src="{{ thumb_sm|default(thumb) }}" alt="{{ heading_title }}" />
             </div>
           {% endif %}
-          {% for image in images %}
-            <div class="studio-thumb-item" data-popup="{{ image.popup }}" data-thumb="{{ image.thumb }}">
+          {% for key, image in images %}
+            <div class="studio-thumb-item" data-popup="{{ image.popup }}" data-preview="{{ image.preview|default(image.popup) }}" data-index="{{ key + (thumb ? 1 : 0) }}">
               <img src="{{ image.thumb }}" alt="{{ heading_title }}" />
             </div>
           {% endfor %}
@@ -416,17 +416,31 @@ document.querySelectorAll('.studio-tab-btn').forEach(function(btn) {
   });
 });
 
-// Thumbnail Image Switching
+// Thumbnail Image Switching & Lightbox Gallery
+var activeGalleryIndex = 0;
+var galleryItems = [];
+{% if popup %}
+galleryItems.push({ src: '{{ popup }}', title: '{{ heading_title|escape('js') }}' });
+{% endif %}
+{% for image in images %}
+galleryItems.push({ src: '{{ image.popup }}', title: '{{ heading_title|escape('js') }}' });
+{% endfor %}
+
 document.querySelectorAll('.studio-thumb-item').forEach(function(item) {
   item.addEventListener('click', function() {
     document.querySelectorAll('.studio-thumb-item').forEach(function(t) { t.classList.remove('active'); });
     this.classList.add('active');
-    var thumb = this.getAttribute('data-thumb');
+    activeGalleryIndex = parseInt(this.getAttribute('data-index') || 0, 10);
+    var preview = this.getAttribute('data-preview') || this.getAttribute('data-popup');
     var popup = this.getAttribute('data-popup');
     var img = document.getElementById('main-product-image');
     var link = document.getElementById('main-product-link');
-    if (img && thumb) img.src = thumb;
-    if (link && popup) link.href = popup;
+    if (img && preview) {
+      img.src = preview;
+    }
+    if (link && popup) {
+      link.href = popup;
+    }
   });
 });
 
@@ -545,10 +559,17 @@ $('#button-review').on('click', function() {
 });
 
 $(document).ready(function() {
-  $('.studio-artwork-frame').magnificPopup({
-    type: 'image',
-    delegate: 'a',
-    gallery: { enabled: true }
+  $('#main-product-link').on('click', function(e) {
+    e.preventDefault();
+    if (galleryItems.length > 0) {
+      $.magnificPopup.open({
+        items: galleryItems,
+        type: 'image',
+        gallery: { enabled: true },
+        removalDelay: 200,
+        mainClass: 'mfp-fade'
+      }, activeGalleryIndex);
+    }
   });
 });
 //--></script>

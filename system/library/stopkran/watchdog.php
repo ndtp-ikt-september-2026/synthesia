@@ -192,7 +192,7 @@ class Watchdog {
     }
 
     /**
-     * Render HTTP 503 Clean Diagnostic Maintenance UI (Flat Industrial)
+     * Render HTTP 503 Clean Diagnostic Maintenance UI (OpenCart Native Bootstrap Style)
      *
      * @param int         $tier
      * @param string|null $moduleCode
@@ -207,202 +207,215 @@ class Watchdog {
         $cleanModule = htmlspecialchars((string)$moduleCode, ENT_QUOTES, 'UTF-8');
 
         $isTier1 = ($tier === 1);
-        $badgeColor = $isTier1 ? '#d29922' : '#da3633';
-        $badgeText  = $isTier1 ? 'TIER 1 : SURGICAL DEACTIVATION' : 'TIER 2 : TOTAL BLACKOUT RESET';
+        $badgeClass = $isTier1 ? 'label-warning' : 'label-danger';
+        $badgeText  = $isTier1 ? 'УРОВЕНЬ 1: ТОЧЕЧНАЯ ИЗОЛЯЦИЯ МОДУЛЯ' : 'УРОВЕНЬ 2: ПОЛНЫЙ АВАРИЙНЫЙ БЛЭКАУТ';
         $titleText  = $isTier1
-            ? "Circuit Breaker Tripped: Module [{$cleanModule}] Isolated"
-            : 'Circuit Breaker Tripped: System Restored to Native Core';
+            ? "Аварийный выключатель сработал: модуль [{$cleanModule}] изолирован"
+            : 'Аварийный выключатель сработал: система возвращена к чистому ядру';
 
         $actionDetails = '';
         if ($isTier1) {
             $actionDetails = "
-                <div class=\"action-row\"><span class=\"action-key\">TARGET MODULE:</span><span class=\"action-val font-mono\">{$cleanModule}</span></div>
-                <div class=\"action-row\"><span class=\"action-key\">MODIFICATIONS DEACTIVATED:</span><span class=\"action-val font-mono\">" . ($actions['modifications_disabled'] ?? 1) . "</span></div>
-                <div class=\"action-row\"><span class=\"action-key\">RELATED EVENTS DISABLED:</span><span class=\"action-val font-mono\">" . ($actions['events_disabled'] ?? 0) . "</span></div>
-                <div class=\"action-row\"><span class=\"action-key\">STORAGE MODIFICATION CACHE:</span><span class=\"action-val font-mono\">UNLINKED &amp; PURGED</span></div>
+                <tr><td><strong>Целевой сбойный модуль:</strong></td><td><code>{$cleanModule}</code></td></tr>
+                <tr><td><strong>Отключено связанных модификаций:</strong></td><td><span class=\"badge\">" . ($actions['modifications_disabled'] ?? 1) . "</span></td></tr>
+                <tr><td><strong>Отключено событий модуля:</strong></td><td><span class=\"badge\">" . ($actions['events_disabled'] ?? 0) . "</span></td></tr>
+                <tr><td><strong>Кэш модификаций OpenCart:</strong></td><td><span class=\"label label-success\">Очищен и сброшен</span></td></tr>
             ";
         } else {
             $actionDetails = "
-                <div class=\"action-row\"><span class=\"action-key\">ALL MODIFICATIONS:</span><span class=\"action-val font-mono\">STATUS = 0 (DISABLED)</span></div>
-                <div class=\"action-row\"><span class=\"action-key\">NON-CORE EVENTS:</span><span class=\"action-val font-mono\">STATUS = 0 (DISABLED)</span></div>
-                <div class=\"action-row\"><span class=\"action-key\">MODULE SETTINGS:</span><span class=\"action-val font-mono\">RESET TO '0'</span></div>
-                <div class=\"action-row\"><span class=\"action-key\">STORAGE &amp; SYSTEM CACHE:</span><span class=\"action-val font-mono\">COMPLETELY FLUSHED</span></div>
+                <tr><td><strong>Все модификации OCMOD:</strong></td><td><span class=\"label label-danger\">Отключены (status = 0)</span></td></tr>
+                <tr><td><strong>Сторонние события OpenCart:</strong></td><td><span class=\"label label-danger\">Отключены (status = 0)</span></td></tr>
+                <tr><td><strong>Статусы модулей:</strong></td><td><span class=\"label label-default\">Сброшены в 0</span></td></tr>
+                <tr><td><strong>Системный кэш и модификации:</strong></td><td><span class=\"label label-success\">Полностью очищены</span></td></tr>
             ";
         }
 
         return <<<HTML
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoundNet Stop-Kran &mdash; Circuit Breaker Diagnostic</title>
+    <title>SoundNet Стоп-Кран &mdash; Диагностика аварийного выключателя</title>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=cyrillic,latin" rel="stylesheet" type="text/css" />
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background-color: #0b0f17;
-            color: #e6edf3;
-            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f6f8;
+            color: #333333;
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            font-size: 13px;
+            line-height: 1.5;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 20px;
         }
         .container {
             max-width: 820px;
             width: 100%;
-            background: #141922;
-            border: 1px solid #30363d;
-            border-left: 6px solid {$badgeColor};
-            border-radius: 0;
-            box-shadow: none;
+            background: #ffffff;
+            border: 1px solid #e1e1e1;
+            border-top: 4px solid #d9534f;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            overflow: hidden;
         }
         .header {
-            padding: 20px 24px;
-            border-bottom: 1px solid #21262d;
+            padding: 18px 24px;
+            border-bottom: 1px solid #eeeeee;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: #0e121a;
+            background: #fafafa;
         }
         .brand {
-            font-size: 13px;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #8b949e;
+            font-size: 14px;
+            font-weight: 700;
+            color: #444;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-family: ui-monospace, Consolas, monospace;
+            gap: 8px;
         }
-        .brand-marker {
-            width: 10px;
-            height: 10px;
-            background: {$badgeColor};
+        .label {
             display: inline-block;
-        }
-        .badge {
-            background: transparent;
-            color: {$badgeColor};
-            border: 1px solid {$badgeColor};
+            padding: 3px 8px;
             font-size: 11px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 0;
-            letter-spacing: 0.08em;
-            font-family: ui-monospace, Consolas, monospace;
+            font-weight: 700;
+            line-height: 1;
+            color: #ffffff;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 3px;
+        }
+        .label-danger { background-color: #d9534f; }
+        .label-warning { background-color: #f0ad4e; }
+        .label-success { background-color: #5cb85c; }
+        .label-default { background-color: #777777; }
+        .badge {
+            display: inline-block;
+            min-width: 10px;
+            padding: 3px 7px;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1;
+            color: #ffffff;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            background-color: #777777;
+            border-radius: 10px;
         }
         .content {
             padding: 24px;
         }
         h1 {
-            font-size: 19px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 10px;
-            color: #f0f6fc;
-            letter-spacing: -0.01em;
+            margin-bottom: 8px;
+            color: #d9534f;
         }
         p.desc {
-            color: #8b949e;
-            font-size: 14px;
+            color: #666;
+            font-size: 13px;
             line-height: 1.6;
             margin-bottom: 20px;
         }
-        .section-label {
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 0.08em;
+        .section-title {
+            font-size: 12px;
+            font-weight: 700;
             text-transform: uppercase;
-            color: #8b949e;
+            letter-spacing: 0.04em;
+            color: #555;
             margin-bottom: 8px;
-            font-family: ui-monospace, Consolas, monospace;
         }
         .code-box {
-            background: #080c13;
-            border: 1px solid #30363d;
-            border-radius: 0;
-            padding: 14px 18px;
-            font-family: ui-monospace, Consolas, monospace;
+            background: #fdf7f7;
+            border: 1px solid #eed3d7;
+            border-radius: 3px;
+            padding: 12px 16px;
+            font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
             font-size: 12px;
-            color: #c9d1d9;
-            line-height: 1.5;
-            word-break: break-all;
+            color: #b94a48;
             margin-bottom: 20px;
+            word-break: break-all;
         }
-        .code-box .file-info {
-            color: #8b949e;
-            margin-bottom: 6px;
+        .file-info {
             font-size: 11px;
-            border-bottom: 1px solid #161b22;
-            padding-bottom: 6px;
+            color: #888;
+            margin-bottom: 6px;
+            border-bottom: 1px solid #f2dede;
+            padding-bottom: 4px;
         }
-        .code-box .err-msg {
-            color: #f85149;
-            font-weight: 600;
-        }
-        .action-panel {
-            background: #0e121a;
-            border: 1px solid #30363d;
-            border-radius: 0;
-            padding: 14px 18px;
+        .table-panel {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #e1e1e1;
             margin-bottom: 24px;
-        }
-        .action-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 0;
-            border-bottom: 1px solid #1c222c;
             font-size: 12px;
         }
-        .action-row:last-child {
+        .table-panel td {
+            padding: 10px 14px;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .table-panel tr:last-child td {
             border-bottom: none;
-        }
-        .action-key {
-            color: #8b949e;
-            font-size: 11px;
-            letter-spacing: 0.04em;
-        }
-        .action-val {
-            color: #f0f6fc;
-            font-weight: 600;
         }
         .footer {
             padding: 16px 24px;
-            background: #0e121a;
-            border-top: 1px solid #21262d;
+            background: #fafafa;
+            border-top: 1px solid #eeeeee;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
         .footer-note {
             font-size: 12px;
-            color: #8b949e;
-            font-family: ui-monospace, Consolas, monospace;
+            color: #888;
+            font-family: monospace;
         }
-        .btn-refresh {
-            background: #238636;
-            color: #ffffff;
-            border: 1px solid #2ea043;
-            border-radius: 0;
-            padding: 8px 18px;
-            font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
+        .btn {
+            display: inline-block;
+            padding: 7px 16px;
+            margin-bottom: 0;
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
             cursor: pointer;
-            transition: background-color 0.1s ease;
+            border: 1px solid transparent;
+            border-radius: 3px;
+            text-decoration: none;
         }
-        .btn-refresh:hover {
-            background: #2ea043;
+        .btn-success {
+            color: #ffffff;
+            background-color: #5cb85c;
+            border-color: #4cae4c;
         }
-        .font-mono {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+        .btn-success:hover {
+            background-color: #449d44;
+        }
+        .btn-default {
+            color: #333333;
+            background-color: #ffffff;
+            border-color: #cccccc;
+        }
+        .btn-default:hover {
+            background-color: #e6e6e6;
+        }
+        code {
+            padding: 2px 4px;
+            font-size: 90%;
+            color: #c7254e;
+            background-color: #f9f2f4;
+            border-radius: 3px;
+            font-family: monospace;
         }
     </style>
 </head>
@@ -410,32 +423,37 @@ class Watchdog {
     <div class="container">
         <div class="header">
             <div class="brand">
-                <span class="brand-marker"></span>
-                SoundNet Stop-Kran Watchdog
+                <span class="label label-danger">STOP-KRAN</span>
+                SoundNet Стоп-Кран &mdash; Защитный сторож OpenCart
             </div>
-            <div class="badge">{$badgeText}</div>
+            <div>
+                <span class="label {$badgeClass}">{$badgeText}</span>
+            </div>
         </div>
         <div class="content">
             <h1>{$titleText}</h1>
             <p class="desc">
-                An unhandled fatal PHP fault was caught prior to page failure. The emergency circuit breaker neutralized the crash source and unlinked cached modifications.
+                Необработанная критическая ошибка PHP была перехвачена защитным контуром до полного падения витрины («белого экрана»). Аварийный механизм Стоп-Кран изолировал источник сбоя и очистил кэш модификаций.
             </p>
 
-            <div class="section-label">Incident Telemetry</div>
+            <div class="section-title">Сведения об инциденте</div>
             <div class="code-box">
-                <div class="file-info">FAULT ORIGIN: {$cleanFile}:{$cleanLine}</div>
-                <div class="err-msg">{$cleanMsg}</div>
+                <div class="file-info">ФАЙЛ СБОЯ: {$cleanFile} (строка {$cleanLine})</div>
+                <div>{$cleanMsg}</div>
             </div>
 
-            <div class="section-label">Automated Actions Executed</div>
-            <div class="action-panel">
-                {$actionDetails}
-            </div>
+            <div class="section-title">Выполненные автоматические действия</div>
+            <table class="table-panel">
+                <tbody>
+                    {$actionDetails}
+                </tbody>
+            </table>
         </div>
         <div class="footer">
-            <div class="footer-note">LOG: system/storage/logs/stopkran_crash.log</div>
-            <div>
-                <a href="javascript:location.reload()" class="btn-refresh">Reload Page</a>
+            <div class="footer-note">Журнал: system/storage/logs/stopkran_crash.log</div>
+            <div style="display: flex; gap: 8px;">
+                <a href="javascript:location.reload()" class="btn btn-success">Перезагрузить страницу</a>
+                <a href="admin/" class="btn btn-default">Панель управления</a>
             </div>
         </div>
     </div>
@@ -445,165 +463,156 @@ HTML;
     }
 
     /**
-     * Render HTTP 200 Emergency Bypass Recovery Confirmation Page (Flat Industrial)
+     * Render HTTP 200 Emergency Bypass Recovery Confirmation Page (OpenCart Native Bootstrap Style)
      *
      * @param array $result
      * @return string
      */
     protected static function renderRecoveryConfirmationPage(array $result) {
-        $timestamp = gmdate('Y-m-d H:i:s') . ' UTC';
+        $timestamp = date('Y-m-d H:i:s');
         $mods = $result['modifications_disabled'] ?? 0;
         $evts = $result['events_disabled'] ?? 0;
         $sets = $result['settings_disabled'] ?? 0;
 
         return <<<HTML
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency Stop-Kran &mdash; Recovery Executed</title>
+    <title>Аварийный Стоп-Кран &mdash; Восстановление завершено</title>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=cyrillic,latin" rel="stylesheet" type="text/css" />
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: #0b0f17;
-            color: #e6edf3;
-            font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+            background: #f4f6f8;
+            color: #333333;
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 24px;
+            padding: 20px;
         }
         .container {
             max-width: 640px;
             width: 100%;
-            background: #141922;
-            border: 1px solid #30363d;
-            border-top: 5px solid #238636;
-            border-radius: 0;
-            box-shadow: none;
-            padding: 32px;
+            background: #ffffff;
+            border: 1px solid #e1e1e1;
+            border-top: 4px solid #5cb85c;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 28px;
         }
         .status-tag {
-            font-family: ui-monospace, Consolas, monospace;
             font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 0.12em;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            color: #3fb950;
-            margin-bottom: 8px;
+            color: #5cb85c;
+            margin-bottom: 6px;
         }
         h1 {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             margin-bottom: 10px;
-            color: #f0f6fc;
-            letter-spacing: -0.01em;
+            color: #333333;
         }
         p {
-            color: #8b949e;
-            font-size: 14px;
+            color: #666666;
+            font-size: 13px;
             line-height: 1.6;
-            margin-bottom: 24px;
+            margin-bottom: 22px;
         }
-        .telemetry-grid {
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: #30363d;
-            border: 1px solid #30363d;
-            margin-bottom: 24px;
+            gap: 12px;
+            margin-bottom: 22px;
         }
-        .telemetry-box {
-            background: #0d1117;
+        .stat-box {
+            background: #fafafa;
+            border: 1px solid #e8e8e8;
+            border-radius: 3px;
             padding: 14px;
             text-align: center;
         }
-        .telemetry-val {
+        .stat-val {
             font-size: 24px;
             font-weight: 700;
-            font-family: ui-monospace, Consolas, monospace;
-            color: #58a6ff;
+            color: #1e91cf;
         }
-        .telemetry-lbl {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: #8b949e;
+        .stat-lbl {
+            font-size: 11px;
+            font-weight: 600;
+            color: #777777;
             margin-top: 4px;
         }
         .meta-strip {
-            font-family: ui-monospace, Consolas, monospace;
             font-size: 11px;
-            color: #6e7681;
-            margin-bottom: 24px;
-            border-top: 1px solid #21262d;
-            padding-top: 12px;
+            color: #888888;
+            margin-bottom: 22px;
+            border-top: 1px solid #eeeeee;
+            padding-top: 10px;
         }
         .btn-group {
             display: flex;
-            gap: 12px;
+            gap: 10px;
         }
         .btn-link {
             flex: 1;
-            padding: 10px 16px;
+            padding: 9px 16px;
             text-align: center;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            font-size: 13px;
+            font-weight: 600;
             text-decoration: none;
-            border-radius: 0;
-            transition: background-color 0.1s ease;
+            border-radius: 3px;
         }
         .btn-primary {
-            background: #238636;
+            background: #1e91cf;
             color: #ffffff;
-            border: 1px solid #2ea043;
+            border: 1px solid #197bb0;
         }
         .btn-primary:hover {
-            background: #2ea043;
+            background: #197bb0;
         }
-        .btn-secondary {
-            background: #21262d;
-            color: #c9d1d9;
-            border: 1px solid #363b42;
+        .btn-default {
+            background: #ffffff;
+            color: #333333;
+            border: 1px solid #cccccc;
         }
-        .btn-secondary:hover {
-            background: #30363d;
-            color: #ffffff;
+        .btn-default:hover {
+            background: #e6e6e6;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="status-tag">[RECOVERY COMPLETE]</div>
-        <h1>Total Blackout Executed</h1>
+        <div class="status-tag">[ВОССТАНОВЛЕНИЕ ВЫПОЛНЕНО]</div>
+        <h1>Аварийный блэкаут успешно активирован</h1>
         <p>
-            Emergency circuit breaker activated via bypass authorization. Active modifications, custom events, and extension statuses have been disabled in the database, and caches flushed.
+            Аварийный контур защиты Стоп-Кран был приведен в действие через прямой токен обхода. Модификаторы OCMOD, пользовательские события и статусы модулей отключены в базе данных. Кэш модификаций полностью очищен.
         </p>
-        <div class="telemetry-grid">
-            <div class="telemetry-box">
-                <div class="telemetry-val">{$mods}</div>
-                <div class="telemetry-lbl">Modifications Disabled</div>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-val">{$mods}</div>
+                <div class="stat-lbl">Модификаторов отключено</div>
             </div>
-            <div class="telemetry-box">
-                <div class="telemetry-val">{$evts}</div>
-                <div class="telemetry-lbl">Events Disabled</div>
+            <div class="stat-box">
+                <div class="stat-val">{$evts}</div>
+                <div class="stat-lbl">Событий отключено</div>
             </div>
-            <div class="telemetry-box">
-                <div class="telemetry-val">{$sets}</div>
-                <div class="telemetry-lbl">Settings Reset</div>
+            <div class="stat-box">
+                <div class="stat-val">{$sets}</div>
+                <div class="stat-lbl">Модулей сброшено</div>
             </div>
         </div>
         <div class="meta-strip">
-            EXECUTION TIME: {$timestamp} | CACHE UNLINKED
+            ВРЕМЯ СРАБАТЫВАНИЯ: {$timestamp} | КЭШ ХРАНИЛИЩА ОЧИЩЕН
         </div>
         <div class="btn-group">
-            <a href="admin/" class="btn-link btn-primary">Go to Admin Login</a>
-            <a href="./" class="btn-link btn-secondary">Go to Storefront</a>
+            <a href="admin/" class="btn-link btn-primary">Войти в панель управления</a>
+            <a href="./" class="btn-link btn-default">Перейти на витрину</a>
         </div>
     </div>
 </body>
@@ -612,23 +621,24 @@ HTML;
     }
 
     /**
-     * Render HTTP 403 Forbidden Security Rejection Page (Flat Industrial)
+     * Render HTTP 403 Forbidden Security Rejection Page (OpenCart Native Bootstrap Style)
      *
      * @return string
      */
     protected static function renderSecurityRejectPage() {
         return <<<HTML
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Access Denied &mdash; Emergency Circuit Breaker</title>
+    <title>403 Доступ запрещен &mdash; Стоп-Кран</title>
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=cyrillic,latin" rel="stylesheet" type="text/css" />
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: #0b0f17;
-            color: #f85149;
-            font-family: ui-monospace, Consolas, monospace;
+            background: #f4f6f8;
+            color: #333333;
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -637,26 +647,28 @@ HTML;
             padding: 20px;
         }
         .box {
-            background: #141922;
-            border: 1px solid #8b1820;
-            border-left: 6px solid #da3633;
-            border-radius: 0;
-            box-shadow: none;
+            background: #ffffff;
+            border: 1px solid #e1e1e1;
+            border-top: 4px solid #d9534f;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
             padding: 24px 30px;
             max-width: 480px;
             width: 100%;
+            text-align: center;
         }
-        h2 { font-size: 16px; margin-bottom: 8px; color: #f85149; letter-spacing: 0.05em; text-transform: uppercase; }
-        p { color: #8b949e; font-size: 13px; line-height: 1.5; }
+        h2 { font-size: 18px; margin-bottom: 10px; color: #d9534f; font-weight: 700; }
+        p { color: #666666; font-size: 13px; line-height: 1.5; }
     </style>
 </head>
 <body>
     <div class="box">
-        <h2>403 Forbidden</h2>
-        <p>Invalid or missing emergency recovery authorization token.</p>
+        <h2>403 Доступ запрещен</h2>
+        <p>Неверный или отсутствующий секретный ключ аварийного восстановления Стоп-Кран.</p>
     </div>
 </body>
 </html>
 HTML;
     }
 }
+

@@ -1732,15 +1732,29 @@
   aspect-ratio: 1 / 1;
   border-radius: 16px;
   overflow: hidden;
-  background: #f8fafc;
+  background: #ffffff;
   border: 1px solid #e2e8f0;
   box-shadow: 0 12px 36px -8px rgba(15, 23, 42, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.studio-artwork-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: zoom-in;
 }
 
 .studio-artwork-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 12px;
+  box-sizing: border-box;
   display: block;
   transition: transform 0.35s ease;
 }
@@ -1777,10 +1791,21 @@
 
 .studio-thumb-strip {
   display: flex;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 10px;
+  margin-top: 14px;
   overflow-x: auto;
   padding-bottom: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.studio-thumb-strip::-webkit-scrollbar {
+  height: 5px;
+}
+
+.studio-thumb-strip::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 
 .studio-thumb-item {
@@ -1788,23 +1813,34 @@
   height: 74px;
   border-radius: 10px;
   overflow: hidden;
-  border: 2px solid transparent;
+  border: 2px solid #e2e8f0;
   cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
-  background: #f8fafc;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  box-sizing: border-box;
 }
 
 .studio-thumb-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.2s ease;
 }
 
-.studio-thumb-item:hover,
+.studio-thumb-item:hover {
+  border-color: #94a3b8;
+  transform: translateY(-2px);
+}
+
 .studio-thumb-item.active {
   border-color: #0f172a;
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
 }
 
 /* Vinyl Audio Sample Player */
@@ -3048,7 +3084,7 @@
    MOBILE RESPONSIVE OVERHAUL (Screens <= 767px)
    ========================================================================== */
 @media (max-width: 767px) {
-  /* 1. Top Utility Bar: Hide fake phone & clean spacing */
+  /* 1. Top Utility Bar */
   .top-utility-bar {
     padding: 6px 0 !important;
   }
@@ -3063,7 +3099,7 @@
     font-size: 12px !important;
   }
 
-  /* 2. Main Interaction Header: 2-Row Modern Mobile Layout */
+  /* 2. Main Interaction Header: 2-row mobile layout */
   .main-interaction-header {
     padding: 10px 0 12px 0 !important;
   }
@@ -3073,8 +3109,6 @@
     align-items: center !important;
     gap: 8px 10px !important;
   }
-
-  /* Row 1: Logo (Left) */
   .header-logo-block {
     order: 1 !important;
     flex: 0 0 auto !important;
@@ -3090,8 +3124,6 @@
   .brand-text-logo .brand-name {
     font-size: 17px !important;
   }
-
-  /* Row 1: Catalog Trigger Button */
   .header-catalog-trigger-block {
     order: 2 !important;
     flex: 0 0 auto !important;
@@ -3105,8 +3137,6 @@
   .trigger-chevron {
     font-size: 10px !important;
   }
-
-  /* Row 1: Actions Cluster (Wishlist + Cart pushed to Right) */
   .header-actions-cluster {
     order: 3 !important;
     margin-left: auto !important;
@@ -3115,7 +3145,6 @@
     gap: 8px !important;
     flex-shrink: 0 !important;
   }
-
   .studio-wishlist-trigger {
     width: 38px !important;
     height: 38px !important;
@@ -3127,7 +3156,6 @@
   .studio-wishlist-trigger .action-label {
     display: none !important;
   }
-
   .studio-cart-trigger {
     height: 38px !important;
     padding: 0 12px !important;
@@ -3144,8 +3172,6 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
-  /* Row 2: Full-Width Search Block */
   .header-search-block {
     order: 4 !important;
     flex: 1 0 100% !important;
@@ -3161,12 +3187,12 @@
     padding: 0 44px 0 14px !important;
   }
 
-  /* 3. Navigation Strip: Completely eliminate legacy empty bar & cyan hamburger on mobile */
+  /* 3. Navigation Strip */
   .header-navigation-strip {
     display: none !important;
   }
 
-  /* 4. Cart Dropdown: Responsive Positioning on Mobile */
+  /* 4. Cart Dropdown: fixed bottom-sheet positioning */
   .studio-cart-dropdown {
     position: fixed !important;
     top: auto !important;
@@ -3178,7 +3204,7 @@
     margin: 12px auto 0 auto !important;
   }
 
-  /* 5. Carousels & Cards: Native Mobile Swiping, Unclipped Edges */
+  /* 5. Carousels & Cards */
   .recommendation-scroll-strip {
     gap: 12px !important;
     margin: 0 -15px !important;
@@ -3235,7 +3261,33 @@
     font-size: 11px !important;
   }
 
-  /* Category Toolbar Responsive */
+  /* 6. Section Header: stack title & nav controls vertically */
+  .section-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    margin-bottom: 14px !important;
+  }
+  .section-header__title-group {
+    width: 100% !important;
+  }
+  .section-title {
+    font-size: 20px !important;
+    letter-spacing: -0.01em !important;
+  }
+  .section-subtitle {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+  .carousel-nav-controls {
+    align-self: flex-end !important;
+  }
+  .carousel-nav-btn {
+    width: 34px !important;
+    height: 34px !important;
+  }
+
+  /* 7. Category Toolbar */
   .studio-category-toolbar {
     flex-direction: column !important;
     align-items: flex-start !important;
@@ -3252,6 +3304,216 @@
   .studio-select-input {
     flex: 1 !important;
     width: 100% !important;
+  }
+
+  /* 8. Product Detail Page – full mobile layout fix */
+  .studio-product-container {
+    padding-bottom: 40px !important;
+    overflow-x: hidden !important;
+  }
+  .studio-product-hero {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    margin-bottom: 32px !important;
+  }
+  .studio-artwork-frame {
+    max-width: 100% !important;
+    border-radius: 12px !important;
+  }
+  .studio-thumb-strip {
+    gap: 8px !important;
+    margin-top: 10px !important;
+  }
+  .studio-thumb-item {
+    width: 58px !important;
+    height: 58px !important;
+    border-radius: 8px !important;
+  }
+  .studio-vinyl-preview-player {
+    padding: 12px 14px !important;
+    gap: 12px !important;
+    margin-top: 14px !important;
+  }
+  .player-vinyl-disc-wrap {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .player-vinyl-disc {
+    width: 44px !important;
+    height: 44px !important;
+  }
+  .btn-player-play {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 10px !important;
+  }
+  .studio-artist-tag {
+    font-size: 11px !important;
+    margin-bottom: 4px !important;
+  }
+  .studio-product-h1 {
+    font-size: 24px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 10px !important;
+  }
+  .studio-meta-pills-row {
+    gap: 6px !important;
+    margin-bottom: 12px !important;
+  }
+  .studio-meta-pill {
+    font-size: 11px !important;
+    padding: 4px 10px !important;
+  }
+  .btn-ai-mode--detail {
+    font-size: 12px !important;
+    padding: 7px 13px !important;
+    margin-bottom: 12px !important;
+  }
+  .studio-commercial-card {
+    border-radius: 12px !important;
+    padding: 16px !important;
+  }
+  /* SKU/stock row: allow wrap to prevent overflow */
+  .commercial-status-bar {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    font-size: 12px !important;
+  }
+  .commercial-sku {
+    font-size: 12px !important;
+  }
+  .commercial-price-bar {
+    margin-bottom: 16px !important;
+  }
+  .commercial-main-price {
+    font-size: 28px !important;
+  }
+  /* Purchase row: qty + buy button sizing */
+  .commercial-purchase-row {
+    gap: 10px !important;
+    margin-bottom: 12px !important;
+  }
+  .studio-qty-stepper {
+    height: 44px !important;
+  }
+  .stepper-btn {
+    width: 36px !important;
+  }
+  .stepper-input {
+    width: 38px !important;
+  }
+  .btn-studio-buy-main {
+    height: 44px !important;
+    font-size: 14px !important;
+    border-radius: 9px !important;
+  }
+  .commercial-actions-row {
+    gap: 8px !important;
+    margin-bottom: 16px !important;
+  }
+  .btn-studio-secondary {
+    height: 36px !important;
+    font-size: 11px !important;
+    gap: 4px !important;
+    padding: 0 10px !important;
+  }
+  .studio-trust-strip {
+    gap: 6px !important;
+  }
+  .trust-pill {
+    font-size: 11px !important;
+  }
+  /* Tabs */
+  .studio-tabs-section {
+    margin-top: 32px !important;
+    border-radius: 12px !important;
+  }
+  .studio-tabs-nav {
+    padding: 0 8px !important;
+    gap: 0 !important;
+  }
+  .studio-tab-btn {
+    padding: 14px 14px !important;
+    font-size: 13px !important;
+    gap: 6px !important;
+  }
+  .studio-tabs-content {
+    padding: 20px 16px !important;
+  }
+  .studio-tracklist-table th,
+  .studio-tracklist-table td {
+    padding: 10px 10px !important;
+    font-size: 12px !important;
+  }
+  .studio-specs-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  /* Matching gear block */
+  .matching-gear-block {
+    margin: 32px 0 !important;
+    padding: 20px 16px !important;
+  }
+  .matching-gear-block__title {
+    font-size: 18px !important;
+  }
+  .matching-gear-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* 9. Sonic Matching Modal: bottom-sheet on mobile */
+  .soundnet-modal-backdrop {
+    padding: 0 !important;
+    align-items: flex-end !important;
+  }
+  .soundnet-modal-dialog {
+    border-radius: 16px 16px 0 0 !important;
+    max-height: 92vh !important;
+    width: 100vw !important;
+  }
+  .soundnet-modal-header {
+    padding: 16px 18px !important;
+  }
+  .soundnet-modal-header__title {
+    font-size: 15px !important;
+  }
+  .soundnet-modal-body {
+    padding: 16px !important;
+  }
+  .soundnet-modal-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+
+  /* 10. Legacy product detail classes */
+  .product-detail-left {
+    flex: 1 1 100% !important;
+    max-width: 100% !important;
+  }
+  .product-album-title {
+    font-size: 22px !important;
+    line-height: 1.2 !important;
+  }
+  .product-artist-title {
+    font-size: 12px !important;
+  }
+  .product-purchase-action-row {
+    gap: 8px !important;
+  }
+  .product-qty-wrap {
+    width: 70px !important;
+  }
+  .btn-buy-primary {
+    height: 44px !important;
+    font-size: 14px !important;
+  }
+  .product-secondary-actions {
+    gap: 8px !important;
+  }
+  .btn-secondary-icon {
+    height: 36px !important;
+    font-size: 12px !important;
   }
 }
 

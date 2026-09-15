@@ -1,13 +1,13 @@
 {{ header }}{{ column_left }}
-<div id="content" class="stopkran-console">
+<div id="content">
     <div class="page-header">
         <div class="container-fluid">
             <div class="pull-right">
-                <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary stopkran-btn-flat"><i class="fa fa-save"></i></button>
-                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default stopkran-btn-flat"><i class="fa fa-reply"></i></a>
+                <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
             </div>
-            <h1 class="stopkran-title">{{ heading_title }}</h1>
-            <ul class="breadcrumb stopkran-breadcrumb">
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
                 {% for breadcrumb in breadcrumbs %}
                 <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
                 {% endfor %}
@@ -17,112 +17,118 @@
 
     <div class="container-fluid">
         {% if error_warning %}
-        <div class="alert alert-danger stopkran-alert"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+        <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
         {% endif %}
         {% if success %}
-        <div class="alert alert-success stopkran-alert"><i class="fa fa-check-circle"></i> {{ success }}
+        <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
             <button type="button" class="close" data-dismiss="alert">&times;</button>
         </div>
         {% endif %}
         <div id="ajax-alert"></div>
 
-        <!-- Master Emergency Override Station (Flat Industrial) -->
-        <div class="stopkran-breaker-bay">
-            <div class="breaker-inner">
-                <div class="breaker-status-col">
-                    <span class="breaker-indicator-light"></span>
-                    <div class="breaker-indicator-label">CIRCUIT BREAKER: ARMED</div>
-                </div>
-                <div class="breaker-spec-col">
-                    <div class="breaker-heading">FAIL-SAFE TOTAL BLACKOUT OVERRIDE</div>
-                    <div class="breaker-subtext">
-                        Direct mechanical fallback. Deactivates all modifications, non-core events, and module statuses in MySQL, then unlinks all storage caches. Instantly reverts OpenCart to an unmodified core state.
-                    </div>
-                </div>
-                <div class="breaker-action-col">
-                    <button type="button" id="btn-master-kill" class="btn btn-danger stopkran-kill-switch">
-                        <span class="kill-icon"><i class="fa fa-ban"></i></span>
-                        <span class="kill-text">{{ button_kill_all }}</span>
-                    </button>
-                </div>
+        <!-- Master Emergency Breaker Panel (OpenCart Native Danger Panel) -->
+        <div class="panel panel-danger" style="border-width: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);">
+            <div class="panel-heading" style="background-color: #f2dede; border-color: #ebccd1; color: #a94442;">
+                <h3 class="panel-title" style="font-weight: 700;"><i class="fa fa-exclamation-triangle"></i> {{ text_breaker_heading }}</h3>
             </div>
-        </div>
-
-        <!-- Telemetry Stats Strip (Flat Tabular Grid) -->
-        <div class="row stopkran-telemetry-row">
-            <div class="col-md-3 col-sm-6">
-                <div class="telemetry-cell">
-                    <div class="telemetry-header">
-                        <span class="telemetry-title">OCMOD Modifications</span>
-                        <span class="telemetry-tag">ACTIVE / TOTAL</span>
+            <div class="panel-body">
+                <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
+                    <div class="col-sm-8 col-xs-12">
+                        <div style="margin-bottom: 5px;">
+                            <span class="label label-danger" style="font-size: 11px; padding: 4px 8px; text-transform: uppercase;">
+                                <i class="fa fa-shield"></i> {{ text_breaker_status_armed }}
+                            </span>
+                        </div>
+                        <p class="text-muted" style="margin: 6px 0 0 0; font-size: 13px; line-height: 1.5;">
+                            {{ text_breaker_subtext }}
+                        </p>
                     </div>
-                    <div class="telemetry-data">
-                        <span class="telemetry-num text-highlight" id="stat-mods">{{ modifications_active }}</span>
-                        <span class="telemetry-divider">/</span>
-                        <span class="telemetry-denom">{{ modifications_total }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="telemetry-cell">
-                    <div class="telemetry-header">
-                        <span class="telemetry-title">Custom Events</span>
-                        <span class="telemetry-tag">NON-CORE</span>
-                    </div>
-                    <div class="telemetry-data">
-                        <span class="telemetry-num text-signal" id="stat-events">{{ events_active }}</span>
-                        <span class="telemetry-divider">/</span>
-                        <span class="telemetry-denom">{{ events_total }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="telemetry-cell">
-                    <div class="telemetry-header">
-                        <span class="telemetry-title">Storage Cache (OCMOD)</span>
-                        <span class="telemetry-tag">DISK OCCUPANCY</span>
-                    </div>
-                    <div class="telemetry-data">
-                        <span class="telemetry-num" id="stat-cache">{{ mod_cache_size }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="telemetry-cell">
-                    <div class="telemetry-header">
-                        <span class="telemetry-title">Cache Maintenance</span>
-                        <span class="telemetry-tag">SYS: {{ system_cache_size }}</span>
-                    </div>
-                    <div class="telemetry-action">
-                        <button type="button" id="btn-purge-cache" class="btn btn-block stopkran-btn-purge">
-                            <i class="fa fa-recycle"></i> {{ button_purge_cache }}
+                    <div class="col-sm-4 col-xs-12 text-right" style="margin-top: 10px;">
+                        <button type="button" id="btn-master-kill" class="btn btn-danger btn-lg" style="font-weight: 700; letter-spacing: 0.03em;">
+                            <i class="fa fa-ban"></i> {{ button_kill_all }}
                         </button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Main Workspace Deck (Flat Structural Panels) -->
-        <div class="stopkran-deck">
-            <div class="deck-header">
-                <ul class="nav nav-tabs stopkran-nav-tabs" id="circuit-tabs">
-                    <li class="active"><a href="#tab-bypass" data-toggle="tab"><i class="fa fa-shield"></i> {{ tab_settings }}</a></li>
-                    <li><a href="#tab-mods" data-toggle="tab"><i class="fa fa-code-fork"></i> {{ tab_modifications }} <span class="flat-chip chip-cyan">{{ modifications_active }}</span></a></li>
-                    <li><a href="#tab-evts" data-toggle="tab"><i class="fa fa-bolt"></i> {{ tab_events }} <span class="flat-chip chip-amber">{{ events_active }}</span></a></li>
-                    <li><a href="#tab-log" data-toggle="tab"><i class="fa fa-terminal"></i> {{ tab_logs }}</a></li>
-                </ul>
+        <!-- Telemetry & Dashboard Stat Tiles (OpenCart 3 Aesthetic) -->
+        <div class="row" style="margin-bottom: 15px;">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default" style="margin-bottom: 15px; border-radius: 3px;">
+                    <div class="panel-body text-center" style="padding: 15px;">
+                        <div class="text-muted text-uppercase" style="font-size: 11px; font-weight: 700; letter-spacing: 0.05em;">{{ text_stat_modifications }}</div>
+                        <div style="font-size: 26px; font-weight: 700; color: #1e91cf; margin: 5px 0;">
+                            <span id="stat-mods">{{ modifications_active }}</span> <span style="font-size: 18px; color: #999;">/</span> <span style="font-size: 20px; color: #777;">{{ modifications_total }}</span>
+                        </div>
+                        <small class="text-muted">{{ text_stat_mods_desc }}</small>
+                    </div>
+                </div>
             </div>
-            <div class="deck-body">
-                <div class="tab-content">
-                    <!-- Tab 1: Emergency Bypass Configuration -->
-                    <div class="tab-pane active" id="tab-bypass">
-                        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal stopkran-form">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default" style="margin-bottom: 15px; border-radius: 3px;">
+                    <div class="panel-body text-center" style="padding: 15px;">
+                        <div class="text-muted text-uppercase" style="font-size: 11px; font-weight: 700; letter-spacing: 0.05em;">{{ text_stat_events }}</div>
+                        <div style="font-size: 26px; font-weight: 700; color: #f39c12; margin: 5px 0;">
+                            <span id="stat-events">{{ events_active }}</span> <span style="font-size: 18px; color: #999;">/</span> <span style="font-size: 20px; color: #777;">{{ events_total }}</span>
+                        </div>
+                        <small class="text-muted">{{ text_stat_events_desc }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default" style="margin-bottom: 15px; border-radius: 3px;">
+                    <div class="panel-body text-center" style="padding: 15px;">
+                        <div class="text-muted text-uppercase" style="font-size: 11px; font-weight: 700; letter-spacing: 0.05em;">{{ text_stat_cache_size }}</div>
+                        <div style="font-size: 24px; font-weight: 700; color: #2ecc71; margin: 5px 0;" id="stat-cache">
+                            {{ mod_cache_size }}
+                        </div>
+                        <small class="text-muted">{{ text_stat_system_cache }}: {{ system_cache_size }}</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                <div class="panel panel-default" style="margin-bottom: 15px; border-radius: 3px;">
+                    <div class="panel-body text-center" style="padding: 15px;">
+                        <div class="text-muted text-uppercase" style="font-size: 11px; font-weight: 700; letter-spacing: 0.05em;">{{ text_stat_maintenance }}</div>
+                        <div style="margin: 6px 0;">
+                            <button type="button" id="btn-purge-cache" class="btn btn-warning btn-sm btn-block" style="font-weight: 600;">
+                                <i class="fa fa-recycle"></i> {{ button_purge_cache }}
+                            </button>
+                        </div>
+                        <small class="text-muted">{{ text_stat_purge_desc }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Workspace Deck (Native OpenCart Panel with Tabs) -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="nav nav-tabs" id="main-tabs">
+                    <li class="active"><a href="#tab-settings" data-toggle="tab"><i class="fa fa-cog"></i> {{ tab_settings }}</a></li>
+                    <li><a href="#tab-testing" data-toggle="tab"><i class="fa fa-flask"></i> {{ tab_testing }} <span class="badge" id="badge-testing-count" style="background-color: #1e91cf;">{{ test_history|length }}</span></a></li>
+                    <li><a href="#tab-mods" data-toggle="tab"><i class="fa fa-code-fork"></i> {{ tab_modifications }} <span class="badge" style="background-color: #5bc0de;">{{ modifications_active }}</span></a></li>
+                    <li><a href="#tab-evts" data-toggle="tab"><i class="fa fa-bolt"></i> {{ tab_events }} <span class="badge" style="background-color: #f0ad4e;">{{ events_active }}</span></a></li>
+                    <li><a href="#tab-crash-log" data-toggle="tab"><i class="fa fa-exclamation-triangle"></i> {{ tab_logs }}</a></li>
+                    <li><a href="#tab-test-log" data-toggle="tab"><i class="fa fa-list-alt"></i> {{ tab_test_logs }}</a></li>
+                </ul>
+
+                <div class="tab-content" style="padding-top: 20px;">
+                    <!-- Tab 1: General Settings & Emergency Bypass -->
+                    <div class="tab-pane active" id="tab-settings">
+                        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+                                <label class="col-sm-3 control-label" for="input-status">
+                                    <span data-toggle="tooltip" title="{{ help_status }}">{{ entry_status }}</span>
+                                </label>
                                 <div class="col-sm-9">
-                                    <select name="module_stopkran_status" id="input-status" class="form-control stopkran-input">
+                                    <select name="module_stopkran_status" id="input-status" class="form-control">
                                         {% if module_stopkran_status %}
                                         <option value="1" selected="selected">{{ text_enabled }}</option>
                                         <option value="0">{{ text_disabled }}</option>
@@ -135,14 +141,36 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-sm-3 control-label" for="input-auto-test">
+                                    <span data-toggle="tooltip" title="{{ help_auto_test }}">{{ entry_auto_test }}</span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <select name="module_stopkran_auto_test" id="input-auto-test" class="form-control">
+                                        {% if module_stopkran_auto_test %}
+                                        <option value="1" selected="selected">{{ text_enabled }}</option>
+                                        <option value="0">{{ text_disabled }}</option>
+                                        {% else %}
+                                        <option value="1">{{ text_enabled }}</option>
+                                        <option value="0" selected="selected">{{ text_disabled }}</option>
+                                        {% endif %}
+                                    </select>
+                                    <div class="help-block" style="margin-top: 5px; font-size: 12px; color: #737373;">
+                                        {{ text_auto_test_desc }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr style="margin: 20px 0; border-color: #eee;">
+
+                            <div class="form-group">
                                 <label class="col-sm-3 control-label" for="input-secret-token">
                                     <span data-toggle="tooltip" title="{{ help_secret_token }}">{{ entry_secret_token }}</span>
                                 </label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" name="module_stopkran_secret_token" value="{{ module_stopkran_secret_token }}" id="input-secret-token" class="form-control font-mono stopkran-input" required />
+                                        <input type="text" name="module_stopkran_secret_token" value="{{ module_stopkran_secret_token }}" id="input-secret-token" class="form-control" style="font-family: monospace;" required />
                                         <span class="input-group-btn">
-                                            <button type="button" id="btn-gen-token" class="btn stopkran-input-btn" data-toggle="tooltip" title="{{ button_generate_token }}">
+                                            <button type="button" id="btn-gen-token" class="btn btn-default" data-toggle="tooltip" title="{{ button_generate_token }}">
                                                 <i class="fa fa-random"></i> {{ button_generate_token }}
                                             </button>
                                         </span>
@@ -150,22 +178,20 @@
                                 </div>
                             </div>
 
-                            <div class="section-divider"></div>
-
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
                                     <span data-toggle="tooltip" title="{{ help_bypass_url }}">{{ entry_bypass_url_admin }}</span>
                                 </label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" readonly value="{{ bypass_url_admin }}" id="bypass-admin-url" class="form-control font-mono stopkran-input copy-target" />
+                                        <input type="text" readonly value="{{ bypass_url_admin }}" id="bypass-admin-url" class="form-control copy-target" style="font-family: monospace;" />
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn stopkran-btn-copy btn-copy" data-target="#bypass-admin-url">
+                                            <button type="button" class="btn btn-default btn-copy" data-target="#bypass-admin-url">
                                                 <i class="fa fa-clipboard"></i> <span class="copy-lbl">{{ text_copy_url }}</span>
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="form-caption">Direct admin rollback link. Operates without sessions or cookies.</div>
+                                    <div class="help-block" style="font-size: 12px;">Прямая ссылка отката панели управления. Работает автономно без активной сессии или cookies.</div>
                                 </div>
                             </div>
 
@@ -175,55 +201,181 @@
                                 </label>
                                 <div class="col-sm-9">
                                     <div class="input-group">
-                                        <input type="text" readonly value="{{ bypass_url_catalog }}" id="bypass-catalog-url" class="form-control font-mono stopkran-input copy-target" />
+                                        <input type="text" readonly value="{{ bypass_url_catalog }}" id="bypass-catalog-url" class="form-control copy-target" style="font-family: monospace;" />
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn stopkran-btn-copy btn-copy" data-target="#bypass-catalog-url">
+                                            <button type="button" class="btn btn-default btn-copy" data-target="#bypass-catalog-url">
                                                 <i class="fa fa-clipboard"></i> <span class="copy-lbl">{{ text_copy_url }}</span>
                                             </button>
                                         </span>
                                     </div>
-                                    <div class="form-caption">Storefront emergency endpoint for unauthenticated recovery triggers.</div>
+                                    <div class="help-block" style="font-size: 12px;">Аварийный эндпоинт витрины для неавторизованного восстановления магазина.</div>
                                 </div>
                             </div>
                         </form>
                     </div>
 
-                    <!-- Tab 2: Modifications Table (Flat Industrial Grid) -->
+                    <!-- Tab 2: Module Testing Facility -->
+                    <div class="tab-pane" id="tab-testing">
+                        <div class="well well-sm" style="background: #fbfbfb; border: 1px solid #e3e3e3;">
+                            <div class="row" style="display: flex; align-items: center; flex-wrap: wrap;">
+                                <div class="col-md-5 col-sm-12" style="margin-bottom: 8px;">
+                                    <label for="select-test-module" style="display: block; font-size: 12px; margin-bottom: 5px; color: #555;">Выберите модуль для тестирования:</label>
+                                    <select id="select-test-module" class="form-control">
+                                        <option value="">{{ text_select_module }}</option>
+                                        {% for mod in available_modules %}
+                                        <option value="{{ mod.code }}">{{ mod.title }} [{{ mod.code }}]</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-7 col-sm-12" style="margin-top: 15px; margin-bottom: 8px;">
+                                    <button type="button" id="btn-run-module-test" class="btn btn-primary" style="margin-right: 8px;">
+                                        <i class="fa fa-play"></i> {{ button_run_test }}
+                                    </button>
+                                    <button type="button" id="btn-run-all-tests" class="btn btn-info" style="margin-right: 8px;">
+                                        <i class="fa fa-check-square-o"></i> {{ button_test_all }}
+                                    </button>
+                                    <span id="test-spinner" style="display: none; font-size: 13px; color: #1e91cf;">
+                                        <i class="fa fa-spinner fa-spin"></i> {{ text_testing_in_progress }}
+                                    </span>
+                                </div>
+                            </div>
+                            <div style="font-size: 12px; color: #777; margin-top: 8px; border-top: 1px solid #eaeaea; padding-top: 8px;">
+                                <i class="fa fa-info-circle text-info"></i> <strong>Автоматический тест:</strong> при включенной опции Стоп-Кран автоматически запускает эту процедуру при установке, добавлении или обновлении любого модуля магазина.
+                            </div>
+                        </div>
+
+                        <!-- Live Diagnostic Test Output Panel -->
+                        <div id="live-test-panel" style="display: none; margin-bottom: 25px;">
+                            <div class="panel panel-default" id="live-test-card" style="border-width: 2px;">
+                                <div class="panel-heading" id="live-test-header">
+                                    <h4 class="panel-title" id="live-test-title" style="font-weight: 700;">Результаты диагностики</h4>
+                                </div>
+                                <div class="panel-body" id="live-test-body">
+                                    <!-- Populated via AJAX -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Test Audit Log Table -->
+                        <div style="margin-top: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                <h4 style="margin: 0; font-size: 15px; font-weight: 700;"><i class="fa fa-history"></i> Журнал недавних проверок</h4>
+                                <button type="button" id="btn-clear-test-log" class="btn btn-xs btn-default text-danger">
+                                    <i class="fa fa-eraser"></i> {{ button_clear_test_log }}
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover" id="table-test-history">
+                                    <thead>
+                                        <tr style="background-color: #f9f9f9;">
+                                            <th style="width: 140px;">{{ column_test_module }}</th>
+                                            <th style="width: 150px;">{{ column_test_trigger }}</th>
+                                            <th style="width: 140px;">{{ column_test_date }}</th>
+                                            <th class="text-center" style="width: 110px;">{{ column_test_result }}</th>
+                                            <th class="text-center" style="width: 80px;">{{ column_test_files }}</th>
+                                            <th class="text-center" style="width: 90px;">{{ column_test_time }}</th>
+                                            <th>{{ column_test_details }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if test_history %}
+                                        {% for item in test_history %}
+                                        <tr>
+                                            <td><strong>{{ item.module }}</strong></td>
+                                            <td>
+                                                {% if item.trigger == 'install' %}
+                                                <span class="label label-info">Установка</span>
+                                                {% elseif item.trigger == 'add' %}
+                                                <span class="label label-primary">Добавление</span>
+                                                {% elseif item.trigger == 'update' %}
+                                                <span class="label label-warning">Обновление</span>
+                                                {% elseif item.trigger == 'manual' %}
+                                                <span class="label label-default">Ручной запуск</span>
+                                                {% elseif item.trigger == 'manual_all' %}
+                                                <span class="label label-default">Пакетный запуск</span>
+                                                {% else %}
+                                                <span class="label label-default">{{ item.trigger }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td><small class="text-muted">{{ item.timestamp }}</small></td>
+                                            <td class="text-center">
+                                                {% if item.passed %}
+                                                <span class="label label-success"><i class="fa fa-check"></i> {{ text_test_passed }}</span>
+                                                {% else %}
+                                                <span class="label label-danger"><i class="fa fa-times"></i> {{ text_test_failed }}</span>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-center">{{ item.total_files }}</td>
+                                            <td class="text-center">{{ item.execution_time }}</td>
+                                            <td>
+                                                {% if item.errors %}
+                                                <div class="text-danger" style="font-size: 12px;">
+                                                    {% for err in item.errors %}
+                                                    <div><i class="fa fa-exclamation-circle"></i> {{ err }}</div>
+                                                    {% endfor %}
+                                                </div>
+                                                {% elseif item.warnings %}
+                                                <div class="text-warning" style="font-size: 12px;">
+                                                    {% for w in item.warnings %}
+                                                    <div><i class="fa fa-warning"></i> {{ w }}</div>
+                                                    {% endfor %}
+                                                </div>
+                                                {% else %}
+                                                <small class="text-success"><i class="fa fa-check-circle"></i> Синтаксис PHP корректен, шаблоны валидны</small>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        {% else %}
+                                        <tr>
+                                            <td colspan="7" class="text-center text-muted" style="padding: 25px;">{{ text_no_test_history }}</td>
+                                        </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: Modifications Table (OpenCart Standard) -->
                     <div class="tab-pane" id="tab-mods">
                         <div class="table-responsive">
-                            <table class="table stopkran-data-table">
+                            <table class="table table-bordered table-hover">
                                 <thead>
-                                    <tr>
+                                    <tr style="background-color: #f9f9f9;">
                                         <th>{{ column_name }}</th>
                                         <th>{{ column_code }}</th>
                                         <th>{{ column_author }}</th>
-                                        <th>{{ column_version }}</th>
+                                        <th style="width: 100px;">{{ column_version }}</th>
                                         <th class="text-center" style="width: 140px;">{{ column_status }}</th>
+                                        <th class="text-right" style="width: 120px;">{{ column_action_toggle }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% if modifications %}
                                     {% for mod in modifications %}
-                                    <tr id="mod-row-{{ mod.modification_id }}" class="{% if not mod.status %}row-deactivated{% endif %}">
-                                        <td class="cell-title">{{ mod.name }}</td>
-                                        <td><span class="cell-code font-mono">{{ mod.code }}</span></td>
-                                        <td class="cell-meta">{{ mod.author }}</td>
-                                        <td><span class="flat-chip">{{ mod.version }}</span></td>
-                                        <td class="text-center">
-                                            <div class="rocker-switch-wrap">
-                                                <input type="checkbox" id="toggle-mod-{{ mod.modification_id }}" class="rocker-input ajax-toggle-mod" data-id="{{ mod.modification_id }}" {% if mod.status %}checked{% endif %}>
-                                                <label for="toggle-mod-{{ mod.modification_id }}" class="rocker-label">
-                                                    <span class="rocker-off">OFF</span>
-                                                    <span class="rocker-on">ON</span>
-                                                    <span class="rocker-nub"></span>
-                                                </label>
-                                            </div>
+                                    <tr id="mod-row-{{ mod.modification_id }}" class="{% if not mod.status %}active text-muted{% endif %}">
+                                        <td><strong>{{ mod.name }}</strong></td>
+                                        <td><code>{{ mod.code }}</code></td>
+                                        <td>{{ mod.author }}</td>
+                                        <td><span class="badge">{{ mod.version }}</span></td>
+                                        <td class="text-center" id="mod-status-badge-{{ mod.modification_id }}">
+                                            {% if mod.status %}
+                                            <span class="label label-success">{{ text_enabled }}</span>
+                                            {% else %}
+                                            <span class="label label-default">{{ text_disabled }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-sm btn-toggle-mod {% if mod.status %}btn-danger{% else %}btn-success{% endif %}" data-id="{{ mod.modification_id }}" data-status="{% if mod.status %}1{% else %}0{% endif %}">
+                                                <i class="fa fa-power-off"></i> <span class="lbl-btn">{% if mod.status %}Отключить{% else %}Включить{% endif %}</span>
+                                            </button>
                                         </td>
                                     </tr>
                                     {% endfor %}
                                     {% else %}
                                     <tr>
-                                        <td colspan="5" class="text-center cell-empty">{{ text_no_modifications }}</td>
+                                        <td colspan="6" class="text-center text-muted" style="padding: 30px;">{{ text_no_modifications }}</td>
                                     </tr>
                                     {% endif %}
                                 </tbody>
@@ -231,40 +383,43 @@
                         </div>
                     </div>
 
-                    <!-- Tab 3: System Events Table -->
+                    <!-- Tab 4: System Events Table (OpenCart Standard) -->
                     <div class="tab-pane" id="tab-evts">
                         <div class="table-responsive">
-                            <table class="table stopkran-data-table">
+                            <table class="table table-bordered table-hover">
                                 <thead>
-                                    <tr>
+                                    <tr style="background-color: #f9f9f9;">
                                         <th>{{ column_code }}</th>
                                         <th>{{ column_trigger }}</th>
                                         <th>{{ column_action }}</th>
-                                        <th class="text-center" style="width: 140px;">{{ column_status }}</th>
+                                        <th class="text-center" style="width: 120px;">{{ column_status }}</th>
+                                        <th class="text-right" style="width: 120px;">{{ column_action_toggle }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% if events %}
                                     {% for evt in events %}
-                                    <tr id="evt-row-{{ evt.event_id }}" class="{% if not evt.status %}row-deactivated{% endif %}">
-                                        <td><span class="cell-code font-mono">{{ evt.code }}</span></td>
-                                        <td class="font-mono text-spec">{{ evt.trigger }}</td>
-                                        <td class="font-mono text-meta">{{ evt.action }}</td>
-                                        <td class="text-center">
-                                            <div class="rocker-switch-wrap">
-                                                <input type="checkbox" id="toggle-evt-{{ evt.event_id }}" class="rocker-input ajax-toggle-evt" data-id="{{ evt.event_id }}" {% if evt.status %}checked{% endif %}>
-                                                <label for="toggle-evt-{{ evt.event_id }}" class="rocker-label">
-                                                    <span class="rocker-off">OFF</span>
-                                                    <span class="rocker-on">ON</span>
-                                                    <span class="rocker-nub"></span>
-                                                </label>
-                                            </div>
+                                    <tr id="evt-row-{{ evt.event_id }}" class="{% if not evt.status %}active text-muted{% endif %}">
+                                        <td><code>{{ evt.code }}</code></td>
+                                        <td><small style="font-family: monospace;">{{ evt.trigger }}</small></td>
+                                        <td><small class="text-muted" style="font-family: monospace;">{{ evt.action }}</small></td>
+                                        <td class="text-center" id="evt-status-badge-{{ evt.event_id }}">
+                                            {% if evt.status %}
+                                            <span class="label label-success">{{ text_enabled }}</span>
+                                            {% else %}
+                                            <span class="label label-default">{{ text_disabled }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-sm btn-toggle-evt {% if evt.status %}btn-danger{% else %}btn-success{% endif %}" data-id="{{ evt.event_id }}" data-status="{% if evt.status %}1{% else %}0{% endif %}">
+                                                <i class="fa fa-power-off"></i> <span class="lbl-btn">{% if evt.status %}Отключить{% else %}Включить{% endif %}</span>
+                                            </button>
                                         </td>
                                     </tr>
                                     {% endfor %}
                                     {% else %}
                                     <tr>
-                                        <td colspan="4" class="text-center cell-empty">{{ text_no_events }}</td>
+                                        <td colspan="5" class="text-center text-muted" style="padding: 30px;">{{ text_no_events }}</td>
                                     </tr>
                                     {% endif %}
                                 </tbody>
@@ -272,497 +427,38 @@
                         </div>
                     </div>
 
-                    <!-- Tab 4: Crash Diagnostics Log (Monospace Telemetry) -->
-                    <div class="tab-pane" id="tab-log">
-                        <div class="log-control-bar">
-                            <span class="log-file-label font-mono">system/storage/logs/stopkran_crash.log</span>
-                            <div class="pull-right">
-                                <button type="button" id="btn-clear-log" class="btn stopkran-btn-flat btn-danger"><i class="fa fa-trash"></i> {{ button_clear_log }}</button>
-                                <a href="javascript:location.reload()" class="btn stopkran-btn-flat btn-default"><i class="fa fa-refresh"></i> {{ button_refresh }}</a>
+                    <!-- Tab 5: Crash Diagnostics Log (OpenCart Textarea Standard) -->
+                    <div class="tab-pane" id="tab-crash-log">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="text-muted" style="font-size: 12px; font-family: monospace;">system/storage/logs/stopkran_crash.log</span>
+                            <div>
+                                <button type="button" id="btn-clear-crash-log" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> {{ button_clear_log }}</button>
+                                <a href="javascript:location.reload()" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i> {{ button_refresh }}</a>
                             </div>
                         </div>
-                        <div class="stopkran-terminal" id="crash-log-container">
-                            {% if has_logs %}
-                            {% for line in log_entries %}
-                            <div class="terminal-record font-mono">{{ line }}</div>
-                            {% endfor %}
-                            {% else %}
-                            <div class="terminal-empty font-mono">{{ text_no_logs }}</div>
-                            {% endif %}
+                        <p>
+                            <textarea wrap="off" rows="18" readonly class="form-control" id="crash-log-text" style="font-family: monospace; font-size: 12px; background: #fafafa;">{{ crash_log ? crash_log : text_no_logs }}</textarea>
+                        </p>
+                    </div>
+
+                    <!-- Tab 6: Module Testing Log (OpenCart Textarea Standard) -->
+                    <div class="tab-pane" id="tab-test-log">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <span class="text-muted" style="font-size: 12px; font-family: monospace;">system/storage/logs/stopkran_test.log</span>
+                            <div>
+                                <button type="button" id="btn-clear-test-log-tab" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> {{ button_clear_test_log }}</button>
+                                <a href="javascript:location.reload()" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i> {{ button_refresh }}</a>
+                            </div>
                         </div>
+                        <p>
+                            <textarea wrap="off" rows="18" readonly class="form-control" id="test-log-text" style="font-family: monospace; font-size: 12px; background: #fafafa;">{{ test_log ? test_log : text_no_test_logs }}</textarea>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<style>
-/* ==========================================================================
-   SoundNet Stop-Kran // Flat Dieter Rams + Swiss International Design
-   Zero Gradients. Zero Shadows. Zero Rounding Bloat. 100% Honest Functionality.
-   ========================================================================== */
-
-.stopkran-console {
-    background: #0d1117;
-    color: #e6edf3;
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    min-height: 100vh;
-    padding-bottom: 40px;
-}
-
-.stopkran-title {
-    font-size: 20px !important;
-    font-weight: 700 !important;
-    letter-spacing: -0.01em;
-    color: #f0f6fc;
-}
-
-.stopkran-breadcrumb > li > a {
-    color: #8b949e;
-}
-
-.stopkran-alert {
-    border-radius: 0 !important;
-    border: 1px solid #30363d !important;
-    box-shadow: none !important;
-    font-size: 13px;
-    padding: 12px 16px;
-}
-.alert-danger.stopkran-alert {
-    background: #1c1214;
-    border-color: #8b1820 !important;
-    color: #f85149;
-}
-.alert-success.stopkran-alert {
-    background: #0d1e16;
-    border-color: #238636 !important;
-    color: #3fb950;
-}
-
-/* Master Breaker Station (Physical Hazard Framing) */
-.stopkran-breaker-bay {
-    background: #141820;
-    border: 1px solid #30363d;
-    border-left: 6px solid #da3633;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 20px 24px;
-    margin-bottom: 20px;
-}
-.breaker-inner {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    flex-wrap: wrap;
-}
-.breaker-status-col {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border-right: 1px solid #21262d;
-    padding-right: 20px;
-}
-.breaker-indicator-light {
-    display: inline-block;
-    width: 12px;
-    height: 12px;
-    background: #da3633;
-    border: 1px solid #f85149;
-    border-radius: 0;
-}
-.breaker-indicator-label {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #f85149;
-    font-family: ui-monospace, Consolas, monospace;
-}
-.breaker-spec-col {
-    flex: 1;
-    min-width: 280px;
-}
-.breaker-heading {
-    font-size: 15px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #f0f6fc;
-    margin-bottom: 4px;
-}
-.breaker-subtext {
-    font-size: 13px;
-    color: #8b949e;
-    line-height: 1.5;
-}
-.stopkran-kill-switch {
-    background: #da3633 !important;
-    color: #ffffff !important;
-    border: 2px solid #b62324 !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    font-size: 13px !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.08em !important;
-    text-transform: uppercase;
-    padding: 12px 22px !important;
-    transition: background-color 0.1s ease, transform 0.08s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-}
-.stopkran-kill-switch:hover {
-    background: #b62324 !important;
-}
-.stopkran-kill-switch:active {
-    transform: translateY(1px);
-}
-
-/* Telemetry Grid */
-.stopkran-telemetry-row {
-    margin-bottom: 20px;
-}
-.telemetry-cell {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 0;
-    padding: 14px 18px;
-    margin-bottom: 15px;
-    height: 84px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.telemetry-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.telemetry-title {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: #8b949e;
-}
-.telemetry-tag {
-    font-size: 10px;
-    font-family: ui-monospace, Consolas, monospace;
-    color: #6e7681;
-}
-.telemetry-data {
-    font-family: ui-monospace, Consolas, monospace;
-    display: flex;
-    align-items: baseline;
-    gap: 6px;
-}
-.telemetry-num {
-    font-size: 22px;
-    font-weight: 700;
-    color: #f0f6fc;
-}
-.telemetry-divider {
-    color: #484f58;
-    font-size: 16px;
-}
-.telemetry-denom {
-    color: #8b949e;
-    font-size: 15px;
-}
-.text-highlight { color: #58a6ff; }
-.text-signal { color: #d29922; }
-
-.stopkran-btn-purge {
-    background: #21262d !important;
-    border: 1px solid #363b42 !important;
-    border-radius: 0 !important;
-    color: #c9d1d9 !important;
-    font-size: 12px !important;
-    font-weight: 600;
-    box-shadow: none !important;
-    padding: 6px 12px !important;
-    text-align: center;
-    transition: background-color 0.1s ease;
-}
-.stopkran-btn-purge:hover {
-    background: #30363d !important;
-    color: #ffffff !important;
-}
-
-/* Structural Deck */
-.stopkran-deck {
-    background: #161b22;
-    border: 1px solid #30363d;
-    border-radius: 0;
-    box-shadow: none;
-}
-.deck-header {
-    background: #0d1117;
-    border-bottom: 1px solid #30363d;
-}
-.stopkran-nav-tabs {
-    border-bottom: none;
-    margin: 0;
-}
-.stopkran-nav-tabs > li > a {
-    background: transparent;
-    border: none !important;
-    border-right: 1px solid #21262d !important;
-    border-radius: 0 !important;
-    color: #8b949e;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    padding: 14px 20px;
-    margin: 0;
-    transition: color 0.1s ease;
-}
-.stopkran-nav-tabs > li > a:hover {
-    color: #f0f6fc;
-    background: #161b22;
-}
-.stopkran-nav-tabs > li.active > a,
-.stopkran-nav-tabs > li.active > a:focus,
-.stopkran-nav-tabs > li.active > a:hover {
-    background: #161b22 !important;
-    color: #58a6ff !important;
-    border-bottom: 2px solid #58a6ff !important;
-}
-.deck-body {
-    padding: 24px;
-}
-
-/* Flat Chips */
-.flat-chip {
-    display: inline-block;
-    padding: 2px 7px;
-    border: 1px solid #30363d;
-    background: #0d1117;
-    border-radius: 0;
-    font-size: 11px;
-    font-family: ui-monospace, Consolas, monospace;
-    font-weight: 600;
-    color: #8b949e;
-    margin-left: 6px;
-}
-.chip-cyan {
-    border-color: #1f4268;
-    background: #0c1b2b;
-    color: #58a6ff;
-}
-.chip-amber {
-    border-color: #5a3e1b;
-    background: #251a0b;
-    color: #d29922;
-}
-
-/* Form Controls */
-.stopkran-form .control-label {
-    color: #c9d1d9;
-    font-size: 13px;
-    font-weight: 600;
-}
-.stopkran-input {
-    background: #0d1117 !important;
-    border: 1px solid #30363d !important;
-    border-radius: 0 !important;
-    color: #f0f6fc !important;
-    box-shadow: none !important;
-    font-size: 13px;
-    height: 38px;
-}
-.stopkran-input:focus {
-    border-color: #58a6ff !important;
-}
-.stopkran-input-btn,
-.stopkran-btn-copy,
-.stopkran-btn-flat {
-    background: #21262d !important;
-    border: 1px solid #363b42 !important;
-    border-radius: 0 !important;
-    color: #c9d1d9 !important;
-    box-shadow: none !important;
-    font-size: 12px !important;
-    font-weight: 600;
-    padding: 8px 16px;
-}
-.stopkran-input-btn:hover,
-.stopkran-btn-copy:hover,
-.stopkran-btn-flat:hover {
-    background: #30363d !important;
-    color: #ffffff !important;
-}
-.form-caption {
-    font-size: 12px;
-    color: #8b949e;
-    margin-top: 6px;
-}
-.section-divider {
-    border-top: 1px solid #21262d;
-    margin: 22px 0;
-}
-
-/* Tables */
-.stopkran-data-table {
-    border: 1px solid #30363d;
-    border-radius: 0;
-    margin-bottom: 0;
-}
-.stopkran-data-table > thead > tr > th {
-    background: #0d1117;
-    border-bottom: 1px solid #30363d !important;
-    color: #8b949e;
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 10px 14px;
-}
-.stopkran-data-table > tbody > tr > td {
-    border-top: 1px solid #21262d;
-    padding: 12px 14px;
-    vertical-align: middle;
-    color: #c9d1d9;
-    font-size: 13px;
-}
-.stopkran-data-table tr.row-deactivated td {
-    opacity: 0.45;
-    background: #0f1319;
-}
-.cell-title {
-    font-weight: 600;
-    color: #f0f6fc !important;
-}
-.cell-code {
-    background: #0d1117;
-    border: 1px solid #30363d;
-    padding: 2px 6px;
-    color: #58a6ff;
-    font-size: 12px;
-}
-.cell-meta {
-    color: #8b949e;
-    font-size: 12px;
-}
-.text-spec {
-    color: #3fb950;
-    font-size: 12px;
-}
-.text-meta {
-    color: #8b949e;
-    font-size: 12px;
-}
-.cell-empty {
-    color: #6e7681;
-    padding: 30px !important;
-}
-
-/* Tactile Industrial Rocker Switch (Physical Equipment Look) */
-.rocker-switch-wrap {
-    display: inline-block;
-    position: relative;
-    user-select: none;
-}
-.rocker-input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-.rocker-label {
-    display: flex;
-    align-items: center;
-    position: relative;
-    width: 72px;
-    height: 26px;
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 0;
-    cursor: pointer;
-    margin: 0;
-    overflow: hidden;
-}
-.rocker-off,
-.rocker-on {
-    flex: 1;
-    text-align: center;
-    font-size: 10px;
-    font-weight: 800;
-    font-family: ui-monospace, Consolas, monospace;
-    letter-spacing: 0.05em;
-    z-index: 1;
-    transition: color 0.1s ease;
-}
-.rocker-off {
-    color: #f85149;
-}
-.rocker-on {
-    color: #484f58;
-}
-.rocker-nub {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-    width: 34px;
-    height: 22px;
-    background: #21262d;
-    border: 1px solid #363b42;
-    border-radius: 0;
-    transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.rocker-input:checked + .rocker-label .rocker-nub {
-    transform: translateX(34px);
-    background: #0e2a1b;
-    border-color: #238636;
-}
-.rocker-input:checked + .rocker-label .rocker-off {
-    color: #484f58;
-}
-.rocker-input:checked + .rocker-label .rocker-on {
-    color: #3fb950;
-}
-
-/* Terminal Log View */
-.log-control-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-.log-file-label {
-    font-size: 12px;
-    color: #8b949e;
-}
-.stopkran-terminal {
-    background: #090d13;
-    border: 1px solid #30363d;
-    border-radius: 0;
-    box-shadow: none;
-    padding: 16px;
-    max-height: 460px;
-    overflow-y: auto;
-}
-.terminal-record {
-    color: #c9d1d9;
-    font-size: 12px;
-    line-height: 1.6;
-    padding: 3px 0;
-    border-bottom: 1px solid #161b22;
-    white-space: pre-wrap;
-    word-break: break-all;
-}
-.terminal-empty {
-    color: #6e7681;
-    font-size: 12px;
-    padding: 20px 0;
-    text-align: center;
-}
-.font-mono {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-}
-</style>
 
 <script>
 $(document).ready(function() {
@@ -775,13 +471,13 @@ $(document).ready(function() {
 
         var btn = $(this);
         var oldHtml = btn.html();
-        btn.html('<i class="fa fa-check"></i> {{ text_copied }}');
+        btn.html('<i class="fa fa-check text-success"></i> {{ text_copied }}');
         setTimeout(function() {
             btn.html(oldHtml);
         }, 1800);
     });
 
-    // 2. Generate Random Token
+    // 2. Generate Random Secret Token
     $('#btn-gen-token').on('click', function() {
         var chars = '0123456789abcdef';
         var token = '';
@@ -795,6 +491,26 @@ $(document).ready(function() {
         $('#bypass-catalog-url').val(catalogBase + '?stopkran_kill_all=' + token);
     });
 
+    // Common Robust AJAX Error Handler
+    function handleAjaxError(xhr, status, thrownError, defaultMsg) {
+        var msg = '';
+        var raw = xhr.responseText || '';
+        if (raw.indexOf('Авторизация') !== -1 || raw.indexOf('route=common/login') !== -1) {
+            msg = 'Сессия администратора истекла или токен безопасности устарел. Пожалуйста, обновите страницу (F5) и авторизуйтесь снова.';
+        } else if (xhr.status === 403) {
+            msg = 'Ошибка 403: Доступ запрещён. У вас нет прав для управления модулем Стоп-Кран.';
+        } else if (xhr.status === 404) {
+            msg = 'Ошибка 404: Запрошенное действие не найдено на сервере.';
+        } else if (xhr.status === 500) {
+            msg = 'Ошибка 500: Внутренняя ошибка сервера. Проверьте журнал ошибок OpenCart.';
+        } else if (xhr.status === 0) {
+            msg = 'Ошибка соединения с сервером. Проверьте сеть или работу веб-сервера.';
+        } else {
+            msg = (defaultMsg || 'Ошибка при выполнении операции') + (thrownError ? (': ' + thrownError) : '');
+        }
+        alert(msg);
+    }
+
     // 3. Master Emergency Stop-Kran (Total Blackout)
     $('#btn-master-kill').on('click', function() {
         if (!confirm('{{ text_confirm_blackout }}')) {
@@ -802,10 +518,10 @@ $(document).ready(function() {
         }
 
         var btn = $(this);
-        btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> ENGAGING...');
+        btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> СРАБАТЫВАНИЕ СТОП-КРАНА...');
 
         $.ajax({
-            url: '{{ url_kill_all }}',
+            url: '{{ url_kill_all|replace({'&amp;': '&'}) }}',
             type: 'post',
             dataType: 'json',
             success: function(json) {
@@ -813,83 +529,99 @@ $(document).ready(function() {
                     alert(json['error']);
                     btn.prop('disabled', false).html('<i class="fa fa-ban"></i> {{ button_kill_all }}');
                 } else {
-                    $('#ajax-alert').html('<div class="alert alert-danger stopkran-alert"><i class="fa fa-check-circle"></i> ' + json['message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    $('#ajax-alert').html('<div class="alert alert-danger alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                     setTimeout(function() {
                         location.reload();
-                    }, 1200);
+                    }, 1400);
                 }
             },
-            error: function(xhr, ajaxOptions, thrownError) {
-                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            error: function(xhr, status, thrownError) {
                 btn.prop('disabled', false).html('<i class="fa fa-ban"></i> {{ button_kill_all }}');
+                handleAjaxError(xhr, status, thrownError, 'Ошибка при аварийном отключении');
             }
         });
     });
 
     // 4. AJAX Toggle Modification
-    $('.ajax-toggle-mod').on('change', function() {
-        var chk = $(this);
-        var modId = chk.data('id');
-        var newStatus = chk.is(':checked') ? 1 : 0;
+    $('.btn-toggle-mod').on('click', function() {
+        var btn = $(this);
+        var modId = btn.data('id');
+        var currentStatus = parseInt(btn.data('status'));
+        var newStatus = currentStatus ? 0 : 1;
         var row = $('#mod-row-' + modId);
+        var badge = $('#mod-status-badge-' + modId);
 
-        chk.prop('disabled', true);
+        btn.prop('disabled', true);
 
         $.ajax({
-            url: '{{ url_toggle_modification }}',
+            url: '{{ url_toggle_modification|replace({'&amp;': '&'}) }}',
             type: 'post',
             data: { modification_id: modId, status: newStatus },
             dataType: 'json',
             success: function(json) {
-                chk.prop('disabled', false);
+                btn.prop('disabled', false);
                 if (json['error']) {
                     alert(json['error']);
-                    chk.prop('checked', !newStatus);
                 } else {
+                    btn.data('status', newStatus);
                     if (newStatus) {
-                        row.removeClass('row-deactivated');
+                        row.removeClass('active text-muted');
+                        badge.html('<span class="label label-success">{{ text_enabled }}</span>');
+                        btn.removeClass('btn-success').addClass('btn-danger');
+                        btn.find('.lbl-btn').text('Отключить');
                     } else {
-                        row.addClass('row-deactivated');
+                        row.addClass('active text-muted');
+                        badge.html('<span class="label label-default">{{ text_disabled }}</span>');
+                        btn.removeClass('btn-danger').addClass('btn-success');
+                        btn.find('.lbl-btn').text('Включить');
                     }
                 }
             },
-            error: function() {
-                chk.prop('disabled', false);
-                chk.prop('checked', !newStatus);
+            error: function(xhr, status, thrownError) {
+                btn.prop('disabled', false);
+                handleAjaxError(xhr, status, thrownError, 'Ошибка при переключении модификатора');
             }
         });
     });
 
     // 5. AJAX Toggle Event
-    $('.ajax-toggle-evt').on('change', function() {
-        var chk = $(this);
-        var evtId = chk.data('id');
-        var newStatus = chk.is(':checked') ? 1 : 0;
+    $('.btn-toggle-evt').on('click', function() {
+        var btn = $(this);
+        var evtId = btn.data('id');
+        var currentStatus = parseInt(btn.data('status'));
+        var newStatus = currentStatus ? 0 : 1;
         var row = $('#evt-row-' + evtId);
+        var badge = $('#evt-status-badge-' + evtId);
 
-        chk.prop('disabled', true);
+        btn.prop('disabled', true);
 
         $.ajax({
-            url: '{{ url_toggle_event }}',
+            url: '{{ url_toggle_event|replace({'&amp;': '&'}) }}',
             type: 'post',
             data: { event_id: evtId, status: newStatus },
             dataType: 'json',
             success: function(json) {
-                chk.prop('disabled', false);
+                btn.prop('disabled', false);
                 if (json['error']) {
                     alert(json['error']);
-                    chk.prop('checked', !newStatus);
                 } else {
+                    btn.data('status', newStatus);
                     if (newStatus) {
-                        row.removeClass('row-deactivated');
+                        row.removeClass('active text-muted');
+                        badge.html('<span class="label label-success">{{ text_enabled }}</span>');
+                        btn.removeClass('btn-success').addClass('btn-danger');
+                        btn.find('.lbl-btn').text('Отключить');
                     } else {
-                        row.addClass('row-deactivated');
+                        row.addClass('active text-muted');
+                        badge.html('<span class="label label-default">{{ text_disabled }}</span>');
+                        btn.removeClass('btn-danger').addClass('btn-success');
+                        btn.find('.lbl-btn').text('Включить');
                     }
                 }
             },
-            error: function() {
-                chk.prop('disabled', false);
-                chk.prop('checked', !newStatus);
+            error: function(xhr, status, thrownError) {
+                btn.prop('disabled', false);
+                handleAjaxError(xhr, status, thrownError, 'Ошибка при переключении события');
             }
         });
     });
@@ -898,30 +630,31 @@ $(document).ready(function() {
     $('#btn-purge-cache').on('click', function() {
         var btn = $(this);
         var oldHtml = btn.html();
-        btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Purging...');
+        btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Очистка...');
 
         $.ajax({
-            url: '{{ url_purge_cache }}',
+            url: '{{ url_purge_cache|replace({'&amp;': '&'}) }}',
             type: 'post',
             dataType: 'json',
             success: function(json) {
                 btn.prop('disabled', false).html(oldHtml);
                 if (json['success']) {
                     $('#stat-cache').text('0.00 B');
-                    $('#ajax-alert').html('<div class="alert alert-success stopkran-alert"><i class="fa fa-check-circle"></i> ' + json['message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    $('#ajax-alert').html('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                 } else if (json['error']) {
                     alert(json['error']);
                 }
             },
-            error: function() {
+            error: function(xhr, status, thrownError) {
                 btn.prop('disabled', false).html(oldHtml);
+                handleAjaxError(xhr, status, thrownError, 'Ошибка при очистке системного кэша');
             }
         });
     });
 
-    // 7. Clear Log Button
-    $('#btn-clear-log').on('click', function() {
-        if (!confirm('Clear crash diagnostics log?')) {
+    // 7. Clear Crash Log Button
+    $('#btn-clear-crash-log').on('click', function() {
+        if (!confirm('Вы действительно хотите очистить журнал сбоев?')) {
             return;
         }
 
@@ -929,22 +662,247 @@ $(document).ready(function() {
         btn.prop('disabled', true);
 
         $.ajax({
-            url: '{{ url_clear_log }}',
+            url: '{{ url_clear_log|replace({'&amp;': '&'}) }}',
             type: 'post',
             dataType: 'json',
             success: function(json) {
                 btn.prop('disabled', false);
                 if (json['success']) {
-                    $('#crash-log-container').html('<div class="terminal-empty font-mono">{{ text_no_logs }}</div>');
+                    $('#crash-log-text').val('{{ text_no_logs }}');
+                    $('#ajax-alert').html('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                 } else if (json['error']) {
                     alert(json['error']);
                 }
             },
-            error: function() {
+            error: function(xhr, status, thrownError) {
                 btn.prop('disabled', false);
+                handleAjaxError(xhr, status, thrownError, 'Ошибка при очистке журнала сбоев');
             }
         });
     });
+
+    // 8. Clear Test Log Button
+    $('#btn-clear-test-log, #btn-clear-test-log-tab').on('click', function() {
+        if (!confirm('Вы действительно хотите очистить журнал тестирования модулей?')) {
+            return;
+        }
+
+        $.ajax({
+            url: '{{ url_clear_test_log|replace({'&amp;': '&'}) }}',
+            type: 'post',
+            dataType: 'json',
+            success: function(json) {
+                if (json['success']) {
+                    $('#test-log-text').val('{{ text_no_test_logs }}');
+                    $('#table-test-history tbody').html('<tr><td colspan="7" class="text-center text-muted" style="padding: 25px;">{{ text_no_test_history }}</td></tr>');
+                    $('#badge-testing-count').text('0');
+                    $('#ajax-alert').html('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['message'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                } else if (json['error']) {
+                    alert(json['error']);
+                }
+            },
+            error: function(xhr, status, thrownError) {
+                handleAjaxError(xhr, status, thrownError, 'Ошибка при очистке журнала тестирования');
+            }
+        });
+    });
+
+    // 9. Run Single Module Test (AJAX)
+    $('#btn-run-module-test').on('click', function() {
+        var moduleCode = $('#select-test-module').val();
+        if (!moduleCode) {
+            alert('Пожалуйста, выберите модуль из списка!');
+            $('#select-test-module').focus();
+            return;
+        }
+
+        var btn = $(this);
+        btn.prop('disabled', true);
+        $('#test-spinner').show();
+        $('#live-test-panel').slideUp(150);
+
+        $.ajax({
+            url: '{{ url_test_module|replace({'&amp;': '&'}) }}',
+            type: 'post',
+            data: { module_code: moduleCode },
+            dataType: 'json',
+            success: function(json) {
+                btn.prop('disabled', false);
+                $('#test-spinner').hide();
+
+                if (json['error']) {
+                    alert(json['error']);
+                    return;
+                }
+
+                renderTestResult(json['report']);
+            },
+            error: function(xhr, status, thrownError) {
+                btn.prop('disabled', false);
+                $('#test-spinner').hide();
+                handleAjaxError(xhr, status, thrownError, 'Ошибка при запуске тестирования модуля');
+            }
+        });
+    });
+
+    // 10. Run All Modules Test (AJAX)
+    $('#btn-run-all-tests').on('click', function() {
+        if (!confirm('Запустить тестирование всех установленных модулей? Это может занять несколько секунд.')) {
+            return;
+        }
+
+        var btn = $(this);
+        btn.prop('disabled', true);
+        $('#test-spinner').show();
+        $('#live-test-panel').slideUp(150);
+
+        $.ajax({
+            url: '{{ url_test_all_modules|replace({'&amp;': '&'}) }}',
+            type: 'post',
+            dataType: 'json',
+            success: function(json) {
+                btn.prop('disabled', false);
+                $('#test-spinner').hide();
+
+                if (json['error']) {
+                    alert(json['error']);
+                    return;
+                }
+
+                renderBatchTestResults(json['reports'], json['summary'], json['message']);
+            },
+            error: function(xhr, status, thrownError) {
+                btn.prop('disabled', false);
+                $('#test-spinner').hide();
+                handleAjaxError(xhr, status, thrownError, 'Ошибка при выполнении пакетного тестирования');
+            }
+        });
+    });
+
+    function renderTestResult(rep) {
+        var card = $('#live-test-card');
+        var header = $('#live-test-header');
+        var body = $('#live-test-body');
+
+        card.removeClass('panel-success panel-danger panel-warning panel-default');
+        if (rep['status'] === 'success') {
+            card.addClass('panel-success');
+        } else if (rep['status'] === 'danger') {
+            card.addClass('panel-danger');
+        } else {
+            card.addClass('panel-warning');
+        }
+
+        var statusBadge = rep['passed']
+            ? '<span class="label label-success"><i class="fa fa-check"></i> ТЕСТ ПРОЙДЕН</span>'
+            : '<span class="label label-danger"><i class="fa fa-times"></i> ОБНАРУЖЕНЫ ОШИБКИ</span>';
+
+        var html = '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">' +
+            '<h4 style="margin: 0; font-weight: 700;">Модуль: <code>' + rep['module'] + '</code> &nbsp;' + statusBadge + '</h4>' +
+            '<span class="text-muted"><i class="fa fa-clock-o"></i> Время: ' + rep['execution_time'] + ' мс | Файлов: ' + rep['total_files'] + '</span>' +
+            '</div>';
+
+        if (rep['errors'] && rep['errors'].length > 0) {
+            html += '<div class="alert alert-danger" style="margin-bottom: 12px;"><strong><i class="fa fa-exclamation-triangle"></i> Критические ошибки:</strong><ul style="margin-top: 5px; margin-bottom: 0;">';
+            for (var i = 0; i < rep['errors'].length; i++) {
+                html += '<li>' + rep['errors'][i] + '</li>';
+            }
+            html += '</ul></div>';
+        }
+
+        if (rep['warnings'] && rep['warnings'].length > 0) {
+            html += '<div class="alert alert-warning" style="margin-bottom: 12px;"><strong><i class="fa fa-warning"></i> Замечания / Предупреждения:</strong><ul style="margin-top: 5px; margin-bottom: 0;">';
+            for (var j = 0; j < rep['warnings'].length; j++) {
+                html += '<li>' + rep['warnings'][j] + '</li>';
+            }
+            html += '</ul></div>';
+        }
+
+        html += '<table class="table table-bordered table-condensed" style="margin-bottom: 0; font-size: 12px;">';
+        html += '<thead style="background: #fbfbfb;"><tr><th>Проверяемый файл</th><th style="width: 130px;" class="text-center">Синтаксис PHP</th><th>Диагностика</th></tr></thead><tbody>';
+
+        if (rep['syntax_checks'] && rep['syntax_checks'].length > 0) {
+            for (var k = 0; k < rep['syntax_checks'].length; k++) {
+                var sc = rep['syntax_checks'][k];
+                var badge = sc['ok']
+                    ? '<span class="label label-success"><i class="fa fa-check"></i> Корректен</span>'
+                    : '<span class="label label-danger"><i class="fa fa-times"></i> Ошибка</span>';
+                var detail = sc['ok']
+                    ? '<span class="text-success"><i class="fa fa-check-circle"></i> Синтаксис PHP проверен без ошибок</span>'
+                    : '<strong class="text-danger">Строка ' + sc['line'] + ': ' + sc['error'] + '</strong>';
+
+                html += '<tr><td><code>' + sc['file'] + '</code></td><td class="text-center">' + badge + '</td><td>' + detail + '</td></tr>';
+            }
+        } else {
+            html += '<tr><td colspan="3" class="text-muted text-center">Файлы PHP не найдены</td></tr>';
+        }
+        html += '</tbody></table>';
+
+        body.html(html);
+        $('#live-test-panel').slideDown(200);
+
+        // Update Recent Checks Table in Real-Time
+        try {
+            var histBadge = rep['passed']
+                ? '<span class="label label-success"><i class="fa fa-check"></i> Успешно</span>'
+                : '<span class="label label-danger"><i class="fa fa-times"></i> Ошибка</span>';
+            var histDiag = rep['passed']
+                ? '<span class="text-success"><i class="fa fa-check-circle"></i> Синтаксис PHP корректен, файлы валидны</span>'
+                : '<strong class="text-danger">' + (rep['errors'] && rep['errors'].length ? rep['errors'][0] : 'Обнаружены ошибки') + '</strong>';
+            var d = new Date();
+            var pad = function(n) { return (n < 10 ? '0' : '') + n; };
+            var nowStr = d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+            var newRow = '<tr>' +
+                '<td><strong>' + rep['module'] + '</strong></td>' +
+                '<td><span class="label label-default">Ручной запуск</span></td>' +
+                '<td><small class="text-muted">' + nowStr + '</small></td>' +
+                '<td class="text-center">' + histBadge + '</td>' +
+                '<td class="text-center">' + rep['total_files'] + '</td>' +
+                '<td class="text-center">' + rep['execution_time'] + '</td>' +
+                '<td>' + histDiag + '</td>' +
+                '</tr>';
+
+            var tbody = $('#table-test-history tbody');
+            if (tbody.find('td[colspan]').length) {
+                tbody.empty();
+            }
+            tbody.prepend(newRow);
+            var currentCount = parseInt($('#badge-testing-count').text()) || 0;
+            $('#badge-testing-count').text(currentCount + 1);
+        } catch(e) {}
+    }
+
+    function renderBatchTestResults(reports, summary, msg) {
+        var card = $('#live-test-card');
+        var body = $('#live-test-body');
+
+        card.removeClass('panel-success panel-danger panel-warning panel-default');
+        card.addClass(summary['errors'] > 0 ? 'panel-warning' : 'panel-success');
+
+        var html = '<div class="alert alert-' + (summary['errors'] > 0 ? 'warning' : 'success') + '" style="margin-bottom: 15px;">' +
+            '<i class="fa fa-check-circle"></i> ' + msg +
+            '</div>';
+
+        html += '<table class="table table-bordered table-hover" style="margin-bottom: 0; font-size: 12px;">';
+        html += '<thead style="background: #fbfbfb;"><tr><th>Модуль</th><th class="text-center" style="width: 120px;">Результат</th><th class="text-center" style="width: 90px;">Файлов</th><th class="text-center" style="width: 100px;">Время</th><th>Сводка</th></tr></thead><tbody>';
+
+        for (var code in reports) {
+            var r = reports[code];
+            var badge = r['passed']
+                ? '<span class="label label-success"><i class="fa fa-check"></i> Успешно</span>'
+                : '<span class="label label-danger"><i class="fa fa-times"></i> Ошибка</span>';
+            var desc = r['passed']
+                ? '<span class="text-success">Все файлы проверены, синтаксис корректен</span>'
+                : '<strong class="text-danger">' + (r['errors'].length ? r['errors'][0] : 'Ошибка') + '</strong>';
+
+            html += '<tr><td><strong>' + code + '</strong></td><td class="text-center">' + badge + '</td><td class="text-center">' + r['total_files'] + '</td><td class="text-center">' + r['execution_time'] + ' мс</td><td>' + desc + '</td></tr>';
+        }
+
+        html += '</tbody></table>';
+
+        body.html(html);
+        $('#live-test-panel').slideDown(200);
+    }
 });
 </script>
 {{ footer }}

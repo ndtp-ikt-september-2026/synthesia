@@ -1,24 +1,24 @@
 <?php
 /**
- * SoundNet Stop-Kran Standalone CLI Recovery Tool
+ * SoundNet Стоп-Кран — Автономная CLI утилита аварийного восстановления и тестирования
  *
- * Designed to execute in 100% standalone CLI mode without HTTP server dependencies,
- * framework classes, or OpenCart engine initialization.
+ * Работает в 100% автономном режиме без зависимостей от веб-сервера.
  *
- * Usage:
+ * Использование:
  *   php cli/stopkran.php --status
  *   php cli/stopkran.php --kill-all
  *   php cli/stopkran.php --purge-cache
+ *   php cli/stopkran.php --test=<code_name>
+ *   php cli/stopkran.php --test-all
  *   php cli/stopkran.php --disable=<code_name>
- *   php cli/stopkran.php --disable-module=<code_name>
  */
 
 declare(strict_types=1);
 
-// Enforce CLI SAPI
+// Проверка запуска из командной строки
 if (php_sapi_name() !== 'cli') {
     http_response_code(403);
-    echo "Access denied: CLI tool only.\n";
+    echo "Доступ запрещен: утилита предназначена только для CLI.\n";
     exit(1);
 }
 
@@ -29,13 +29,13 @@ class StopKranCli {
     public function run(array $argv): int {
         $this->printBanner();
 
-        // 1. Load configuration safely
+        // 1. Загрузка конфигурации
         if (!$this->loadConfig()) {
-            $this->logError("Failed to locate or parse OpenCart config.php. Ensure you run this from the project root or cli/ directory.");
+            $this->logError("Не удалось найти или прочитать OpenCart config.php. Запустите скрипт из корневой директории проекта.");
             return 1;
         }
 
-        // 2. Parse arguments
+        // 2. Разбор аргументов
         $options = $this->parseArgs($argv);
 
         if (empty($options) || isset($options['help']) || isset($options['h'])) {
@@ -55,37 +55,46 @@ class StopKranCli {
             return $this->handlePurgeCache();
         }
 
+        if (isset($options['test-all'])) {
+            return $this->handleTestAll();
+        }
+
+        if (isset($options['test'])) {
+            return $this->handleTestModule((string)$options['test']);
+        }
+
         $disableCode = $options['disable-module'] ?? ($options['disable'] ?? null);
         if (!empty($disableCode)) {
             return $this->handleDisableModule((string)$disableCode);
         }
 
-        $this->logWarn("Unrecognized command option.");
+        $this->logWarn("Неизвестный параметр команды.");
         $this->printUsage();
         return 1;
     }
 
     protected function printBanner(): void {
         echo "====================================================================\n";
-        echo "   SOUNDNET STOP-KRAN // INDUSTRIAL EMERGENCY RECOVERY UTILITY      \n";
+        echo "   SOUNDNET СТОП-КРАН // АВАРИЙНЫЙ ВЫКЛЮЧАТЕЛЬ И ТЕСТИРОВАНИЕ       \n";
         echo "====================================================================\n";
     }
 
     protected function printUsage(): void {
-        echo "Usage:\n";
-        echo "  php cli/stopkran.php [options]\n\n";
-        echo "Available Options:\n";
-        echo "  --status                     Display circuit breaker status, active mods, & cache usage\n";
-        echo "  --kill-all                   Engage Total Blackout: disable all mods, non-core events, & purge cache\n";
-        echo "  --purge-cache                Purge modification & system storage cache without touching database\n";
-        echo "  --disable=<code_name>        Surgically disable a single modification & related events\n";
-        echo "  --disable-module=<code_name> Alias for --disable\n";
-        echo "  --help, -h                   Show this help message\n\n";
+        echo "Использование:\n";
+        echo "  php cli/stopkran.php [параметры]\n\n";
+        echo "Доступные параметры:\n";
+        echo "  --status                     Вывести состояние защитного контура и размер кэша\n";
+        echo "  --kill-all                   Полный блэкаут: отключить все модификаторы, события и кэш\n";
+        echo "  --purge-cache                Очистить кэш модификаций и системное хранилище\n";
+        echo "  --test=<code_name>           Протестировать модуль (синтаксис PHP, классы, шаблоны)\n";
+        echo "  --test-all                   Протестировать все установленные модули магазина\n";
+        echo "  --disable=<code_name>        Точечно отключить модификатор и события модуля\n";
+        echo "  --help, -h                   Показать эту справку\n\n";
     }
 
     protected function parseArgs(array $argv): array {
         $options = [];
-        array_shift($argv); // Remove script name
+        array_shift($argv);
 
         foreach ($argv as $arg) {
             if (strpos($arg, '--') === 0) {
@@ -129,7 +138,6 @@ class StopKranCli {
             return false;
         }
 
-        // Parse constants using regex to bypass any external includes
         $patterns = [
             'DB_HOSTNAME'      => '/define\(\s*[\'"]DB_HOSTNAME[\'"]\s*,\s*[\'"](.*?)[\'"]\s*\);/i',
             'DB_USERNAME'      => '/define\(\s*[\'"]DB_USERNAME[\'"]\s*,\s*[\'"](.*?)[\'"]\s*\);/i',
@@ -149,7 +157,6 @@ class StopKranCli {
             }
         }
 
-        // If DIR_STORAGE was parsed, set default derived directories
         if (!empty($this->config['DIR_STORAGE'])) {
             $storage = rtrim(str_replace('\\', '/', $this->config['DIR_STORAGE']), '/') . '/';
             if (empty($this->config['DIR_MODIFICATION'])) {
@@ -163,7 +170,6 @@ class StopKranCli {
             }
         }
 
-        // Default fallbacks
         $this->config['DB_HOSTNAME'] = $this->config['DB_HOSTNAME'] ?? 'localhost';
         $this->config['DB_PORT']     = $this->config['DB_PORT'] ?? '3306';
         $this->config['DB_PREFIX']   = $this->config['DB_PREFIX'] ?? 'oc_';
@@ -195,7 +201,7 @@ class StopKranCli {
     }
 
     protected function handleStatus(): int {
-        $this->logInfo("Gathering system status...");
+        $this->logInfo("Сбор сведений о состоянии системы...");
 
         try {
             $pdo = $this->getPdo();
@@ -213,23 +219,23 @@ class StopKranCli {
             $cacheSize = $this->calcDirSize($this->config['DIR_CACHE'] ?? '');
 
             echo "\n";
-            echo "  [DATABASE]           Host: {$this->config['DB_HOSTNAME']}:{$this->config['DB_PORT']} | DB: {$this->config['DB_DATABASE']}\n";
-            echo "  [MODIFICATIONS]      Active: " . ($modData['active_cnt'] ?? 0) . " / Total: " . ($modData['total_cnt'] ?? 0) . "\n";
-            echo "  [CUSTOM EVENTS]      Active: " . ($evtData['active_cnt'] ?? 0) . " / Total: " . ($evtData['total_cnt'] ?? 0) . "\n";
-            echo "  [MODIFICATION CACHE] " . $this->formatBytes($modSize) . " (" . ($this->config['DIR_MODIFICATION'] ?? 'N/A') . ")\n";
-            echo "  [SYSTEM CACHE]       " . $this->formatBytes($cacheSize) . " (" . ($this->config['DIR_CACHE'] ?? 'N/A') . ")\n";
+            echo "  [БАЗА ДАННЫХ]        Хост: {$this->config['DB_HOSTNAME']}:{$this->config['DB_PORT']} | БД: {$this->config['DB_DATABASE']}\n";
+            echo "  [МОДИФИКАЦИИ]        Активно: " . ($modData['active_cnt'] ?? 0) . " / Всего: " . ($modData['total_cnt'] ?? 0) . "\n";
+            echo "  [СОБЫТИЯ]            Активно: " . ($evtData['active_cnt'] ?? 0) . " / Всего: " . ($evtData['total_cnt'] ?? 0) . "\n";
+            echo "  [КЭШ МОДИФИКАЦИЙ]    " . $this->formatBytes($modSize) . "\n";
+            echo "  [СИСТЕМНЫЙ КЭШ]      " . $this->formatBytes($cacheSize) . "\n";
             echo "\n";
 
-            $this->logOk("Status query completed successfully.");
+            $this->logOk("Запрос статуса успешно выполнен.");
             return 0;
         } catch (PDOException $e) {
-            $this->logError("Database query failed: " . $e->getMessage());
+            $this->logError("Ошибка запроса к базе данных: " . $e->getMessage());
             return 1;
         }
     }
 
     protected function handleKillAll(): int {
-        $this->logWarn("ENGAGING TOTAL BLACKOUT...");
+        $this->logWarn("АКТИВАЦИЯ АВАРИЙНОГО БЛЭКАУТА...");
 
         try {
             $pdo = $this->getPdo();
@@ -238,52 +244,141 @@ class StopKranCli {
             // 1. Disable all active modifications
             $stmt1 = $pdo->query("UPDATE `{$prefix}modification` SET `status` = 0");
             $modsDisabled = $stmt1 ? $stmt1->rowCount() : 0;
-            $this->logOk("Deactivated {$modsDisabled} modifications in `{$prefix}modification`.");
+            $this->logOk("Отключено {$modsDisabled} модификаций в `{$prefix}modification`.");
 
             // 2. Disable all non-core events
             $stmt2 = $pdo->query("UPDATE `{$prefix}event` SET `status` = 0 WHERE `code` NOT LIKE 'core_%'");
             $evtsDisabled = $stmt2 ? $stmt2->rowCount() : 0;
-            $this->logOk("Deactivated {$evtsDisabled} non-core events in `{$prefix}event`.");
+            $this->logOk("Отключено {$evtsDisabled} сторонних событий в `{$prefix}event`.");
 
             // 3. Disable all module settings
             $stmt3 = $pdo->query("UPDATE `{$prefix}setting` SET `value` = '0' WHERE `key` LIKE 'module_%_status'");
             $setsReset = $stmt3 ? $stmt3->rowCount() : 0;
-            $this->logOk("Reset {$setsReset} module statuses in `{$prefix}setting`.");
+            $this->logOk("Сброшено {$setsReset} статусов модулей в `{$prefix}setting`.");
 
             // 4. Purge caches
             $modPurge = $this->purgeDirectory($this->config['DIR_MODIFICATION'] ?? '', true);
             $cachePurge = $this->purgeDirectory($this->config['DIR_CACHE'] ?? '', false);
 
-            $this->logOk("Purged modification cache ({$modPurge['files']} files, {$modPurge['dirs']} dirs deleted).");
-            $this->logOk("Purged system cache ({$cachePurge['files']} files, {$cachePurge['dirs']} dirs deleted).");
+            $this->logOk("Очищен кэш модификаций ({$modPurge['files']} файлов, {$modPurge['dirs']} папок удалено).");
+            $this->logOk("Очищен системный кэш ({$cachePurge['files']} файлов, {$cachePurge['dirs']} папок удалено).");
 
-            $this->logOk("TOTAL BLACKOUT COMPLETE: OpenCart restored to clean native core.");
+            $this->logOk("ПОЛНЫЙ БЛЭКАУТ ВЫПОЛНЕН: OpenCart возвращен к немодифицированному ядру.");
             return 0;
         } catch (PDOException $e) {
-            $this->logError("Failed to execute Total Blackout: " . $e->getMessage());
+            $this->logError("Ошибка при выполнении полного блэкаута: " . $e->getMessage());
             return 1;
         }
     }
 
     protected function handlePurgeCache(): int {
-        $this->logInfo("Purging storage cache directories...");
+        $this->logInfo("Очистка директорий кэша...");
 
         $modPurge = $this->purgeDirectory($this->config['DIR_MODIFICATION'] ?? '', true);
         $cachePurge = $this->purgeDirectory($this->config['DIR_CACHE'] ?? '', false);
 
-        $this->logOk("Purged modification storage: {$modPurge['files']} files, {$modPurge['dirs']} directories removed.");
-        $this->logOk("Purged system cache storage: {$cachePurge['files']} files, {$cachePurge['dirs']} directories removed.");
+        $this->logOk("Очищен кэш модификаций: {$modPurge['files']} файлов, {$modPurge['dirs']} папок.");
+        $this->logOk("Очищен системный кэш: {$cachePurge['files']} файлов, {$cachePurge['dirs']} папок.");
         return 0;
+    }
+
+    protected function handleTestModule(string $code): int {
+        $cleanCode = preg_replace('/[^a-zA-Z0-9_\-]/', '', strtolower(trim($code)));
+        if (empty($cleanCode)) {
+            $this->logError("Укажите корректный код модуля.");
+            return 1;
+        }
+
+        $this->logInfo("Запуск комплексного тестирования модуля '{$cleanCode}'...");
+
+        $testerFile = dirname(__DIR__) . '/system/library/stopkran/tester.php';
+        if (!file_exists($testerFile)) {
+            $this->logError("Файл тестера не найден: {$testerFile}");
+            return 1;
+        }
+
+        require_once($testerFile);
+
+        $report = \SoundNet\StopKran\Tester::testModule($cleanCode, 'cli');
+
+        echo "\n";
+        echo "  [МОДУЛЬ]            {$report['module']}\n";
+        echo "  [РЕЗУЛЬТАТ]         " . ($report['passed'] ? "УСПЕШНО" : "ОБНАРУЖЕНЫ ОШИБКИ") . "\n";
+        echo "  [ПРОВЕРЕНО ФАЙЛОВ]  {$report['total_files']}\n";
+        echo "  [ВРЕМЯ ПРОВЕРКИ]    {$report['execution_time']} мс\n";
+        echo "\n";
+
+        if (!empty($report['errors'])) {
+            echo "  КРИТИЧЕСКИЕ ОШИБКИ:\n";
+            foreach ($report['errors'] as $err) {
+                echo "    [!] {$err}\n";
+            }
+            echo "\n";
+        }
+
+        if (!empty($report['warnings'])) {
+            echo "  ПРЕДУПРЕЖДЕНИЯ:\n";
+            foreach ($report['warnings'] as $warn) {
+                echo "    [*] {$warn}\n";
+            }
+            echo "\n";
+        }
+
+        if ($report['passed']) {
+            $this->logOk("Модуль '{$cleanCode}' успешно прошел все тесты синтаксиса и структуры.");
+            return 0;
+        } else {
+            $this->logError("Тестирование выявило критические ошибки в модуле '{$cleanCode}'.");
+            return 1;
+        }
+    }
+
+    protected function handleTestAll(): int {
+        $this->logInfo("Запуск пакетного тестирования всех модулей магазина...");
+
+        $testerFile = dirname(__DIR__) . '/system/library/stopkran/tester.php';
+        if (!file_exists($testerFile)) {
+            $this->logError("Файл тестера не найден: {$testerFile}");
+            return 1;
+        }
+
+        require_once($testerFile);
+
+        $reports = \SoundNet\StopKran\Tester::testAllModules();
+
+        $total = count($reports);
+        $passed = 0;
+        $failed = 0;
+
+        echo "\n";
+        echo str_repeat('-', 70) . "\n";
+        printf("%-30s | %-12s | %-8s | %-10s\n", "Модуль", "Статус", "Файлов", "Время (мс)");
+        echo str_repeat('-', 70) . "\n";
+
+        foreach ($reports as $code => $rep) {
+            $statusStr = $rep['passed'] ? "OK" : "ОШИБКА";
+            printf("%-30s | %-12s | %-8d | %-10.2f\n", $code, $statusStr, $rep['total_files'], $rep['execution_time']);
+            if ($rep['passed']) {
+                $passed++;
+            } else {
+                $failed++;
+            }
+        }
+
+        echo str_repeat('-', 70) . "\n\n";
+
+        $this->logOk("Всего модулей: {$total} | Пройдено: {$passed} | С ошибками: {$failed}");
+        return $failed > 0 ? 1 : 0;
     }
 
     protected function handleDisableModule(string $code): int {
         $cleanCode = preg_replace('/[^a-zA-Z0-9_\-]/', '', $code);
         if (empty($cleanCode)) {
-            $this->logError("Invalid module code provided.");
+            $this->logError("Неверный код модуля.");
             return 1;
         }
 
-        $this->logInfo("Surgically disabling module '{$cleanCode}'...");
+        $this->logInfo("Точечное отключение модуля '{$cleanCode}'...");
 
         try {
             $pdo = $this->getPdo();
@@ -310,12 +405,12 @@ class StopKranCli {
             // 4. Purge modification cache
             $purge = $this->purgeDirectory($this->config['DIR_MODIFICATION'] ?? '', true);
 
-            $this->logOk("Disabled {$modCount} modifications, {$evtCount} events, {$setCount} module settings.");
-            $this->logOk("Modification cache purged ({$purge['files']} files removed).");
-            $this->logOk("Module '{$cleanCode}' surgically isolated and neutralized.");
+            $this->logOk("Отключено: модификаций — {$modCount}, событий — {$evtCount}, настроек — {$setCount}.");
+            $this->logOk("Кэш модификаций очищен ({$purge['files']} файлов удалено).");
+            $this->logOk("Модуль '{$cleanCode}' успешно изолирован и обезврежен.");
             return 0;
         } catch (PDOException $e) {
-            $this->logError("Database operation failed: " . $e->getMessage());
+            $this->logError("Ошибка операции с базой данных: " . $e->getMessage());
             return 1;
         }
     }
@@ -378,31 +473,31 @@ class StopKranCli {
 
     protected function formatBytes(int $bytes): string {
         if ($bytes >= 1048576) {
-            return number_format($bytes / 1048576, 2) . ' MB';
+            return number_format($bytes / 1048576, 2) . ' МБ';
         }
         if ($bytes >= 1024) {
-            return number_format($bytes / 1024, 2) . ' KB';
+            return number_format($bytes / 1024, 2) . ' КБ';
         }
-        return $bytes . ' B';
+        return $bytes . ' Б';
     }
 
     protected function logOk(string $msg): void {
-        echo "  [OK]    {$msg}\n";
+        echo "  [УСПЕХ]    {$msg}\n";
     }
 
     protected function logInfo(string $msg): void {
-        echo "  [INFO]  {$msg}\n";
+        echo "  [ИНФО]     {$msg}\n";
     }
 
     protected function logWarn(string $msg): void {
-        echo "  [WARN]  {$msg}\n";
+        echo "  [ВНИМАНИЕ] {$msg}\n";
     }
 
     protected function logError(string $msg): void {
-        echo "  [ERROR] {$msg}\n";
+        echo "  [ОШИБКА]   {$msg}\n";
     }
 }
 
-// Execute script
+// Запуск скрипта
 $cli = new StopKranCli();
 exit($cli->run($argv));
