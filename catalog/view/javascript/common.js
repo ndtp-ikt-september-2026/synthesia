@@ -167,7 +167,14 @@ var cart = {
 
 					// Need to set timeout otherwise it wont update the total
 					setTimeout(function () {
-						$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+						if ($('#cart-total').length) {
+							$('#cart-total').html(json['total']);
+						} else {
+							$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+						}
+						if (window.SoundnetStorefront && window.SoundnetStorefront.syncCartUI) {
+							window.SoundnetStorefront.syncCartUI();
+						}
 					}, 100);
 
 					$('html, body').animate({ scrollTop: 0 }, 'slow');
@@ -195,7 +202,14 @@ var cart = {
 			success: function(json) {
 				// Need to set timeout otherwise it wont update the total
 				setTimeout(function () {
-					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+					if ($('#cart-total').length) {
+						$('#cart-total').html(json['total']);
+					} else {
+						$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+					}
+					if (window.SoundnetStorefront && window.SoundnetStorefront.syncCartUI) {
+						window.SoundnetStorefront.syncCartUI();
+					}
 				}, 100);
 
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout' || $('#checkout-cart').length || $('#checkout-checkout').length) {
@@ -224,7 +238,14 @@ var cart = {
 			success: function(json) {
 				// Need to set timeout otherwise it wont update the total
 				setTimeout(function () {
-					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+					if ($('#cart-total').length) {
+						$('#cart-total').html(json['total']);
+					} else {
+						$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+					}
+					if (window.SoundnetStorefront && window.SoundnetStorefront.syncCartUI) {
+						window.SoundnetStorefront.syncCartUI();
+					}
 				}, 100);
 
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout' || $('#checkout-cart').length || $('#checkout-checkout').length) {
@@ -259,7 +280,14 @@ var voucher = {
 			success: function(json) {
 				// Need to set timeout otherwise it wont update the total
 				setTimeout(function () {
-					$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+					if ($('#cart-total').length) {
+						$('#cart-total').html(json['total']);
+					} else {
+						$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+					}
+					if (window.SoundnetStorefront && window.SoundnetStorefront.syncCartUI) {
+						window.SoundnetStorefront.syncCartUI();
+					}
 				}, 100);
 
 				if (getURLVar('route') == 'checkout/cart' || getURLVar('route') == 'checkout/checkout') {

@@ -511,7 +511,14 @@ $('#button-cart').on('click', function() {
 
       if (json['success']) {
         $('.studio-breadcrumbs-bar').after('<div class="alert alert-success alert-dismissible container" style="margin-top:15px;"><i class="fa fa-check-circle"></i> ' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-        $('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+        if ($('#cart-total').length) {
+          $('#cart-total').html(json['total']);
+        } else {
+          $('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+        }
+        if (window.SoundnetStorefront && window.SoundnetStorefront.syncCartUI) {
+          window.SoundnetStorefront.syncCartUI();
+        }
         $('html, body').animate({ scrollTop: 0 }, 'slow');
         $('#cart > ul').load('index.php?route=common/cart/info ul li');
       }
