@@ -391,14 +391,8 @@ class ControllerExtensionModuleSoundnetAi extends Controller {
 
 		if ($entity_type === 'instrument') {
 			$text_parts[] = 'Instrument: ' . $title;
-			if (!empty($brand)) {
-				$text_parts[] = 'Brand: ' . $brand;
-			}
 			if (!empty($instrument_type)) {
 				$text_parts[] = 'Type: ' . $instrument_type;
-			}
-			if (!empty($tags)) {
-				$text_parts[] = 'Tags: ' . $tags;
 			}
 			if (!empty($sound_style)) {
 				$text_parts[] = 'Sound Style: ' . $sound_style;
@@ -406,18 +400,52 @@ class ControllerExtensionModuleSoundnetAi extends Controller {
 			if (!empty($vibe)) {
 				$text_parts[] = 'Vibe: ' . $vibe;
 			}
-			$spec_parts = array();
-			foreach ($all_attributes as $k => $v) {
-				$spec_parts[] = $k . ': ' . $v;
+			if (!empty($brand)) {
+				$text_parts[] = 'Brand: ' . $brand;
 			}
-			if (!empty($spec_parts)) {
-				$text_parts[] = 'Characteristics: ' . implode(', ', $spec_parts);
+			if (!empty($pickups)) {
+				$text_parts[] = 'Pickups: ' . $pickups;
 			}
 			if (!empty($category_names)) {
 				$text_parts[] = 'Categories: ' . implode(', ', $category_names);
 			}
+
+			// Extract only relevant musical attributes (filter out physical dimensions, package size, weight, warranty, country)
+			$noise_keys = array('габарит', 'размер', 'вес', 'гаранти', 'страна', 'упаковк', 'питани', 'ток');
+			$clean_specs = array();
+			foreach ($all_attributes as $k => $v) {
+				$k_lower = mb_strtolower($k, 'UTF-8');
+				$is_noise = false;
+				foreach ($noise_keys as $nk) {
+					if (strpos($k_lower, $nk) !== false) {
+						$is_noise = true;
+						break;
+					}
+				}
+				if (!$is_noise && mb_strlen($v, 'UTF-8') < 50) {
+					$clean_specs[] = $k . ': ' . $v;
+				}
+			}
+			if (!empty($clean_specs)) {
+				$text_parts[] = 'Characteristics: ' . implode(', ', array_slice($clean_specs, 0, 8));
+			}
+
+			// Clean tags (remove dimensions/weights from tags)
+			if (!empty($tags)) {
+				$tag_items = array_map('trim', explode(',', $tags));
+				$filtered_tags = array();
+				foreach ($tag_items as $ti) {
+					if (!preg_match('/(\d+\s*x\s*\d+|\d+\s*кг|\d+\s*г|\d+\s*м\b|китай|россия|гарантия)/ui', $ti) && mb_strlen($ti, 'UTF-8') < 30) {
+						$filtered_tags[] = $ti;
+					}
+				}
+				if (!empty($filtered_tags)) {
+					$text_parts[] = 'Tags: ' . implode(', ', array_slice($filtered_tags, 0, 10));
+				}
+			}
+
 			if (!empty($clean_desc)) {
-				$text_parts[] = 'Description: ' . mb_substr($clean_desc, 0, 500, 'UTF-8');
+				$text_parts[] = 'Description: ' . mb_substr($clean_desc, 0, 250, 'UTF-8');
 			}
 		} else {
 			$text_parts[] = 'Track: ' . $title;

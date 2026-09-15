@@ -320,8 +320,21 @@ class ModelExtensionModuleSoundnetStorefront extends Model {
 
 		$instrument_ids = array();
 
+		$params = array(
+			'limit' => (int)$limit
+		);
+		if (!empty($meta['genre'])) {
+			$params['genre'] = $meta['genre'];
+		}
+		if (!empty($meta['vibe'])) {
+			$params['vibe'] = $meta['vibe'];
+		}
+		if (!empty($meta['artist'])) {
+			$params['artist'] = $meta['artist'];
+		}
+
 		// 1. Query local AI microservice
-		$endpoint = rtrim($ai_server_url, '/') . '/internal/v1/tracks/' . (int)$product_id . '/instruments?limit=' . (int)$limit;
+		$endpoint = rtrim($ai_server_url, '/') . '/internal/v1/tracks/' . (int)$product_id . '/instruments?' . http_build_query($params);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $endpoint);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -340,17 +353,40 @@ class ModelExtensionModuleSoundnetStorefront extends Model {
 
 		// 2. Fallback to MySQL style matching
 		if (empty($instrument_ids)) {
-			$meta = $this->getReleaseMetadata($product_id);
-			$vibe = $this->db->escape($meta['vibe']);
+			$check_str = mb_strtolower($meta['genre'] . ' ' . $meta['vibe'], 'UTF-8');
+
+			$is_electronic = (strpos($check_str, 'electronic') !== false || strpos($check_str, 'techno') !== false || strpos($check_str, 'house') !== false || strpos($check_str, 'synth') !== false || strpos($check_str, 'ambient') !== false);
+			$is_heavy_rock = (strpos($check_str, 'rock') !== false || strpos($check_str, 'metal') !== false || strpos($check_str, 'thrash') !== false || strpos($check_str, 'grunge') !== false || strpos($check_str, 'punk') !== false);
+			$is_acoustic   = (strpos($check_str, 'acoustic') !== false || strpos($check_str, 'folk') !== false || strpos($check_str, 'unplugged') !== false);
+
+			if ($is_electronic) {
+				$pref_cats = array(24, 22, 20, 16);
+			} elseif ($is_heavy_rock && !$is_acoustic) {
+				$pref_cats = array(15, 16, 19, 20, 13);
+			} elseif ($is_acoustic) {
+				$pref_cats = array(12, 14, 11);
+			} else {
+				$pref_cats = array(15, 12, 24, 16);
+			}
+
+			$cat_list = implode(',', $pref_cats);
+			$kw_parts = array();
+			$vibe_words = preg_split('/[\s,;\/]+/', $meta['vibe'] . ' ' . $meta['genre']);
+			foreach ($vibe_words as $vw) {
+				$clean_vw = trim($vw);
+				if (mb_strlen($clean_vw, 'UTF-8') >= 4) {
+					$kw_parts[] = "pa.text LIKE '%" . $this->db->escape($clean_vw) . "%'";
+				}
+			}
 
 			$fallback_sql = "SELECT DISTINCT p.product_id
 				FROM " . DB_PREFIX . "product p
 				JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id)
-				LEFT JOIN " . DB_PREFIX . "product_attribute pa ON (p.product_id = pa.product_id)
-				WHERE p.status = '1' AND p2c.category_id IN (5, 6, 11, 12, 14, 15, 22, 24)";
+				LEFT JOIN " . DB_PREFIX . "product_attribute pa ON (p.product_id = pa.product_id AND pa.attribute_id = 9)
+				WHERE p.status = '1' AND p2c.category_id IN (" . $cat_list . ")";
 
-			if ($vibe) {
-				$fallback_sql .= " AND pa.attribute_id = 9";
+			if (!empty($kw_parts)) {
+				$fallback_sql .= " AND (" . implode(' OR ', $kw_parts) . ")";
 			}
 
 			$fallback_sql .= " ORDER BY p.price DESC LIMIT " . (int)$limit;
@@ -361,7 +397,7 @@ class ModelExtensionModuleSoundnetStorefront extends Model {
 			}
 
 			if (empty($instrument_ids)) {
-				$gen_query = $this->db->query("SELECT DISTINCT p.product_id FROM " . DB_PREFIX . "product p JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) WHERE p.status = '1' AND p2c.category_id IN (5, 6, 11, 12, 14, 15, 22, 24) ORDER BY p.price DESC LIMIT " . (int)$limit);
+				$gen_query = $this->db->query("SELECT DISTINCT p.product_id FROM " . DB_PREFIX . "product p JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) WHERE p.status = '1' AND p2c.category_id IN (" . $cat_list . ") ORDER BY p.price DESC LIMIT " . (int)$limit);
 				foreach ($gen_query->rows as $gr) {
 					$instrument_ids[] = (int)$gr['product_id'];
 				}
@@ -375,7 +411,7 @@ class ModelExtensionModuleSoundnetStorefront extends Model {
 		$id_list = implode(',', $instrument_ids);
 		$sql = "SELECT p.product_id, p.image, p.price, pd.name,
 				m.name AS brand,
-				(SELECT cd.name FROM " . DB_PREFIX . "category_description cd JOIN " . DB_PREFIX . "product_to_category p2c ON (cd.category_id = p2c.category_id) WHERE p2c.product_id = p.product_id AND cd.category_id IN (6, 11, 12, 14, 15, 22, 24) LIMIT 1) AS category_name,
+				(SELECT cd.name FROM " . DB_PREFIX . "category_description cd JOIN " . DB_PREFIX . "product_to_category p2c ON (cd.category_id = p2c.category_id) WHERE p2c.product_id = p.product_id AND cd.category_id IN (12, 13, 14, 15, 16, 19, 20, 24, 22, 11) ORDER BY FIELD(cd.category_id, 15, 12, 14, 13, 20, 19, 16, 24, 22, 11) LIMIT 1) AS category_name,
 				(SELECT pa.text FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 9 LIMIT 1) AS sound_style
 				FROM " . DB_PREFIX . "product p
 				JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id AND pd.language_id = '" . (int)$this->config->get('config_language_id') . "')

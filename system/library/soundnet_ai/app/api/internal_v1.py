@@ -86,6 +86,9 @@ async def get_matching_instruments(
     track_id: int,
     limit: int = Query(5, ge=1, le=20),
     category_id: int | None = Query(None),
+    genre: str | None = Query(None),
+    vibe: str | None = Query(None),
+    artist: str | None = Query(None),
     qdrant_client: AsyncQdrantClient = Depends(get_qdrant_client),
 ) -> MatchingInstrumentsResponse:
     instrument_ids = await search_matching_instruments(
@@ -93,6 +96,9 @@ async def get_matching_instruments(
         track_id=track_id,
         limit=limit,
         category_id=category_id,
+        genre=genre,
+        vibe=vibe,
+        artist=artist,
     )
 
     if instrument_ids is None:
