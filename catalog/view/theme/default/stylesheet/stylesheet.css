@@ -500,6 +500,18 @@ body {
   margin: 0 !important;
 }
 
+.site-logo-img {
+  max-height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.site-logo-img:hover {
+  transform: scale(1.02);
+}
+
 .brand-text-logo {
   display: flex;
   align-items: center;
