@@ -80,6 +80,27 @@ class ControllerCatalogProduct extends Controller {
 				$url .= '&filter_noindex=' . $this->request->get['filter_noindex'];
 			}
 
+			if (isset($this->request->get['filter_artist'])) {
+				$url .= '&filter_artist=' . urlencode(html_entity_decode($this->request->get['filter_artist'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_year'])) {
+				$url .= '&filter_year=' . urlencode(html_entity_decode($this->request->get['filter_year'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_genre'])) {
+				$url .= '&filter_genre=' . urlencode(html_entity_decode($this->request->get['filter_genre'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_brand'])) {
+				$url .= '&filter_brand=' . urlencode(html_entity_decode($this->request->get['filter_brand'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_format'])) {
+				$url .= '&filter_format=' . urlencode(html_entity_decode($this->request->get['filter_format'], ENT_QUOTES, 'UTF-8'));
+			}
+
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -171,6 +192,27 @@ class ControllerCatalogProduct extends Controller {
 				$url .= '&filter_noindex=' . $this->request->get['filter_noindex'];
 			}
 
+			if (isset($this->request->get['filter_artist'])) {
+				$url .= '&filter_artist=' . urlencode(html_entity_decode($this->request->get['filter_artist'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_year'])) {
+				$url .= '&filter_year=' . urlencode(html_entity_decode($this->request->get['filter_year'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_genre'])) {
+				$url .= '&filter_genre=' . urlencode(html_entity_decode($this->request->get['filter_genre'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_brand'])) {
+				$url .= '&filter_brand=' . urlencode(html_entity_decode($this->request->get['filter_brand'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_format'])) {
+				$url .= '&filter_format=' . urlencode(html_entity_decode($this->request->get['filter_format'], ENT_QUOTES, 'UTF-8'));
+			}
+
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -256,6 +298,27 @@ class ControllerCatalogProduct extends Controller {
 				$url .= '&filter_noindex=' . $this->request->get['filter_noindex'];
 			}
 
+			if (isset($this->request->get['filter_artist'])) {
+				$url .= '&filter_artist=' . urlencode(html_entity_decode($this->request->get['filter_artist'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_year'])) {
+				$url .= '&filter_year=' . urlencode(html_entity_decode($this->request->get['filter_year'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_genre'])) {
+				$url .= '&filter_genre=' . urlencode(html_entity_decode($this->request->get['filter_genre'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_brand'])) {
+				$url .= '&filter_brand=' . urlencode(html_entity_decode($this->request->get['filter_brand'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_format'])) {
+				$url .= '&filter_format=' . urlencode(html_entity_decode($this->request->get['filter_format'], ENT_QUOTES, 'UTF-8'));
+			}
+
+
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
 			}
@@ -340,6 +403,27 @@ class ControllerCatalogProduct extends Controller {
 			if (isset($this->request->get['filter_noindex'])) {
 				$url .= '&filter_noindex=' . $this->request->get['filter_noindex'];
 			}
+
+			if (isset($this->request->get['filter_artist'])) {
+				$url .= '&filter_artist=' . urlencode(html_entity_decode($this->request->get['filter_artist'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_year'])) {
+				$url .= '&filter_year=' . urlencode(html_entity_decode($this->request->get['filter_year'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_genre'])) {
+				$url .= '&filter_genre=' . urlencode(html_entity_decode($this->request->get['filter_genre'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_brand'])) {
+				$url .= '&filter_brand=' . urlencode(html_entity_decode($this->request->get['filter_brand'], ENT_QUOTES, 'UTF-8'));
+			}
+
+			if (isset($this->request->get['filter_format'])) {
+				$url .= '&filter_format=' . urlencode(html_entity_decode($this->request->get['filter_format'], ENT_QUOTES, 'UTF-8'));
+			}
+
 
 			if (isset($this->request->get['sort'])) {
 				$url .= '&sort=' . $this->request->get['sort'];
@@ -499,6 +583,36 @@ class ControllerCatalogProduct extends Controller {
 			$filter_noindex = '';
 		}
 
+		if (isset($this->request->get['filter_artist'])) {
+			$filter_artist = $this->request->get['filter_artist'];
+		} else {
+			$filter_artist = '';
+		}
+
+		if (isset($this->request->get['filter_year'])) {
+			$filter_year = $this->request->get['filter_year'];
+		} else {
+			$filter_year = '';
+		}
+
+		if (isset($this->request->get['filter_genre'])) {
+			$filter_genre = $this->request->get['filter_genre'];
+		} else {
+			$filter_genre = '';
+		}
+
+		if (isset($this->request->get['filter_brand'])) {
+			$filter_brand = $this->request->get['filter_brand'];
+		} else {
+			$filter_brand = '';
+		}
+
+		if (isset($this->request->get['filter_format'])) {
+			$filter_format = $this->request->get['filter_format'];
+		} else {
+			$filter_format = '';
+		}
+
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -612,6 +726,11 @@ class ControllerCatalogProduct extends Controller {
 			'filter_sub_category'	=> $filter_sub_category,
 			'filter_manufacturer_id'=> $filter_manufacturer_id,
 			'filter_noindex' 		=> $filter_noindex,
+			'filter_artist' 		=> $filter_artist,
+			'filter_year' 			=> $filter_year,
+			'filter_genre' 			=> $filter_genre,
+			'filter_brand' 			=> $filter_brand,
+			'filter_format' 		=> $filter_format,
 			'sort'            		=> $sort,
 			'order'           		=> $order,
 			'start'           		=> ($page - 1) * $this->config->get('config_limit_admin'),
@@ -623,6 +742,12 @@ class ControllerCatalogProduct extends Controller {
 		$product_total = $this->model_catalog_product->getTotalProducts($filter_data);
 
 		$results = $this->model_catalog_product->getProducts($filter_data);
+
+		$product_ids = array();
+		foreach ($results as $result) {
+			$product_ids[] = $result['product_id'];
+		}
+		$music_attributes = $this->model_catalog_product->getProductsMusicAttributes($product_ids);
 
 		foreach ($results as $result) {
 			if (is_file(DIR_IMAGE . $result['image'])) {
@@ -653,6 +778,11 @@ class ControllerCatalogProduct extends Controller {
 				'quantity'   => $result['quantity'],
 				'status'     => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'noindex'    => $result['noindex'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'artist'     => isset($music_attributes[$result['product_id']]['artist']) ? $music_attributes[$result['product_id']]['artist'] : '',
+				'year'       => isset($music_attributes[$result['product_id']]['year']) ? $music_attributes[$result['product_id']]['year'] : '',
+				'genre'      => isset($music_attributes[$result['product_id']]['genre']) ? $music_attributes[$result['product_id']]['genre'] : '',
+				'brand'      => isset($music_attributes[$result['product_id']]['brand']) ? $music_attributes[$result['product_id']]['brand'] : '',
+				'format'     => isset($music_attributes[$result['product_id']]['format']) ? $music_attributes[$result['product_id']]['format'] : '',
 				'href_shop'  => HTTP_CATALOG . 'index.php?route=product/product&product_id=' . $result['product_id'],
 				'edit'       => $this->url->link('catalog/product/edit', 'user_token=' . $this->session->data['user_token'] . '&product_id=' . $result['product_id'] . $url, true)
 			);
@@ -837,6 +967,15 @@ class ControllerCatalogProduct extends Controller {
 		$data['filter_manufacturer_name'] = $filter_manufacturer_name;
 		$data['filter_manufacturer_id'] = $filter_manufacturer_id;
 		$data['filter_noindex'] = $filter_noindex;
+		$data['filter_artist'] = $filter_artist;
+		$data['filter_year'] = $filter_year;
+		$data['filter_genre'] = $filter_genre;
+		$data['filter_brand'] = $filter_brand;
+		$data['filter_format'] = $filter_format;
+
+		$data['filter_years_list'] = $this->model_catalog_product->getDistinctAttributeValues(3, 'DESC');
+		$data['filter_genres_list'] = $this->model_catalog_product->getDistinctAttributeValues(2, 'ASC');
+		$data['filter_formats_list'] = $this->model_catalog_product->getDistinctAttributeValues(5, 'ASC');
 
 		$data['sort'] = $sort;
 		$data['order'] = $order;
@@ -1758,6 +1897,36 @@ class ControllerCatalogProduct extends Controller {
 		return !$this->error;
 	}
 
+	public function autocompleteArtist() {
+		$json = array();
+		if (isset($this->request->get['filter_name'])) {
+			$this->load->model('catalog/product');
+			$results = $this->model_catalog_product->getAttributeValues(1, $this->request->get['filter_name']);
+			foreach ($results as $result) {
+				$json[] = array(
+					'name' => strip_tags(html_entity_decode($result, ENT_QUOTES, 'UTF-8'))
+				);
+			}
+		}
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+
+	public function autocompleteBrand() {
+		$json = array();
+		if (isset($this->request->get['filter_name'])) {
+			$this->load->model('catalog/product');
+			$results = $this->model_catalog_product->getAttributeValues(7, $this->request->get['filter_name']);
+			foreach ($results as $result) {
+				$json[] = array(
+					'name' => strip_tags(html_entity_decode($result, ENT_QUOTES, 'UTF-8'))
+				);
+			}
+		}
+		$this->response->addHeader('Content-Type: application/json');
+		$this->response->setOutput(json_encode($json));
+	}
+
 	public function autocomplete() {
 		$json = array();
 
@@ -1791,6 +1960,12 @@ class ControllerCatalogProduct extends Controller {
 			);
 
 			$results = $this->model_catalog_product->getProducts($filter_data);
+
+		$product_ids = array();
+		foreach ($results as $result) {
+			$product_ids[] = $result['product_id'];
+		}
+		$music_attributes = $this->model_catalog_product->getProductsMusicAttributes($product_ids);
 
 			foreach ($results as $result) {
 				$option_data = array();

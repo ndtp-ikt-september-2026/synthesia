@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @font-face {
+    font-family: 'Inter';
+    src: url('Inter.ttf') format('truetype');
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    margin: 0;
+  }
+  
+  /* 1. Exact Rectangular Match */
+  #logoRect {
+    background: #0f172a;
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    padding: 12px 24px;
+    border-radius: 0;
+  }
+
+  /* 2. Sleek Studio Hardware Badge (Rounded corners) */
+  #logoBadge {
+    background: #0f172a;
+    display: inline-flex;
+    align-items: center;
+    gap: 13px;
+    padding: 12px 24px;
+    border-radius: 8px;
+  }
+  
+  .logo-icon svg {
+    display: block;
+    width: 26px;
+    height: 26px;
+    stroke: #38bdf8;
+    stroke-width: 2.2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  
+  .logo-text {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    color: #f8fafc;
+    /* Optical chromatic aberration */
+    text-shadow:
+      -1.3px 0 0.4px rgba(56, 189, 248, 0.85),
+       1.3px 0 0.4px rgba(245, 158, 11, 0.85);
+    text-transform: uppercase;
+    line-height: 1;
+    display: block;
+    position: relative;
+    top: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div>
+  <div id="logoRect">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="3"></circle>
+        <line x1="12" y1="2" x2="12" y2="4.2"></line>
+      </svg>
+    </div>
+    <span class="logo-text">SYNTHESIA</span>
+  </div>
+</div>
+
+<div>
+  <div id="logoBadge">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10"></circle>
+        <circle cx="12" cy="12" r="3"></circle>
+        <line x1="12" y1="2" x2="12" y2="4.2"></line>
+      </svg>
+    </div>
+    <span class="logo-text">SYNTHESIA</span>
+  </div>
+</div>
+
+</body>
+</html>

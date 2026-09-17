@@ -503,6 +503,26 @@ class ModelCatalogProduct extends Model {
 			$sql .= " AND p.noindex = '" . (int)$data['filter_noindex'] . "'";
 		}
 
+		if (!empty($data['filter_artist'])) {
+			$sql .= " AND EXISTS (SELECT 1 FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 1 AND pa.text LIKE '%" . $this->db->escape($data['filter_artist']) . "%')";
+		}
+
+		if (!empty($data['filter_year'])) {
+			$sql .= " AND EXISTS (SELECT 1 FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 3 AND pa.text LIKE '%" . $this->db->escape($data['filter_year']) . "%')";
+		}
+
+		if (!empty($data['filter_genre'])) {
+			$sql .= " AND EXISTS (SELECT 1 FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 2 AND pa.text LIKE '%" . $this->db->escape($data['filter_genre']) . "%')";
+		}
+
+		if (!empty($data['filter_brand'])) {
+			$sql .= " AND EXISTS (SELECT 1 FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 7 AND pa.text LIKE '%" . $this->db->escape($data['filter_brand']) . "%')";
+		}
+
+		if (!empty($data['filter_format'])) {
+			$sql .= " AND EXISTS (SELECT 1 FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 5 AND pa.text LIKE '%" . $this->db->escape($data['filter_format']) . "%')";
+		}
+
 		$sql .= " GROUP BY p.product_id";
 
 		$sort_data = array(
@@ -851,6 +871,26 @@ class ModelCatalogProduct extends Model {
 			$sql .= " AND p.noindex = '" . (int)$data['filter_noindex'] . "'";
 		}
 
+		if (!empty($data['filter_artist'])) {
+			$sql .= " AND EXISTS (SELECT 1 FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 1 AND pa.text LIKE '%" . $this->db->escape($data['filter_artist']) . "%')";
+		}
+
+		if (!empty($data['filter_year'])) {
+			$sql .= " AND EXISTS (SELECT 1 FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 3 AND pa.text LIKE '%" . $this->db->escape($data['filter_year']) . "%')";
+		}
+
+		if (!empty($data['filter_genre'])) {
+			$sql .= " AND EXISTS (SELECT 1 FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 2 AND pa.text LIKE '%" . $this->db->escape($data['filter_genre']) . "%')";
+		}
+
+		if (!empty($data['filter_brand'])) {
+			$sql .= " AND EXISTS (SELECT 1 FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 7 AND pa.text LIKE '%" . $this->db->escape($data['filter_brand']) . "%')";
+		}
+
+		if (!empty($data['filter_format'])) {
+			$sql .= " AND EXISTS (SELECT 1 FROM " . DB_PREFIX . "product_attribute pa WHERE pa.product_id = p.product_id AND pa.attribute_id = 5 AND pa.text LIKE '%" . $this->db->escape($data['filter_format']) . "%')";
+		}
+
 		$query = $this->db->query($sql);
 
 		return $query->row['total'];
@@ -914,5 +954,60 @@ class ModelCatalogProduct extends Model {
 		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product_to_layout WHERE layout_id = '" . (int)$layout_id . "'");
 
 		return $query->row['total'];
+	}
+
+	public function getDistinctAttributeValues($attribute_id, $order = 'ASC') {
+		$sql = "SELECT DISTINCT TRIM(text) AS val FROM " . DB_PREFIX . "product_attribute WHERE attribute_id = '" . (int)$attribute_id . "' AND TRIM(text) != '' ORDER BY val " . ($order == 'DESC' ? 'DESC' : 'ASC');
+		$query = $this->db->query($sql);
+		$values = array();
+		foreach ($query->rows as $row) {
+			$values[] = $row['val'];
+		}
+		return $values;
+	}
+
+	public function getAttributeValues($attribute_id, $filter = '') {
+		$sql = "SELECT DISTINCT TRIM(text) AS val FROM " . DB_PREFIX . "product_attribute WHERE attribute_id = '" . (int)$attribute_id . "' AND TRIM(text) != ''";
+		if (!empty($filter)) {
+			$sql .= " AND text LIKE '%" . $this->db->escape($filter) . "%'";
+		}
+		$sql .= " ORDER BY val ASC LIMIT 20";
+		$query = $this->db->query($sql);
+		$values = array();
+		foreach ($query->rows as $row) {
+			$values[] = $row['val'];
+		}
+		return $values;
+	}
+
+	public function getProductsMusicAttributes($product_ids = array()) {
+		if (empty($product_ids)) {
+			return array();
+		}
+		$clean_ids = array_map('intval', $product_ids);
+		$sql = "SELECT product_id, attribute_id, TRIM(text) as text 
+		        FROM " . DB_PREFIX . "product_attribute 
+		        WHERE product_id IN (" . implode(',', $clean_ids) . ") 
+		          AND attribute_id IN (1, 2, 3, 5, 7)";
+		$query = $this->db->query($sql);
+		$result = array();
+		foreach ($query->rows as $row) {
+			$pid = $row['product_id'];
+			if (!isset($result[$pid])) {
+				$result[$pid] = array(
+					'artist' => '',
+					'genre'  => '',
+					'year'   => '',
+					'format' => '',
+					'brand'  => ''
+				);
+			}
+			if ($row['attribute_id'] == 1) $result[$pid]['artist'] = $row['text'];
+			if ($row['attribute_id'] == 2) $result[$pid]['genre'] = $row['text'];
+			if ($row['attribute_id'] == 3) $result[$pid]['year'] = $row['text'];
+			if ($row['attribute_id'] == 5) $result[$pid]['format'] = $row['text'];
+			if ($row['attribute_id'] == 7) $result[$pid]['brand'] = $row['text'];
+		}
+		return $result;
 	}
 }

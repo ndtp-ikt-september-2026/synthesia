@@ -33,7 +33,7 @@
 			</div>
 		{% endif %}
 		<div class="row">
-			<div id="filter-product" class="col-md-3 col-md-push-9 col-sm-12 hidden-sm hidden-xs">
+			<div id="filter-product" class="col-md-3 col-md-push-9 col-sm-12 hidden-sm hidden-xs{% if filter_name or filter_model or filter_price_min or filter_price_max or filter_quantity_min or filter_quantity_max or filter_status or filter_category or filter_sub_category or filter_manufacturer_id or filter_noindex or filter_artist or filter_brand or filter_year or filter_genre or filter_format %} show{% endif %}">
 				<button class="open-close-filter btn btn-success"><i class="fa fa-filter"></i></button>
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -78,6 +78,68 @@
 								</div>
 								<input type="hidden" name="filter_manufacturer_id" value="{{ filter_manufacturer_id }}" id="input-manufacturer-id" class="form-control" />
 							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label" for="input-artist"><i class="fa fa-user"></i> {{ entry_artist }}</label>
+							<div class="input-group">
+								<input type="text" name="filter_artist" value="{{ filter_artist }}" placeholder="{{ entry_artist }}" id="input-artist" class="form-control" />
+								<div class="input-group-btn">
+									<button type="button" id="button-clear-input-artist" class="btn btn-default"><i class="fa fa-times"></i></button>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label" for="input-brand"><i class="fa fa-tag"></i> {{ entry_brand }}</label>
+							<div class="input-group">
+								<input type="text" name="filter_brand" value="{{ filter_brand }}" placeholder="{{ entry_brand }}" id="input-brand" class="form-control" />
+								<div class="input-group-btn">
+									<button type="button" id="button-clear-input-brand" class="btn btn-default"><i class="fa fa-times"></i></button>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label" for="input-year"><i class="fa fa-calendar"></i> {{ entry_year }}</label>
+							<select name="filter_year" id="input-year" class="form-control">
+								<option value="">{{ text_all_years }}</option>
+								{% for y in filter_years_list %}
+									{% if y == filter_year %}
+										<option value="{{ y }}" selected="selected">{{ y }}</option>
+									{% else %}
+										<option value="{{ y }}">{{ y }}</option>
+									{% endif %}
+								{% endfor %}
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label" for="input-genre"><i class="fa fa-music"></i> {{ entry_genre }}</label>
+							<select name="filter_genre" id="input-genre" class="form-control">
+								<option value="">{{ text_all_genres }}</option>
+								{% for g in filter_genres_list %}
+									{% if g == filter_genre %}
+										<option value="{{ g }}" selected="selected">{{ g }}</option>
+									{% else %}
+										<option value="{{ g }}">{{ g }}</option>
+									{% endif %}
+								{% endfor %}
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label" for="input-format"><i class="fa fa-dot-circle-o"></i> {{ entry_format }}</label>
+							<select name="filter_format" id="input-format" class="form-control">
+								<option value="">{{ text_all_formats }}</option>
+								{% for f in filter_formats_list %}
+									{% if f == filter_format %}
+										<option value="{{ f }}" selected="selected">{{ f }}</option>
+									{% else %}
+										<option value="{{ f }}">{{ f }}</option>
+									{% endif %}
+								{% endfor %}
+							</select>
 						</div>
 			<!--
 			<div class="form-group">
@@ -212,7 +274,26 @@
 															<span class="img-thumbnail list"><i class="fa fa-camera fa-2x"></i></span>
 														{% endif %}
 													</td>
-													<td class="text-left">{{ product.name }}</td>
+													<td class="text-left">
+														<strong>{{ product.name }}</strong>
+														<div class="product-meta-badges" style="margin-top: 5px; display: flex; flex-wrap: wrap; gap: 4px;">
+															{% if product.artist %}
+																<span class="label label-info" title="Исполнитель / Артист" style="font-size: 11px;"><i class="fa fa-user"></i> {{ product.artist }}</span>
+															{% endif %}
+															{% if product.brand %}
+																<span class="label label-warning" title="Бренд" style="font-size: 11px;"><i class="fa fa-tag"></i> {{ product.brand }}</span>
+															{% endif %}
+															{% if product.year %}
+																<span class="label label-default" title="Год выпуска" style="font-size: 11px;"><i class="fa fa-calendar"></i> {{ product.year }}</span>
+															{% endif %}
+															{% if product.genre %}
+																<span class="label label-primary" title="Жанр" style="font-size: 11px;"><i class="fa fa-music"></i> {{ product.genre }}</span>
+															{% endif %}
+															{% if product.format %}
+																<span class="label label-success" title="Формат" style="font-size: 11px;"><i class="fa fa-circle-o"></i> {{ product.format }}</span>
+															{% endif %}
+														</div>
+													</td>
 													<td class="text-left">{{ product.model }}</td>
 													<td class="text-right">
 														{% if product.special %}
@@ -327,6 +408,31 @@
 	
 		if (filter_noindex !== '') {
 			url += '&filter_noindex=' + encodeURIComponent(filter_noindex);
+		}
+
+		var filter_artist = $('input[name=\'filter_artist\']').val();
+		if (filter_artist) {
+			url += '&filter_artist=' + encodeURIComponent(filter_artist);
+		}
+
+		var filter_brand = $('input[name=\'filter_brand\']').val();
+		if (filter_brand) {
+			url += '&filter_brand=' + encodeURIComponent(filter_brand);
+		}
+
+		var filter_year = $('select[name=\'filter_year\']').val();
+		if (filter_year) {
+			url += '&filter_year=' + encodeURIComponent(filter_year);
+		}
+
+		var filter_genre = $('select[name=\'filter_genre\']').val();
+		if (filter_genre) {
+			url += '&filter_genre=' + encodeURIComponent(filter_genre);
+		}
+
+		var filter_format = $('select[name=\'filter_format\']').val();
+		if (filter_format) {
+			url += '&filter_format=' + encodeURIComponent(filter_format);
 		}
 
 		location = 'index.php?route=catalog/product&user_token={{ user_token }}' + url;
@@ -483,7 +589,71 @@
 		$('input[name=\'filter_quantity_max\']').val('');
 		$('#button-filter').trigger('click');
 	});
-	$('input[name=\'filter_name\'], input[name=\'filter_model\'], input[name=\'filter_category_name\'], input[name=\'filter_manufacturer_id\'], input[name=\'filter_price_min\'], input[name=\'filter_price_max\'], input[name=\'filter_quantity_min\'], input[name=\'filter_quantity_max\']').keypress(function (e) {
+
+	// Artist Autocomplete
+	$('input[name=\'filter_artist\']').autocomplete({
+		'source': function(request, response) {
+			if ($('input[name=\'filter_artist\']').val().length == 0) {
+				$('input[name=\'filter_artist\']').val('');
+			}
+			$.ajax({
+				url: 'index.php?route=catalog/product/autocompleteArtist&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+				dataType: 'json',
+				success: function(json) {
+					response($.map(json, function(item) {
+						return {
+							label: item['name'],
+							value: item['name']
+						}
+					}));
+				}
+			});
+		},
+		'select': function(item) {
+			$('input[name=\'filter_artist\']').val(item['label']);
+		}
+	});
+
+	$('#button-clear-input-artist').on('click', function() {
+		$('input[name=\'filter_artist\']').val('');
+		$('#button-filter').trigger('click');
+	});
+
+	// Brand Autocomplete
+	$('input[name=\'filter_brand\']').autocomplete({
+		'source': function(request, response) {
+			if ($('input[name=\'filter_brand\']').val().length == 0) {
+				$('input[name=\'filter_brand\']').val('');
+			}
+			$.ajax({
+				url: 'index.php?route=catalog/product/autocompleteBrand&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+				dataType: 'json',
+				success: function(json) {
+					response($.map(json, function(item) {
+						return {
+							label: item['name'],
+							value: item['name']
+						}
+					}));
+				}
+			});
+		},
+		'select': function(item) {
+			$('input[name=\'filter_brand\']').val(item['label']);
+		}
+	});
+
+	$('#button-clear-input-brand').on('click', function() {
+		$('input[name=\'filter_brand\']').val('');
+		$('#button-filter').trigger('click');
+	});
+
+	// Auto-filter on select dropdown change
+	$('select[name=\'filter_year\'], select[name=\'filter_genre\'], select[name=\'filter_format\']').on('change', function() {
+		$('#button-filter').trigger('click');
+	});
+
+	$('input[name=\'filter_name\'], input[name=\'filter_model\'], input[name=\'filter_category_name\'], input[name=\'filter_manufacturer_id\'], input[name=\'filter_price_min\'], input[name=\'filter_price_max\'], input[name=\'filter_quantity_min\'], input[name=\'filter_quantity_max\'], input[name=\'filter_artist\'], input[name=\'filter_brand\']').keypress(function (e) {
 		if (e.which == 13) {
 			$('#button-filter').trigger('click');
 			return false;

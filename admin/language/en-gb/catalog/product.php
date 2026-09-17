@@ -110,3 +110,14 @@ $_['error_keyword'] = 'SEO URL already in use!';
 $_['error_unique'] = 'SEO URL must be unique!';
 $_['text_none_category'] = '--- Not selected ---';
 $_['text_none_manufacturer'] = '--- Not selected ---';
+
+// Music & Studio Filters
+$_['entry_artist'] = 'Artist / Performer';
+$_['entry_year'] = 'Release Year';
+$_['entry_genre'] = 'Genre';
+$_['entry_brand'] = 'Brand';
+$_['entry_format'] = 'Release Format';
+$_['text_all_years'] = '--- All Years ---';
+$_['text_all_genres'] = '--- All Genres ---';
+$_['text_all_formats'] = '--- All Formats ---';
+$_['text_all_brands'] = '--- All Brands ---';

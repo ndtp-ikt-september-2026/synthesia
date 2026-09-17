@@ -123,3 +123,14 @@ $_['error_model'] = 'Код Товара товара должна содерж�
 $_['error_keyword'] = 'SEO URL уже используется!';
 $_['error_tab'] = '';
 $_['error_unique'] = 'Должно быть уникальным на всю систему, без пробелов и спецсимволов';
+
+// Music & Studio Filters
+$_['entry_artist'] = 'Исполнитель / Артист';
+$_['entry_year'] = 'Год выпуска';
+$_['entry_genre'] = 'Жанр';
+$_['entry_brand'] = 'Бренд';
+$_['entry_format'] = 'Формат издания';
+$_['text_all_years'] = '--- Все годы ---';
+$_['text_all_genres'] = '--- Все жанры ---';
+$_['text_all_formats'] = '--- Все форматы ---';
+$_['text_all_brands'] = '--- Все бренды ---';
