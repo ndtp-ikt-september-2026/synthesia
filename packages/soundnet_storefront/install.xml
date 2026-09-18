@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>SoundNet Storefront Extension &amp; Product Card Bugfix</name>
+    <code>soundnet_storefront</code>
+    <version>1.0.0</version>
+    <author>SoundNet Core Architect</author>
+    <link>http://synthesia/</link>
+
+    <!-- 1. PRODUCT CONTROLLER: Load Module, Enrich Release Metadata & Matching Gear -->
+    <file path="catalog/controller/product/product.php">
+        <operation>
+            <search><![CDATA[$this->load->language('product/product');]]></search>
+            <add position="after"><![CDATA[
+		$this->load->language('extension/module/soundnet_storefront');
+		$this->load->model('extension/module/soundnet_storefront');
+		$this->document->addStyle('catalog/view/theme/default/stylesheet/soundnet_storefront.css');
+		$this->document->addScript('catalog/view/javascript/soundnet_storefront.js');
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[$this->model_catalog_product->updateViewed($this->request->get['product_id']);]]></search>
+            <add position="after"><![CDATA[
+			// SoundNet Metadata Enrichment
+			$soundnet_meta = $this->model_extension_module_soundnet_storefront->getReleaseMetadata($this->request->get['product_id']);
+			$data['is_music'] = $soundnet_meta['is_music'];
+			$data['artist'] = $soundnet_meta['is_music'] ? $soundnet_meta['artist'] : '';
+			$data['year'] = $soundnet_meta['year'];
+			$data['label'] = $soundnet_meta['label'];
+			$data['format_badge'] = $soundnet_meta['is_music'] ? $soundnet_meta['format_badge'] : '';
+			if ($data['is_music']) {
+				$data['matching_gear'] = $this->model_extension_module_soundnet_storefront->getMatchingInstruments($this->request->get['product_id'], 6);
+				$data['tracks'] = $this->model_extension_module_soundnet_storefront->getTracks($this->request->get['product_id']);
+			} else {
+				$data['matching_gear'] = array();
+				$data['tracks'] = array();
+			}
+			$data['preview_track'] = null;
+			if (!empty($data['tracks'])) {
+				foreach ($data['tracks'] as $trk) {
+					if (!empty($trk['audio_url'])) {
+						$data['preview_track'] = $trk;
+						break;
+					}
+				}
+			}
+            ]]></add>
+        </operation>
+    </file>
+
+    <!-- 2. PRODUCT TEMPLATE: Inject AI Similar Modal -->
+    <file path="catalog/view/theme/default/template/product/product.twig">
+        <operation>
+            <search><![CDATA[{{ footer }}]]></search>
+            <add position="before"><![CDATA[
+{% include 'default/template/extension/module/soundnet_similar_modal.twig' %}
+            ]]></add>
+        </operation>
+    </file>
+
+    <!-- 3. HEADER CONTROLLER & TEMPLATE: Localized Russian Labels & Styles -->
+    <file path="catalog/controller/common/header.php">
+        <operation>
+            <search><![CDATA[$this->load->language('common/header');]]></search>
+            <add position="after"><![CDATA[
+		$this->load->language('extension/module/soundnet_storefront');
+		$data['text_catalog_all'] = $this->language->get('text_catalog_all');
+		$data['text_search_label'] = $this->language->get('text_search_label');
+		$data['text_search_placeholder'] = $this->language->get('text_search_placeholder');
+		$this->document->addStyle('catalog/view/theme/default/stylesheet/soundnet_storefront.css');
+		$this->document->addScript('catalog/view/javascript/soundnet_storefront.js');
+            ]]></add>
+        </operation>
+    </file>
+
+    <!-- 4. HOME CONTROLLER & TEMPLATE: Load Dual Recommendation Carousels & Categories Grid -->
+    <file path="catalog/controller/common/home.php">
+        <operation>
+            <search><![CDATA[$data['column_left'] = $this->load->controller('common/column_left');]]></search>
+            <add position="before"><![CDATA[
+		$data['soundnet_storefront'] = $this->load->controller('extension/module/soundnet_storefront');
+            ]]></add>
+        </operation>
+    </file>
+    <file path="catalog/view/theme/default/template/common/home.twig">
+        <operation>
+            <search><![CDATA[{{ content_top }}]]></search>
+            <add position="replace"><![CDATA[
+      {{ soundnet_storefront }}
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[{{ content_bottom }}]]></search>
+            <add position="replace"><![CDATA[]]></add>
+        </operation>
+    </file>
+</modification>

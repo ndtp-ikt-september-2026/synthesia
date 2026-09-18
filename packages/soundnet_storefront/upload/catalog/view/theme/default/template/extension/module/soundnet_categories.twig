@@ -1,0 +1,25 @@
+{# SoundNet Storefront 5-Column Popular Categories Grid #}
+<section class="storefront-categories-section" id="section-popular-categories">
+  <div class="section-header">
+    <div class="section-header__title-group">
+      <div class="section-eyebrow">Разделы каталога</div>
+      <h2 class="section-title">{{ heading_categories|default('Популярные категории') }}</h2>
+      <p class="section-subtitle">{{ subtitle_categories|default('Физические носители, синтезаторы и струнные по направлениям') }}</p>
+    </div>
+  </div>
+
+  <div class="categories-square-grid">
+    {% for cat in popular_categories %}
+    <a href="{{ cat.href }}" class="category-square-tile">
+      <div class="category-square-tile__media">
+        <img src="{{ cat.thumb }}" alt="{{ cat.name }}" loading="lazy" />
+        <div class="category-square-tile__scrim"></div>
+      </div>
+      <div class="category-square-tile__caption">
+        <h3 class="category-square-tile__title">{{ cat.name }}</h3>
+        <span class="category-square-tile__count">{{ cat.count }} товаров</span>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+</section>

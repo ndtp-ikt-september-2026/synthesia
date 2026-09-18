@@ -1,0 +1,144 @@
+{{ header }}
+<!-- Studio Breadcrumbs -->
+<nav class="studio-breadcrumbs-bar" aria-label="breadcrumb">
+  <div class="container">
+    <ol class="studio-breadcrumbs-list">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.last %}
+          <li class="studio-breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+        {% else %}
+          <li class="studio-breadcrumb-item">
+            <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+            <span class="studio-breadcrumb-sep">/</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </div>
+</nav>
+
+<div id="information-contact" class="container studio-product-container">
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+      {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+      {% set class = 'col-sm-9' %}
+    {% else %}
+      {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      
+      <div class="studio-category-hero-card" style="margin-bottom: 24px;">
+        <div class="category-hero-meta">
+          <h1 class="studio-category-heading">{{ heading_title }}</h1>
+          <div class="studio-category-desc">Команда SoundNet Studio всегда на связи. Обращайтесь по вопросам заказов, консультаций по винилу и подбору инструментов.</div>
+        </div>
+      </div>
+
+      <div class="row studio-contact-grid">
+        <!-- Contact Information Card -->
+        <div class="col-md-5 col-sm-12" style="margin-bottom: 20px;">
+          <div class="studio-content-card">
+            <h3 class="studio-card-section-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+              <span>{{ text_location|default('Наши контакты') }}</span>
+            </h3>
+
+            <div class="studio-contact-details">
+              <div class="contact-info-item">
+                <div class="contact-info-label">Магазин &amp; Шоурум</div>
+                <div class="contact-info-val store-name">{{ store }}</div>
+                {% if address %}
+                  <div class="contact-info-desc">{{ address|nl2br }}</div>
+                {% endif %}
+                {% if geocode %}
+                  <a href="https://maps.google.com/maps?q={{ geocode|url_encode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="btn-studio-secondary" style="display: inline-flex; margin-top: 8px; font-size: 12px; height: 32px; padding: 0 12px;">
+                    <i class="fa fa-map-marker"></i> <span>Показать на карте</span>
+                  </a>
+                {% endif %}
+              </div>
+
+              {% if telephone %}
+                <div class="contact-info-item">
+                  <div class="contact-info-label">Телефон горячей линии</div>
+                  <a href="tel:{{ telephone }}" class="contact-info-val phone-link">
+                    <i class="fa fa-phone"></i> <span>{{ telephone }}</span>
+                  </a>
+                </div>
+              {% endif %}
+
+              {% if open %}
+                <div class="contact-info-item">
+                  <div class="contact-info-label">{{ text_open|default('Режим работы') }}</div>
+                  <div class="contact-info-desc"><i class="fa fa-clock-o"></i> {{ open|nl2br }}</div>
+                </div>
+              {% endif %}
+
+              {% if comment %}
+                <div class="contact-info-item">
+                  <div class="contact-info-label">Дополнительно</div>
+                  <div class="contact-info-desc">{{ comment|nl2br }}</div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Message Form -->
+        <div class="col-md-7 col-sm-12" style="margin-bottom: 20px;">
+          <div class="studio-content-card">
+            <h3 class="studio-card-section-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+              <span>Написать нам сообщение</span>
+            </h3>
+
+            <form action="{{ action }}" method="post" enctype="multipart/form-data" class="studio-form">
+              <div class="form-group studio-form-group {% if error_name %}has-error{% endif %}">
+                <label class="control-label studio-label" for="input-name">Ваше имя <span class="required-star">*</span></label>
+                <input type="text" name="name" value="{{ name }}" id="input-name" class="form-control studio-input" placeholder="Иван Иванов" />
+                {% if error_name %}
+                  <div class="text-danger studio-form-error">{{ error_name }}</div>
+                {% endif %}
+              </div>
+
+              <div class="form-group studio-form-group {% if error_email %}has-error{% endif %}">
+                <label class="control-label studio-label" for="input-email">Электронная почта (E-Mail) <span class="required-star">*</span></label>
+                <input type="email" name="email" value="{{ email }}" id="input-email" class="form-control studio-input" placeholder="ivan@example.com" />
+                {% if error_email %}
+                  <div class="text-danger studio-form-error">{{ error_email }}</div>
+                {% endif %}
+              </div>
+
+              <div class="form-group studio-form-group {% if error_enquiry %}has-error{% endif %}">
+                <label class="control-label studio-label" for="input-enquiry">Ваше сообщение или вопрос <span class="required-star">*</span></label>
+                <textarea name="enquiry" rows="6" id="input-enquiry" class="form-control studio-textarea" placeholder="Напишите интересующий вас вопрос по товару, доставке или заказу...">{{ enquiry }}</textarea>
+                {% if error_enquiry %}
+                  <div class="text-danger studio-form-error">{{ error_enquiry }}</div>
+                {% endif %}
+              </div>
+
+              {{ captcha }}
+
+              <div class="studio-form-actions">
+                <button type="submit" class="btn-studio-buy-main" style="width: 100%; height: 48px; font-size: 15px;">
+                  <i class="fa fa-paper-plane-o"></i>
+                  <span>Отправить сообщение</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      {{ content_bottom }}
+    </div>
+    {{ column_right }}
+  </div>
+</div>
+{{ footer }}

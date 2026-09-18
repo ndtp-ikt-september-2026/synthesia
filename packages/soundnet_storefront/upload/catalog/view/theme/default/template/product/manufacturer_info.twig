@@ -1,0 +1,115 @@
+{{ header }}
+<!-- Studio Breadcrumbs -->
+<nav class="studio-breadcrumbs-bar" aria-label="breadcrumb">
+  <div class="container">
+    <ol class="studio-breadcrumbs-list">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.last %}
+          <li class="studio-breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+        {% else %}
+          <li class="studio-breadcrumb-item">
+            <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+            <span class="studio-breadcrumb-sep">/</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </div>
+</nav>
+
+<div id="product-manufacturer" class="container studio-product-container">
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+      {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+      {% set class = 'col-sm-9' %}
+    {% else %}
+      {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <div class="studio-category-hero-card">
+        <div class="category-hero-meta">
+          <h1 class="studio-category-heading">{{ heading_title }}</h1>
+          <div class="studio-category-desc">Коллекция товаров и релизов от {{ heading_title }} в SoundNet Studio</div>
+        </div>
+      </div>
+
+      {% if products %}
+        <div class="studio-category-toolbar">
+          <div class="studio-category-toolbar__count">
+            <span class="toolbar-count-badge">{{ products|length }}</span>
+            <span class="toolbar-count-label">товаров бренда</span>
+          </div>
+          <div class="studio-category-toolbar__controls">
+            <div class="studio-select-wrap">
+              <label for="input-sort">Сортировка:</label>
+              <select id="input-sort" class="studio-select-input" onchange="location = this.value;">
+                {% for sorts in sorts %}
+                  {% if sorts.value == '%s-%s'|format(sort, order) %}
+                    <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+                  {% else %}
+                    <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="row category-products-grid">
+          {% for product in products %}
+            <div class="product-layout col-lg-4 col-md-4 col-sm-6 col-xs-6">
+              <div class="studio-search-card">
+                <div class="image">
+                  <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" loading="lazy" /></a>
+                </div>
+                <div class="caption">
+                  <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+                  <p class="search-desc-snippet">{{ product.description }}</p>
+                  {% if product.price %}
+                    <p class="price">
+                      {% if not product.special %}
+                        <span class="price-normal">{{ product.price }}</span>
+                      {% else %}
+                        <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                      {% endif %}
+                    </p>
+                  {% endif %}
+                </div>
+                <div class="studio-search-card__actions">
+                  <button type="button" class="btn-search-cart" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" title="Купить">
+                    <i class="fa fa-shopping-cart"></i> <span>Купить</span>
+                  </button>
+                  <button type="button" class="btn-search-icon" data-toggle="tooltip" title="В избранное" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart-o"></i></button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="category-pagination-row row">
+          <div class="col-sm-6 text-left">{{ pagination }}</div>
+          <div class="col-sm-6 text-right pagination-results-text">{{ results }}</div>
+        </div>
+      {% else %}
+        <div class="empty-category-notice">
+          <div class="empty-notice-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M8 15h8"></path>
+              <circle cx="9" cy="9" r="1"></circle>
+              <circle cx="15" cy="9" r="1"></circle>
+            </svg>
+          </div>
+          <h3>{{ text_empty }}</h3>
+          <p>В каталоге пока нет доступных товаров данного бренда.</p>
+          <a href="{{ continue }}" class="btn btn-primary">Смотреть все товары</a>
+        </div>
+      {% endif %}
+
+      {{ content_bottom }}
+    </div>
+    {{ column_right }}
+  </div>
+</div>
+{{ footer }}

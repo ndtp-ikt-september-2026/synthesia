@@ -1,0 +1,99 @@
+{{ header }}
+<!-- Studio Breadcrumbs -->
+<nav class="studio-breadcrumbs-bar" aria-label="breadcrumb">
+  <div class="container">
+    <ol class="studio-breadcrumbs-list">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.last %}
+          <li class="studio-breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+        {% else %}
+          <li class="studio-breadcrumb-item">
+            <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+            <span class="studio-breadcrumb-sep">/</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </div>
+</nav>
+
+<div id="account-wishlist" class="container studio-product-container">
+  {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+  {% endif %}
+
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+      {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+      {% set class = 'col-sm-9' %}
+    {% else %}
+      {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      
+      <div class="studio-category-hero-card" style="margin-bottom: 24px;">
+        <div class="category-hero-meta">
+          <h1 class="studio-category-heading">{{ heading_title }}</h1>
+          <div class="studio-category-desc">Ваша персональная коллекция избранных виниловых релизов и музыкального оборудования</div>
+        </div>
+      </div>
+
+      {% if products %}
+        <div class="row category-products-grid">
+          {% for product in products %}
+            <div class="product-layout col-lg-3 col-md-4 col-sm-6 col-xs-6">
+              <div class="studio-search-card">
+                <div class="image">
+                  {% if product.thumb %}
+                    <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" loading="lazy" /></a>
+                  {% endif %}
+                  {% if product.special %}
+                    <span class="special-discount-badge">Sale</span>
+                  {% endif %}
+                </div>
+                <div class="caption">
+                  <h4><a href="{{ product.href }}" title="{{ product.name }}">{{ product.name }}</a></h4>
+                  {% if product.price %}
+                    <p class="price">
+                      {% if not product.special %}
+                        <span class="price-normal">{{ product.price }}</span>
+                      {% else %}
+                        <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                      {% endif %}
+                    </p>
+                  {% endif %}
+                </div>
+                <div class="studio-search-card__actions">
+                  <button type="button" class="btn-search-cart" onclick="cart.add('{{ product.product_id }}');" title="Купить">
+                    <i class="fa fa-shopping-cart"></i> <span>Купить</span>
+                  </button>
+                  <a href="{{ product.remove }}" data-toggle="tooltip" title="{{ button_remove }}" class="btn-search-icon" style="color: #ef4444; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                    <i class="fa fa-trash-o"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-category-notice">
+          <div class="empty-notice-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </div>
+          <h3>{{ text_empty }}</h3>
+          <p>В вашем списке избранного пока нет добавленных товаров.</p>
+          <a href="{{ continue }}" class="btn btn-primary">Смотреть каталог</a>
+        </div>
+      {% endif %}
+
+      {{ content_bottom }}
+    </div>
+    {{ column_right }}
+  </div>
+</div>
+{{ footer }}

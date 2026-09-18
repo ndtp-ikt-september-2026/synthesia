@@ -206,8 +206,10 @@
         </div>
 
         {% if is_music and tracks %}
-          <div class="studio-tracklist-section" style="margin-top: 32px;">
-            <h3 class="studio-block-header"><i class="fa fa-list-ol"></i> Треклист релиза</h3>
+          <div class="studio-tracklist-section{% if tracks|length > 8 %} is-collapsible is-collapsed{% endif %}" id="studio-tracklist-section" style="margin-top: 32px;">
+            <div class="studio-tracklist-header-row">
+              <h3 class="studio-block-header"><i class="fa fa-list-ol"></i> Треклист релиза <span class="tracklist-badge">{{ tracks|length }}</span></h3>
+            </div>
             <div class="studio-tracklist-table-wrap">
               <table class="studio-tracklist-table">
                 <thead>
@@ -238,6 +240,18 @@
                 </tbody>
               </table>
             </div>
+            {% if tracks|length > 8 %}
+              <div class="studio-tracklist-toggle-bar">
+                <button type="button" class="btn-tracklist-toggle js-tracklist-toggle" data-count="{{ tracks|length }}" aria-expanded="false">
+                  <span class="toggle-text-collapsed">
+                    <i class="fa fa-chevron-down"></i> Показать все треки ({{ tracks|length }})
+                  </span>
+                  <span class="toggle-text-expanded">
+                    <i class="fa fa-chevron-up"></i> Свернуть треклист
+                  </span>
+                </button>
+              </div>
+            {% endif %}
           </div>
         {% endif %}
       </div>
@@ -411,6 +425,28 @@ document.querySelectorAll('.studio-tab-btn').forEach(function(btn) {
     }
   });
 });
+
+// Tracklist Collapsible Full View / Less View Toggle
+document.querySelectorAll('.js-tracklist-toggle').forEach(function(btn) {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    var section = this.closest('.studio-tracklist-section');
+    if (!section) return;
+    var isCollapsed = section.classList.contains('is-collapsed');
+    if (isCollapsed) {
+      section.classList.remove('is-collapsed');
+      this.setAttribute('aria-expanded', 'true');
+    } else {
+      section.classList.add('is-collapsed');
+      this.setAttribute('aria-expanded', 'false');
+      var rect = section.getBoundingClientRect();
+      if (rect.top < 80) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  });
+});
+
 
 // Thumbnail Image Switching & Lightbox Gallery
 var activeGalleryIndex = 0;

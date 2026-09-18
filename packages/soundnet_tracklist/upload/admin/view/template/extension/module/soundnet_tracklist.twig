@@ -1,0 +1,119 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-music"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-9">
+              <select name="module_soundnet_tracklist_status" id="input-status" class="form-control">
+                {% if module_soundnet_tracklist_status %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="input-theme"><span data-toggle="tooltip" title="{{ help_theme }}">{{ entry_theme }}</span></label>
+            <div class="col-sm-9">
+              <select name="module_soundnet_tracklist_theme" id="input-theme" class="form-control">
+                <option value="darkstudio" {% if module_soundnet_tracklist_theme == 'darkstudio' %}selected="selected"{% endif %}>{{ text_theme_darkstudio }}</option>
+                <option value="vinyl" {% if module_soundnet_tracklist_theme == 'vinyl' %}selected="selected"{% endif %}>{{ text_theme_vinyl }}</option>
+                <option value="minimalist" {% if module_soundnet_tracklist_theme == 'minimalist' %}selected="selected"{% endif %}>{{ text_theme_minimalist }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="input-position">{{ entry_position }}</label>
+            <div class="col-sm-9">
+              <select name="module_soundnet_tracklist_position" id="input-position" class="form-control">
+                <option value="bottom" {% if module_soundnet_tracklist_position == 'bottom' %}selected="selected"{% endif %}>{{ text_position_bottom }}</option>
+                <option value="inline" {% if module_soundnet_tracklist_position == 'inline' %}selected="selected"{% endif %}>{{ text_position_inline }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="input-auto-advance"><span data-toggle="tooltip" title="{{ help_auto_advance }}">{{ entry_auto_advance }}</span></label>
+            <div class="col-sm-9">
+              <select name="module_soundnet_tracklist_auto_advance" id="input-auto-advance" class="form-control">
+                <option value="1" {% if module_soundnet_tracklist_auto_advance %}selected="selected"{% endif %}>{{ text_enabled }}</option>
+                <option value="0" {% if not module_soundnet_tracklist_auto_advance %}selected="selected"{% endif %}>{{ text_disabled }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label" for="input-allowed-formats"><span data-toggle="tooltip" title="{{ help_allowed_formats }}">{{ entry_allowed_formats }}</span></label>
+            <div class="col-sm-9">
+              <input type="text" name="module_soundnet_tracklist_allowed_formats" value="{{ module_soundnet_tracklist_allowed_formats }}" placeholder="mp3,wav,ogg,flac" id="input-allowed-formats" class="form-control" />
+            </div>
+          </div>
+
+          <hr/>
+
+          <div class="well" style="background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; padding:18px;">
+            <div class="row">
+              <div class="col-md-8">
+                <h4 style="margin-top:0; color:#111827; font-weight:600;"><i class="fa fa-sliders text-primary"></i> SoundNet Audio Engine Information</h4>
+                <p style="color:#4b5563; font-size:13px; line-height:1.6;">
+                  Tracks can be added and managed on each Product edit page under the <strong>"Tracklist & Previews"</strong> tab. 
+                  Preview audio files can be uploaded via AJAX directly in each track row or linked from CDN/external streaming URLs.
+                </p>
+                <ul style="color:#4b5563; font-size:13px; padding-left:18px;">
+                  <li><strong>Native HTML5 Engine:</strong> Zero bulky Flash or heavy libraries. Fast, responsive, lightweight.</li>
+                  <li><strong>HTTP 206 Partial Content:</strong> Built-in seekable streaming endpoint for smooth scrub on iOS Safari, Android, and desktop.</li>
+                  <li><strong>Visual Equalizer:</strong> Animated CSS keyframe bars react when audio is actively playing.</li>
+                </ul>
+              </div>
+              <div class="col-md-4 text-right">
+                <div style="background:#111827; color:#fff; border-radius:8px; padding:15px; text-align:left;">
+                  <span class="label label-success" style="font-size:11px;">OCMOD Ready</span>
+                  <div style="margin-top:10px; font-weight:bold; font-size:14px; color:#38bdf8;">SoundNet Player Active</div>
+                  <div style="font-size:12px; color:#9ca3af; margin-top:4px;">Version 1.0.0 &bull; OpenCart 3.0.3.x</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

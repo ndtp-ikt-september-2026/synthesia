@@ -18,8 +18,8 @@ system/storage/session/*
 # ==============================================================================
 # OpenCart Generated Image Cache
 # ==============================================================================
-image/cache/catalog/products/
-image/cache/placeholder-*.png
+image/cache/*
+!image/cache/index.html
 
 # ==============================================================================
 # Scraped / Ingested Product Images & Audio Previews
@@ -76,12 +76,24 @@ wheels/
 .env.*.local
 *.env
 !.env.example
+config.php
+admin/config.php
+!config-dist.php
+!admin/config-dist.php
+
+# ==============================================================================
+# Explanatory Notes & Local Scratch Artifacts
+# ==============================================================================
+ПОЯСНИТЕЛЬНАЯ_ЗАПИСКА*
+*.docx
+scratch/
 
 # ==============================================================================
 # Build Artifacts & Archive Packages
 # ==============================================================================
 dist/
-*.zip
+*.ocmod.zip
+!packages/**
 *.tar
 *.tar.gz
 *.tgz
@@ -97,6 +109,7 @@ setup.log
 *.swp
 *.swo
 *~
+admin/view/javascript/jquery/flot/build.log
 
 # ==============================================================================
 # IDEs & Editor Configuration

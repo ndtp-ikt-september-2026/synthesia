@@ -1,0 +1,49 @@
+{{ header }}
+<!-- Studio Breadcrumbs -->
+<nav class="studio-breadcrumbs-bar" aria-label="breadcrumb">
+  <div class="container">
+    <ol class="studio-breadcrumbs-list">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.last %}
+          <li class="studio-breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+        {% else %}
+          <li class="studio-breadcrumb-item">
+            <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+            <span class="studio-breadcrumb-sep">/</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </div>
+</nav>
+
+<div id="error-not-found" class="container studio-product-container">
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+      {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+      {% set class = 'col-sm-9' %}
+    {% else %}
+      {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <div class="empty-category-notice" style="margin: 40px auto; max-width: 540px;">
+        <div class="empty-notice-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="15" y1="9" x2="9" y2="15"></line>
+            <line x1="9" y1="9" x2="15" y2="15"></line>
+          </svg>
+        </div>
+        <h3>{{ heading_title }}</h3>
+        <p>{{ text_error }}</p>
+        <a href="{{ continue }}" class="btn-studio-buy-main" style="display: inline-flex; align-items: center; justify-content: center; height: 46px; padding: 0 24px; text-decoration: none;">
+          <span>Вернуться на главную</span>
+        </a>
+      </div>
+      {{ content_bottom }}
+    </div>
+    {{ column_right }}
+  </div>
+</div>
+{{ footer }}

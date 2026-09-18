@@ -1,0 +1,41 @@
+{{ header }}
+<!-- Studio Breadcrumbs -->
+<nav class="studio-breadcrumbs-bar" aria-label="breadcrumb">
+  <div class="container">
+    <ol class="studio-breadcrumbs-list">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.last %}
+          <li class="studio-breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+        {% else %}
+          <li class="studio-breadcrumb-item">
+            <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+            <span class="studio-breadcrumb-sep">/</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </div>
+</nav>
+
+<div id="information-information" class="container studio-product-container">
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+      {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+      {% set class = 'col-sm-9' %}
+    {% else %}
+      {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <div class="studio-content-card" style="margin-bottom: 30px;">
+        <h1 class="studio-category-heading" style="margin-top: 0; margin-bottom: 20px; font-size: 26px;">{{ heading_title }}</h1>
+        <div class="studio-article-body" style="font-size: 15px; line-height: 1.7; color: #334155;">
+          {{ description }}
+        </div>
+      </div>
+      {{ content_bottom }}
+    </div>
+    {{ column_right }}
+  </div>
+</div>
+{{ footer }}

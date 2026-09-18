@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>SoundNet Dynamic Tracklist &amp; Audio Player</name>
+    <code>soundnet_tracklist</code>
+    <version>1.0.0</version>
+    <author>SoundNet AI</author>
+    <link>http://synthesia</link>
+
+    <!-- 1. Admin Product Form View: Inject Tracklist Tab & Management Table -->
+    <file path="admin/view/template/catalog/product_form.twig">
+        <operation>
+            <search><![CDATA[<li><a href="#tab-design" data-toggle="tab">{{ tab_design }}</a></li>]]></search>
+            <add position="after"><![CDATA[
+            <li><a href="#tab-tracklist" data-toggle="tab"><i class="fa fa-music text-primary"></i> Tracklist &amp; Previews</a></li>
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[<div class="tab-pane" id="tab-design">]]></search>
+            <add position="before"><![CDATA[
+            <div class="tab-pane" id="tab-tracklist">
+              <div class="alert alert-info" style="border-radius:6px; background-color:#f0f9ff; border-color:#b9e6fe; color:#0369a1;">
+                <i class="fa fa-info-circle"></i> <strong>SoundNet Audio Engine:</strong> Manage release tracks, duration, and audio preview snippets. You can either upload audio files directly via the Upload button or paste external streaming URLs (MP3, WAV, OGG, FLAC).
+              </div>
+              <div class="table-responsive">
+                <table id="product-tracklist" class="table table-striped table-bordered table-hover">
+                  <thead>
+                    <tr style="background:#f9fafb;">
+                      <th class="text-center" style="width: 70px;">#</th>
+                      <th class="text-left" style="min-width: 220px;">Track Title</th>
+                      <th class="text-left" style="width: 120px;">Duration</th>
+                      <th class="text-left">Preview Audio File / URL</th>
+                      <th class="text-left" style="width: 130px;">Status</th>
+                      <th class="text-right" style="width: 90px;">Sort Order</th>
+                      <th class="text-center" style="width: 60px;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody id="track-rows">
+                    {% set track_row = 0 %}
+                    {% for track in product_tracks %}
+                    <tr id="track-row{{ track_row }}">
+                      <td class="text-center">
+                        <input type="text" name="product_track[{{ track_row }}][track_num]" value="{{ track.track_num }}" class="form-control text-center" style="font-weight:bold;" />
+                      </td>
+                      <td class="text-left">
+                        <input type="text" name="product_track[{{ track_row }}][title]" value="{{ track.title }}" placeholder="e.g. Speak to Me" class="form-control" />
+                      </td>
+                      <td class="text-left">
+                        <input type="text" name="product_track[{{ track_row }}][duration]" value="{{ track.duration }}" placeholder="1:30" class="form-control" />
+                      </td>
+                      <td class="text-left">
+                        <div class="input-group">
+                          <input type="text" name="product_track[{{ track_row }}][preview_file]" id="input-track-file{{ track_row }}" value="{{ track.preview_file }}" placeholder="upload/audio/sample.mp3 or https://..." class="form-control" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default js-soundnet-upload-trigger" data-row="{{ track_row }}" data-toggle="tooltip" title="Upload Audio File (MP3, WAV, OGG, FLAC)">
+                              <i class="fa fa-upload text-primary"></i> Upload
+                            </button>
+                          </span>
+                        </div>
+                      </td>
+                      <td class="text-left">
+                        <select name="product_track[{{ track_row }}][status]" class="form-control">
+                          <option value="1" {% if track.status == '1' or track.status is not defined %}selected="selected"{% endif %}>Enabled</option>
+                          <option value="0" {% if track.status == '0' %}selected="selected"{% endif %}>Disabled</option>
+                        </select>
+                      </td>
+                      <td class="text-right">
+                        <input type="text" name="product_track[{{ track_row }}][sort_order]" value="{{ track.sort_order }}" class="form-control text-right" />
+                      </td>
+                      <td class="text-center">
+                        <button type="button" onclick="$('#track-row{{ track_row }}').remove();" data-toggle="tooltip" title="Remove Track" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button>
+                      </td>
+                    </tr>
+                    {% set track_row = track_row + 1 %}
+                    {% endfor %}
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td colspan="6"></td>
+                      <td class="text-center">
+                        <button type="button" onclick="addSoundNetTrack();" data-toggle="tooltip" title="Add Track" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <input type="file" id="soundnet-admin-file-input" accept="audio/*,.mp3,.wav,.ogg,.flac,.m4a" style="display:none;" />
+            </div>
+
+            <script type="text/javascript"><!--
+            var soundnet_track_row = {{ track_row }};
+
+            function addSoundNetTrack() {
+                var next_num = $('#track-rows tr').length + 1;
+                html  = '<tr id="track-row' + soundnet_track_row + '">';
+                html += '  <td class="text-center"><input type="text" name="product_track[' + soundnet_track_row + '][track_num]" value="' + next_num + '" class="form-control text-center" style="font-weight:bold;" /></td>';
+                html += '  <td class="text-left"><input type="text" name="product_track[' + soundnet_track_row + '][title]" value="" placeholder="Track ' + next_num + '" class="form-control" /></td>';
+                html += '  <td class="text-left"><input type="text" name="product_track[' + soundnet_track_row + '][duration]" value="0:00" placeholder="3:45" class="form-control" /></td>';
+                html += '  <td class="text-left">';
+                html += '    <div class="input-group">';
+                html += '      <input type="text" name="product_track[' + soundnet_track_row + '][preview_file]" id="input-track-file' + soundnet_track_row + '" value="" placeholder="upload/audio/sample.mp3 or URL" class="form-control" />';
+                html += '      <span class="input-group-btn">';
+                html += '        <button type="button" class="btn btn-default js-soundnet-upload-trigger" data-row="' + soundnet_track_row + '" title="Upload Audio File"><i class="fa fa-upload text-primary"></i> Upload</button>';
+                html += '      </span>';
+                html += '    </div>';
+                html += '  </td>';
+                html += '  <td class="text-left">';
+                html += '    <select name="product_track[' + soundnet_track_row + '][status]" class="form-control">';
+                html += '      <option value="1" selected="selected">Enabled</option>';
+                html += '      <option value="0">Disabled</option>';
+                html += '    </select>';
+                html += '  </td>';
+                html += '  <td class="text-right"><input type="text" name="product_track[' + soundnet_track_row + '][sort_order]" value="' + soundnet_track_row + '" class="form-control text-right" /></td>';
+                html += '  <td class="text-center"><button type="button" onclick="$(\'#track-row' + soundnet_track_row + '\').remove();" title="Remove Track" class="btn btn-danger btn-sm"><i class="fa fa-minus-circle"></i></button></td>';
+                html += '</tr>';
+
+                $('#track-rows').append(html);
+                soundnet_track_row++;
+            }
+
+            var currentSoundNetRow = null;
+            $(document).on('click', '.js-soundnet-upload-trigger', function() {
+                currentSoundNetRow = $(this).attr('data-row');
+                $('#soundnet-admin-file-input').val('').trigger('click');
+            });
+
+            $('#soundnet-admin-file-input').on('change', function() {
+                if (this.files && this.files[0] && currentSoundNetRow !== null) {
+                    var file = this.files[0];
+                    var formData = new FormData();
+                    formData.append('file', file);
+
+                    var $btn = $('button.js-soundnet-upload-trigger[data-row="' + currentSoundNetRow + '"]');
+                    var origHtml = $btn.html();
+                    $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i>');
+
+                    $.ajax({
+                        url: 'index.php?route=extension/module/soundnet_tracklist/upload&user_token={{ user_token }}',
+                        type: 'post',
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        dataType: 'json',
+                        success: function(json) {
+                            $btn.prop('disabled', false).html(origHtml);
+                            if (json['error']) {
+                                alert(json['error']);
+                            } else if (json['success']) {
+                                $('#input-track-file' + currentSoundNetRow).val(json['preview_file']);
+                                var $titleInput = $('input[name="product_track[' + currentSoundNetRow + '][title]"]');
+                                if (!$titleInput.val() && json['title_hint']) {
+                                    $titleInput.val(json['title_hint']);
+                                }
+                            }
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            $btn.prop('disabled', false).html(origHtml);
+                            alert('Upload request failed: ' + thrownError);
+                        }
+                    });
+                }
+            });
+            //--></script>
+            ]]></add>
+        </operation>
+    </file>
+
+    <!-- 2. Admin Product Controller: Fetch Tracks on Edit & Save Tracks -->
+    <file path="admin/controller/catalog/product.php">
+        <operation>
+            <search><![CDATA[$product_id = $this->model_catalog_product->addProduct($this->request->post);]]></search>
+            <add position="after"><![CDATA[
+			$this->load->model('extension/module/soundnet_tracklist');
+			if (isset($this->request->post['product_track']) && is_array($this->request->post['product_track'])) {
+				$this->model_extension_module_soundnet_tracklist->saveTracks($product_id, $this->request->post['product_track']);
+			}
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);]]></search>
+            <add position="after"><![CDATA[
+			$this->load->model('extension/module/soundnet_tracklist');
+			if (isset($this->request->post['product_track']) && is_array($this->request->post['product_track'])) {
+				$this->model_extension_module_soundnet_tracklist->saveTracks($this->request->get['product_id'], $this->request->post['product_track']);
+			}
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[$this->model_catalog_product->deleteProduct($product_id);]]></search>
+            <add position="after"><![CDATA[
+				$this->load->model('extension/module/soundnet_tracklist');
+				$this->model_extension_module_soundnet_tracklist->deleteTracks($product_id);
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[$data['header'] = $this->load->controller('common/header');]]></search>
+            <add position="before"><![CDATA[
+		$this->load->language('extension/module/soundnet_tracklist');
+		$this->load->model('extension/module/soundnet_tracklist');
+		if (isset($this->request->post['product_track'])) {
+			$data['product_tracks'] = $this->request->post['product_track'];
+		} elseif (isset($this->request->get['product_id'])) {
+			$data['product_tracks'] = $this->model_extension_module_soundnet_tracklist->getTracks($this->request->get['product_id']);
+		} else {
+			$data['product_tracks'] = array();
+		}
+            ]]></add>
+        </operation>
+    </file>
+
+    <!-- 3. Catalog Product Controller: Prepare Tracklist View -->
+    <file path="catalog/controller/product/product.php">
+        <operation>
+            <search><![CDATA[$this->response->setOutput($this->load->view('product/product', $data));]]></search>
+            <add position="before"><![CDATA[
+			$this->load->language('extension/module/soundnet_tracklist');
+			$data['tab_soundnet_tracklist'] = $this->language->get('heading_title');
+			$data['soundnet_tracklist'] = $this->load->controller('extension/module/soundnet_tracklist', array('product_id' => (int)$this->request->get['product_id']));
+            ]]></add>
+        </operation>
+    </file>
+
+    <!-- 4. Catalog Product Detail Page: Inject Tracklist Tab & Content -->
+    <file path="catalog/view/theme/*/template/product/product.twig">
+        <operation>
+            <search><![CDATA[<li class="active"><a href="#tab-description" data-toggle="tab">{{ tab_description }}</a></li>]]></search>
+            <add position="after"><![CDATA[
+            {% if soundnet_tracklist %}
+            <li><a href="#tab-tracklist" data-toggle="tab"><i class="fa fa-headphones"></i> {{ tab_soundnet_tracklist|default('Tracklist & Previews') }}</a></li>
+            {% endif %}
+            ]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[<div class="tab-pane active" id="tab-description">{{ description }}</div>]]></search>
+            <add position="after"><![CDATA[
+            {% if soundnet_tracklist %}
+            <div class="tab-pane" id="tab-tracklist">
+              {{ soundnet_tracklist }}
+            </div>
+            {% endif %}
+            ]]></add>
+        </operation>
+    </file>
+</modification>

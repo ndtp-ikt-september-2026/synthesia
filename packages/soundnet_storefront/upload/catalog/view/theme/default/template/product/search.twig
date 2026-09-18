@@ -1,0 +1,192 @@
+{{ header }}
+<!-- Studio Breadcrumbs -->
+<nav class="studio-breadcrumbs-bar" aria-label="breadcrumb">
+  <div class="container">
+    <ol class="studio-breadcrumbs-list">
+      {% for breadcrumb in breadcrumbs %}
+        {% if loop.last %}
+          <li class="studio-breadcrumb-item active" aria-current="page">{{ breadcrumb.text }}</li>
+        {% else %}
+          <li class="studio-breadcrumb-item">
+            <a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+            <span class="studio-breadcrumb-sep">/</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </div>
+</nav>
+<div id="product-search" class="container studio-product-container">
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <div class="studio-search-filter-card">
+        <h1 class="studio-category-heading" style="margin-top: 0; margin-bottom: 16px;">{{ heading_title }}</h1>
+        <div class="row" style="margin-bottom: 12px;">
+          <div class="col-sm-5 col-xs-12" style="margin-bottom: 10px;">
+            <input type="text" name="search" value="{{ search }}" placeholder="{{ text_keyword }}" id="input-search" class="form-control studio-select-input" style="height: 42px;" />
+          </div>
+          <div class="col-sm-4 col-xs-12" style="margin-bottom: 10px;">
+            <select name="category_id" class="form-control studio-select-input" style="height: 42px;">
+              <option value="0">{{ text_category }}</option>
+              {% for category_1 in categories %}
+              {% if category_1.category_id == category_id %}
+              <option value="{{ category_1.category_id }}" selected="selected">{{ category_1.name }}</option>
+              {% else %}
+              <option value="{{ category_1.category_id }}">{{ category_1.name }}</option>
+              {% endif %}
+              {% for category_2 in category_1.children %}
+              {% if category_2.category_id == category_id %}
+              <option value="{{ category_2.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+              {% else %}
+              <option value="{{ category_2.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+              {% endif %}
+              {% for category_3 in category_2.children %}
+              {% if category_3.category_id == category_id %}
+              <option value="{{ category_3.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+              {% else %}
+              <option value="{{ category_3.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+              {% endif %}
+              {% endfor %}
+              {% endfor %}
+              {% endfor %}
+            </select>
+          </div>
+          <div class="col-sm-3 col-xs-12" style="margin-bottom: 10px;">
+            <input type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary btn-search-submit" style="width: 100%; height: 42px; font-weight: 700; border-radius: 9px;" />
+          </div>
+        </div>
+        <div class="search-checkboxes-row" style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: #64748b;">
+          <label class="checkbox-inline" style="margin: 0; display: inline-flex; align-items: center; gap: 6px;">
+            {% if sub_category %}
+            <input type="checkbox" name="sub_category" value="1" checked="checked" />
+            {% else %}
+            <input type="checkbox" name="sub_category" value="1" />
+            {% endif %}
+            {{ text_sub_category }}
+          </label>
+          <label class="checkbox-inline" style="margin: 0; display: inline-flex; align-items: center; gap: 6px;">
+            {% if description %}
+            <input type="checkbox" name="description" value="1" id="description" checked="checked" />
+            {% else %}
+            <input type="checkbox" name="description" value="1" id="description" />
+            {% endif %}
+            {{ entry_description }}
+          </label>
+        </div>
+      </div>
+      {% if products %}
+      <div class="studio-category-toolbar">
+        <div class="studio-category-toolbar__count">
+          <span class="toolbar-count-badge">{{ products|length }}</span>
+          <span class="toolbar-count-label">найдено товаров</span>
+        </div>
+        <div class="studio-category-toolbar__controls">
+          <div class="studio-select-wrap">
+            <label for="input-sort">Сортировка:</label>
+            <select id="input-sort" class="studio-select-input" onchange="location = this.value;">
+              {% for sorts in sorts %}
+              {% if sorts.value == '%s-%s'|format(sort, order) %}
+              <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+              {% else %}
+              <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row category-products-grid">
+        {% for product in products %}
+        <div class="product-layout col-lg-4 col-md-4 col-sm-6 col-xs-6">
+          <div class="studio-search-card">
+            <div class="image">
+              <a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" loading="lazy" /></a>
+            </div>
+            <div class="caption">
+              <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+              <p class="search-desc-snippet">{{ product.description }}</p>
+              {% if product.price %}
+              <p class="price">
+                {% if not product.special %}
+                <span class="price-normal">{{ product.price }}</span>
+                {% else %}
+                <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span>
+                {% endif %}
+              </p>
+              {% endif %}
+            </div>
+            <div class="studio-search-card__actions">
+              <button type="button" class="btn-search-cart" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" title="Купить">
+                <i class="fa fa-shopping-cart"></i> <span>Купить</span>
+              </button>
+              <button type="button" class="btn-search-icon" data-toggle="tooltip" title="В избранное" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart-o"></i></button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="row">
+        <div class="col-sm-6 text-left">{{ pagination }}</div>
+        <div class="col-sm-6 text-right">{{ results }}</div>
+      </div>
+      {% else %}
+      <p>{{ text_empty }}</p>
+      {% endif %}
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+<script type="text/javascript"><!--
+$('#button-search').bind('click', function() {
+	url = 'index.php?route=product/search';
+
+	var search = $('#content input[name=\'search\']').prop('value');
+
+	if (search) {
+		url += '&search=' + encodeURIComponent(search);
+	}
+
+	var category_id = $('#content select[name=\'category_id\']').prop('value');
+
+	if (category_id > 0) {
+		url += '&category_id=' + encodeURIComponent(category_id);
+	}
+
+	var sub_category = $('#content input[name=\'sub_category\']:checked').prop('value');
+
+	if (sub_category) {
+		url += '&sub_category=true';
+	}
+
+	var filter_description = $('#content input[name=\'description\']:checked').prop('value');
+
+	if (filter_description) {
+		url += '&description=true';
+	}
+
+	location = url;
+});
+
+$('#content input[name=\'search\']').bind('keydown', function(e) {
+	if (e.keyCode == 13) {
+		$('#button-search').trigger('click');
+	}
+});
+
+$('select[name=\'category_id\']').on('change', function() {
+	if (this.value == '0') {
+		$('input[name=\'sub_category\']').prop('disabled', true);
+	} else {
+		$('input[name=\'sub_category\']').prop('disabled', false);
+	}
+});
+
+$('select[name=\'category_id\']').trigger('change');
+--></script>
+{{ footer }}

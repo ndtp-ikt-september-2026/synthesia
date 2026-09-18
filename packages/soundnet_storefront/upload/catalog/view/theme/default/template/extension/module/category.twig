@@ -1,0 +1,41 @@
+<div class="list-group studio-category-sidebar">
+  <div class="studio-sidebar-header">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="3" width="7" height="7"></rect>
+      <rect x="14" y="3" width="7" height="7"></rect>
+      <rect x="14" y="14" width="7" height="7"></rect>
+      <rect x="3" y="14" width="7" height="7"></rect>
+    </svg>
+    <span>Каталог товаров</span>
+  </div>
+  {% for category in categories %}
+    {% if category.category_id == category_id %} 
+      <a href="{{ category.href }}" class="list-group-item active">
+        <span>{{ category.name }}</span>
+        {% if category.children %}<i class="fa fa-chevron-down" style="font-size: 10px; opacity: 0.8;"></i>{% endif %}
+      </a> 
+      {% if category.children %}
+        <div class="sidebar-subcategories-list">
+          {% for child in category.children %}
+            {% if child.category_id == child_id %}
+              <a href="{{ child.href }}" class="list-group-item sub-item active">
+                <span class="sub-dot"></span>
+                <span>{{ child.name }}</span>
+              </a> 
+            {% else %} 
+              <a href="{{ child.href }}" class="list-group-item sub-item">
+                <span class="sub-dot"></span>
+                <span>{{ child.name }}</span>
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% else %}
+      <a href="{{ category.href }}" class="list-group-item">
+        <span>{{ category.name }}</span>
+        {% if category.children %}<i class="fa fa-chevron-right" style="font-size: 10px; color: #94a3b8;"></i>{% endif %}
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>

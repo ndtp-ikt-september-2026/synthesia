@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<!--[if IE 8 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html dir="{{ direction }}" lang="{{ lang }}" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html dir="{{ direction }}" lang="{{ lang }}">
+<!--<![endif]-->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ title }}</title>
+{% if robots %}
+<meta name="robots" content="{{ robots }}">
+{% endif %}
+<base href="{{ base }}">
+{% if description %}
+<meta name="description" content="{{ description }}">
+{% endif %}
+{% if keywords %}
+<meta name="keywords" content="{{ keywords }}">
+{% endif %}
+<meta property="og:title" content="{{ title }}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ og_url }}">
+{% if og_image %}
+<meta property="og:image" content="{{ og_image }}">
+{% else %}
+<meta property="og:image" content="{{ logo }}">
+{% endif %}
+<meta property="og:site_name" content="{{ name }}">
+<link href="catalog/view/theme/default/fonts/Inter-Regular.woff2" rel="preload" as="font" type="font/woff2" crossorigin>
+<link href="catalog/view/theme/default/fonts/Inter-Medium.woff2" rel="preload" as="font" type="font/woff2" crossorigin>
+<link href="catalog/view/theme/default/fonts/Inter-Bold.woff2" rel="preload" as="font" type="font/woff2" crossorigin>
+<script src="catalog/view/javascript/jquery/jquery-3.7.1.min.js"></script>
+<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js"></script>
+<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
+<link href="catalog/view/theme/default/stylesheet/soundnet_storefront.css" rel="stylesheet">
+{% for style in styles %}
+<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}">
+{% endfor %}
+{% for script in scripts %}
+{% if script != 'catalog/view/javascript/soundnet_storefront.js' %}
+<script src="{{ script }}"></script>
+{% endif %}
+{% endfor %}
+<script src="catalog/view/javascript/common.js"></script>
+<script src="catalog/view/javascript/soundnet_storefront.js"></script>
+{% for link in links %}
+<link href="{{ link.href }}" rel="{{ link.rel }}">
+{% endfor %}
+{% for analytic in analytics %}
+{{ analytic }}
+{% endfor %}
+</head>
+<body>
+<nav id="top" class="top-utility-bar">
+  <div class="container">
+    <div class="top-utility-left">
+      {% if telephone and telephone != '123456789' %}
+      <a href="{{ contact }}" class="top-contact-link"><i class="fa fa-phone"></i> <span>{{ telephone }}</span></a>
+      {% endif %}
+    </div>
+    <div id="top-links" class="top-utility-right">
+      <ul class="list-inline top-quick-links">
+        <li><a href="{{ contact }}"><i class="fa fa-headphones"></i> <span>Поддержка</span></a></li>
+        <li class="dropdown"><a href="{{ account }}" title="{{ text_account }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user-circle"></i> <span class="hidden-xs">{{ text_account }}</span> <span class="caret"></span></a>
+          <ul class="dropdown-menu dropdown-menu-right top-user-dropdown">
+            {% if logged %}
+            <li><a href="{{ account }}"><i class="fa fa-user"></i> {{ text_account }}</a></li>
+            <li><a href="{{ order }}"><i class="fa fa-history"></i> {{ text_order }}</a></li>
+            <li><a href="{{ transaction }}"><i class="fa fa-credit-card"></i> {{ text_transaction }}</a></li>
+            <li><a href="{{ download }}"><i class="fa fa-download"></i> {{ text_download }}</a></li>
+            <li class="divider"></li>
+            <li><a href="{{ logout }}"><i class="fa fa-sign-out"></i> {{ text_logout }}</a></li>
+            {% else %}
+            <li><a href="{{ register }}"><i class="fa fa-user-plus"></i> {{ text_register }}</a></li>
+            <li><a href="{{ login }}"><i class="fa fa-sign-in"></i> {{ text_login }}</a></li>
+            {% endif %}
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<header class="main-interaction-header">
+  <div class="container">
+    <div class="header-inner-row">
+      <div class="header-logo-block">
+        <div id="logo">
+          {% if logo %}
+            {% if home == og_url %}
+              <img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive site-logo-img">
+            {% else %}
+              <a href="{{ home }}"><img src="{{ logo }}" title="{{ name }}" alt="{{ name }}" class="img-responsive site-logo-img"></a>
+            {% endif %}
+          {% else %}
+            <a href="{{ home }}" class="brand-text-logo">
+              <span class="brand-mark">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <line x1="12" y1="2" x2="12" y2="4"></line>
+                </svg>
+              </span>
+              <span class="brand-name">{{ name }}</span>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="header-catalog-trigger-block dropdown">
+        <button type="button" class="btn btn-catalog-trigger dropdown-toggle" id="catalogMegaTrigger" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span class="catalog-text-full hidden-xs">{{ text_catalog_all|default('Каталог товаров') }}</span>
+          <span class="catalog-text-short visible-xs-inline">Каталог</span>
+          <i class="fa fa-chevron-down trigger-chevron"></i>
+        </button>
+        <ul class="dropdown-menu studio-catalog-dropdown" aria-labelledby="catalogMegaTrigger">
+          <li class="dropdown-header">Медиатека</li>
+          <li><a href="index.php?route=product/category&amp;path=1"><i class="fa fa-music"></i> <strong>Все аудиофильские релизы</strong></a></li>
+          <li><a href="index.php?route=product/category&amp;path=2"><i class="fa fa-circle-o-notch"></i> Виниловые пластинки</a></li>
+          <li><a href="index.php?route=product/category&amp;path=3"><i class="fa fa-dot-circle-o"></i> Компакт-диски (CD)</a></li>
+          <li class="divider"></li>
+          <li class="dropdown-header">Инструменты и студия</li>
+          <li><a href="index.php?route=product/category&amp;path=11"><i class="fa fa-sliders"></i> <strong>Все гитары и оборудование</strong></a></li>
+          <li><a href="index.php?route=product/category&amp;path=15"><i class="fa fa-bolt"></i> Электрогитары</a></li>
+          <li><a href="index.php?route=product/category&amp;path=12"><i class="fa fa-volume-up"></i> Акустические гитары</a></li>
+          <li><a href="index.php?route=product/category&amp;path=22"><i class="fa fa-keyboard-o"></i> Клавишные инструменты</a></li>
+          <li><a href="index.php?route=product/category&amp;path=24"><i class="fa fa-sliders"></i> Синтезаторы и рабочие станции</a></li>
+          <li><a href="index.php?route=product/category&amp;path=27"><i class="fa fa-bookmark-o"></i> Струнные инструменты</a></li>
+        </ul>
+      </div>
+
+      <div class="header-search-block">
+        {{ search }}
+      </div>
+
+      <div class="header-actions-cluster">
+        <a href="{{ wishlist }}" id="wishlist-total" class="btn-action-icon studio-wishlist-trigger" title="{{ text_wishlist }}">
+          <span class="action-icon-wrap">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </span>
+          <span class="action-label hidden-xs">Избранное</span>
+        </a>
+
+        <div class="header-cart-block">
+          {{ cart }}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="header-navigation-strip">
+  {{ menu }}
+</div>
