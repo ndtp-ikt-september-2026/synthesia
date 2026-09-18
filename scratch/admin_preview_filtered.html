@@ -21,16 +21,16 @@
 <div id="container">
 <header id="header" class="navbar navbar-static-top">
   <div class="container-fluid">
-    <div id="header-logo" class="navbar-header"><a href="http://synthesia/admin/index.php?route=common/dashboard&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" class="navbar-brand"><img src="http://synthesia/admin/view/image/logo.png" alt="LiveStore" title="LiveStore" /></a></div>
+    <div id="header-logo" class="navbar-header"><a href="http://synthesia/admin/index.php?route=common/dashboard&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" class="navbar-brand"><img src="http://synthesia/admin/view/image/logo.png" alt="LiveStore" title="LiveStore" /></a></div>
     <a href="#" id="button-menu" class="hidden-md hidden-lg"><span class="fa fa-bars"></span></a>
     <ul class="nav pull-left">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"  title="Добавить"><i class="fa fa-plus fa-lg"></i> <span class="header-item">Добавить</span></a>
         <ul class="dropdown-menu dropdown-menu-left alerts-dropdown">
-          <li><a href="http://synthesia/admin/index.php?route=catalog/product/add&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" style="display: block; overflow: auto;">Товар</a></li>
-          <li><a href="http://synthesia/admin/index.php?route=catalog/category/add&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" style="display: block; overflow: auto;">Категорию</a></li>
-          <li><a href="http://synthesia/admin/index.php?route=catalog/manufacturer/add&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" style="display: block; overflow: auto;">Производителя</a></li>
-          <li><a href="http://synthesia/admin/index.php?route=user/user/add&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" style="display: block; overflow: auto;">Пользователя</a></li>
-          <li><a href="http://synthesia/admin/index.php?route=catalog/download/add&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" style="display: block; overflow: auto;">Загрузку</a></li>
+          <li><a href="http://synthesia/admin/index.php?route=catalog/product/add&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" style="display: block; overflow: auto;">Товар</a></li>
+          <li><a href="http://synthesia/admin/index.php?route=catalog/category/add&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" style="display: block; overflow: auto;">Категорию</a></li>
+          <li><a href="http://synthesia/admin/index.php?route=catalog/manufacturer/add&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" style="display: block; overflow: auto;">Производителя</a></li>
+          <li><a href="http://synthesia/admin/index.php?route=user/user/add&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" style="display: block; overflow: auto;">Пользователя</a></li>
+          <li><a href="http://synthesia/admin/index.php?route=catalog/download/add&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" style="display: block; overflow: auto;">Загрузку</a></li>
         </ul>
       </li>
     </ul>
@@ -79,7 +79,7 @@
 
         $.ajax({
             type: 'get',
-            url: 'index.php?route=search/search/search' + '&user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw',		
+            url: 'index.php?route=search/search/search' + '&user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE',		
 			data: $('#oc-search').serialize(),
             dataType: 'json',
             success:function(json){
@@ -110,10 +110,10 @@
 </script>
     </div>
     <ul class="nav navbar-nav navbar-right">
-	  <li><a href="http://synthesia/admin/index.php?route=setting/setting/maintenance&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" id="button-maintenance" title="Режим обслуживания: Выключен"><i class="fa fa-wrench"></i></a></li>
+	  <li><a href="http://synthesia/admin/index.php?route=setting/setting/maintenance&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" id="button-maintenance" title="Режим обслуживания: Выключен"><i class="fa fa-wrench"></i></a></li>
       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="http://synthesia/image/cache/profile-45x45.png" alt="John Doe" title="admin" id="user-profile" class="img-circle" />John Doe <i class="fa fa-caret-down fa-fw"></i></a>
         <ul class="dropdown-menu dropdown-menu-right">
-          <li><a href="http://synthesia/admin/index.php?route=common/profile&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw"><i class="fa fa-user-circle-o fa-fw"></i> Ваш профиль</a></li>
+          <li><a href="http://synthesia/admin/index.php?route=common/profile&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE"><i class="fa fa-user-circle-o fa-fw"></i> Ваш профиль</a></li>
           <li role="separator" class="divider"></li>
           <li class="dropdown-header">Магазины</li>
                     <li><a href="http://synthesia/" target="_blank">SYNTHESIA</a></li>
@@ -124,7 +124,7 @@
           <li><a href="https://forum.liveopencart.ru/?utm_source=ocstore3&utm_medium=admin&utm_campaign=3045" target="_blank"><i class="fa fa-comments-o fa-fw"></i> Форум поддержки</a></li>
         </ul>
       </li>
-      <li><a href="http://synthesia/admin/index.php?route=common/logout&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw"><i class="fa fa-sign-out"></i> <span class="hidden-xs hidden-sm hidden-md">Выход</span></a></li>
+      <li><a href="http://synthesia/admin/index.php?route=common/logout&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE"><i class="fa fa-sign-out"></i> <span class="hidden-xs hidden-sm hidden-md">Выход</span></a></li>
     </ul>
     </div>
 </header>
@@ -141,48 +141,48 @@ $('#button-maintenance').on('click', function(e) {
 	<div id="navigation"><i class="fa fa-bars fa-fw"></i> Навигация</div>
 	<ul id="menu">
 							<li id="menu-dashboard">
-									<a href="http://synthesia/admin/index.php?route=common/dashboard&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw"><i class="fa fa-dashboard fa-fw"></i> Панель состояния</a>
+									<a href="http://synthesia/admin/index.php?route=common/dashboard&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE"><i class="fa fa-dashboard fa-fw"></i> Панель состояния</a>
 											</li>
 								<li id="menu-catalog">
 									<a href="#collapse1" data-toggle="collapse" class="parent collapsed"><i class="fa fa-tags fa-fw"></i> Каталог</a>
 													<ul id="collapse1" class="collapse">
 																			<li>
-																	<a href="http://synthesia/admin/index.php?route=catalog/category&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Категории</a>
+																	<a href="http://synthesia/admin/index.php?route=catalog/category&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Категории</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Товары</a>
+																	<a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Товары</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=catalog/recurring&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Регулярные платежи</a>
+																	<a href="http://synthesia/admin/index.php?route=catalog/recurring&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Регулярные платежи</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=catalog/filter&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Фильтры</a>
+																	<a href="http://synthesia/admin/index.php?route=catalog/filter&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Фильтры</a>
 																							</li>
 																				<li>
 																	<a href="#collapse1-4" data-toggle="collapse" class="parent collapsed">Характеристики</a>
 																									<ul id="collapse1-4" class="collapse">
 																															<li>
-																									<a href="http://synthesia/admin/index.php?route=catalog/attribute&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Характеристики</a>
+																									<a href="http://synthesia/admin/index.php?route=catalog/attribute&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Характеристики</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=catalog/attribute_group&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Группы характеристик</a>
+																									<a href="http://synthesia/admin/index.php?route=catalog/attribute_group&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Группы характеристик</a>
 																																			</li>
 																														</ul>
 															</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=catalog/option&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Опции</a>
+																	<a href="http://synthesia/admin/index.php?route=catalog/option&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Опции</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=catalog/manufacturer&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Производители</a>
+																	<a href="http://synthesia/admin/index.php?route=catalog/manufacturer&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Производители</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=catalog/download&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Файлы для скачивания</a>
+																	<a href="http://synthesia/admin/index.php?route=catalog/download&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Файлы для скачивания</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=catalog/review&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Отзывы</a>
+																	<a href="http://synthesia/admin/index.php?route=catalog/review&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Отзывы</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=catalog/information&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Статьи</a>
+																	<a href="http://synthesia/admin/index.php?route=catalog/information&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Статьи</a>
 																							</li>
 																		</ul>
 							</li>
@@ -190,16 +190,16 @@ $('#button-maintenance').on('click', function(e) {
 									<a href="#collapse2" data-toggle="collapse" class="parent collapsed"><i class="fa fa-book fa-fw"></i> Блог</a>
 													<ul id="collapse2" class="collapse">
 																			<li>
-																	<a href="http://synthesia/admin/index.php?route=blog/article&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Статьи блога</a>
+																	<a href="http://synthesia/admin/index.php?route=blog/article&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Статьи блога</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=blog/category&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Категории блога</a>
+																	<a href="http://synthesia/admin/index.php?route=blog/category&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Категории блога</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=blog/review&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Отзывы блога</a>
+																	<a href="http://synthesia/admin/index.php?route=blog/review&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Отзывы блога</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=blog/setting&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Настройки блога</a>
+																	<a href="http://synthesia/admin/index.php?route=blog/setting&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Настройки блога</a>
 																							</li>
 																		</ul>
 							</li>
@@ -207,16 +207,16 @@ $('#button-maintenance').on('click', function(e) {
 									<a href="#collapse3" data-toggle="collapse" class="parent collapsed"><i class="fa fa-puzzle-piece fa-fw"></i> Расширения</a>
 													<ul id="collapse3" class="collapse">
 																			<li>
-																	<a href="http://synthesia/admin/index.php?route=marketplace/installer&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Установка расширений</a>
+																	<a href="http://synthesia/admin/index.php?route=marketplace/installer&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Установка расширений</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=marketplace/extension&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;type=module">Расширения</a>
+																	<a href="http://synthesia/admin/index.php?route=marketplace/extension&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;type=module">Расширения</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=marketplace/modification&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Модификаторы</a>
+																	<a href="http://synthesia/admin/index.php?route=marketplace/modification&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Модификаторы</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=marketplace/event&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">События</a>
+																	<a href="http://synthesia/admin/index.php?route=marketplace/event&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">События</a>
 																							</li>
 																		</ul>
 							</li>
@@ -224,19 +224,19 @@ $('#button-maintenance').on('click', function(e) {
 									<a href="#collapse4" data-toggle="collapse" class="parent collapsed"><i class="fa fa-television fa-fw"></i> Дизайн</a>
 													<ul id="collapse4" class="collapse">
 																			<li>
-																	<a href="http://synthesia/admin/index.php?route=design/layout&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Макеты</a>
+																	<a href="http://synthesia/admin/index.php?route=design/layout&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Макеты</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=design/theme&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Редактор шаблонов</a>
+																	<a href="http://synthesia/admin/index.php?route=design/theme&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Редактор шаблонов</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=design/translation&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Редактор перевода</a>
+																	<a href="http://synthesia/admin/index.php?route=design/translation&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Редактор перевода</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=design/banner&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Баннеры</a>
+																	<a href="http://synthesia/admin/index.php?route=design/banner&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Баннеры</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=design/seo_url&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">SEO URL</a>
+																	<a href="http://synthesia/admin/index.php?route=design/seo_url&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">SEO URL</a>
 																							</li>
 																		</ul>
 							</li>
@@ -244,27 +244,27 @@ $('#button-maintenance').on('click', function(e) {
 									<a href="#collapse5" data-toggle="collapse" class="parent collapsed"><i class="fa fa-shopping-cart fa-fw"></i> Продажи</a>
 													<ul id="collapse5" class="collapse">
 																			<li>
-																	<a href="http://synthesia/admin/index.php?route=sale/order&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Заказы</a>
+																	<a href="http://synthesia/admin/index.php?route=sale/order&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Заказы</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=sale/recurring&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Периодические заказы</a>
+																	<a href="http://synthesia/admin/index.php?route=sale/recurring&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Периодические заказы</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=sale/return&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Возврат товара</a>
+																	<a href="http://synthesia/admin/index.php?route=sale/return&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Возврат товара</a>
 																							</li>
 																				<li>
 																	<a href="#collapse5-3" data-toggle="collapse" class="parent collapsed">Сертификаты</a>
 																									<ul id="collapse5-3" class="collapse">
 																															<li>
-																									<a href="http://synthesia/admin/index.php?route=sale/voucher&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Сертификаты</a>
+																									<a href="http://synthesia/admin/index.php?route=sale/voucher&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Сертификаты</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=sale/voucher_theme&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Тематика</a>
+																									<a href="http://synthesia/admin/index.php?route=sale/voucher_theme&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Тематика</a>
 																																			</li>
 																														</ul>
 															</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=tool/upload&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Прикреплённые файлы</a>
+																	<a href="http://synthesia/admin/index.php?route=tool/upload&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Прикреплённые файлы</a>
 																							</li>
 																		</ul>
 							</li>
@@ -272,16 +272,16 @@ $('#button-maintenance').on('click', function(e) {
 									<a href="#collapse6" data-toggle="collapse" class="parent collapsed"><i class="fa fa-user fa-fw"></i> Покупатели</a>
 													<ul id="collapse6" class="collapse">
 																			<li>
-																	<a href="http://synthesia/admin/index.php?route=customer/customer&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Покупатели</a>
+																	<a href="http://synthesia/admin/index.php?route=customer/customer&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Покупатели</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=customer/customer_group&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Группы покупателей</a>
+																	<a href="http://synthesia/admin/index.php?route=customer/customer_group&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Группы покупателей</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=customer/customer_approval&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Одобрение покупателей</a>
+																	<a href="http://synthesia/admin/index.php?route=customer/customer_approval&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Одобрение покупателей</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=customer/custom_field&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Настраиваемые поля</a>
+																	<a href="http://synthesia/admin/index.php?route=customer/custom_field&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Настраиваемые поля</a>
 																							</li>
 																		</ul>
 							</li>
@@ -289,19 +289,19 @@ $('#button-maintenance').on('click', function(e) {
 									<a href="#collapse7" data-toggle="collapse" class="parent collapsed"><i class="fa fa-share-alt fa-fw"></i> Маркетинг</a>
 													<ul id="collapse7" class="collapse">
 																			<li>
-																	<a href="http://synthesia/admin/index.php?route=marketing/marketing&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Маркетинг</a>
+																	<a href="http://synthesia/admin/index.php?route=marketing/marketing&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Маркетинг</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=marketing/coupon&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Купоны</a>
+																	<a href="http://synthesia/admin/index.php?route=marketing/coupon&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Купоны</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=marketing/contact&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Почта</a>
+																	<a href="http://synthesia/admin/index.php?route=marketing/contact&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Почта</a>
 																							</li>
 																				<li>
 																	<a href="#collapse7-3" data-toggle="collapse" class="parent collapsed">Google Shopping</a>
 																									<ul id="collapse7-3" class="collapse">
 																															<li>
-																									<a href="http://synthesia/admin/index.php?route=extension/advertise/google&amp;store_id=0&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">SYNTHESIA</a>
+																									<a href="http://synthesia/admin/index.php?route=extension/advertise/google&amp;store_id=0&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">SYNTHESIA</a>
 																																			</li>
 																														</ul>
 															</li>
@@ -311,19 +311,19 @@ $('#button-maintenance').on('click', function(e) {
 									<a href="#collapse8" data-toggle="collapse" class="parent collapsed"><i class="fa fa-cog fa-fw"></i> Система</a>
 													<ul id="collapse8" class="collapse">
 																			<li>
-																	<a href="http://synthesia/admin/index.php?route=setting/store&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Настройки</a>
+																	<a href="http://synthesia/admin/index.php?route=setting/store&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Настройки</a>
 																							</li>
 																				<li>
 																	<a href="#collapse8-1" data-toggle="collapse" class="parent collapsed">Пользователи</a>
 																									<ul id="collapse8-1" class="collapse">
 																															<li>
-																									<a href="http://synthesia/admin/index.php?route=user/user&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Пользователи</a>
+																									<a href="http://synthesia/admin/index.php?route=user/user&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Пользователи</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=user/user_permission&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Группы пользователей</a>
+																									<a href="http://synthesia/admin/index.php?route=user/user_permission&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Группы пользователей</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=user/api&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">API</a>
+																									<a href="http://synthesia/admin/index.php?route=user/api&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">API</a>
 																																			</li>
 																														</ul>
 															</li>
@@ -331,49 +331,49 @@ $('#button-maintenance').on('click', function(e) {
 																	<a href="#collapse8-2" data-toggle="collapse" class="parent collapsed">Локализация</a>
 																									<ul id="collapse8-2" class="collapse">
 																															<li>
-																									<a href="http://synthesia/admin/index.php?route=localisation/location&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Местонахождение</a>
+																									<a href="http://synthesia/admin/index.php?route=localisation/location&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Местонахождение</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=localisation/language&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Языки</a>
+																									<a href="http://synthesia/admin/index.php?route=localisation/language&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Языки</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=localisation/currency&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Валюта</a>
+																									<a href="http://synthesia/admin/index.php?route=localisation/currency&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Валюта</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=localisation/stock_status&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Состояние на складе</a>
+																									<a href="http://synthesia/admin/index.php?route=localisation/stock_status&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Состояние на складе</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=localisation/order_status&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Статус заказов</a>
+																									<a href="http://synthesia/admin/index.php?route=localisation/order_status&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Статус заказов</a>
 																																			</li>
 																																<li>
 																									<a href="#collapse-8-2-5" data-toggle="collapse" class="parent collapsed">Возврат товара</a>
 																																					<ul id="collapse-8-2-5" class="collapse">
-																													<li><a href="http://synthesia/admin/index.php?route=localisation/return_status&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Статусы возврата</a></li>
-																													<li><a href="http://synthesia/admin/index.php?route=localisation/return_action&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Операции возврата</a></li>
-																													<li><a href="http://synthesia/admin/index.php?route=localisation/return_reason&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Причины возврата</a></li>
+																													<li><a href="http://synthesia/admin/index.php?route=localisation/return_status&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Статусы возврата</a></li>
+																													<li><a href="http://synthesia/admin/index.php?route=localisation/return_action&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Операции возврата</a></li>
+																													<li><a href="http://synthesia/admin/index.php?route=localisation/return_reason&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Причины возврата</a></li>
 																											</ul>
 																							</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=localisation/country&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Страны</a>
+																									<a href="http://synthesia/admin/index.php?route=localisation/country&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Страны</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=localisation/zone&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Регионы</a>
+																									<a href="http://synthesia/admin/index.php?route=localisation/zone&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Регионы</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=localisation/geo_zone&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Географические зоны</a>
+																									<a href="http://synthesia/admin/index.php?route=localisation/geo_zone&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Географические зоны</a>
 																																			</li>
 																																<li>
 																									<a href="#collapse-8-2-9" data-toggle="collapse" class="parent collapsed">Налоги</a>
 																																					<ul id="collapse-8-2-9" class="collapse">
-																													<li><a href="http://synthesia/admin/index.php?route=localisation/tax_class&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Налоговые классы</a></li>
-																													<li><a href="http://synthesia/admin/index.php?route=localisation/tax_rate&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Налоговые ставки</a></li>
+																													<li><a href="http://synthesia/admin/index.php?route=localisation/tax_class&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Налоговые классы</a></li>
+																													<li><a href="http://synthesia/admin/index.php?route=localisation/tax_rate&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Налоговые ставки</a></li>
 																											</ul>
 																							</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=localisation/length_class&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Единицы измерения</a>
+																									<a href="http://synthesia/admin/index.php?route=localisation/length_class&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Единицы измерения</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=localisation/weight_class&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Единицы веса</a>
+																									<a href="http://synthesia/admin/index.php?route=localisation/weight_class&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Единицы веса</a>
 																																			</li>
 																														</ul>
 															</li>
@@ -381,10 +381,10 @@ $('#button-maintenance').on('click', function(e) {
 																	<a href="#collapse8-3" data-toggle="collapse" class="parent collapsed">Обслуживание</a>
 																									<ul id="collapse8-3" class="collapse">
 																															<li>
-																									<a href="http://synthesia/admin/index.php?route=tool/backup&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Бэкап / Восстановление</a>
+																									<a href="http://synthesia/admin/index.php?route=tool/backup&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Бэкап / Восстановление</a>
 																																			</li>
 																																<li>
-																									<a href="http://synthesia/admin/index.php?route=tool/log&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Журнал ошибок</a>
+																									<a href="http://synthesia/admin/index.php?route=tool/log&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Журнал ошибок</a>
 																																			</li>
 																														</ul>
 															</li>
@@ -394,13 +394,13 @@ $('#button-maintenance').on('click', function(e) {
 									<a href="#collapse9" data-toggle="collapse" class="parent collapsed"><i class="fa fa-bar-chart fa-fw"></i> Отчеты</a>
 													<ul id="collapse9" class="collapse">
 																			<li>
-																	<a href="http://synthesia/admin/index.php?route=report/report&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Отчеты</a>
+																	<a href="http://synthesia/admin/index.php?route=report/report&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Отчеты</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=report/online&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Покупатели онлайн</a>
+																	<a href="http://synthesia/admin/index.php?route=report/online&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Покупатели онлайн</a>
 																							</li>
 																				<li>
-																	<a href="http://synthesia/admin/index.php?route=report/statistics&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Статистика</a>
+																	<a href="http://synthesia/admin/index.php?route=report/statistics&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Статистика</a>
 																							</li>
 																		</ul>
 							</li>
@@ -411,16 +411,16 @@ $('#button-maintenance').on('click', function(e) {
 		<div class="container-fluid">
 			<div class="pull-right">
 				<button type="button" data-toggle="tooltip" title="Фильтр" onclick="$('#filter-product').toggleClass('hidden-sm hidden-xs');" class="btn btn-success hidden-md hidden-lg"><i class="fa fa-filter"></i></button>
-				<a href="http://synthesia/admin/index.php?route=catalog/product/add&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" data-toggle="tooltip" title="Добавить" class="btn btn-primary"><i class="fa fa-plus"></i></a>
-				<button type="submit" form="form-product" formaction="http://synthesia/admin/index.php?route=catalog/product/copy&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" data-toggle="tooltip" title="Копировать" class="btn btn-default"><i class="fa fa-copy"></i></button>
-				<button type="submit" form="form-product" formaction="http://synthesia/admin/index.php?route=catalog/product/enable&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" data-toggle="tooltip" title="Включить" class="btn btn-default"><i class="fa fa-play"></i></button>
-				<button type="submit" form="form-product" formaction="http://synthesia/admin/index.php?route=catalog/product/disable&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" data-toggle="tooltip" title="Отключить" class="btn btn-default"><i class="fa fa-pause"></i></button>
-				<button type="button" form="form-product" formaction="http://synthesia/admin/index.php?route=catalog/product/delete&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" data-toggle="tooltip" title="Удалить" class="btn btn-danger" onclick="confirm('Вы уверены?') ? $('#form-product').submit() : false;"><i class="fa fa-trash-o"></i></button>
+				<a href="http://synthesia/admin/index.php?route=catalog/product/add&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" data-toggle="tooltip" title="Добавить" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+				<button type="submit" form="form-product" formaction="http://synthesia/admin/index.php?route=catalog/product/copy&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" data-toggle="tooltip" title="Копировать" class="btn btn-default"><i class="fa fa-copy"></i></button>
+				<button type="submit" form="form-product" formaction="http://synthesia/admin/index.php?route=catalog/product/enable&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" data-toggle="tooltip" title="Включить" class="btn btn-default"><i class="fa fa-play"></i></button>
+				<button type="submit" form="form-product" formaction="http://synthesia/admin/index.php?route=catalog/product/disable&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" data-toggle="tooltip" title="Отключить" class="btn btn-default"><i class="fa fa-pause"></i></button>
+				<button type="button" form="form-product" formaction="http://synthesia/admin/index.php?route=catalog/product/delete&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" data-toggle="tooltip" title="Удалить" class="btn btn-danger" onclick="confirm('Вы уверены?') ? $('#form-product').submit() : false;"><i class="fa fa-trash-o"></i></button>
 			</div>
 			<h1>Товары</h1>
 			<ul class="breadcrumb">
-									<li><a href="http://synthesia/admin/index.php?route=common/dashboard&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Главная</a></li>
-									<li><a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw">Товары</a></li>
+									<li><a href="http://synthesia/admin/index.php?route=common/dashboard&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Главная</a></li>
+									<li><a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE">Товары</a></li>
 							</ul>
 		</div>
 	</div>
@@ -518,9 +518,7 @@ $('#button-maintenance').on('click', function(e) {
 																																				<option value="2006">2006</option>
 																																				<option value="2005">2005</option>
 																																				<option value="2004">2004</option>
-																																				<option value="2003">2003</option>
 																																				<option value="2002">2002</option>
-																																				<option value="2001">2001</option>
 																																				<option value="2000">2000</option>
 																																				<option value="1999">1999</option>
 																																				<option value="1998">1998</option>
@@ -540,7 +538,6 @@ $('#button-maintenance').on('click', function(e) {
 																											<option value="Electronic">Electronic</option>
 																																				<option value="Hip Hop">Hip Hop</option>
 																																				<option value="Non-Music">Non-Music</option>
-																																				<option value="Pop">Pop</option>
 																																				<option value="Progressive Rock">Progressive Rock</option>
 																																				<option value="Rock">Rock</option>
 																								</select>
@@ -639,19 +636,19 @@ $('#button-maintenance').on('click', function(e) {
 						<h3 class="panel-title"><i class="fa fa-list"></i> Список товаров</h3>
 					</div>
 					<div class="panel-body">
-						<form action="http://synthesia/admin/index.php?route=catalog/product/delete&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw" method="post" enctype="multipart/form-data" id="form-product">
+						<form action="http://synthesia/admin/index.php?route=catalog/product/delete&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE" method="post" enctype="multipart/form-data" id="form-product">
 							<div class="table-responsive">
 								<table class="table table-bordered table-hover">
 									<thead>
 										<tr>
 											<td style="width: 1px;" class="text-center"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></td>
 											<td class="text-center">Изображение</td>
-											<td class="text-left"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;sort=pd.name&amp;order=DESC" class="asc">Название</a> </td>
-											<td class="text-left"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;sort=p.model&amp;order=DESC">Код товара</a> </td>
-											<td class="text-right"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;sort=p.price&amp;order=DESC">Цена</a> </td>
-											<td class="text-right"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;sort=p.quantity&amp;order=DESC">Количество</a> </td>
-											<td class="text-left"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;sort=p.status&amp;order=DESC">Статус</a> </td>
-											<td class="text-left"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;sort=p.noindex&amp;order=DESC">Индексация</a> </td>
+											<td class="text-left"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;sort=pd.name&amp;order=DESC" class="asc">Название</a> </td>
+											<td class="text-left"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;sort=p.model&amp;order=DESC">Код товара</a> </td>
+											<td class="text-right"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;sort=p.price&amp;order=DESC">Цена</a> </td>
+											<td class="text-right"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;sort=p.quantity&amp;order=DESC">Количество</a> </td>
+											<td class="text-left"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;sort=p.status&amp;order=DESC">Статус</a> </td>
+											<td class="text-left"> <a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;sort=p.noindex&amp;order=DESC">Индексация</a> </td>
 											<td class="text-right">Действие</td>
 										</tr>
 									</thead>
@@ -683,7 +680,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=199" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=199" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=199" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -713,7 +710,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=166" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=166" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=166" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -743,7 +740,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=183" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=183" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=183" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -773,7 +770,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=217" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=217" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=217" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -803,7 +800,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=221" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=221" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=221" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -833,7 +830,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=169" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=169" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=169" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -863,7 +860,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=185" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=185" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=185" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -893,7 +890,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=170" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=170" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=170" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -923,7 +920,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=186" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=186" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=186" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -953,7 +950,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=220" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=220" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=220" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -983,7 +980,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=223" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=223" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=223" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1013,7 +1010,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=195" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=195" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=195" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1043,7 +1040,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=191" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=191" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=191" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1073,7 +1070,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=180" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=180" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=180" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1103,7 +1100,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=219" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=219" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=219" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1133,7 +1130,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=168" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=168" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=168" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1163,7 +1160,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=184" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=184" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=184" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1193,7 +1190,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=206" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=206" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=206" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1223,7 +1220,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=178" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=178" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=178" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1253,7 +1250,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=188" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=188" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=188" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1283,7 +1280,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=165" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=165" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=165" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1313,7 +1310,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=226" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=226" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=226" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1343,7 +1340,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=228" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=228" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=228" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1373,7 +1370,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=200" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=200" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=200" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																							<tr>
@@ -1403,7 +1400,7 @@ $('#button-maintenance').on('click', function(e) {
 													<td class="text-left">Отключено</td>
 													<td class="text-right">
 														<a target="_blank" href="http://synthesia/index.php?route=product/product&product_id=222" data-toggle="tooltip" title="Посмотреть" class="btn btn-success"><i class="fa fa-eye"></i></a>
-														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;product_id=222" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
+														<a href="http://synthesia/admin/index.php?route=catalog/product/edit&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;product_id=222" data-toggle="tooltip" title="Редактировать" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 																														</tbody>
@@ -1411,7 +1408,7 @@ $('#button-maintenance').on('click', function(e) {
 							</div>
 						</form>
 						<div class="row">
-							<div class="col-sm-6 text-left"><ul class="pagination"><li class="active"><span>1</span></li><li><a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;page=2">2</a></li><li><a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;page=3">3</a></li><li><a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;page=2"><i class="fa fa-angle-right"></i></a></li><li><a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&amp;page=3"><i class="fa fa-angle-double-right"></i></a></li></ul></div>
+							<div class="col-sm-6 text-left"><ul class="pagination"><li class="active"><span>1</span></li><li><a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;page=2">2</a></li><li><a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;page=3">3</a></li><li><a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;page=2"><i class="fa fa-angle-right"></i></a></li><li><a href="http://synthesia/admin/index.php?route=catalog/product&amp;user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&amp;page=3"><i class="fa fa-angle-double-right"></i></a></li></ul></div>
 							<div class="col-sm-6 text-right">Показано с 1 по 25 из 62 (всего 3 страниц)</div>
 						</div>
 					</div>
@@ -1515,11 +1512,11 @@ $('#button-maintenance').on('click', function(e) {
 			url += '&filter_format=' + encodeURIComponent(filter_format);
 		}
 
-		location = 'index.php?route=catalog/product&user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw' + url;
+		location = 'index.php?route=catalog/product&user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE' + url;
 	});
 	
 	$('#button-clear-filter').on('click', function() {
-		location = 'index.php?route=catalog/product&user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw';
+		location = 'index.php?route=catalog/product&user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE';
 	});
 </script> 
 <script>
@@ -1531,7 +1528,7 @@ $('#button-maintenance').on('click', function(e) {
 	$('input[name=\'filter_name\']').autocomplete({
 		'source': function(request, response) {
 			$.ajax({
-				url: 'index.php?route=catalog/product/autocomplete&user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&filter_name=' +  encodeURIComponent(request),
+				url: 'index.php?route=catalog/product/autocomplete&user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&filter_name=' +  encodeURIComponent(request),
 				dataType: 'json',
 				success: function(json) {
 					response($.map(json, function(item) {
@@ -1556,7 +1553,7 @@ $('#button-maintenance').on('click', function(e) {
 	$('input[name=\'filter_model\']').autocomplete({
 		'source': function(request, response) {
 			$.ajax({
-				url: 'index.php?route=catalog/product/autocomplete&user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&filter_model=' +  encodeURIComponent(request),
+				url: 'index.php?route=catalog/product/autocomplete&user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&filter_model=' +  encodeURIComponent(request),
 				dataType: 'json',
 				success: function(json) {
 					response($.map(json, function(item) {
@@ -1585,7 +1582,7 @@ $('#button-maintenance').on('click', function(e) {
 			}
 			
 			$.ajax({
-				url: 'index.php?route=catalog/category/autocomplete&user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&filter_name=' +  encodeURIComponent(request),
+				url: 'index.php?route=catalog/category/autocomplete&user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&filter_name=' +  encodeURIComponent(request),
 				dataType: 'json',
 				success: function(json) {
 					if (json.length>0) {
@@ -1623,7 +1620,7 @@ $('#button-maintenance').on('click', function(e) {
 				$('input[name=\'filter_manufacturer_id\']').val(null);
 			}
 			$.ajax({
-				url: 'index.php?route=catalog/manufacturer/autocomplete&user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&filter_name=' +  encodeURIComponent(request),
+				url: 'index.php?route=catalog/manufacturer/autocomplete&user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&filter_name=' +  encodeURIComponent(request),
 				dataType: 'json',
 				success: function(json) {
 					if (json.length>0) {
@@ -1677,7 +1674,7 @@ $('#button-maintenance').on('click', function(e) {
 				$('input[name=\'filter_artist\']').val('');
 			}
 			$.ajax({
-				url: 'index.php?route=catalog/product/autocompleteArtist&user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&filter_name=' + encodeURIComponent(request),
+				url: 'index.php?route=catalog/product/autocompleteArtist&user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&filter_name=' + encodeURIComponent(request),
 				dataType: 'json',
 				success: function(json) {
 					response($.map(json, function(item) {
@@ -1706,7 +1703,7 @@ $('#button-maintenance').on('click', function(e) {
 				$('input[name=\'filter_brand\']').val('');
 			}
 			$.ajax({
-				url: 'index.php?route=catalog/product/autocompleteBrand&user_token=X4gG2ombjAfxlQByr8iexuTMwqHnQuZw&filter_name=' + encodeURIComponent(request),
+				url: 'index.php?route=catalog/product/autocompleteBrand&user_token=vivWyizwtQZcnLEKrwWlwDhGasnSafmE&filter_name=' + encodeURIComponent(request),
 				dataType: 'json',
 				success: function(json) {
 					response($.map(json, function(item) {
@@ -1740,6 +1737,6 @@ $('#button-maintenance').on('click', function(e) {
 		}
 	});
 </script>
-<footer id="footer"><b>SYNTHESIA</b> &copy; 2026 Все права защищены.<br />Версия 3.0.4.5 | PHP 7.4.30 | IonCube Not installed | Server time: 2026-09-17 08:51:23<br><br><span class="text-danger">Внимание: показ ошибок PHP включён! Это не рекомендуется на рабочем сайте. <br> Чтобы отключить, перейдите в Система → Настройки → вкладка "Сервер" и отключите "Показывать ошибки".</span></footer></div>
+<footer id="footer"><b>SYNTHESIA</b> &copy; 2026 Все права защищены.<br />Версия 3.0.4.5 | PHP 7.4.30 | IonCube Not installed | Server time: 2026-09-17 09:11:10<br><br><span class="text-danger">Внимание: показ ошибок PHP включён! Это не рекомендуется на рабочем сайте. <br> Чтобы отключить, перейдите в Система → Настройки → вкладка "Сервер" и отключите "Показывать ошибки".</span></footer></div>
 </body></html>
  

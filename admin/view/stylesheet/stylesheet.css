@@ -48,7 +48,7 @@ a, a:focus, a:hover, a:visited{outline:none !important}
 #header .container-fluid {padding:0}
 #header .navbar-header {transition:0.3s all;border-right:1px solid #eee;width:235px;display:none}
 #header .navbar-brand {margin-left:8px;padding:13px 15px}
-#header .navbar-brand img {max-height:34px;width:auto;display:inline-block;vertical-align:middle}
+#header .navbar-brand img {max-height:34px;width:auto;display:inline-block;vertical-align:middle;border-radius:9999px}
 #header .navbar-nav > li {display:inline-block}
 #header .navbar-right > li {border-left:1px solid #eee}
 #header .navbar-right {margin-right:0;margin:0px 0px 0px 0px;float:right}

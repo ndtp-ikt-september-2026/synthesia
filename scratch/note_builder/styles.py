@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 Модуль стилей и типографики для оформления пояснительной записки
-по ГОСТ 7.32-2001, ГОСТ 2.105-95 и СТП УО «Национальный детский технопарк».
+по стандартам УО «Национальный детский технопарк» (Минск 2026)
+и правилам ВАК Республики Беларусь.
 """
 
 from docx.shared import Pt, Mm, RGBColor, Inches
@@ -53,7 +54,7 @@ def setup_document_styles(doc):
     
     r_foot = p_foot.add_run()
     r_foot.font.name = 'Times New Roman'
-    r_foot.font.size = Pt(12)
+    r_foot.font.size = Pt(14) # Требование 14 pt
     r_foot.font.color.rgb = RGBColor(0, 0, 0)
     
     fldChar1 = OxmlElement('w:fldChar')
@@ -105,22 +106,26 @@ def add_h1(doc, title, page_break=True):
     p.paragraph_format.line_spacing = 1.0
     p.paragraph_format.first_line_indent = Mm(0)
     
-    r = p.add_run(title.upper())
+    # Требование Слайд 3: Шрифт 16 pt, полужирный, ПРОПИСНЫЕ буквы, по центру, без точки
+    clean_title = title.rstrip('.').upper()
+    r = p.add_run(clean_title)
     r.font.name = 'Times New Roman'
-    r.font.size = Pt(14)
+    r.font.size = Pt(16)
     r.font.bold = True
     r.font.color.rgb = RGBColor(0, 0, 0)
     return p
 
 def add_h2(doc, title):
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    # Требование Слайд 3: Шрифт 14 pt, полужирный, ВЫРАВНИВАНИЕ ПО ЦЕНТРУ, без точки в конце
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_before = Pt(14)
     p.paragraph_format.space_after = Pt(8)
     p.paragraph_format.line_spacing = 1.0
-    p.paragraph_format.first_line_indent = Mm(12.5)
+    p.paragraph_format.first_line_indent = Mm(0)
     
-    r = p.add_run(title)
+    clean_title = title.rstrip('.')
+    r = p.add_run(clean_title)
     r.font.name = 'Times New Roman'
     r.font.size = Pt(14)
     r.font.bold = True
@@ -129,13 +134,14 @@ def add_h2(doc, title):
 
 def add_h3(doc, title):
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
     p.paragraph_format.space_before = Pt(10)
     p.paragraph_format.space_after = Pt(6)
     p.paragraph_format.line_spacing = 1.0
-    p.paragraph_format.first_line_indent = Mm(12.5)
+    p.paragraph_format.first_line_indent = Mm(0)
     
-    r = p.add_run(title)
+    clean_title = title.rstrip('.')
+    r = p.add_run(clean_title)
     r.font.name = 'Times New Roman'
     r.font.size = Pt(14)
     r.font.bold = True
@@ -143,130 +149,179 @@ def add_h3(doc, title):
     r.font.color.rgb = RGBColor(0, 0, 0)
     return p
 
-def add_formula(doc, formula_text, formula_num=""):
+def add_figure(doc, image_path, caption, width_mm=150):
+    """
+    Вставка иллюстрации по стандарту Слайда 5:
+    Все иллюстрации подписываются шрифтом 14 pt: 'Рисунок X.Y. – Название'
+    Выравнивание по центру, без точки в конце.
+    """
+    # Абзац с изображением
+    p_img = doc.add_paragraph()
+    p_img.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_img.paragraph_format.space_before = Pt(8)
+    p_img.paragraph_format.space_after = Pt(4)
+    p_img.paragraph_format.first_line_indent = Mm(0)
+    p_img.paragraph_format.line_spacing = 1.0
+    
+    r_img = p_img.add_run()
+    r_img.add_picture(image_path, width=Mm(width_mm))
+    
+    # Абзац с подписью
+    p_cap = doc.add_paragraph()
+    p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    p_cap.paragraph_format.space_before = Pt(4)
+    p_cap.paragraph_format.space_after = Pt(12)
+    p_cap.paragraph_format.first_line_indent = Mm(0)
+    p_cap.paragraph_format.line_spacing = 1.0
+    
+    r_cap = p_cap.add_run(caption.rstrip('.'))
+    r_cap.font.name = 'Times New Roman'
+    r_cap.font.size = Pt(14)
+    r_cap.font.color.rgb = RGBColor(0, 0, 0)
+    return p_img, p_cap
+
+def add_formula(doc, formula_text, formula_num):
     p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_before = Pt(8)
-    p.paragraph_format.space_after = Pt(8)
+    p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
+    p.paragraph_format.space_before = Pt(6)
+    p.paragraph_format.space_after = Pt(6)
     p.paragraph_format.line_spacing = 1.0
     p.paragraph_format.first_line_indent = Mm(0)
     
-    r = p.add_run(formula_text)
-    r.font.name = 'Times New Roman'
-    r.font.size = Pt(14)
-    r.font.italic = True
-    r.font.color.rgb = RGBColor(0, 0, 0)
+    pPr = p._p.get_or_add_pPr()
+    tabs = OxmlElement('w:tabs')
     
-    if formula_num:
-        r_space = p.add_run("   " * 6)
-        r_num = p.add_run(f"({formula_num})")
-        r_num.font.name = 'Times New Roman'
-        r_num.font.size = Pt(14)
-        r_num.font.italic = False
-        r_num.font.color.rgb = RGBColor(0, 0, 0)
+    tab_center = OxmlElement('w:tab')
+    tab_center.set(qn('w:val'), 'center')
+    tab_center.set(qn('w:pos'), '4819')
+    tabs.append(tab_center)
+    
+    tab_right = OxmlElement('w:tab')
+    tab_right.set(qn('w:val'), 'right')
+    tab_right.set(qn('w:pos'), '9638')
+    tabs.append(tab_right)
+    
+    pPr.append(tabs)
+    
+    p.add_run("\t")
+    rf = p.add_run(formula_text)
+    rf.font.name = 'Times New Roman'
+    rf.font.size = Pt(14)
+    rf.font.italic = True
+    
+    p.add_run("\t")
+    rn = p.add_run(f"({formula_num})")
+    rn.font.name = 'Times New Roman'
+    rn.font.size = Pt(14)
     return p
 
-def set_cell_borders(cell, top="D3D3D3", bottom="D3D3D3", left="D3D3D3", right="D3D3D3"):
-    tcPr = cell._tc.get_or_add_tcPr()
-    tcBorders = parse_xml(
-        f'<w:tcBorders {nsdecls("w")}>\n'
-        f'  <w:top w:val="single" w:sz="4" w:space="0" w:color="{top}"/>\n'
-        f'  <w:left w:val="single" w:sz="4" w:space="0" w:color="{left}"/>\n'
-        f'  <w:bottom w:val="single" w:sz="4" w:space="0" w:color="{bottom}"/>\n'
-        f'  <w:right w:val="single" w:sz="4" w:space="0" w:color="{right}"/>\n'
-        f'</w:tcBorders>'
-    )
-    tcPr.append(tcBorders)
-
-def set_cell_bg(cell, hex_color):
-    tcPr = cell._tc.get_or_add_tcPr()
-    shd = parse_xml(f'<w:shd {nsdecls("w")} w:fill="{hex_color}"/>')
-    tcPr.append(shd)
-
-def add_table(doc, headers, data, col_widths=None, title=""):
+def add_table(doc, headers, data, col_widths=None, title="", is_appendix=False):
+    """
+    Вставка таблицы по стандарту Слайда 5:
+    - Нумерация: первая цифра - номер раздела, вторая - порядковый номер (Таблица 1.1)
+    - Название: краткое (2-5 слов), шрифт как в основном тексте (14 pt)
+    - В ячейках: 10-12 pt (используем 11 pt)
+    """
     if title:
-        p_t = doc.add_paragraph()
-        p_t.alignment = WD_ALIGN_PARAGRAPH.LEFT
-        p_t.paragraph_format.space_before = Pt(12)
-        p_t.paragraph_format.space_after = Pt(4)
-        p_t.paragraph_format.line_spacing = 1.0
-        p_t.paragraph_format.first_line_indent = Mm(12.5)
-        r_t = p_t.add_run(title)
-        r_t.font.name = 'Times New Roman'
-        r_t.font.size = Pt(14)
-        r_t.font.bold = True
-        r_t.font.color.rgb = RGBColor(0, 0, 0)
-
-    table = doc.add_table(rows=len(data) + 1, cols=len(headers))
+        p_title = doc.add_paragraph()
+        p_title.alignment = WD_ALIGN_PARAGRAPH.LEFT
+        p_title.paragraph_format.space_before = Pt(10)
+        p_title.paragraph_format.space_after = Pt(4)
+        p_title.paragraph_format.line_spacing = 1.0
+        p_title.paragraph_format.first_line_indent = Mm(12.5)
+        
+        rt = p_title.add_run(title.rstrip('.'))
+        rt.font.name = 'Times New Roman'
+        rt.font.size = Pt(14)
+        rt.font.color.rgb = RGBColor(0, 0, 0)
+        
+    num_rows = len(data) + 1
+    num_cols = len(headers)
+    table = doc.add_table(rows=num_rows, cols=num_cols)
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    table.autofit = False
     
-    # Table borders
     tblPr = table._tbl.tblPr
     borders = parse_xml(
         f'<w:tblBorders {nsdecls("w")}>\n'
-        f'  <w:top w:val="single" w:sz="6" w:space="0" w:color="808080"/>\n'
-        f'  <w:left w:val="single" w:sz="6" w:space="0" w:color="808080"/>\n'
-        f'  <w:bottom w:val="single" w:sz="6" w:space="0" w:color="808080"/>\n'
-        f'  <w:right w:val="single" w:sz="6" w:space="0" w:color="808080"/>\n'
-        f'  <w:insideH w:val="single" w:sz="4" w:space="0" w:color="C0C0C0"/>\n'
-        f'  <w:insideV w:val="single" w:sz="4" w:space="0" w:color="C0C0C0"/>\n'
+        f'  <w:top w:val="single" w:sz="4" w:space="0" w:color="000000"/>\n'
+        f'  <w:left w:val="single" w:sz="4" w:space="0" w:color="000000"/>\n'
+        f'  <w:bottom w:val="single" w:sz="4" w:space="0" w:color="000000"/>\n'
+        f'  <w:right w:val="single" w:sz="4" w:space="0" w:color="000000"/>\n'
+        f'  <w:insideH w:val="single" w:sz="4" w:space="0" w:color="A0A0A0"/>\n'
+        f'  <w:insideV w:val="single" w:sz="4" w:space="0" w:color="A0A0A0"/>\n'
         f'</w:tblBorders>'
     )
     tblPr.append(borders)
     
     # Header row
-    hdr_cells = table.rows[0].cells
-    for i, h in enumerate(headers):
-        hdr_cells[i].text = ""
-        p = hdr_cells[i].paragraphs[0]
+    hdr_row = table.rows[0]
+    trPr = hdr_row._tr.get_or_add_trPr()
+    trPr.append(parse_xml(f'<w:tblHeader {nsdecls("w")}/>'))
+    
+    for c_idx, h_text in enumerate(headers):
+        cell = hdr_row.cells[c_idx]
+        tcPr = cell._tc.get_or_add_tcPr()
+        tcPr.append(parse_xml(f'<w:shd {nsdecls("w")} w:fill="F0F4F8"/>'))
+        
+        tcMar = OxmlElement('w:tcMar')
+        for m, val in [('top', 120), ('bottom', 120), ('left', 140), ('right', 140)]:
+            node = OxmlElement(f'w:{m}')
+            node.set(qn('w:w'), str(val))
+            node.set(qn('w:type'), 'dxa')
+            tcMar.append(node)
+        tcPr.append(tcMar)
+        
+        p = cell.paragraphs[0]
         p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        p.paragraph_format.space_before = Pt(4)
-        p.paragraph_format.space_after = Pt(4)
+        p.paragraph_format.space_before = Pt(2)
+        p.paragraph_format.space_after = Pt(2)
         p.paragraph_format.line_spacing = 1.0
         p.paragraph_format.first_line_indent = Mm(0)
-        r = p.add_run(h)
+        
+        r = p.add_run(h_text)
         r.font.name = 'Times New Roman'
-        r.font.size = Pt(11)
+        r.font.size = Pt(11) # Требование 10-12 pt
         r.font.bold = True
-        set_cell_bg(hdr_cells[i], "F2F4F7")
-        set_cell_margins(hdr_cells[i], top=100, bottom=100, left=140, right=140)
+        r.font.color.rgb = RGBColor(0, 0, 0)
         
     # Data rows
-    for r_idx, row in enumerate(data):
-        row_cells = table.rows[r_idx + 1].cells
-        for c_idx, val in enumerate(row):
-            row_cells[c_idx].text = ""
-            p = row_cells[c_idx].paragraphs[0]
-            p.alignment = WD_ALIGN_PARAGRAPH.LEFT if c_idx > 0 else WD_ALIGN_PARAGRAPH.CENTER
-            p.paragraph_format.space_before = Pt(3)
-            p.paragraph_format.space_after = Pt(3)
+    for r_idx, row_data in enumerate(data):
+        row = table.rows[r_idx + 1]
+        for c_idx, val in enumerate(row_data):
+            cell = row.cells[c_idx]
+            tcPr = cell._tc.get_or_add_tcPr()
+            if r_idx % 2 == 1:
+                tcPr.append(parse_xml(f'<w:shd {nsdecls("w")} w:fill="FAFAFA"/>'))
+                
+            tcMar = OxmlElement('w:tcMar')
+            for m, val_m in [('top', 100), ('bottom', 100), ('left', 140), ('right', 140)]:
+                node = OxmlElement(f'w:{m}')
+                node.set(qn('w:w'), str(val_m))
+                node.set(qn('w:type'), 'dxa')
+                tcMar.append(node)
+            tcPr.append(tcMar)
+            
+            p = cell.paragraphs[0]
+            p.alignment = WD_ALIGN_PARAGRAPH.LEFT if c_idx > 0 or len(val) > 20 else WD_ALIGN_PARAGRAPH.CENTER
+            p.paragraph_format.space_before = Pt(2)
+            p.paragraph_format.space_after = Pt(2)
             p.paragraph_format.line_spacing = 1.0
             p.paragraph_format.first_line_indent = Mm(0)
+            
             r = p.add_run(str(val))
             r.font.name = 'Times New Roman'
-            r.font.size = Pt(11)
-            set_cell_margins(row_cells[c_idx], top=80, bottom=80, left=140, right=140)
-            if r_idx % 2 == 1:
-                set_cell_bg(row_cells[c_idx], "FAFAFA")
-                
+            r.font.size = Pt(11) # Требование 10-12 pt
+            r.font.color.rgb = RGBColor(0, 0, 0)
+            
     if col_widths:
         for row in table.rows:
-            for i, w in enumerate(col_widths):
-                row.cells[i].width = Mm(w)
-                
-    # Отступ после таблицы
-    p_after = doc.add_paragraph()
-    p_after.paragraph_format.space_before = Pt(0)
-    p_after.paragraph_format.space_after = Pt(6)
-    p_after.paragraph_format.line_spacing = 1.0
+            for c_idx, w_mm in enumerate(col_widths):
+                if c_idx < len(row.cells):
+                    row.cells[c_idx].width = Mm(w_mm)
+                    
+    p_post = doc.add_paragraph()
+    p_post.paragraph_format.space_before = Pt(4)
+    p_post.paragraph_format.space_after = Pt(0)
+    p_post.paragraph_format.first_line_indent = Mm(0)
     return table
-
-def set_cell_margins(cell, top=100, bottom=100, left=150, right=150):
-    tcPr = cell._tc.get_or_add_tcPr()
-    tcMar = OxmlElement('w:tcMar')
-    for m, val in [('top', top), ('bottom', bottom), ('left', left), ('right', right)]:
-        node = OxmlElement(f'w:{m}')
-        node.set(qn('w:w'), str(val))
-        node.set(qn('w:type'), 'dxa')
-        tcMar.append(node)
-    tcPr.append(tcMar)
