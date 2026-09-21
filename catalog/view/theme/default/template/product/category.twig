@@ -1,4 +1,26 @@
 {{ header }}
+<!-- Schema.org Structured Data (CollectionPage & Breadcrumbs) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "{{ heading_title|escape('js') }}",
+  "description": "{{ heading_title|escape('js') }} - каталог товаров интернет-магазина SYNTHESIA",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {% for key, breadcrumb in breadcrumbs %}
+      {
+        "@type": "ListItem",
+        "position": {{ key + 1 }},
+        "name": "{{ breadcrumb.text|escape('js') }}",
+        "item": "{{ breadcrumb.href }}"
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
 <div id="product-category" class="container">
 	<ul class="breadcrumb">
 		{% for breadcrumb in breadcrumbs %}

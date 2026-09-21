@@ -6,11 +6,12 @@ Disallow: /*route=common/
 Disallow: /*route=product/compare
 Disallow: /*route=product/search
 Disallow: /*route=product/product*&manufacturer_id=
-Disallow: /catalog/controller
-Disallow: /catalog/language
-Disallow: /catalog/model
-Disallow: /download
-Disallow: /system
+Disallow: /admin/
+Disallow: /catalog/controller/
+Disallow: /catalog/language/
+Disallow: /catalog/model/
+Disallow: /download/
+Disallow: /system/
 Disallow: /search
 Disallow: */storage/
 Disallow: /*?sort=
@@ -31,6 +32,10 @@ Disallow: /*?tracking=
 Disallow: /*&tracking=
 Disallow: /*&tag=*
 Disallow: /*?tag=*
+Disallow: /*?page=1$
+Disallow: /*cart
+Disallow: /*checkout
+
 Allow: *.css
 Allow: *.js
 Allow: *.jpg
@@ -43,5 +48,11 @@ Allow: *.ttf
 Allow: *.woff
 Allow: *.woff2
 
-# При включенном SeoPro, раскомментировать строку Sitemap и подставить Ваш адрес сайта
-# Sitemap: https://site.com/sitemap.xml
+# Yandex parameters optimization
+Clean-param: sort&order&limit&filter&filter_name /
+
+# Host
+Host: synthesia
+
+# Sitemap
+Sitemap: http://synthesia/sitemap.xml

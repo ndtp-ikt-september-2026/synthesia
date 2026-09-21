@@ -29,6 +29,58 @@
 <meta property="og:image" content="{{ logo }}">
 {% endif %}
 <meta property="og:site_name" content="{{ name }}">
+{% if description %}
+<meta property="og:description" content="{{ description }}">
+{% endif %}
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ title }}">
+{% if description %}
+<meta name="twitter:description" content="{{ description }}">
+{% endif %}
+{% if og_image %}
+<meta name="twitter:image" content="{{ og_image }}">
+{% elseif logo %}
+<meta name="twitter:image" content="{{ logo }}">
+{% endif %}
+{% set has_canonical = false %}
+{% for link in links %}
+  {% if link.rel == 'canonical' %}{% set has_canonical = true %}{% endif %}
+{% endfor %}
+{% if not has_canonical and og_url %}
+<link href="{{ og_url }}" rel="canonical">
+{% endif %}
+
+<!-- Schema.org Organization & WebSite Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "{{ base }}#organization",
+      "name": "{{ name }}",
+      "url": "{{ base }}",
+      "logo": "{{ logo|default(base ~ 'image/catalog/synthesia_logo.png') }}"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ base }}#website",
+      "url": "{{ base }}",
+      "name": "{{ name }}",
+      "publisher": {
+        "@id": "{{ base }}#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{ base }}index.php?route=product/search&search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
 <link href="catalog/view/theme/default/fonts/Inter-Regular.woff2" rel="preload" as="font" type="font/woff2" crossorigin>
 <link href="catalog/view/theme/default/fonts/Inter-Medium.woff2" rel="preload" as="font" type="font/woff2" crossorigin>
 <link href="catalog/view/theme/default/fonts/Inter-Bold.woff2" rel="preload" as="font" type="font/woff2" crossorigin>

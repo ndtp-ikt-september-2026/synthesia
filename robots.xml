@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robots xmlns="http://synthesia/robots.dtd">
+  <sitemap>http://synthesia/sitemap.xml</sitemap>
+  <host>synthesia</host>
+  <user-agent name="*">
+    <allow>/*</allow>
+    <disallow>/admin/</disallow>
+    <disallow>/catalog/controller/</disallow>
+    <disallow>/catalog/language/</disallow>
+    <disallow>/catalog/model/</disallow>
+    <disallow>/download/</disallow>
+    <disallow>/system/</disallow>
+    <disallow>/*route=account/</disallow>
+    <disallow>/*route=affiliate/</disallow>
+    <disallow>/*route=checkout/</disallow>
+    <disallow>/*route=product/compare</disallow>
+    <disallow>/*route=product/search</disallow>
+    <disallow>/*?sort=</disallow>
+    <disallow>/*?order=</disallow>
+    <disallow>/*?limit=</disallow>
+    <disallow>/*?filter=</disallow>
+  </user-agent>
+</robots>

@@ -1,0 +1,3742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>http://synthesia/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/specials</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/brands</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/contact-us</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/sitemap</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/gitary</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/gitarnoe-oborudovanie</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/klavishnye</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/strunnye</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/muzyka-vinil-cd</loc>
+    <lastmod>2026-09-07T11:48:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/vinilovye-plastinki</loc>
+    <lastmod>2026-09-07T11:48:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/kompakt-diski</loc>
+    <lastmod>2026-09-07T11:48:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/tsifrovye-relizy</loc>
+    <lastmod>2026-09-07T11:48:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskie-gitary</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/bas-gitary</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/gitary-klassicheskie</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitary</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/kombiki</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/usiliteli-dlya-gitar</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/kabinety</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/pedali-dlya-gitar</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/pedali-dlya-elektroakusticheskoy-gitary</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/tsifrovye-pianino</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezatory</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/midi-kontrollery</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/midi-klaviatury</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/elektroskripki</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/skripki</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/kontrabasy</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/violoncheli</loc>
+    <lastmod>2026-09-08T16:36:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e201stb</loc>
+    <lastmod>2026-09-08T17:53:05+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034400/img_95925b029441.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E201STB</image:caption>
+      <image:title>Электрогитара Caraya E201STB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-homage-heg340bk</loc>
+    <lastmod>2026-09-08T17:53:05+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036107/img_a1021437f7b5.jpg</image:loc>
+      <image:caption>Электрогитара Homage HEG340BK</image:caption>
+      <image:title>Электрогитара Homage HEG340BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-homage-heg341bl</loc>
+    <lastmod>2026-09-08T17:53:05+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036605/img_266e6e8f3dde.jpg</image:loc>
+      <image:caption>Электрогитара Homage HEG341BL</image:caption>
+      <image:title>Электрогитара Homage HEG341BL</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-homage-heg330rds</loc>
+    <lastmod>2026-09-08T17:53:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036106/img_265ac72f1077.jpg</image:loc>
+      <image:caption>Электрогитара Homage HEG330RDS</image:caption>
+      <image:title>Электрогитара Homage HEG330RDS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e200tgr</loc>
+    <lastmod>2026-09-08T17:53:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031565/img_e910f8072752.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E200TGR</image:caption>
+      <image:title>Электрогитара Caraya E200TGR</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e210bs</loc>
+    <lastmod>2026-09-08T17:53:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038211/img_6e99c9b49543.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E210BS</image:caption>
+      <image:title>Электрогитара Caraya E210BS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-mk1-bk</loc>
+    <lastmod>2026-09-08T18:05:27+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880032070/img_46ed52631f53.jpg</image:loc>
+      <image:caption>Синтезатор Medeli MK1-BK</image:caption>
+      <image:title>Синтезатор Medeli MK1-BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-mk1-wh</loc>
+    <lastmod>2026-09-08T18:05:27+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880032071/img_f11a45cc6975.jpg</image:loc>
+      <image:caption>Синтезатор Medeli MK1-WH</image:caption>
+      <image:title>Синтезатор Medeli MK1-WH</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-mk37</loc>
+    <lastmod>2026-09-08T18:05:27+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880032072/img_5479e76de46f.jpg</image:loc>
+      <image:caption>Синтезатор Medeli MK37</image:caption>
+      <image:title>Синтезатор Medeli MK37</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-mk37-or</loc>
+    <lastmod>2026-09-08T18:05:27+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038721/img_9ac90f9d9ee4.jpg</image:loc>
+      <image:caption>Синтезатор Medeli MK37-OR</image:caption>
+      <image:title>Синтезатор Medeli MK37-OR</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-mk49</loc>
+    <lastmod>2026-09-08T18:05:27+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880033195/img_afa1723a6153.jpg</image:loc>
+      <image:caption>Синтезатор MEDELI MK49</image:caption>
+      <image:title>Синтезатор MEDELI MK49</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/klassicheskaya-gitara-terris-tc-3801a-sb</loc>
+    <lastmod>2026-09-08T17:42:12+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880028018/img_6cdaf4db2e6b.jpg</image:loc>
+      <image:caption>Классическая гитара TERRIS TC-3801A SB</image:caption>
+      <image:title>Классическая гитара TERRIS TC-3801A SB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/klassicheskaya-gitara-terris-tc-3801a-na</loc>
+    <lastmod>2026-09-08T17:42:13+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026969/img_d27af92fcac5.jpg</image:loc>
+      <image:caption>Классическая гитара TERRIS TC-3801A NA</image:caption>
+      <image:title>Классическая гитара TERRIS TC-3801A NA</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/klassicheskaya-gitara-terris-tc-3801a-bk</loc>
+    <lastmod>2026-09-08T17:42:15+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026968/img_fb467ca4e2a9.jpg</image:loc>
+      <image:caption>Классическая гитара TERRIS TC-3801A BK</image:caption>
+      <image:title>Классическая гитара TERRIS TC-3801A BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/klassicheskaya-gitara-terris-tc-3901a-na</loc>
+    <lastmod>2026-09-08T17:42:17+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026970/img_1793020612b4.jpg</image:loc>
+      <image:caption>Классическая гитара TERRIS TC-3901A NA</image:caption>
+      <image:title>Классическая гитара TERRIS TC-3901A NA</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/klassicheskaya-gitara-terris-tc-390a-bk</loc>
+    <lastmod>2026-09-08T17:42:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880027026/img_14efac0bcd60.jpg</image:loc>
+      <image:caption>Классическая гитара TERRIS TC-390A BK</image:caption>
+      <image:title>Классическая гитара TERRIS TC-390A BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-terris-tf-3802a-na</loc>
+    <lastmod>2026-09-08T17:47:01+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880028327/img_8545d8ba867a.jpg</image:loc>
+      <image:caption>Акустическая гитара TERRIS TF-3802A NA</image:caption>
+      <image:title>Акустическая гитара TERRIS TF-3802A NA</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-terris-tf-380a-bk</loc>
+    <lastmod>2026-09-08T17:47:02+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026973/img_18b093e08fcd.jpg</image:loc>
+      <image:caption>Акустическая гитара TERRIS TF-380A BK</image:caption>
+      <image:title>Акустическая гитара TERRIS TF-380A BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-terris-tf-380a-na</loc>
+    <lastmod>2026-09-08T17:47:04+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026974/img_1b4b39f8014f.jpg</image:loc>
+      <image:caption>Акустическая гитара TERRIS TF-380A NA</image:caption>
+      <image:title>Акустическая гитара TERRIS TF-380A NA</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-3900w-ns</loc>
+    <lastmod>2026-09-08T17:47:07+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880032915/img_56d4dde23f7a.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-3900W-NS</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-3900W-NS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-3900</loc>
+    <lastmod>2026-09-08T17:47:10+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029950/img_7a218cf75449.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-3900</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-3900</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-colombo-lf-3800ct-sb</loc>
+    <lastmod>2026-09-08T17:47:10+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/88880003210/img_12d334140c40.jpg</image:loc>
+      <image:caption>АКУСТИЧЕСКАЯ ГИТАРА COLOMBO LF-3800CT SB</image:caption>
+      <image:title>АКУСТИЧЕСКАЯ ГИТАРА COLOMBO LF-3800CT SB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4100-n</loc>
+    <lastmod>2026-09-08T17:47:12+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029933/img_f8a54bf2c3fb.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4100-N</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4100-N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-caraya-f600-bs</loc>
+    <lastmod>2026-09-08T17:47:14+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880035057/img_67c837afc81b.jpg</image:loc>
+      <image:caption>Акустическая гитара Caraya F600-BS</image:caption>
+      <image:title>Акустическая гитара Caraya F600-BS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-caraya-f600-bk</loc>
+    <lastmod>2026-09-08T17:47:16+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880035056/img_791e76315ce7.jpg</image:loc>
+      <image:caption>Акустическая гитара Caraya F600-BK</image:caption>
+      <image:title>Акустическая гитара Caraya F600-BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-caraya-f601-bs</loc>
+    <lastmod>2026-09-08T17:47:18+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880035054/img_af760ad3e446.jpg</image:loc>
+      <image:caption>Акустическая гитара Caraya F601-BS</image:caption>
+      <image:title>Акустическая гитара Caraya F601-BS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-colombo-lf-4100-sb</loc>
+    <lastmod>2026-09-08T17:47:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880002482/img_b6c6b9ce138c.jpg</image:loc>
+      <image:caption>АКУСТИЧЕСКАЯ ГИТАРА COLOMBO LF-4100 SB</image:caption>
+      <image:title>АКУСТИЧЕСКАЯ ГИТАРА COLOMBO LF-4100 SB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4110-n</loc>
+    <lastmod>2026-09-08T17:47:21+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029849/img_34ad03076fee.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4110-N</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4110-N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4110-sb</loc>
+    <lastmod>2026-09-08T17:47:23+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034986/img_2dab8bf48b68.gif</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4110-SB</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4110-SB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-caraya-f640-n</loc>
+    <lastmod>2026-09-08T17:47:26+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031726/img_469f218d1018.jpg</image:loc>
+      <image:caption>Акустическая гитара Caraya F640-N</image:caption>
+      <image:title>Акустическая гитара Caraya F640-N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-caraya-f641-n</loc>
+    <lastmod>2026-09-08T17:47:28+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030751/img_13767fc8e94f.jpg</image:loc>
+      <image:caption>Акустическая гитара Caraya F641-N</image:caption>
+      <image:title>Акустическая гитара Caraya F641-N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-colombo-lf-4000-sb</loc>
+    <lastmod>2026-09-08T17:47:28+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880004413/img_f5a1919784ad.jpg</image:loc>
+      <image:caption>АКУСТИЧЕСКАЯ ГИТАРА COLOMBO LF-4000 SB</image:caption>
+      <image:title>АКУСТИЧЕСКАЯ ГИТАРА COLOMBO LF-4000 SB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-colombo-lf-4000-n</loc>
+    <lastmod>2026-09-08T17:47:29+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/88880003206/img_97910df0457b.jpg</image:loc>
+      <image:caption>АКУСТИЧЕСКАЯ ГИТАРА COLOMBO LF-4000 N</image:caption>
+      <image:title>АКУСТИЧЕСКАЯ ГИТАРА COLOMBO LF-4000 N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-401c-n</loc>
+    <lastmod>2026-09-08T17:47:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031184/img_652a6717b221.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-401C-N</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-401C-N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-401c-r</loc>
+    <lastmod>2026-09-08T17:47:33+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031078/img_59a86ec3f019.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-401C-R</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-401C-R</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-flight-d-145-bk</loc>
+    <lastmod>2026-09-08T17:47:35+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026971/img_fd34b2498198.jpg</image:loc>
+      <image:caption>Акустическая гитара FLIGHT D-145 BK</image:caption>
+      <image:title>Акустическая гитара FLIGHT D-145 BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-caraya-f601-bk</loc>
+    <lastmod>2026-09-08T17:47:37+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880035055/img_30aa25b25643.jpg</image:loc>
+      <image:caption>Акустическая гитара Caraya F601-BK</image:caption>
+      <image:title>Акустическая гитара Caraya F601-BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4100-d</loc>
+    <lastmod>2026-09-08T17:47:39+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880035470/img_56df61d04a44.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4100-D</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4100-D</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-401c-b</loc>
+    <lastmod>2026-09-08T17:47:42+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029932/img_3047b1e1beb7.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-401C-B</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-401C-B</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4111-r</loc>
+    <lastmod>2026-09-08T17:47:44+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034790/img_98375bfcdc7d.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4111-R</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4111-R</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-aria-fiesta-fst-300-bk</loc>
+    <lastmod>2026-09-08T17:47:45+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880023018/img_702a83ed1bf8.jpg</image:loc>
+      <image:caption>Акустическая гитара ARIA FIESTA FST-300 BK</image:caption>
+      <image:title>Акустическая гитара ARIA FIESTA FST-300 BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-aria-fiesta-fst-300-n</loc>
+    <lastmod>2026-09-08T17:47:47+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880023017/img_5e1c2ffb2bf2.jpg</image:loc>
+      <image:caption>Акустическая гитара ARIA FIESTA FST-300 N</image:caption>
+      <image:title>Акустическая гитара ARIA FIESTA FST-300 N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4111-n</loc>
+    <lastmod>2026-09-08T17:47:49+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031148/img_a51ba91de61a.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4111-N</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4111-N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4111-bk</loc>
+    <lastmod>2026-09-08T17:47:52+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029954/img_a4eef20da249.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4111-BK</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4111-BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4121-n</loc>
+    <lastmod>2026-09-08T17:47:54+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880032911/img_6fc5ec764cf6.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4121-N</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4121-N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4021</loc>
+    <lastmod>2026-09-08T17:47:57+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029952/img_d45684f0d1c7.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4021</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4021</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4121c-sb</loc>
+    <lastmod>2026-09-08T17:47:59+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034562/img_665b87f857cb.jpg</image:loc>
+      <image:caption>Акустическая гитара Homage LF-4121C-SB</image:caption>
+      <image:title>Акустическая гитара Homage LF-4121C-SB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4121c-n</loc>
+    <lastmod>2026-09-08T17:48:01+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029953/img_63f58760682a.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4121C-N</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4121C-N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-aria-awn-15-or</loc>
+    <lastmod>2026-09-08T17:48:02+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029265/img_13fcbd33382d.jpg</image:loc>
+      <image:caption>Акустическая гитара ARIA AWN-15 OR</image:caption>
+      <image:title>Акустическая гитара ARIA AWN-15 OR</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-flight-d-200-na</loc>
+    <lastmod>2026-09-08T17:48:05+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031824/img_1addf7368ed8.jpg</image:loc>
+      <image:caption>Акустическая гитара FLIGHT D-200 NA</image:caption>
+      <image:title>Акустическая гитара FLIGHT D-200 NA</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-homage-lf-4123-n</loc>
+    <lastmod>2026-09-08T17:48:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034288/img_dad8700eded8.jpg</image:loc>
+      <image:caption>Акустическая гитара HOMAGE LF-4123-N</image:caption>
+      <image:title>Акустическая гитара HOMAGE LF-4123-N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-ramis-ra-c07</loc>
+    <lastmod>2026-09-08T17:48:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036746/img_1eaf92b5f659.jpg</image:loc>
+      <image:caption>Акустическая гитара RAMIS RA-C07</image:caption>
+      <image:title>Акустическая гитара RAMIS RA-C07</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-root-note-ad310-ns</loc>
+    <lastmod>2026-09-08T17:48:12+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034417/img_1b1eab070fa4.jpg</image:loc>
+      <image:caption>Акустическая гитара Root Note AD310-NS</image:caption>
+      <image:title>Акустическая гитара Root Note AD310-NS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-caraya-f565c-n</loc>
+    <lastmod>2026-09-08T17:48:14+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034649/img_0c7056695861.jpg</image:loc>
+      <image:caption>Акустическая гитара CARAYA F565C-N</image:caption>
+      <image:title>Акустическая гитара CARAYA F565C-N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-flight-ad-200-3ts</loc>
+    <lastmod>2026-09-08T17:48:16+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034874/img_ede1d0209cda.jpg</image:loc>
+      <image:caption>Акустическая гитара FLIGHT AD-200 3TS</image:caption>
+      <image:title>Акустическая гитара FLIGHT AD-200 3TS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/gitara-akusticheskaya-flight-ag-210-s-na</loc>
+    <lastmod>2026-09-08T17:48:17+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880032074/img_25960b5ac2af.jpeg</image:loc>
+      <image:caption>Гитара акустическая FLIGHT AG-210 С NA</image:caption>
+      <image:title>Гитара акустическая FLIGHT AG-210 С NA</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-aria-afn-15-or</loc>
+    <lastmod>2026-09-08T17:48:18+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029264/img_673218f5d30b.jpg</image:loc>
+      <image:caption>Акустическая гитара ARIA AFN-15 OR</image:caption>
+      <image:title>Акустическая гитара ARIA AFN-15 OR</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-aria-awn-15-bk</loc>
+    <lastmod>2026-09-08T17:48:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880011178/img_758ec12bb1b3.jpg</image:loc>
+      <image:caption>АКУСТИЧЕСКАЯ ГИТАРА ARIA AWN-15 BK</image:caption>
+      <image:title>АКУСТИЧЕСКАЯ ГИТАРА ARIA AWN-15 BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/gitara-akusticheskaya-martinez-w-11cs</loc>
+    <lastmod>2026-09-08T17:48:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880003996/img_2e6b8ec2b4e0.jpg</image:loc>
+      <image:caption>ГИТАРА АКУСТИЧЕСКАЯ MARTINEZ W-11CS</image:caption>
+      <image:title>ГИТАРА АКУСТИЧЕСКАЯ MARTINEZ W-11CS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/gitara-akusticheskaya-martinez-w-11n</loc>
+    <lastmod>2026-09-08T17:48:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880003645/img_12983fd5d83a.jpg</image:loc>
+      <image:caption>ГИТАРА АКУСТИЧЕСКАЯ MARTINEZ W-11N</image:caption>
+      <image:title>ГИТАРА АКУСТИЧЕСКАЯ MARTINEZ W-11N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-caraya-f673-wa</loc>
+    <lastmod>2026-09-08T17:48:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880035059/img_882e7d7bdf26.jpg</image:loc>
+      <image:caption>Акустическая гитара Caraya F673-WA</image:caption>
+      <image:title>Акустическая гитара Caraya F673-WA</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-phil-pro-as-3607-n</loc>
+    <lastmod>2026-09-08T17:48:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880023986/img_0370da2bbb68.jpg</image:loc>
+      <image:caption>Акустическая гитара PHIL PRO AS-3607/N</image:caption>
+      <image:title>Акустическая гитара PHIL PRO AS-3607/N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-magna-mgc-02</loc>
+    <lastmod>2026-09-08T17:48:25+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034343/img_300fc15dc2fa.jpg</image:loc>
+      <image:caption>Акустическая гитара MAGNA MGC-02</image:caption>
+      <image:title>Акустическая гитара MAGNA MGC-02</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/gitara-akusticheskaya-martinez-faw-702-twrs</loc>
+    <lastmod>2026-09-08T17:48:25+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/88880004064/img_09bb5598a36c.jpg</image:loc>
+      <image:caption>ГИТАРА АКУСТИЧЕСКАЯ MARTINEZ FAW-702 TWRS</image:caption>
+      <image:title>ГИТАРА АКУСТИЧЕСКАЯ MARTINEZ FAW-702 TWRS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/akusticheskaya-gitara-martinez-faw-702-tbk</loc>
+    <lastmod>2026-09-08T17:48:26+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/88880004130/img_444dc5308b66.jpg</image:loc>
+      <image:caption>АКУСТИЧЕСКАЯ ГИТАРА MARTINEZ FAW-702 TBK</image:caption>
+      <image:title>АКУСТИЧЕСКАЯ ГИТАРА MARTINEZ FAW-702 TBK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/gitara-akusticheskaya-martinez-faw-702-bl</loc>
+    <lastmod>2026-09-08T17:48:26+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/88880004129/img_d0b9aa89ab49.jpg</image:loc>
+      <image:caption>ГИТАРА АКУСТИЧЕСКАЯ MARTINEZ FAW-702 BL</image:caption>
+      <image:title>ГИТАРА АКУСТИЧЕСКАЯ MARTINEZ FAW-702 BL</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-homage-heg500rds</loc>
+    <lastmod>2026-09-08T17:53:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036108/img_10c5a530291b.jpg</image:loc>
+      <image:caption>Электрогитара Homage HEG500RDS</image:caption>
+      <image:title>Электрогитара Homage HEG500RDS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-aria-stg-004-3ts-treshchiny-nizhnego-roga</loc>
+    <lastmod>2026-09-08T17:53:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034221/img_fe23816b2e62.jpg</image:loc>
+      <image:caption>Электрогитара ARIA STG-004 3TS(Трещины нижнего рога)</image:caption>
+      <image:title>Электрогитара ARIA STG-004 3TS(Трещины нижнего рога)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-homage-heg350bk</loc>
+    <lastmod>2026-09-08T17:53:13+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036109/img_4b6797e5dc23.jpg</image:loc>
+      <image:caption>Электрогитара Homage HEG350BK</image:caption>
+      <image:title>Электрогитара Homage HEG350BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-magna-200a-sbk</loc>
+    <lastmod>2026-09-08T17:53:15+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880032809/img_7392fc99fac9.jpg</image:loc>
+      <image:caption>Электрогитара MAGNA 200A-SBK</image:caption>
+      <image:title>Электрогитара MAGNA 200A-SBK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e219rds</loc>
+    <lastmod>2026-09-08T17:53:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030861/img_e1df9713f36c.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E219RDS</image:caption>
+      <image:title>Электрогитара Caraya E219RDS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-stagg-ses-30-bk</loc>
+    <lastmod>2026-09-08T17:53:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880028454/img_b44751476d00.jpg</image:loc>
+      <image:caption>Электрогитара STAGG SES-30 BK</image:caption>
+      <image:title>Электрогитара STAGG SES-30 BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e233bk</loc>
+    <lastmod>2026-09-08T17:53:25+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880032605/img_a2d309e781e7.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E233BK</image:caption>
+      <image:title>Электрогитара Caraya E233BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e252trds</loc>
+    <lastmod>2026-09-08T17:53:28+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031729/img_26fc469ad3bb.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E252TRDS</image:caption>
+      <image:title>Электрогитара Caraya E252TRDS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e231trd</loc>
+    <lastmod>2026-09-08T17:53:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038409/img_4f2685cda442.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E231TRD</image:caption>
+      <image:title>Электрогитара Caraya E231TRD</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e235bk</loc>
+    <lastmod>2026-09-08T17:53:34+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030863/img_42056f23252e.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E235BK</image:caption>
+      <image:title>Электрогитара Caraya E235BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-aria-stg-003-mbl</loc>
+    <lastmod>2026-09-08T17:53:38+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880021833/img_a75714e4dbf7.jpg</image:loc>
+      <image:caption>ЭЛЕКТРОГИТАРА ARIA STG-003 MBL</image:caption>
+      <image:title>ЭЛЕКТРОГИТАРА ARIA STG-003 MBL</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-aria-stg-003-wh</loc>
+    <lastmod>2026-09-08T17:53:38+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880011105/img_cdf1ac5230ec.jpg</image:loc>
+      <image:caption>ЭЛЕКТРОГИТАРА ARIA STG-003 WH</image:caption>
+      <image:title>ЭЛЕКТРОГИТАРА ARIA STG-003 WH</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-ashtone-st-100-sb</loc>
+    <lastmod>2026-09-08T17:53:42+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880003970/img_e1baf3d818e0.jpg</image:loc>
+      <image:caption>ЭЛЕКТРОГИТАРА ASHTONE ST-100 SB</image:caption>
+      <image:title>ЭЛЕКТРОГИТАРА ASHTONE ST-100 SB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e228bs</loc>
+    <lastmod>2026-09-08T17:53:46+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030862/img_38aae8ecc8be.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E228BS</image:caption>
+      <image:title>Электрогитара Caraya E228BS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e232ftgr</loc>
+    <lastmod>2026-09-08T17:53:49+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031728/img_891a44a2cc0a.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E232FTGR</image:caption>
+      <image:title>Электрогитара Caraya E232FTGR</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-foix-feg-feg-kg-01-nat</loc>
+    <lastmod>2026-09-08T17:53:51+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038212/img_7c9045fdfbc3.jpg</image:loc>
+      <image:caption>Электрогитара Foix FEG/FEG-KG-01-NAT</image:caption>
+      <image:title>Электрогитара Foix FEG/FEG-KG-01-NAT</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-stagg-ses-30-snb</loc>
+    <lastmod>2026-09-08T17:53:54+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880027831/img_e2b9317d2426.jpg</image:loc>
+      <image:caption>Электрогитара STAGG SES-30 SNB</image:caption>
+      <image:title>Электрогитара STAGG SES-30 SNB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-ashtone-st-100-bls</loc>
+    <lastmod>2026-09-08T17:53:57+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880003971/img_db0e9713b168.jpg</image:loc>
+      <image:caption>ЭЛЕКТРОГИТАРА ASHTONE ST-100 BLS</image:caption>
+      <image:title>ЭЛЕКТРОГИТАРА ASHTONE ST-100 BLS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-ashtone-st-200-bl</loc>
+    <lastmod>2026-09-08T17:53:58+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880003038/img_f289694861dc.jpg</image:loc>
+      <image:caption>ЭЛЕКТРОГИТАРА ASHTONE ST-200 BL</image:caption>
+      <image:title>ЭЛЕКТРОГИТАРА ASHTONE ST-200 BL</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-stagg-ses-55-whb</loc>
+    <lastmod>2026-09-08T17:54:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030806/img_b200053c8b30.jpg</image:loc>
+      <image:caption>Электрогитара STAGG SES-55 WHB</image:caption>
+      <image:title>Электрогитара STAGG SES-55 WHB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-prodipe-jmfstjuniorfr</loc>
+    <lastmod>2026-09-08T17:54:02+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036912/img_328f7042a352.jpg</image:loc>
+      <image:caption>Электрогитара Prodipe JMFSTJUNIORFR</image:caption>
+      <image:title>Электрогитара Prodipe JMFSTJUNIORFR</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-peavey-raptor-plus-black</loc>
+    <lastmod>2026-09-08T17:54:04+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036071/img_9e49fb92887b.jpg</image:loc>
+      <image:caption>Электрогитара PEAVEY Raptor Plus Black</image:caption>
+      <image:title>Электрогитара PEAVEY Raptor Plus Black</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-luxars-s-kpro-sbl</loc>
+    <lastmod>2026-09-08T17:54:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880037487/img_6eb671a8449f.jpg</image:loc>
+      <image:caption>Электрогитара Luxars S-KPRO-SBL</image:caption>
+      <image:title>Электрогитара Luxars S-KPRO-SBL</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-caraya-e226n</loc>
+    <lastmod>2026-09-08T17:54:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031727/img_8c58286bae21.jpg</image:loc>
+      <image:caption>Электрогитара Caraya E226N</image:caption>
+      <image:title>Электрогитара Caraya E226N</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-cort-g110-opsb</loc>
+    <lastmod>2026-09-08T17:54:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030419/img_7807470c9d14.jpg</image:loc>
+      <image:caption>Электрогитара CORT G110-OPSB</image:caption>
+      <image:title>Электрогитара CORT G110-OPSB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-cort-g110-opbk</loc>
+    <lastmod>2026-09-08T17:54:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030177/img_b69662428127.jpg</image:loc>
+      <image:caption>Электрогитара CORT G110-OPBK</image:caption>
+      <image:title>Электрогитара CORT G110-OPBK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-cort-g110-opbc</loc>
+    <lastmod>2026-09-08T17:54:11+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030168/img_2b505fed5234.jpg</image:loc>
+      <image:caption>Электрогитара CORT G110-OPBC</image:caption>
+      <image:title>Электрогитара CORT G110-OPBC</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-aria-stg-003-m-wh</loc>
+    <lastmod>2026-09-08T17:54:11+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029220/img_6f133dd4a619.jpg</image:loc>
+      <image:caption>Электрогитара ARIA STG-003/M WH</image:caption>
+      <image:title>Электрогитара ARIA STG-003/M WH</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-aria-stg-003-3ts</loc>
+    <lastmod>2026-09-08T17:54:11+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880011100/img_6dc2869f91e4.jpg</image:loc>
+      <image:caption>ЭЛЕКТРОГИТАРА ARIA STG-003 3TS</image:caption>
+      <image:title>ЭЛЕКТРОГИТАРА ARIA STG-003 3TS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-stagg-ses-55-snb</loc>
+    <lastmod>2026-09-08T17:54:14+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030800/img_8e17702a01d2.jpg</image:loc>
+      <image:caption>Электрогитара STAGG SES-55 SNB</image:caption>
+      <image:title>Электрогитара STAGG SES-55 SNB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-stagg-ses-55-blk</loc>
+    <lastmod>2026-09-08T17:54:15+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030797/img_bcedf054eed8.jpg</image:loc>
+      <image:caption>Электрогитара STAGG SES-55 BLK</image:caption>
+      <image:title>Электрогитара STAGG SES-55 BLK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-jet-js-200-bl</loc>
+    <lastmod>2026-09-08T17:54:26+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036786/img_138bbddd5dd9.jpg</image:loc>
+      <image:caption>Электрогитара JET JS-200 BL</image:caption>
+      <image:title>Электрогитара JET JS-200 BL</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-jet-js-200-bk</loc>
+    <lastmod>2026-09-08T17:54:29+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034601/img_ba95462daba7.jpg</image:loc>
+      <image:caption>Электрогитара JET JS-200 BK</image:caption>
+      <image:title>Электрогитара JET JS-200 BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-cort-x100-opbb</loc>
+    <lastmod>2026-09-08T17:54:30+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029869/img_82fa9e57d3d0.jpg</image:loc>
+      <image:caption>Электрогитара CORT X100-OPBB</image:caption>
+      <image:title>Электрогитара CORT X100-OPBB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-cort-x100-opbk</loc>
+    <lastmod>2026-09-08T17:54:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880025509/img_954f6fadfac0.jpg</image:loc>
+      <image:caption>Электрогитара CORT X100-OPBK</image:caption>
+      <image:title>Электрогитара CORT X100-OPBK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-cort-g100-hh-opw</loc>
+    <lastmod>2026-09-08T17:54:34+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038734/img_491ae4dc88bc.jpg</image:loc>
+      <image:caption>Электрогитара Cort G100-HH-OPW</image:caption>
+      <image:title>Электрогитара Cort G100-HH-OPW</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-cort-g100-hh-opb</loc>
+    <lastmod>2026-09-08T17:54:38+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038732/img_5b7e67978fb0.jpg</image:loc>
+      <image:caption>Электрогитара Cort G100-HH-OPB</image:caption>
+      <image:title>Электрогитара Cort G100-HH-OPB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-sunsmile-ssgi-300</loc>
+    <lastmod>2026-09-08T17:54:42+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038442/img_c85a872a0576.jpg</image:loc>
+      <image:caption>Электрогитара Sunsmile SSGI-300</image:caption>
+      <image:title>Электрогитара Sunsmile SSGI-300</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-jet-js-250-ow</loc>
+    <lastmod>2026-09-08T17:54:45+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036787/img_b1f6fec81081.jpg</image:loc>
+      <image:caption>Электрогитара JET JS-250 OW</image:caption>
+      <image:title>Электрогитара JET JS-250 OW</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-stagg-set-cst-bs</loc>
+    <lastmod>2026-09-08T17:54:46+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880017309/img_32e62855b5d7.jpg</image:loc>
+      <image:caption>ЭЛЕКТРОГИТАРА STAGG SET-CST BS</image:caption>
+      <image:title>ЭЛЕКТРОГИТАРА STAGG SET-CST BS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-stagg-set-plus-whb</loc>
+    <lastmod>2026-09-08T17:54:48+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880028460/img_a61a0be3613e.jpg</image:loc>
+      <image:caption>Электрогитара STAGG SET-PLUS WHB</image:caption>
+      <image:title>Электрогитара STAGG SET-PLUS WHB</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/elektrogitara-stagg-set-plus-nat</loc>
+    <lastmod>2026-09-08T17:54:51+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880027839/img_b8d1e6e41297.jpg</image:loc>
+      <image:caption>Электрогитара STAGG SET-PLUS NAT</image:caption>
+      <image:title>Электрогитара STAGG SET-PLUS NAT</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-korg-monotron-duo</loc>
+    <lastmod>2026-09-08T18:05:29+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880015372/img_bb3e939abebe.jpg</image:loc>
+      <image:caption>СИНТЕЗАТОР KORG Monotron Duo</image:caption>
+      <image:title>СИНТЕЗАТОР KORG Monotron Duo</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-soundsation-keyli61</loc>
+    <lastmod>2026-09-08T18:05:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038343/img_5eb2588de425.jpg</image:loc>
+      <image:caption>Синтезатор SoundSation KeyLi61</image:caption>
+      <image:title>Синтезатор SoundSation KeyLi61</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-yamaha-pss-e30-r</loc>
+    <lastmod>2026-09-08T18:05:32+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029854/img_6cae4542c351.jpg</image:loc>
+      <image:caption>Синтезатор YAMAHA PSS-E30 R</image:caption>
+      <image:title>Синтезатор YAMAHA PSS-E30 R</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/tsifrovoe-skladnoe-elektropiano-donner-dp-06</loc>
+    <lastmod>2026-09-08T18:05:32+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034531/img_de24587cb279.jpg</image:loc>
+      <image:caption>Цифровое складное электропиано Donner DP-06</image:caption>
+      <image:title>Цифровое складное электропиано Donner DP-06</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-mk61</loc>
+    <lastmod>2026-09-08T18:05:35+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034326/img_e796f6f6bb0c.jpg</image:loc>
+      <image:caption>Синтезатор MEDELI MK61</image:caption>
+      <image:title>Синтезатор MEDELI MK61</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-behringer-jt-mini</loc>
+    <lastmod>2026-09-08T18:05:37+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880037320/img_4e9473968a3e.jpg</image:loc>
+      <image:caption>Синтезатор BEHRINGER JT MINI</image:caption>
+      <image:title>Синтезатор BEHRINGER JT MINI</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-mk110-bk</loc>
+    <lastmod>2026-09-08T18:05:37+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038650/img_1f18671c181f.png</image:loc>
+      <image:caption>Синтезатор Medeli MK110-BK</image:caption>
+      <image:title>Синтезатор Medeli MK110-BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-mk110-wh</loc>
+    <lastmod>2026-09-08T18:05:38+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038649/img_88a82b34af92.jpg</image:loc>
+      <image:caption>Синтезатор Medeli MK110-WH</image:caption>
+      <image:title>Синтезатор Medeli MK110-WH</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-m211k</loc>
+    <lastmod>2026-09-08T18:05:40+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034964/img_6f4b0eadeb2f.gif</image:loc>
+      <image:caption>Синтезатор Medeli M211K</image:caption>
+      <image:title>Синтезатор Medeli M211K</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-behringer-phara-o-mini</loc>
+    <lastmod>2026-09-08T18:05:41+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880037529/img_3dc4ab591a72.jpg</image:loc>
+      <image:caption>Синтезатор BEHRINGER PHARA-O MINI</image:caption>
+      <image:title>Синтезатор BEHRINGER PHARA-O MINI</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-midi-kontroller-yamaha-pss-a50</loc>
+    <lastmod>2026-09-08T18:05:43+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880027034/img_e692bd83956f.jpg</image:loc>
+      <image:caption>Синтезатор/Midi контроллер YAMAHA PSS-A50</image:caption>
+      <image:title>Синтезатор/Midi контроллер YAMAHA PSS-A50</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-mk200</loc>
+    <lastmod>2026-09-08T18:05:45+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031945/img_72389a5c1003.jpg</image:loc>
+      <image:caption>Синтезатор MEDELI MK200</image:caption>
+      <image:title>Синтезатор MEDELI MK200</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-behringer-pro-vs-mini</loc>
+    <lastmod>2026-09-08T18:05:47+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880035000/img_494d32297dec.jpg</image:loc>
+      <image:caption>Синтезатор BEHRINGER PRO-VS MINI</image:caption>
+      <image:title>Синтезатор BEHRINGER PRO-VS MINI</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-casio-ct-s195</loc>
+    <lastmod>2026-09-08T18:05:48+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031213/img_05e1e1e89057.jpg</image:loc>
+      <image:caption>Синтезатор CASIO CT-S195</image:caption>
+      <image:title>Синтезатор CASIO CT-S195</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-casio-ct-s100</loc>
+    <lastmod>2026-09-08T18:05:50+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026616/img_58f5a1d6227f.jpg</image:loc>
+      <image:caption>Синтезатор CASIO CT-S100</image:caption>
+      <image:title>Синтезатор CASIO CT-S100</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-casio-ct-s100-130</loc>
+    <lastmod>2026-09-08T18:05:50+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026616/img_58f5a1d6227f.jpg</image:loc>
+      <image:caption>Синтезатор CASIO CT-S100</image:caption>
+      <image:title>Синтезатор CASIO CT-S100</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-nux-nek-100</loc>
+    <lastmod>2026-09-08T18:05:53+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880033732/img_c863e48cc848.jpg</image:loc>
+      <image:caption>Синтезатор NUX NEK-100</image:caption>
+      <image:title>Синтезатор NUX NEK-100</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-ik110-wh</loc>
+    <lastmod>2026-09-08T18:05:54+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880039201/img_ed19bc56ea2c.jpg</image:loc>
+      <image:caption>Синтезатор Medeli IK110-WH</image:caption>
+      <image:title>Синтезатор Medeli IK110-WH</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-ik110</loc>
+    <lastmod>2026-09-08T18:05:55+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038784/img_121574c5b371.jpg</image:loc>
+      <image:caption>Синтезатор Medeli IK110</image:caption>
+      <image:title>Синтезатор Medeli IK110</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-m221l</loc>
+    <lastmod>2026-09-08T18:05:57+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034965/img_19452f119c34.png</image:loc>
+      <image:caption>Синтезатор Medeli M221L</image:caption>
+      <image:title>Синтезатор Medeli M221L</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-nux-nek-110-bk</loc>
+    <lastmod>2026-09-08T18:05:59+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038413/img_5f522b53e273.jpg</image:loc>
+      <image:caption>Синтезатор Nux NEK-110-BK</image:caption>
+      <image:title>Синтезатор Nux NEK-110-BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-nux-nek-110-wh</loc>
+    <lastmod>2026-09-08T18:06:01+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036981/img_7f12c761680b.jpg</image:loc>
+      <image:caption>Синтезатор NUX NEK-110-WH</image:caption>
+      <image:title>Синтезатор NUX NEK-110-WH</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-m17</loc>
+    <lastmod>2026-09-08T18:06:03+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880031344/img_3c0037442bed.jpg</image:loc>
+      <image:caption>Синтезатор MEDELI M17</image:caption>
+      <image:title>Синтезатор MEDELI M17</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-mk300</loc>
+    <lastmod>2026-09-08T18:06:05+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034213/img_02a3a9d9791c.jpg</image:loc>
+      <image:caption>Синтезатор MEDELI MK300</image:caption>
+      <image:title>Синтезатор MEDELI MK300</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-casio-ct-s200we</loc>
+    <lastmod>2026-09-08T18:06:07+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026613/img_45f2065a8b5a.jpg</image:loc>
+      <image:caption>Синтезатор CASIO CT-S200WE</image:caption>
+      <image:title>Синтезатор CASIO CT-S200WE</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-casio-ct-s200bk</loc>
+    <lastmod>2026-09-08T18:06:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026612/img_92b4cfd48a78.jpg</image:loc>
+      <image:caption>Синтезатор CASIO CT-S200BK</image:caption>
+      <image:title>Синтезатор CASIO CT-S200BK</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-m331</loc>
+    <lastmod>2026-09-08T18:06:11+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030004/img_8c96575b91e4.jpg</image:loc>
+      <image:caption>Синтезатор MEDELI M331</image:caption>
+      <image:title>Синтезатор MEDELI M331</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-rin-rk-107-s-vostochnymi-tembrami</loc>
+    <lastmod>2026-09-08T18:06:14+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038506/img_a6f152c9f85d.jpg</image:loc>
+      <image:caption>Синтезатор Rin RK-107 (с восточными тембрами)</image:caption>
+      <image:title>Синтезатор Rin RK-107 (с восточными тембрами)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-rin-rk-107-s-vostochnymi-tembrami-143</loc>
+    <lastmod>2026-09-08T18:06:14+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880038506/img_a6f152c9f85d.jpg</image:loc>
+      <image:caption>Синтезатор Rin RK-107 (с восточными тембрами)</image:caption>
+      <image:title>Синтезатор Rin RK-107 (с восточными тембрами)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-ik200</loc>
+    <lastmod>2026-09-08T18:06:15+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880032171/img_9592163397ea.jpg</image:loc>
+      <image:caption>Синтезатор Medeli IK200</image:caption>
+      <image:title>Синтезатор Medeli IK200</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/fm-sintezator-korg-volca-fm2</loc>
+    <lastmod>2026-09-08T18:06:15+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880036151/img_8a3dfa389d5a.jpg</image:loc>
+      <image:caption>FM-синтезатор KORG Volca FM2</image:caption>
+      <image:title>FM-синтезатор KORG Volca FM2</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-korg-nts-1-mkii</loc>
+    <lastmod>2026-09-08T18:06:16+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034269/img_007d19e417b4.jpg</image:loc>
+      <image:caption>Синтезатор KORG NTS-1 MKII</image:caption>
+      <image:title>Синтезатор KORG NTS-1 MKII</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/tsifrovoy-sempler-korg-volca-sample-2</loc>
+    <lastmod>2026-09-08T18:06:18+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880028598/img_e540bc2f045a.jpg</image:loc>
+      <image:caption>Цифровой сэмплер KORG VOLCA SAMPLE 2</image:caption>
+      <image:title>Цифровой сэмплер KORG VOLCA SAMPLE 2</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/tsifrovoy-sintezator-korg-volca-drum</loc>
+    <lastmod>2026-09-08T18:06:18+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026064/img_b8f265c1c31a.jpg</image:loc>
+      <image:caption>Цифровой синтезатор KORG VOLCA DRUM</image:caption>
+      <image:title>Цифровой синтезатор KORG VOLCA DRUM</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/analogovo-tsifrovoy-sintezator-korg-volca-beats</loc>
+    <lastmod>2026-09-08T18:06:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880018784/img_46513010e147.jpg</image:loc>
+      <image:caption>Аналогово-цифровой синтезатор KORG VOLCA BEATS</image:caption>
+      <image:title>Аналогово-цифровой синтезатор KORG VOLCA BEATS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/analogovyy-sintezator-korg-volca-keys</loc>
+    <lastmod>2026-09-08T18:06:20+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880018783/img_2fdbcf41167b.jpg</image:loc>
+      <image:caption>АНАЛОГОВЫЙ СИНТЕЗАТОР KORG VOLCA KEYS</image:caption>
+      <image:title>АНАЛОГОВЫЙ СИНТЕЗАТОР KORG VOLCA KEYS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/analogovyy-sintezator-korg-volca-bass</loc>
+    <lastmod>2026-09-08T18:06:21+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880018782/img_effcde96a067.jpg</image:loc>
+      <image:caption>АНАЛОГОВЫЙ СИНТЕЗАТОР KORG VOLCA BASS</image:caption>
+      <image:title>АНАЛОГОВЫЙ СИНТЕЗАТОР KORG VOLCA BASS</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-m361</loc>
+    <lastmod>2026-09-08T18:06:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880029853/img_cc751ca2f889.jpg</image:loc>
+      <image:caption>Синтезатор MEDELI M361</image:caption>
+      <image:title>Синтезатор MEDELI M361</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/basovyy-sintezator-donner-b1</loc>
+    <lastmod>2026-09-08T18:06:24+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880032299/img_0f0d2a8673f5.png</image:loc>
+      <image:caption>Басовый синтезатор Donner B1</image:caption>
+      <image:title>Басовый синтезатор Donner B1</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-yamaha-psr-f52-bez-b-p</loc>
+    <lastmod>2026-09-08T18:06:27+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880030285/img_f3dbb95abc94.jpg</image:loc>
+      <image:caption>Синтезатор YAMAHA PSR-F52 (Без Б/П)</image:caption>
+      <image:title>Синтезатор YAMAHA PSR-F52 (Без Б/П)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-a100</loc>
+    <lastmod>2026-09-08T18:06:30+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880037416/img_d735117862a1.jpg</image:loc>
+      <image:caption>Синтезатор MEDELI A100</image:caption>
+      <image:title>Синтезатор MEDELI A100</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-yamaha-psr-e283</loc>
+    <lastmod>2026-09-08T18:06:32+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034568/img_ff1225ad0b77.jpg</image:loc>
+      <image:caption>Синтезатор YAMAHA PSR-E283</image:caption>
+      <image:title>Синтезатор YAMAHA PSR-E283</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-korg-volca-modular</loc>
+    <lastmod>2026-09-08T18:06:33+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880034125/img_af78cd6b2f2f.jpg</image:loc>
+      <image:caption>Синтезатор KORG VOLCA MODULAR</image:caption>
+      <image:title>Синтезатор KORG VOLCA MODULAR</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-a100-wh</loc>
+    <lastmod>2026-09-08T18:06:34+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880037482/img_f7eed23288a1.jpg</image:loc>
+      <image:caption>Синтезатор MEDELI A100 WH</image:caption>
+      <image:title>Синтезатор MEDELI A100 WH</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-medeli-a100-wh-159</loc>
+    <lastmod>2026-09-08T18:06:34+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880037482/img_f7eed23288a1.jpg</image:loc>
+      <image:caption>Синтезатор MEDELI A100 WH</image:caption>
+      <image:title>Синтезатор MEDELI A100 WH</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-behringer-wasp-deluxe</loc>
+    <lastmod>2026-09-08T18:06:37+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880027940/img_abaddefef52a.jpg</image:loc>
+      <image:caption>Синтезатор BEHRINGER WASP DELUXE</image:caption>
+      <image:title>Синтезатор BEHRINGER WASP DELUXE</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-behringer-wasp-deluxe-161</loc>
+    <lastmod>2026-09-08T18:06:37+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880027940/img_abaddefef52a.jpg</image:loc>
+      <image:caption>Синтезатор BEHRINGER WASP DELUXE</image:caption>
+      <image:title>Синтезатор BEHRINGER WASP DELUXE</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-casio-lk-s250</loc>
+    <lastmod>2026-09-08T18:06:38+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880026617/img_22a17307aaa6.jpg</image:loc>
+      <image:caption>Синтезатор CASIO LK-S250</image:caption>
+      <image:title>Синтезатор CASIO LK-S250</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sintezator-casio-ct-x700</loc>
+    <lastmod>2026-09-08T18:06:40+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/888880024503/img_29df523a3a84.jpg</image:loc>
+      <image:caption>Синтезатор CASIO CT-X700</image:caption>
+      <image:title>Синтезатор CASIO CT-X700</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/homework-remixes</loc>
+    <lastmod>2026-09-09T09:39:07+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-22288435/img_86a4a541bbbb.jpeg</image:loc>
+      <image:caption>Homework (Remixes)</image:caption>
+      <image:title>Homework (Remixes)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/live-from-the-los-angeles-sports-arena-april-26th-1975</loc>
+    <lastmod>2026-09-09T11:12:20+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-37078761/img_6249119fec47.jpeg</image:loc>
+      <image:caption>Live From The Los Angeles Sports Arena, April 26th , 1975</image:caption>
+      <image:title>Live From The Los Angeles Sports Arena, April 26th , 1975</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/8-tracks</loc>
+    <lastmod>2026-09-10T09:05:04+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-37533777/img_14005a7c40c7.jpeg</image:loc>
+      <image:caption>8-Tracks</image:caption>
+      <image:title>8-Tracks</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-dark-side-of-the-moon-live-at-wembley-1974</loc>
+    <lastmod>2026-09-09T12:43:30+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-26503601/img_4a95bd23936e.jpeg</image:loc>
+      <image:caption>The Dark Side Of The Moon (Live At Wembley 1974)</image:caption>
+      <image:title>The Dark Side Of The Moon (Live At Wembley 1974)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/hey-hey-rise-up</loc>
+    <lastmod>2026-09-10T09:05:04+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-22828391/img_adad821d0981.jpeg</image:loc>
+      <image:caption>Hey Hey Rise Up</image:caption>
+      <image:title>Hey Hey Rise Up</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/alternative-tracks-1972</loc>
+    <lastmod>2026-09-10T09:05:05+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-29778781/img_f339f015e5ec.jpeg</image:loc>
+      <image:caption>Alternative Tracks 1972</image:caption>
+      <image:title>Alternative Tracks 1972</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/arnold-layne</loc>
+    <lastmod>2026-09-10T09:05:05+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-15838029/img_73d90186f1ff.jpeg</image:loc>
+      <image:caption>Arnold Layne</image:caption>
+      <image:title>Arnold Layne</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-later-years-1987-2019</loc>
+    <lastmod>2026-09-10T09:05:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-14077408/img_8ca8887e7994.jpeg</image:loc>
+      <image:caption>The Later Years 1987-2019</image:caption>
+      <image:title>The Later Years 1987-2019</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-singles</loc>
+    <lastmod>2026-09-09T11:27:29+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-37907196/img_0bf40143c0cf.jpeg</image:loc>
+      <image:caption>The Singles</image:caption>
+      <image:title>The Singles</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/de-lane-lea-demos</loc>
+    <lastmod>2026-09-09T11:27:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-33672534/img_e2f349fbf5fd.jpeg</image:loc>
+      <image:caption>De Lane Lea Demos</image:caption>
+      <image:title>De Lane Lea Demos</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/we-will-rock-you-megan-thee-stallion-version</loc>
+    <lastmod>2026-09-09T11:27:32+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-31677569/img_9a1028e423d3.jpeg</image:loc>
+      <image:caption>We Will Rock You (Megan Thee Stallion Version)</image:caption>
+      <image:title>We Will Rock You (Megan Thee Stallion Version)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/kizuna</loc>
+    <lastmod>2026-09-09T11:27:36+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-29663569/img_2fdd79ffc599.jpeg</image:loc>
+      <image:caption>Kizuna</image:caption>
+      <image:title>Kizuna</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/machines-or-back-to-humans</loc>
+    <lastmod>2026-09-09T11:27:36+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-28912189/img_ca4c6a24ca20.jpeg</image:loc>
+      <image:caption>Machines (Or 'Back To Humans')</image:caption>
+      <image:title>Machines (Or 'Back To Humans')</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/interstellar-overdrive</loc>
+    <lastmod>2026-09-10T09:05:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-10165060/img_557cd9a91c71.jpeg</image:loc>
+      <image:caption>Interstellar Overdrive</image:caption>
+      <image:title>Interstellar Overdrive</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-early-years-1972-obfusc-ation</loc>
+    <lastmod>2026-09-10T09:05:07+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-10067907/img_5b93f0446030.jpeg</image:loc>
+      <image:caption>The Early Years 1972 Obfusc/ation</image:caption>
+      <image:title>The Early Years 1972 Obfusc/ation</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/cre-ation-the-early-years-of-pink-floyd-one-hour-radio-special-59-00-version</loc>
+    <lastmod>2026-09-10T09:05:08+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-9439122/img_c7d2109101a5.jpeg</image:loc>
+      <image:caption>Cre/ation: The Early Years Of Pink Floyd (One Hour Radio Special) (59:00 Version)</image:caption>
+      <image:title>Cre/ation: The Early Years Of Pink Floyd (One Hour Radio Special) (59:00 Version)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-early-years-1970-devi-ation</loc>
+    <lastmod>2026-09-10T09:05:08+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-10068967/img_185a0149f8c2.jpeg</image:loc>
+      <image:caption>The Early Years 1970 Devi/ation</image:caption>
+      <image:title>The Early Years 1970 Devi/ation</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-early-years-1969-dramatis-ation</loc>
+    <lastmod>2026-09-10T09:05:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-VINYL-10069734/img_7c1051a2a212.jpeg</image:loc>
+      <image:caption>The Early Years 1969 Dramatis/ation</image:caption>
+      <image:title>The Early Years 1969 Dramatis/ation</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/8-tracks-183</loc>
+    <lastmod>2026-09-12T10:29:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-37533777/img_14005a7c40c7.jpeg</image:loc>
+      <image:caption>8-Tracks</image:caption>
+      <image:title>8-Tracks</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/hey-hey-rise-up-184</loc>
+    <lastmod>2026-09-12T10:29:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-22828391/img_adad821d0981.jpeg</image:loc>
+      <image:caption>Hey Hey Rise Up</image:caption>
+      <image:title>Hey Hey Rise Up</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/alternative-tracks-1972-185</loc>
+    <lastmod>2026-09-12T10:29:01+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-29778781/img_f339f015e5ec.jpeg</image:loc>
+      <image:caption>Alternative Tracks 1972</image:caption>
+      <image:title>Alternative Tracks 1972</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/arnold-layne-186</loc>
+    <lastmod>2026-09-12T10:29:04+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-15838029/img_73d90186f1ff.jpeg</image:loc>
+      <image:caption>Arnold Layne</image:caption>
+      <image:title>Arnold Layne</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-later-years-1987-2019-187</loc>
+    <lastmod>2026-09-12T10:29:07+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-14077408/img_8ca8887e7994.jpeg</image:loc>
+      <image:caption>The Later Years 1987-2019</image:caption>
+      <image:title>The Later Years 1987-2019</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/interstellar-overdrive-188</loc>
+    <lastmod>2026-09-12T10:29:12+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10165060/img_557cd9a91c71.jpeg</image:loc>
+      <image:caption>Interstellar Overdrive</image:caption>
+      <image:title>Interstellar Overdrive</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-early-years-1972-obfusc-ation-189</loc>
+    <lastmod>2026-09-12T10:29:16+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10067907/img_5b93f0446030.jpeg</image:loc>
+      <image:caption>The Early Years 1972 Obfusc/ation</image:caption>
+      <image:title>The Early Years 1972 Obfusc/ation</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/pink-floyd</loc>
+    <lastmod>2026-09-12T10:29:17+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-33403031/img_d02ebb2f0ddb.jpeg</image:loc>
+      <image:caption>Pink Floyd</image:caption>
+      <image:title>Pink Floyd</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/cre-ation-the-early-years-of-pink-floyd-one-hour-radio-special-59-00-version-191</loc>
+    <lastmod>2026-09-12T10:29:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-9439122/img_c7d2109101a5.jpeg</image:loc>
+      <image:caption>Cre/ation: The Early Years Of Pink Floyd (One Hour Radio Special) (59:00 Version)</image:caption>
+      <image:title>Cre/ation: The Early Years Of Pink Floyd (One Hour Radio Special) (59:00 Version)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-early-years-1970-devi-ation-192</loc>
+    <lastmod>2026-09-12T10:29:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10068967/img_185a0149f8c2.jpeg</image:loc>
+      <image:caption>The Early Years 1970 Devi/ation</image:caption>
+      <image:title>The Early Years 1970 Devi/ation</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-early-years-1969-dramatis-ation-193</loc>
+    <lastmod>2026-09-12T10:29:25+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10069734/img_7c1051a2a212.jpeg</image:loc>
+      <image:caption>The Early Years 1969 Dramatis/ation</image:caption>
+      <image:title>The Early Years 1969 Dramatis/ation</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-early-years-1965-1972</loc>
+    <lastmod>2026-09-12T10:29:26+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-9218307/img_fc72005c3ed9.jpeg</image:loc>
+      <image:caption>The Early Years 1965-1972</image:caption>
+      <image:title>The Early Years 1965-1972</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/cre-ation-the-early-years-1967-1972</loc>
+    <lastmod>2026-09-12T10:29:28+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-9339620/img_6accb41fb5df.jpeg</image:loc>
+      <image:caption>Cre/ation - The Early Years 1967 - 1972</image:caption>
+      <image:title>Cre/ation - The Early Years 1967 - 1972</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-early-years-1965-1967-cambridge-st-ation</loc>
+    <lastmod>2026-09-12T10:29:30+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10753471/img_e67226f62563.jpeg</image:loc>
+      <image:caption>The Early Years 1965-1967 Cambridge St/ation</image:caption>
+      <image:title>The Early Years 1965-1967 Cambridge St/ation</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-early-years-1971-reverber-ation</loc>
+    <lastmod>2026-09-12T10:29:32+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10068450/img_07e268e180cf.jpeg</image:loc>
+      <image:caption>The Early Years 1971 Reverber/ation</image:caption>
+      <image:title>The Early Years 1971 Reverber/ation</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-early-years-1968-germin-ation</loc>
+    <lastmod>2026-09-12T10:29:35+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10047833/img_badda65f4491.jpeg</image:loc>
+      <image:caption>The Early Years 1968 Germin/Ation</image:caption>
+      <image:title>The Early Years 1968 Germin/Ation</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/1965-their-first-recordings</loc>
+    <lastmod>2026-09-12T10:29:38+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-7780256/img_129433403b14.jpeg</image:loc>
+      <image:caption>1965 (Their First Recordings)</image:caption>
+      <image:title>1965 (Their First Recordings)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/louder-than-words</loc>
+    <lastmod>2026-09-12T10:29:38+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-6915724/img_5bb4f6a50819.jpeg</image:loc>
+      <image:caption>Louder Than Words</image:caption>
+      <image:title>Louder Than Words</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-endless-river</loc>
+    <lastmod>2026-09-12T10:29:40+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-6268164/img_29d0ce5b1543.jpeg</image:loc>
+      <image:caption>The Endless River</image:caption>
+      <image:title>The Endless River</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-wall-immersion-edition-promotional-sampler</loc>
+    <lastmod>2026-09-12T10:29:42+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4911312/img_86f3cb6bc3ab.jpeg</image:loc>
+      <image:caption>The Wall - Immersion Edition Promotional Sampler</image:caption>
+      <image:title>The Wall - Immersion Edition Promotional Sampler</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/pink-floyd-s-the-wall-pink-floyd-in-their-own-words</loc>
+    <lastmod>2026-09-12T10:29:43+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-15444609/img_2de950851acd.jpeg</image:loc>
+      <image:caption>Pink Floyd's The Wall - Pink Floyd In Their Own Words</image:caption>
+      <image:title>Pink Floyd's The Wall - Pink Floyd In Their Own Words</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sampler</loc>
+    <lastmod>2026-09-12T10:29:46+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-3130633/img_735f06b019e7.jpeg</image:loc>
+      <image:caption>Sampler</image:caption>
+      <image:title>Sampler</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/wish-you-were-here</loc>
+    <lastmod>2026-09-12T10:29:48+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-3318137/img_76c0f1c09551.jpeg</image:loc>
+      <image:caption>Wish You Were Here</image:caption>
+      <image:title>Wish You Were Here</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/in-store-sampler</loc>
+    <lastmod>2026-09-12T10:29:48+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-3371800/img_931ca460bf3a.jpeg</image:loc>
+      <image:caption>In-Store Sampler</image:caption>
+      <image:title>In-Store Sampler</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-wall-immersion-evening-night-time-sampler</loc>
+    <lastmod>2026-09-12T10:29:51+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-3546583/img_dc764afba2c2.jpeg</image:loc>
+      <image:caption>The Wall - Immersion - Evening / Night Time Sampler</image:caption>
+      <image:title>The Wall - Immersion - Evening / Night Time Sampler</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-dark-side-of-the-moon</loc>
+    <lastmod>2026-09-12T10:29:52+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4616687/img_0fe78195bc9e.jpeg</image:loc>
+      <image:caption>The Dark Side Of The Moon</image:caption>
+      <image:title>The Dark Side Of The Moon</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-wall-immersion-daytime-sampler</loc>
+    <lastmod>2026-09-12T10:29:55+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-6690060/img_5cda590392db.jpeg</image:loc>
+      <image:caption>The Wall - Immersion - Daytime Sampler</image:caption>
+      <image:title>The Wall - Immersion - Daytime Sampler</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/radio-sampler</loc>
+    <lastmod>2026-09-12T10:29:59+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-7606184/img_2f0586a0b118.jpeg</image:loc>
+      <image:caption>Radio Sampler</image:caption>
+      <image:title>Radio Sampler</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/radio-sampler-volume-2</loc>
+    <lastmod>2026-09-12T10:30:01+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-9495224/img_41c8d907e138.jpeg</image:loc>
+      <image:caption>Radio Sampler Volume 2</image:caption>
+      <image:title>Radio Sampler Volume 2</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/why-pink-floyd-commercial-radio-special</loc>
+    <lastmod>2026-09-12T10:30:03+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-14877042/img_33b7bceb7ccf.jpeg</image:loc>
+      <image:caption>Why Pink Floyd? (Commercial Radio Special)</image:caption>
+      <image:title>Why Pink Floyd? (Commercial Radio Special)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/why-pink-floyd-non-commercial-radio-special</loc>
+    <lastmod>2026-09-12T10:30:03+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-23894906/img_7254b4f83f81.jpeg</image:loc>
+      <image:caption>Why Pink Floyd? (Non Commercial Radio Special)</image:caption>
+      <image:title>Why Pink Floyd? (Non Commercial Radio Special)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/untitled</loc>
+    <lastmod>2026-09-12T10:30:05+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-24985399/img_9fc07ee44036.jpeg</image:loc>
+      <image:caption>Untitled</image:caption>
+      <image:title>Untitled</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/radio-sampler-volume-1</loc>
+    <lastmod>2026-09-12T10:30:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-25003864/img_0a7790be9629.jpeg</image:loc>
+      <image:caption>Radio Sampler Volume 1</image:caption>
+      <image:title>Radio Sampler Volume 1</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/why-pink-floyd-a-foot-in-the-door</loc>
+    <lastmod>2026-09-12T10:30:07+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-25037485/img_0673c95661e1.jpeg</image:loc>
+      <image:caption>Why Pink Floyd? A Foot In The Door</image:caption>
+      <image:title>Why Pink Floyd? A Foot In The Door</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/a-foot-in-the-door-the-best-of-pink-floyd</loc>
+    <lastmod>2026-09-12T10:30:10+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-3237652/img_d91423883270.jpeg</image:loc>
+      <image:caption>A Foot In The Door (The Best Of Pink Floyd)</image:caption>
+      <image:title>A Foot In The Door (The Best Of Pink Floyd)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-dark-side-of-the-moon-blu-ray</loc>
+    <lastmod>2026-09-12T10:30:12+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-6450615/img_fb7eb06080e8.jpeg</image:loc>
+      <image:caption>The Dark Side Of The Moon Blu-ray</image:caption>
+      <image:title>The Dark Side Of The Moon Blu-ray</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/discovery</loc>
+    <lastmod>2026-09-12T10:30:15+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-3146262/img_9c79dac8970a.jpeg</image:loc>
+      <image:caption>Discovery</image:caption>
+      <image:title>Discovery</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/behind-the-wall-inside-the-minds-of-pink-floyd-the-dark-side-of-the-moon-revisited</loc>
+    <lastmod>2026-09-12T10:30:15+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10533489/img_e84c776b96d0.jpeg</image:loc>
+      <image:caption>Behind The Wall (Inside The Minds Of Pink Floyd) / The Dark Side Of The Moon (Revisited)</image:caption>
+      <image:title>Behind The Wall (Inside The Minds Of Pink Floyd) / The Dark Side Of The Moon (Revisited)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/a-technicolor-dream</loc>
+    <lastmod>2026-09-12T10:30:18+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-9656164/img_5e83377ea5b1.jpeg</image:loc>
+      <image:caption>A Technicolor Dream</image:caption>
+      <image:title>A Technicolor Dream</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/oh-by-the-way</loc>
+    <lastmod>2026-09-12T10:30:21+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-1570546/img_a36842f63025.jpeg</image:loc>
+      <image:caption>Oh By The Way</image:caption>
+      <image:title>Oh By The Way</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/breathe-wish-you-were-here</loc>
+    <lastmod>2026-09-12T10:30:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-7802971/img_7d0a3a119a70.jpeg</image:loc>
+      <image:caption>Breathe / Wish You Were Here</image:caption>
+      <image:title>Breathe / Wish You Were Here</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/proper-education</loc>
+    <lastmod>2026-09-12T10:30:24+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-840440/img_43bdaa4f0207.jpeg</image:loc>
+      <image:caption>Proper Education</image:caption>
+      <image:title>Proper Education</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-story-of-wish-you-were-here</loc>
+    <lastmod>2026-09-12T10:30:25+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-3911889/img_b107c94ca9ef.jpeg</image:loc>
+      <image:caption>The Story Of Wish You Were Here</image:caption>
+      <image:title>The Story Of Wish You Were Here</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/live-from-the-los-angeles-sports-arena-april-26th-1975-226</loc>
+    <lastmod>2026-09-12T10:30:27+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-37078761/img_6249119fec47.jpeg</image:loc>
+      <image:caption>Live From The Los Angeles Sports Arena, April 26th , 1975</image:caption>
+      <image:title>Live From The Los Angeles Sports Arena, April 26th , 1975</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-dark-side-of-the-moon-live-at-wembley-1974-227</loc>
+    <lastmod>2026-09-12T10:30:30+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-26503601/img_4a95bd23936e.jpeg</image:loc>
+      <image:caption>The Dark Side Of The Moon (Live At Wembley 1974)</image:caption>
+      <image:title>The Dark Side Of The Moon (Live At Wembley 1974)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/live-in-venice</loc>
+    <lastmod>2026-09-12T10:30:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-21553735/img_fdd516f84eec.jpeg</image:loc>
+      <image:caption>Live In Venice</image:caption>
+      <image:title>Live In Venice</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/pulse-live-audio-from-the-dvd</loc>
+    <lastmod>2026-09-12T10:30:32+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4797487/img_d077543bde14.jpeg</image:loc>
+      <image:caption>Pulse - Live Audio From The DVD</image:caption>
+      <image:title>Pulse - Live Audio From The DVD</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/young-lust</loc>
+    <lastmod>2026-09-12T10:30:34+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-5221960/img_d4b853650568.jpeg</image:loc>
+      <image:caption>Young Lust</image:caption>
+      <image:title>Young Lust</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-doctor-comfortably-numb</loc>
+    <lastmod>2026-09-12T10:30:35+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-6690276/img_c9d9ec961ec1.jpeg</image:loc>
+      <image:caption>The Doctor (Comfortably Numb)</image:caption>
+      <image:title>The Doctor (Comfortably Numb)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-frankfurt-germany-may-22-2026</loc>
+    <lastmod>2026-09-12T11:09:15+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-37869510/img_d858da99875f.jpeg</image:loc>
+      <image:caption>M72 - Frankfurt, Germany - May 22, 2026</image:caption>
+      <image:title>M72 - Frankfurt, Germany - May 22, 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-frankfurt-germany-may-24-2026</loc>
+    <lastmod>2026-09-12T11:09:16+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-37869564/img_53576b81e345.jpeg</image:loc>
+      <image:caption>M72 - Frankfurt, Germany - May 24, 2026</image:caption>
+      <image:title>M72 - Frankfurt, Germany - May 24, 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-budapest-hungary-june-11-2026</loc>
+    <lastmod>2026-09-12T11:09:17+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-37972368/img_88b06333e541.jpeg</image:loc>
+      <image:caption>M72 -  Budapest, Hungary -  June 11, 2026</image:caption>
+      <image:title>M72 -  Budapest, Hungary -  June 11, 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-budapest-hungary-june-13-2026</loc>
+    <lastmod>2026-09-12T11:09:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-37972386/img_a0c155bb8527.jpeg</image:loc>
+      <image:caption>M72 -  Budapest, Hungary -  June 13, 2026</image:caption>
+      <image:title>M72 -  Budapest, Hungary -  June 13, 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-bologna-italy-june-3-2026</loc>
+    <lastmod>2026-09-12T11:09:20+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-38028519/img_27fa557c5281.jpeg</image:loc>
+      <image:caption>M72 - Bologna, Italy - June 3, 2026</image:caption>
+      <image:title>M72 - Bologna, Italy - June 3, 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/dublin-ireland-june-19-2026</loc>
+    <lastmod>2026-09-12T11:09:21+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-38170893/img_c7a72f9d6c0f.jpeg</image:loc>
+      <image:caption>Dublin, Ireland - June 19, 2026</image:caption>
+      <image:title>Dublin, Ireland - June 19, 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/dublin-ireland-june-21-2026</loc>
+    <lastmod>2026-09-12T11:09:22+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-38171166/img_2e17ab41a5ea.jpeg</image:loc>
+      <image:caption>Dublin, Ireland - June 21, 2026</image:caption>
+      <image:title>Dublin, Ireland - June 21, 2026</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/santa-clara-ca-june-22-2025</loc>
+    <lastmod>2026-09-12T11:09:24+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31111316/img_71879510390a.jpeg</image:loc>
+      <image:caption>Santa Clara, CA - June 22, 2025</image:caption>
+      <image:title>Santa Clara, CA - June 22, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-syracuse-new-york-april-19-2025</loc>
+    <lastmod>2026-09-12T11:09:27+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34150435/img_69612e31ee7d.jpeg</image:loc>
+      <image:caption>M72 - Syracuse, New York - April 19, 2025</image:caption>
+      <image:title>M72 - Syracuse, New York - April 19, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nashville-tennessee-may-3-2025</loc>
+    <lastmod>2026-09-12T11:09:30+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34203295/img_8f0cb4b8a918.jpeg</image:loc>
+      <image:caption>Nashville, Tennessee May 3, 2025</image:caption>
+      <image:title>Nashville, Tennessee May 3, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nashville-tennessee-may-1-2025</loc>
+    <lastmod>2026-09-12T11:09:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34214890/img_aed30f78adc2.jpeg</image:loc>
+      <image:caption>Nashville, Tennessee May 1, 2025</image:caption>
+      <image:title>Nashville, Tennessee May 1, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-toronto-ontario-april-24-2025</loc>
+    <lastmod>2026-09-12T11:09:33+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34243489/img_fccc72e148a5.jpeg</image:loc>
+      <image:caption>M72 - Toronto, Ontario - April 24, 2025</image:caption>
+      <image:title>M72 - Toronto, Ontario - April 24, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-toronto-ontario-april-26-2025</loc>
+    <lastmod>2026-09-12T11:09:35+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34243600/img_eea33ea2244c.jpeg</image:loc>
+      <image:caption>M72 - Toronto, Ontario - April 26, 2025</image:caption>
+      <image:title>M72 - Toronto, Ontario - April 26, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-landover-maryland-may-28-2025</loc>
+    <lastmod>2026-09-12T11:09:39+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34297768/img_348c47e7c940.jpeg</image:loc>
+      <image:caption>M72 - Landover, Maryland - May 28, 2025</image:caption>
+      <image:title>M72 - Landover, Maryland - May 28, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-blacksburg-virginia-may-7-2025</loc>
+    <lastmod>2026-09-12T11:09:42+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34405459/img_f8bd953ff4fd.jpeg</image:loc>
+      <image:caption>M72 - Blacksburg, Virginia - May 7, 2025</image:caption>
+      <image:title>M72 - Blacksburg, Virginia - May 7, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/charlotte-north-carolina-may-31-2025</loc>
+    <lastmod>2026-09-12T11:09:42+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34417639/img_ed7a5b52afe5.jpeg</image:loc>
+      <image:caption>Charlotte, North Carolina May 31, 2025</image:caption>
+      <image:title>Charlotte, North Carolina May 31, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/santa-clara-ca-june-20-2025</loc>
+    <lastmod>2026-09-12T11:09:44+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34444621/img_577abff0bcaa.jpeg</image:loc>
+      <image:caption>Santa Clara, CA - June 20, 2025</image:caption>
+      <image:title>Santa Clara, CA - June 20, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-atlanta-ga-june-3-2025</loc>
+    <lastmod>2026-09-12T11:09:45+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34532299/img_4cb48fb45a81.jpeg</image:loc>
+      <image:caption>M72 - Atlanta, Ga - June 3, 2025</image:caption>
+      <image:title>M72 - Atlanta, Ga - June 3, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-denver-colorado-june-27-2025</loc>
+    <lastmod>2026-09-12T11:09:45+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34931930/img_62d1b0952484.jpeg</image:loc>
+      <image:caption>M72 - Denver, Colorado - June 27, 2025</image:caption>
+      <image:title>M72 - Denver, Colorado - June 27, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-denver-colorado-june-29-2025</loc>
+    <lastmod>2026-09-12T11:09:46+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34932134/img_fa527413b43e.jpeg</image:loc>
+      <image:caption>M72 - Denver, Colorado - June 29, 2025</image:caption>
+      <image:title>M72 - Denver, Colorado - June 29, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/philadelphia-pennsylvania-may-23-2025</loc>
+    <lastmod>2026-09-12T11:09:50+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-35231950/img_af26e02e998d.jpeg</image:loc>
+      <image:caption>Philadelphia, Pennsylvania May 23, 2025</image:caption>
+      <image:title>Philadelphia, Pennsylvania May 23, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/philadelphia-pennsylvania-may-25-2025</loc>
+    <lastmod>2026-09-12T11:09:54+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-35232082/img_f7da6285987d.jpeg</image:loc>
+      <image:caption>Philadelphia, Pennsylvania May 25, 2025</image:caption>
+      <image:title>Philadelphia, Pennsylvania May 25, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-houston-texas-june-14-2025</loc>
+    <lastmod>2026-09-12T11:09:56+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-35291677/img_5101a6f428cb.jpeg</image:loc>
+      <image:caption>M72 - Houston, Texas - June 14, 2025</image:caption>
+      <image:title>M72 - Houston, Texas - June 14, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-adelaide-australia-november-5th-2025</loc>
+    <lastmod>2026-09-12T11:09:59+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-36052399/img_2e21248c2255.jpeg</image:loc>
+      <image:caption>M72 - Adelaide, Australia, November 5th 2025</image:caption>
+      <image:title>M72 - Adelaide, Australia, November 5th 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-brisbane-australia-november-12-2025</loc>
+    <lastmod>2026-09-12T11:10:01+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-36061270/img_c4df313fc14c.jpeg</image:loc>
+      <image:caption>M72 - Brisbane, Australia - November 12, 2025</image:caption>
+      <image:title>M72 - Brisbane, Australia - November 12, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-melbourne-australia-november-8-2025</loc>
+    <lastmod>2026-09-12T11:10:04+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-36072127/img_72201bd00c9c.jpeg</image:loc>
+      <image:caption>M72 - Melbourne, Australia November 8, 2025</image:caption>
+      <image:title>M72 - Melbourne, Australia November 8, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sakhir-bahrain-december-3-2025</loc>
+    <lastmod>2026-09-12T11:10:07+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-36178912/img_9b63bf8a85df.jpeg</image:loc>
+      <image:caption>Sakhir, Bahrain - December 3, 2025</image:caption>
+      <image:title>Sakhir, Bahrain - December 3, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-sydney-australia-november-15-2025</loc>
+    <lastmod>2026-09-12T11:10:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-36382516/img_2f61154e83e2.jpeg</image:loc>
+      <image:caption>M72 - Sydney, Australia - November 15, 2025</image:caption>
+      <image:title>M72 - Sydney, Australia - November 15, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-auckland-new-zealand-november-19-2025</loc>
+    <lastmod>2026-09-12T11:10:11+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-36582880/img_07983d6911da.jpeg</image:loc>
+      <image:caption>M72 - Auckland, New Zealand - November 19, 2025</image:caption>
+      <image:title>M72 - Auckland, New Zealand - November 19, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-metallica-doha-qatar-november-30-2025</loc>
+    <lastmod>2026-09-12T11:10:12+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-36582979/img_5fb72a25b8db.jpeg</image:loc>
+      <image:caption>M72 - Metallica Doha, Qatar - November 30, 2025</image:caption>
+      <image:title>M72 - Metallica Doha, Qatar - November 30, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-metallica-abu-dhabi-united-arab-emirates-december-6-2025</loc>
+    <lastmod>2026-09-12T11:10:13+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-36583144/img_68b5a673a2b2.jpeg</image:loc>
+      <image:caption>M72 - Metallica Abu Dhabi, United Arab Emirates - december 6, 2025</image:caption>
+      <image:title>M72 - Metallica Abu Dhabi, United Arab Emirates - december 6, 2025</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/summer-shit-94</loc>
+    <lastmod>2026-09-12T11:10:14+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-34941581/img_7b249f63fb7a.jpeg</image:loc>
+      <image:caption>Summer Shit '94</image:caption>
+      <image:title>Summer Shit '94</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/detroit-michigan-november-10-2023</loc>
+    <lastmod>2026-09-12T11:10:17+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-29388175/img_3227d026d116.jpeg</image:loc>
+      <image:caption>Detroit, Michigan - November 10, 2023</image:caption>
+      <image:title>Detroit, Michigan - November 10, 2023</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/detroit-michigan-november-12-2023</loc>
+    <lastmod>2026-09-12T11:10:21+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-29388370/img_840ffe55ca46.jpeg</image:loc>
+      <image:caption>Detroit, Michigan - November 12, 2023</image:caption>
+      <image:title>Detroit, Michigan - November 12, 2023</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/st-louis-missouri-november-3-2023</loc>
+    <lastmod>2026-09-12T11:10:23+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-29516968/img_a331e3139e46.jpeg</image:loc>
+      <image:caption>St. Louis, Missouri - November 3, 2023</image:caption>
+      <image:title>St. Louis, Missouri - November 3, 2023</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/milan-italy-may-29-2024</loc>
+    <lastmod>2026-09-12T11:10:27+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31257574/img_b4c7a2897ae4.jpeg</image:loc>
+      <image:caption>Milan, Italy May 29, 2024</image:caption>
+      <image:title>Milan, Italy May 29, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/copenhagen-denmark-june-16-2024</loc>
+    <lastmod>2026-09-12T11:10:28+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31308306/img_394e031854d0.jpeg</image:loc>
+      <image:caption>Copenhagen, Denmark - June 16, 2024</image:caption>
+      <image:title>Copenhagen, Denmark - June 16, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/vienna-austria-june-1-2024</loc>
+    <lastmod>2026-09-12T11:10:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31322406/img_56388536de2a.jpeg</image:loc>
+      <image:caption>Vienna, Austria, June 1, 2024</image:caption>
+      <image:title>Vienna, Austria, June 1, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-munich-germany-may-24-2024</loc>
+    <lastmod>2026-09-12T11:10:33+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31330684/img_06abea268f38.jpeg</image:loc>
+      <image:caption>M72 Munich Germany May 24, 2024</image:caption>
+      <image:title>M72 Munich Germany May 24, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/m72-munich-germany-may-26-2024</loc>
+    <lastmod>2026-09-12T11:10:36+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31330912/img_f8362ee78d8c.jpeg</image:loc>
+      <image:caption>M72 Munich Germany May 26, 2024</image:caption>
+      <image:title>M72 Munich Germany May 26, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/copenhagen-denmark-june-14-2024</loc>
+    <lastmod>2026-09-12T11:10:37+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31468097/img_575749ded865.jpeg</image:loc>
+      <image:caption>Copenhagen, Denmark - June 14, 2024</image:caption>
+      <image:title>Copenhagen, Denmark - June 14, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/oslo-norway-june-26-2024</loc>
+    <lastmod>2026-09-12T11:10:38+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31515014/img_a47134b3198b.jpeg</image:loc>
+      <image:caption>Oslo, Norway June 26, 2024</image:caption>
+      <image:title>Oslo, Norway June 26, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/warsaw-poland-july-5-2024</loc>
+    <lastmod>2026-09-12T11:10:40+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31516880/img_d8f65cbb3fe3.jpeg</image:loc>
+      <image:caption>Warsaw, Poland - July 5, 2024</image:caption>
+      <image:title>Warsaw, Poland - July 5, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/warsaw-poland-july-7-2024</loc>
+    <lastmod>2026-09-12T11:10:41+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31516961/img_d584689950e7.jpeg</image:loc>
+      <image:caption>Warsaw, Poland - July 7, 2024</image:caption>
+      <image:title>Warsaw, Poland - July 7, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/madrid-spain-july-12-2024</loc>
+    <lastmod>2026-09-12T11:10:44+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31517042/img_c29c7fc29d66.jpeg</image:loc>
+      <image:caption>Madrid, Spain - July 12, 2024</image:caption>
+      <image:title>Madrid, Spain - July 12, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/madrid-spain-july-14-2024</loc>
+    <lastmod>2026-09-12T11:10:48+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31517114/img_cfb4c599af68.jpeg</image:loc>
+      <image:caption>Madrid, Spain - July 14, 2024</image:caption>
+      <image:title>Madrid, Spain - July 14, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/helsinki-finland-june-7-2024</loc>
+    <lastmod>2026-09-12T11:10:49+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31650158/img_5ae5f2655a35.jpeg</image:loc>
+      <image:caption>Helsinki, Finland - June 7, 2024</image:caption>
+      <image:title>Helsinki, Finland - June 7, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/helsinki-finland-june-9-2024</loc>
+    <lastmod>2026-09-12T11:10:50+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31650212/img_8b867553cf91.jpeg</image:loc>
+      <image:caption>Helsinki, Finland - June 9, 2024</image:caption>
+      <image:title>Helsinki, Finland - June 9, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/foxborough-massachusetts-august-2-2024</loc>
+    <lastmod>2026-09-12T11:10:53+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31734698/img_3b72c1e05e28.jpeg</image:loc>
+      <image:caption>Foxborough, Massachusetts - August 2, 2024</image:caption>
+      <image:title>Foxborough, Massachusetts - August 2, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/foxborough-massachusettes-august-4-2024</loc>
+    <lastmod>2026-09-12T11:10:54+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31741688/img_a5688f4af504.jpeg</image:loc>
+      <image:caption>Foxborough, Massachusettes August 4, 2024</image:caption>
+      <image:title>Foxborough, Massachusettes August 4, 2024</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/discografia</loc>
+    <lastmod>2026-09-12T11:41:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-32623452/img_21d83300d264.jpeg</image:loc>
+      <image:caption>Discografia</image:caption>
+      <image:title>Discografia</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-music-of-nirvana</loc>
+    <lastmod>2026-09-12T11:41:12+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-6812100/img_0df21f37802c.jpeg</image:loc>
+      <image:caption>The Music Of Nirvana</image:caption>
+      <image:title>The Music Of Nirvana</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/extraits-de-la-r-dition-20-me-anniversaire-de-nevermind-et-du-best-of</loc>
+    <lastmod>2026-09-12T11:41:14+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-8419079/img_103caa0b0233.jpeg</image:loc>
+      <image:caption>Extraits De La Réédition 20ème Anniversaire De Nevermind Et Du Best Of</image:caption>
+      <image:title>Extraits De La Réédition 20ème Anniversaire De Nevermind Et Du Best Of</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/radio-1-s-essential-albums-of-the-90-s-nirvana-nevermind</loc>
+    <lastmod>2026-09-12T11:41:15+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-36885418/img_5d16dbdc899b.jpeg</image:loc>
+      <image:caption>Radio 1's Essential Albums Of The 90's: Nirvana - Nevermind</image:caption>
+      <image:title>Radio 1's Essential Albums Of The 90's: Nirvana - Nevermind</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/icon</loc>
+    <lastmod>2026-09-12T11:41:17+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-5378642/img_fdddaa5d8147.jpeg</image:loc>
+      <image:caption>Icon</image:caption>
+      <image:title>Icon</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/lithium</loc>
+    <lastmod>2026-09-12T11:41:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-2063631/img_230032579a90.jpeg</image:loc>
+      <image:caption>Lithium</image:caption>
+      <image:title>Lithium</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/in-bloom-collection</loc>
+    <lastmod>2026-09-12T11:41:20+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-15649408/img_b4fb232a6dfe.jpeg</image:loc>
+      <image:caption>In Bloom Collection</image:caption>
+      <image:title>In Bloom Collection</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/smells-like-teen-spirit-songs-that-changed-the-world</loc>
+    <lastmod>2026-09-12T11:41:21+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-15122392/img_85a6f17958aa.jpeg</image:loc>
+      <image:caption>Smells Like Teen Spirit: Songs That Changed The World</image:caption>
+      <image:title>Smells Like Teen Spirit: Songs That Changed The World</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-songs-of-kurt-cobain</loc>
+    <lastmod>2026-09-12T11:41:23+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-8615079/img_88b548a947f1.jpeg</image:loc>
+      <image:caption>The Songs Of Kurt Cobain</image:caption>
+      <image:title>The Songs Of Kurt Cobain</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sliver-the-radio-special</loc>
+    <lastmod>2026-09-12T11:41:25+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-3627741/img_080540db03ae.jpeg</image:loc>
+      <image:caption>Sliver - The Radio Special</image:caption>
+      <image:title>Sliver - The Radio Special</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nevermind-kurt-kurt-cobain-all-apologies-10-ans-d-j</loc>
+    <lastmod>2026-09-12T11:41:26+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-23709935/img_b60a34d9943f.jpeg</image:loc>
+      <image:caption>Nevermind Kurt - Kurt Cobain "All Apologies" 10 Ans Déjà</image:caption>
+      <image:title>Nevermind Kurt - Kurt Cobain "All Apologies" 10 Ans Déjà</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/sliver-the-best-of-the-box</loc>
+    <lastmod>2026-09-12T11:41:29+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-590533/img_f920832110b5.jpeg</image:loc>
+      <image:caption>Sliver (The Best Of The Box)</image:caption>
+      <image:title>Sliver (The Best Of The Box)</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nightly-nirvana-week-one</loc>
+    <lastmod>2026-09-12T11:41:29+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4552137/img_1a13ff4e4dc5.jpeg</image:loc>
+      <image:caption>Nightly Nirvana Week One</image:caption>
+      <image:title>Nightly Nirvana Week One</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nightly-nirvana-week-two</loc>
+    <lastmod>2026-09-12T11:41:29+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4552139/img_728c80ceecde.jpeg</image:loc>
+      <image:caption>Nightly Nirvana Week Two</image:caption>
+      <image:title>Nightly Nirvana Week Two</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nightly-nirvana-week-three</loc>
+    <lastmod>2026-09-12T11:41:29+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4552141/img_e787da82a9a8.jpeg</image:loc>
+      <image:caption>Nightly Nirvana Week Three</image:caption>
+      <image:title>Nightly Nirvana Week Three</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nightly-nirvana-week-four</loc>
+    <lastmod>2026-09-12T11:41:30+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4552143/img_3c75933d8370.jpeg</image:loc>
+      <image:caption>Nightly Nirvana Week Four</image:caption>
+      <image:title>Nightly Nirvana Week Four</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nightly-nirvana-week-five</loc>
+    <lastmod>2026-09-12T11:41:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4552146/img_84a4145598bc.jpeg</image:loc>
+      <image:caption>Nightly Nirvana Week Five</image:caption>
+      <image:title>Nightly Nirvana Week Five</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nightly-nirvana-week-six</loc>
+    <lastmod>2026-09-12T11:41:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4552150/img_4a83c7b21285.jpeg</image:loc>
+      <image:caption>Nightly Nirvana Week Six</image:caption>
+      <image:title>Nightly Nirvana Week Six</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nightly-nirvana-week-seven</loc>
+    <lastmod>2026-09-12T11:41:32+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4552151/img_5cd4aa545391.jpeg</image:loc>
+      <image:caption>Nightly Nirvana Week Seven</image:caption>
+      <image:title>Nightly Nirvana Week Seven</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nightly-nirvana-week-eight</loc>
+    <lastmod>2026-09-12T11:41:33+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4552153/img_2bde49e42637.jpeg</image:loc>
+      <image:caption>Nightly Nirvana Week Eight</image:caption>
+      <image:title>Nightly Nirvana Week Eight</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nightly-nirvana-week-nine</loc>
+    <lastmod>2026-09-12T11:41:33+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4552154/img_a12fbd5d58f2.jpeg</image:loc>
+      <image:caption>Nightly Nirvana Week Nine</image:caption>
+      <image:title>Nightly Nirvana Week Nine</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nightly-nirvana-week-ten</loc>
+    <lastmod>2026-09-12T11:41:33+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10741531/img_11ed58da791b.jpeg</image:loc>
+      <image:caption>Nightly Nirvana Week Ten</image:caption>
+      <image:title>Nightly Nirvana Week Ten</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-album-network</loc>
+    <lastmod>2026-09-12T11:41:34+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10746010/img_14205ec676b3.jpeg</image:loc>
+      <image:caption>The Album Network</image:caption>
+      <image:title>The Album Network</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nevermind</loc>
+    <lastmod>2026-09-12T11:41:36+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-3270779/img_3da27f4cba32.jpeg</image:loc>
+      <image:caption>Nevermind</image:caption>
+      <image:title>Nevermind</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/selections-from-with-the-lights-out</loc>
+    <lastmod>2026-09-12T11:41:37+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-2691163/img_e44b51227e78.jpeg</image:loc>
+      <image:caption>Selections From With The Lights Out</image:caption>
+      <image:title>Selections From With The Lights Out</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/incesticide-in-utero</loc>
+    <lastmod>2026-09-12T11:41:41+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-2091391/img_8a495956b64e.jpeg</image:loc>
+      <image:caption>Incesticide + In Utero</image:caption>
+      <image:title>Incesticide + In Utero</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nirvana-about-a-band</loc>
+    <lastmod>2026-09-12T11:41:41+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-9984525/img_d00021a90495.jpeg</image:loc>
+      <image:caption>Nirvana: About A Band</image:caption>
+      <image:title>Nirvana: About A Band</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/with-the-lights-out</loc>
+    <lastmod>2026-09-12T11:41:44+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-983454/img_7093175fdc14.jpeg</image:loc>
+      <image:caption>With The Lights Out</image:caption>
+      <image:title>With The Lights Out</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/nirvana</loc>
+    <lastmod>2026-09-12T11:41:45+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-6662523/img_439e485772c8.jpeg</image:loc>
+      <image:caption>Nirvana</image:caption>
+      <image:title>Nirvana</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/meat-puppets-compilation</loc>
+    <lastmod>2026-09-12T11:41:48+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-31275386/img_251452b931f4.jpeg</image:loc>
+      <image:caption>Meat Puppets Compilation</image:caption>
+      <image:title>Meat Puppets Compilation</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/you-know-you-re-right</loc>
+    <lastmod>2026-09-12T11:41:50+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-1002797/img_174cbd38135e.jpeg</image:loc>
+      <image:caption>You Know You're Right</image:caption>
+      <image:title>You Know You're Right</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/best-of-nirvana</loc>
+    <lastmod>2026-09-12T11:41:52+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-3087399/img_f48b94426b24.jpeg</image:loc>
+      <image:caption>Best Of Nirvana</image:caption>
+      <image:title>Best Of Nirvana</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/in-utero-nevermind</loc>
+    <lastmod>2026-09-12T11:41:55+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10866555/img_40033e19156d.jpeg</image:loc>
+      <image:caption>In Utero / Nevermind</image:caption>
+      <image:title>In Utero / Nevermind</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/in-the-zone</loc>
+    <lastmod>2026-09-12T11:41:58+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10745963/img_a78ac2633f40.jpeg</image:loc>
+      <image:caption>In The Zone</image:caption>
+      <image:title>In The Zone</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/en-concierto</loc>
+    <lastmod>2026-09-12T11:41:58+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-9272105/img_ee1584f1b877.jpeg</image:loc>
+      <image:caption>En Concierto</image:caption>
+      <image:title>En Concierto</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/drain-you</loc>
+    <lastmod>2026-09-12T11:42:00+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-2255278/img_ae9a10ea24e5.jpeg</image:loc>
+      <image:caption>Drain You</image:caption>
+      <image:title>Drain You</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/from-the-muddy-banks-of-the-wishkah</loc>
+    <lastmod>2026-09-12T11:42:03+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-367273/img_0f3d94b7e510.jpeg</image:loc>
+      <image:caption>From The Muddy Banks Of The Wishkah</image:caption>
+      <image:title>From The Muddy Banks Of The Wishkah</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/aneurysm</loc>
+    <lastmod>2026-09-12T11:42:06+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-1521317/img_2c16e6a83969.jpeg</image:loc>
+      <image:caption>Aneurysm</image:caption>
+      <image:title>Aneurysm</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/singles</loc>
+    <lastmod>2026-09-12T11:42:09+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-4108596/img_07dd7a06511f.jpeg</image:loc>
+      <image:caption>Singles</image:caption>
+      <image:title>Singles</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/walk-on-water-the-man-who-sold-the-world-sympathy-for-the-devil</loc>
+    <lastmod>2026-09-12T11:42:11+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-10257006/img_f4d873396743.jpeg</image:loc>
+      <image:caption>Walk On Water / The Man Who Sold The World / Sympathy For The Devil</image:caption>
+      <image:title>Walk On Water / The Man Who Sold The World / Sympathy For The Devil</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/about-a-girl-blind-man</loc>
+    <lastmod>2026-09-12T11:42:13+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-13129904/img_4def52e19e50.jpeg</image:loc>
+      <image:caption>About a Girl / Blind Man</image:caption>
+      <image:title>About a Girl / Blind Man</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/pennyroyal-tea</loc>
+    <lastmod>2026-09-12T11:42:15+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-829733/img_add80781a340.jpeg</image:loc>
+      <image:caption>Pennyroyal Tea</image:caption>
+      <image:title>Pennyroyal Tea</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/verse-chorus-verse</loc>
+    <lastmod>2026-09-12T11:42:19+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-6652939/img_0e08f3d084ba.jpeg</image:loc>
+      <image:caption>Verse Chorus Verse</image:caption>
+      <image:title>Verse Chorus Verse</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/where-did-you-sleep-last-night</loc>
+    <lastmod>2026-09-12T11:42:20+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-6510731/img_6e87bf1b4c79.jpeg</image:loc>
+      <image:caption>Where Did You Sleep Last Night</image:caption>
+      <image:title>Where Did You Sleep Last Night</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/about-a-girl</loc>
+    <lastmod>2026-09-12T11:42:24+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-829730/img_805c80a3f568.jpeg</image:loc>
+      <image:caption>About A Girl</image:caption>
+      <image:title>About A Girl</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/the-man-who-sold-the-world</loc>
+    <lastmod>2026-09-12T11:42:28+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-829729/img_e1f19f446def.jpeg</image:loc>
+      <image:caption>The Man Who Sold The World</image:caption>
+      <image:title>The Man Who Sold The World</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/eq-cd-reference</loc>
+    <lastmod>2026-09-12T11:42:31+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-28848721/img_33ed2f57288c.jpeg</image:loc>
+      <image:caption>EQ CD Reference</image:caption>
+      <image:title>EQ CD Reference</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/puss-oh-the-guilt</loc>
+    <lastmod>2026-09-12T11:42:33+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-733713/img_92fc0445ed2d.jpeg</image:loc>
+      <image:caption>Puss / Oh, The Guilt</image:caption>
+      <image:title>Puss / Oh, The Guilt</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/all-apologies-rape-me-mv</loc>
+    <lastmod>2026-09-12T11:42:37+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-654742/img_21a57cf1c1d9.jpeg</image:loc>
+      <image:caption>All Apologies ● Rape Me ● MV</image:caption>
+      <image:title>All Apologies ● Rape Me ● MV</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>http://synthesia/heart-shaped-box</loc>
+    <lastmod>2026-09-12T11:42:39+03:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>http://synthesia/image/catalog/products/DISCOGS-CD-393065/img_557071196b38.jpeg</image:loc>
+      <image:caption>Heart-Shaped Box</image:caption>
+      <image:title>Heart-Shaped Box</image:title>
+    </image:image>
+  </url>
+</urlset>

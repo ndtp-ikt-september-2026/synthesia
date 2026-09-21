@@ -1,4 +1,51 @@
 {{ header }}
+<!-- Schema.org Structured Data (Product & Breadcrumbs) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": "{{ heading_title|escape('js') }}",
+  "image": [
+    "{{ popup|default(thumb) }}"
+  ],
+  "description": "{{ heading_title|escape('js') }} - купить в музыкальном интернет-магазине SYNTHESIA. Оригинальное качество и гарантия.",
+  "sku": "{{ model|escape('js') }}",
+  "mpn": "{{ model|escape('js') }}",
+  {% if artist or manufacturer %}
+  "brand": {
+    "@type": "Brand",
+    "name": "{{ (artist ? artist : manufacturer)|escape('js') }}"
+  },
+  {% endif %}
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": "RUB",
+    "price": "{{ (special ? special : price)|replace({' ': '', 'руб.': '', 'р.': '', '₽': '', ',': '.'})|trim }}",
+    "itemCondition": "https://schema.org/NewCondition",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "SYNTHESIA"
+    }
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {% for key, breadcrumb in breadcrumbs %}
+    {
+      "@type": "ListItem",
+      "position": {{ key + 1 }},
+      "name": "{{ breadcrumb.text|escape('js') }}",
+      "item": "{{ breadcrumb.href }}"
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
 <!-- Studio Breadcrumbs -->
 <nav class="studio-breadcrumbs-bar" aria-label="breadcrumb">
   <div class="container">
